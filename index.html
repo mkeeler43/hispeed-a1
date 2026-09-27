@@ -157,6 +157,22 @@ input.blank.bad{color:var(--bad);border-color:var(--bad);background:var(--bad-so
 .cw.bad{border-color:var(--bad);color:var(--bad);background:var(--bad-soft)}
 .cw.miss{border:2px dashed var(--bad)}
 
+/* sort */
+.sortlist{display:grid;gap:8px}
+.srow{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;flex-wrap:wrap}
+.srow .txt{font-weight:600}
+.seg{display:flex;gap:4px;flex-wrap:wrap}
+.seg button{font:inherit;font-size:13px;padding:5px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
+.srow.ok{border-color:var(--ok);background:var(--ok-soft)}
+.srow.bad{border-color:var(--bad);background:var(--bad-soft)}
+.srow .fixnote{font-size:13px;color:var(--bad);width:100%}
+/* rubric */
+.rubric{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px}
+.rubric li{display:flex;gap:8px;align-items:baseline}
+.rubric .m{font-weight:800;width:1.2em;flex:none}
+.rubric .pass .m{color:var(--ok)}
+.rubric .fail .m{color:var(--bad)}
 .actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .btn{font:inherit;font-weight:700;padding:11px 20px;border-radius:10px;border:0;background:var(--accent);color:var(--accent-ink);cursor:pointer}
 .btn:disabled{opacity:.4;cursor:not-allowed}
@@ -250,7 +266,7 @@ const WEEKS = [
     <div class="tbl"><table><tr><th></th><th>lernen</th><th>arbeiten</th><th>heissen</th></tr>
       <tr><td>ich</td><td>lern<b>e</b></td><td>arbeit<b>e</b></td><td>heiss<b>e</b></td></tr>
       <tr><td>du</td><td>lern<b>st</b></td><td>arbeit<b>est</b></td><td>heiss<b>t</b></td></tr>
-      <tr><td>er / sie / es</td><td>lern<b>t</b></td><td>arbeit<b>et</b></td><td>heiss<b>t</b></td></tr>
+      <tr><td>er / sie / es / man</td><td>lern<b>t</b></td><td>arbeit<b>et</b></td><td>heiss<b>t</b></td></tr>
       <tr><td>wir</td><td>lern<b>en</b></td><td>arbeit<b>en</b></td><td>heiss<b>en</b></td></tr>
       <tr><td>ihr</td><td>lern<b>t</b></td><td>arbeit<b>et</b></td><td>heiss<b>t</b></td></tr>
       <tr><td>sie / Sie</td><td>lern<b>en</b></td><td>arbeit<b>en</b></td><td>heiss<b>en</b></td></tr>
@@ -259,25 +275,25 @@ const WEEKS = [
       <li>Stem ends in <b>-t, -d</b> or consonant + <b>n</b>: add <b>-e-</b> for du, er, ihr. du arbeitest, er findet, ihr öffnet, es regnet.</li>
       <li>Stem ends in <b>-s, -ss, -z</b>: du only adds <b>-t</b>. du heisst, du löst, du ergänzt.</li>
     </ul>`,
-  words:[["lernen","to learn"],["verstehen","to understand"],["fragen","to ask"],["antworten","to answer"],["schreiben","to write"],["wiederholen","to repeat"],["üben","to practice"],["notieren","to note down"],["suchen","to look for"],["finden","to find"],["öffnen","to open"],["warten","to wait"],["rechnen","to calculate"],["zeichnen","to draw"],["bezahlen","to pay"],["kaufen","to buy"],["brauchen","to need"],["bleiben","to stay"],["wohnen","to live (reside)"],["leben","to live, be alive"],["geniessen","to enjoy"],["lösen","to solve"],["ergänzen","to fill in"]],
+  words:[["lernen","learn"],["verstehen","understand"],["fragen","ask"],["antworten","answer"],["schreiben","write"],["wiederholen","repeat"],["üben","practise"],["notieren","note down"],["suchen","search"],["finden","find"],["öffnen","open"],["warten","wait"],["rechnen","calculate"],["zeichnen","draw"],["bezahlen","pay"],["kaufen","buy"],["brauchen","need"],["bleiben","stay"],["wohnen","live (where my flat is)"],["leben","live/ be alive"],["geniessen","enjoy"],["lösen","solve"],["ergänzen","complete, fill in"]],
   items:[
-    {t:"flash",lv:1,d:1,k:"v",front:"verstehen",back:"to understand",ex:"Ich verstehe das nicht."},
-    {t:"flash",lv:1,d:1,k:"v",front:"wiederholen",back:"to repeat",ex:"Können Sie das bitte wiederholen?"},
-    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"to wait",back:"warten",ex:"Ich warte auf das Tram."},
-    {t:"flash",lv:1,d:2,k:"g",front:"How do you say „you work“ (du, arbeiten)?",back:"du arbeitest",ex:"arbeit- ends in -t, so you add an extra -e- before -st."},
-    {t:"match",lv:1,d:1,k:"v",q:"Match the verbs.",pairs:[["suchen","to look for"],["bezahlen","to pay"],["zeichnen","to draw"],["bleiben","to stay"],["brauchen","to need"],["geniessen","to enjoy"]]},
-    {t:"mc",lv:2,d:1,k:"g",q:"___ lernst Deutsch.",opts:["Du","Ich","Er"],a:0,why:"The ending -st belongs to du."},
+    {t:"flash",lv:1,d:1,k:"v",front:"verstehen",back:"understand",ex:"Ich verstehe das nicht."},
+    {t:"flash",lv:1,d:1,k:"v",front:"wiederholen",back:"repeat",ex:"Können Sie das bitte wiederholen?"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"wait",back:"warten",ex:"Ich warte auf das Tram."},
+    {t:"flash",rev:true,lv:1,d:2,k:"g",front:"How do you say „you work“ (du, arbeiten)?",back:"du arbeitest",ex:"arbeit- ends in -t, so you add an extra -e- before -st."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the verbs.",pairs:[["suchen","search"],["bezahlen","pay"],["zeichnen","draw"],["bleiben","stay"],["brauchen","need"],["geniessen","enjoy"]]},
+    {t:"mc",lv:2,d:1,k:"g",q:"Which pronoun goes with „lernst“?",opts:["du","ich","er"],a:0,why:"The ending -st belongs to du: du lernst."},
     {t:"mc",lv:2,d:2,k:"g",q:"„Sie studieren Mathematik, oder?“ Who is Sie?",opts:["„they“ or formal „you“","„she“","only formal „you“"],a:0,why:"The -en ending rules out she. At the start of a sentence, sie (they) and Sie (formal you) look the same, so it could be either."},
-    {t:"gap",lv:3,d:1,k:"gv",q:"Wir ___ jeden Abend die Hausaufgaben.",hints:["machen"],a:[["machen"]],why:"wir takes -en."},
+    {t:"write",lv:3,d:1,k:"gv",q:"Rewrite the sentence with er instead of wir.",prompt:"Wir machen jeden Abend die Hausaufgaben.",a:["Er macht jeden Abend die Hausaufgaben."],why:"er takes -t: er macht."},
     {t:"gap",lv:3,d:2,k:"gv",q:"Du ___ die Tür und ___ auf Anna.",hints:["öffnen","warten"],a:[["öffnest"],["wartest"]],why:"Both stems need the extra -e-: öffn-e-st, wart-e-st."},
-    {t:"gap",lv:3,d:2,k:"gv",q:"Wie ___ du? Ich ___ Lea.",hints:["heissen","heissen"],a:[["heisst"],["heisse"]],why:"Stem ends in -ss, so du only adds -t: du heisst."},
+    {t:"sort",lv:2,d:2,k:"g",q:"Sort the verbs. Which ones need an extra -e- with du?",groups:["du + -est (du arbeitest)","du + -st (du lernst)"],items:[["arbeiten",0],["finden",0],["öffnen",0],["warten",0],["rechnen",0],["lernen",1],["wohnen",1],["spielen",1],["fragen",1],["kaufen",1]],why:"From the verb list: stems ending in -t, -d or consonant + n (finden, öffnen, warten, rechnen) take du + -est and er, sie, es, man + -et."},
     {t:"gap",lv:3,d:3,k:"gv",q:"Er ___ die Übung und ___ die Antwort.",hints:["lösen","notieren"],a:[["löst"],["notiert"]],why:"er takes -t: er löst, er notiert."},
     {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Du arbeitst am Computer.",wrong:[1],fixed:"Du arbeitest am Computer.",why:"arbeit- ends in -t, so du needs -est."},
     {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Er heisst Tom und er findt das Buch.",wrong:[5],fixed:"Er heisst Tom und er findet das Buch.",why:"find- ends in -d, so er needs -et."},
     {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Du heissst Maria und ihr wohnen in Bern.",wrong:[1,5],fixed:"Du heisst Maria und ihr wohnt in Bern.",why:"du heisst has only one -t ending. ihr takes -t: ihr wohnt."},
     {t:"build",lv:4,d:2,k:"gv",q:"Start with the time: In the evening we repeat the words.",tiles:["am Abend","wiederholen","wir","die Wörter"],end:".",a:["Am Abend wiederholen wir die Wörter.","Wir wiederholen am Abend die Wörter."],verb:"wiederholen",why:"The verb stays on position 2. The subject moves behind it."},
     {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I'm learning German and I understand a lot. (a lot = viel)",a:["Ich lerne Deutsch und ich verstehe viel.","Ich lerne Deutsch und verstehe viel."],why:"lernen and verstehen both take -e for ich."},
-    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Describe how you study in one or two sentences. Use at least two verbs from the list.",model:"Ich notiere die Wörter und ich wiederhole sie am Abend. Dann übe ich auf Quizlet."}
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Describe how you study in one or two sentences. Use at least two verbs from the list in the ich form.",model:"Ich notiere die Wörter und ich wiederhole sie am Abend. Dann übe ich auf Quizlet.",checks:[{"need": "\\b(lerne|verstehe|frage|antworte|schreibe|wiederhole|uebe|notiere|suche|finde|oeffne|warte|rechne|zeichne|kaufe|brauche|bleibe|wohne|lebe|geniesse|loese|ergaenze|mache|markiere|unterstreiche|studiere|analysiere|diskutiere|spiele|hoere)\\b", "min": 2, "label": "At least two verbs from the list in the ich form (ich notiere, ich wiederhole …)"}, {"avoid": "\\bich (?!nicht|jetzt|oft|erst|selbst|auch|nur)[a-z]+s?t\\b", "label": "No -st or -t ending after ich (not ich lernst, ich lernt)"}]}
   ]
 },
 {
@@ -296,18 +312,18 @@ const WEEKS = [
       <li>Negative question (nicht, kein) and your answer is positive: <b>Doch</b>.</li>
       <li>Name, number, address: ask with <b>wie</b>, not was.</li>
     </ul>`,
-  words:[["wer","who"],["was","what"],["wie","how"],["wie lange","how long"],["seit wann","since when"],["wann","when"],["wie viel","how much"],["wie viele","how many"],["woher","where from"],["wo","where"],["wohin","where to"],["welche","which"],["doch","yes (to a negative question)"]],
+  words:[["wer","who"],["was","what"],["wie","how"],["wie lange","how long"],["seit wann","since when"],["wann","when"],["wie viel","how much"],["wie viele","how many"],["woher","where … from"],["wo","where"],["wohin","where … to"],["welche","which"],["doch","yes (to a negative question)"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"seit wann",back:"since when",ex:"Seit wann wohnst du in Zürich?"},
     {t:"flash",lv:1,d:1,k:"v",front:"wie viele",back:"how many",ex:"Wie viele Kurse hast du?"},
     {t:"flash",lv:1,d:1,k:"v",rev:true,front:"how long",back:"wie lange",ex:"Wie lange bleibst du in Zürich?"},
-    {t:"match",lv:1,d:1,k:"v",q:"Match the question words.",pairs:[["wer","who"],["was","what"],["wann","when"],["woher","where from"],["wohin","where to"],["welche","which"]]},
-    {t:"mc",lv:2,d:1,k:"gv",q:"___ kostet ein Kaffee?",reply:"Vier Franken.",opts:["Wie viel","Wie viele","Wann"],a:0,why:"wie viel for amounts like money. wie viele for things you count."},
-    {t:"mc",lv:2,d:2,k:"gv",q:"___ studierst du in Zürich?",reply:"Seit 2024.",opts:["Seit wann","Wie lange","Wann"],a:0,why:"The answer is a starting point, so the question is seit wann."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the question words.",pairs:[["wer","who"],["was","what"],["wann","when"],["woher","where … from"],["wohin","where … to"],["seit wann","since when"]]},
+    {t:"mc",lv:2,d:1,k:"gv",q:"Which question gets this answer?",reply:"Vier Franken.",opts:["Wie viel kostet ein Kaffee?","Wie viele Kurse hast du?","Wann beginnt der Kurs?"],a:0,why:"wie viel for amounts like money. wie viele for things you count."},
+    {t:"mc",lv:2,d:2,k:"gv",q:"Which question gets this answer?",reply:"Seit 2024.",opts:["Seit wann studierst du in Zürich?","Wie lange bleibst du in Zürich?","Wann beginnt der Kurs?"],a:0,why:"The answer is a starting point, so the question is seit wann."},
     {t:"mc",lv:2,d:2,k:"g",ctx:"You are from Chile.",q:"Kommst du nicht aus Chile?",opts:["Doch.","Ja.","Nein."],a:0,why:"Negative question, positive answer: Doch."},
     {t:"mc",lv:2,d:3,k:"g",ctx:"You are not hungry.",q:"Hast du keinen Hunger?",opts:["Nein.","Doch.","Ja."],a:0,why:"You agree with the negative question, so the answer is Nein."},
-    {t:"gap",lv:3,d:2,k:"gv",q:"___ ___ du?",reply:"Ich wohne in Oerlikon.",hints:["question word","wohnen"],a:[["Wo"],["wohnst"]],why:"Wo asks for a place. wohnen with du: wohnst."},
-    {t:"gap",lv:3,d:2,k:"gv",q:"___ ___ der Kurs?",reply:"Um 12:15 Uhr.",hints:["question word","beginnen"],a:[["Wann"],["beginnt"]],why:"Wann asks for a time. der Kurs is er, so beginnt."},
+    {t:"mc",lv:3,d:1,k:"gv",q:"Wo wohnst du? Which answer is correct?",opts:["Ich wohne in Oerlikon.","Ich wohnst in Oerlikon.","Ich komme aus Oerlikon."],a:0,why:"ich takes -e: ich wohne. Wo asks where you live, so the answer uses in."},
+    {t:"write",lv:3,d:2,k:"g",q:"Turn the statement into a yes/no question.",prompt:"Du kommst aus Chile.",a:["Kommst du aus Chile?"],why:"In a yes/no question the verb moves to position 1."},
     {t:"gap",lv:3,d:3,k:"gv",q:"___ Sprachen ___ du?",reply:"Deutsch und Englisch.",hints:["which","sprechen"],a:[["Welche"],["sprichst"]],why:"sprechen changes e to i for du: du sprichst."},
     {t:"build",lv:4,d:1,k:"g",q:"Build the question: Aren't you from Chile?",tiles:["du","aus Chile","kommst","nicht"],end:"?",a:["Kommst du nicht aus Chile?"],verb:"kommst",why:"Yes/no question, so the verb goes first."},
     {t:"build",lv:4,d:2,k:"gv",q:"Build the question: How long are you staying in Zurich?",tiles:["bleibst","wie lange","in Zürich","du"],end:"?",a:["Wie lange bleibst du in Zürich?"],verb:"bleibst",why:"„Wie lange“ is one block on position 1. The verb is second."},
@@ -315,7 +331,7 @@ const WEEKS = [
     {t:"fix",lv:4,d:1,k:"g",q:"Tap the wrong word.",text:"Wo wohnt du in Zürich?",wrong:[1],fixed:"Wo wohnst du in Zürich?",why:"du takes -st: wohnst."},
     {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Sie kommt aus Berlin.",a:["Woher kommt sie?"],why:"The answer is about sie, so ask about sie: kommt sie."},
     {t:"write",lv:5,d:3,k:"gv",q:"Write the question for this answer.",prompt:"Ich bin seit drei Monaten in der Schweiz.",a:["Seit wann bist du in der Schweiz?","Seit wann sind Sie in der Schweiz?","Wie lange bist du schon in der Schweiz?"],why:"seit in the answer means the question is seit wann."},
-    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Write a negative question that a classmate will answer with Doch. Then write the answer.",model:"Trinkst du keinen Kaffee?\nDoch, jeden Morgen!"}
+    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Write a negative question that a classmate will answer with Doch. Then write the answer.",model:"Trinkst du keinen Kaffee?\nDoch, jeden Morgen!",checks:[{"need": "\\?", "label": "A question with a question mark"}, {"need": "\\b(nicht|kein|keine|keinen)\\b", "label": "The question is negative: nicht or kein"}, {"need": "\\bdoch\\b", "label": "The answer starts with Doch"}]}
   ]
 },
 {
@@ -338,22 +354,21 @@ const WEEKS = [
   words:[["das Büro","office"],["das Labor","lab"],["die Mensa","cafeteria"],["der Hörsaal","lecture hall"],["das Institut","institute"],["die Universität","university"],["die Vorlesung","lecture"],["nach Hause","(going) home"],["zu Hause","at home"],["die Ferien (pl.)","holidays"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"der Hörsaal",back:"lecture hall",ex:"Die Vorlesung ist im Hörsaal."},
-    {t:"flash",lv:1,d:1,k:"v",front:"die Mensa",back:"cafeteria",ex:"Am Mittag gehe ich zur Mensa."},
-    {t:"flash",lv:1,d:2,k:"g",front:"Ich gehe ___ ETH. (die ETH)",back:"zur ETH",ex:"die ETH is feminine, so zu + der becomes zur."},
+    {t:"flash",lv:1,d:1,k:"v",front:"die Mensa",back:"cafeteria",ex:"Am Mittag gehen wir oft in die Mensa."},
+    {t:"flash",dirLabel:"Complete it",lv:1,d:2,k:"g",front:"Ich gehe ___ ETH. (die ETH)",back:"zur ETH",ex:"die ETH is feminine, so zu + der becomes zur."},
     {t:"match",lv:2,d:2,k:"g",q:"Match the question with its answer.",pairs:[["Woher? (Italien)","aus Italien"],["Wo? (Zürich)","in Zürich"],["Wohin? (Basel)","nach Basel"],["Wohin? (der Coop)","zum Coop"],["Wohin? (die ETH)","zur ETH"]]},
-    {t:"mc",lv:2,d:1,k:"g",q:"Ich gehe ___ Hause.",opts:["nach","zu","in"],a:0,why:"Going home: nach Hause."},
-    {t:"mc",lv:2,d:2,k:"g",q:"Ich bin heute Abend ___ Hause.",opts:["zu","nach","in"],a:0,why:"Being at home: zu Hause."},
-    {t:"mc",lv:2,d:2,k:"gv",q:"Ich gehe ___ Mensa.",hint:"(die Mensa)",opts:["zur","zum","nach"],a:0,why:"die Mensa is feminine, so zur."},
-    {t:"gap",lv:3,d:2,k:"gv",q:"Ich ___ aus Indien und ___ in Oerlikon.",hints:["kommen","wohnen"],a:[["komme"],["wohne"]],why:"ich takes -e."},
+    {t:"sort",lv:2,d:2,k:"gv",q:"nach Hause or zu Hause?",groups:["nach Hause (going home)","zu Hause (at home)"],items:[["Ich gehe …",0],["Um 6 Uhr geht er …",0],["Wann gehst du …?",0],["Ich bin heute Abend …",1],["Ich bleibe heute …",1],["Sie arbeitet heute …",1]],why:"Going home: nach Hause. Being at home: zu Hause."},
+    {t:"mc",lv:2,d:2,k:"gv",q:"Ich gehe ___ Supermarkt.",hint:"(der Supermarkt)",opts:["zum","zur","nach"],a:0,why:"der Supermarkt is masculine, so zum. die ETH is feminine, so zur ETH."},
+    {t:"build",lv:3,d:2,k:"gv",q:"Build the sentence: I'm from India and I live in Oerlikon.",tiles:["ich","komme","aus Indien","und","wohne","in Oerlikon"],end:".",a:["Ich komme aus Indien und wohne in Oerlikon."],verb:"komme",why:"aus for where you come from, in for where you live."},
     {t:"gap",lv:3,d:2,k:"gv",q:"Wir gehen ___ Labor und dann ___ Hause.",hints:["das Labor",""],a:[["zum"],["nach"]],why:"das Labor is neuter, so zum. Going home is nach Hause."},
-    {t:"gap",lv:3,d:3,k:"gv",q:"___ gehst du? Ich gehe ___ Vorlesung.",hints:["question word","die Vorlesung"],a:[["Wohin"],["zur"]],why:"A direction needs wohin. die Vorlesung is feminine, so zur."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Answer in a full sentence.",prompt:"Wohin gehst du? (die ETH)",a:["Ich gehe zur ETH."],why:"Wohin asks for a direction. die ETH is feminine, so zur."},
     {t:"gap",lv:3,d:3,k:"gv",q:"Sie kommt ___ ___ Schweiz, aber sie wohnt ___ Berlin.",hints:["from","article","in"],a:[["aus"],["der"],["in"]],why:"aus der Schweiz, because die Schweiz keeps its article. in Berlin for where she lives."},
     {t:"build",lv:4,d:2,k:"gv",q:"Start with today: Today I'm going to Coop.",tiles:["heute","gehe","ich","zum Coop"],end:".",a:["Heute gehe ich zum Coop.","Ich gehe heute zum Coop."],verb:"gehe",why:"heute on position 1 pushes ich behind the verb."},
     {t:"fix",lv:4,d:2,k:"g",q:"There are two mistakes. Tap both.",text:"Ich komme von Italien und wohne nach Zürich.",wrong:[2,6],fixed:"Ich komme aus Italien und wohne in Zürich.",why:"Woher takes aus. Wo takes in."},
     {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Ich gehe heute zum ETH.",wrong:[3],fixed:"Ich gehe heute zur ETH.",why:"die ETH is feminine, so zur."},
     {t:"mc",lv:4,d:3,k:"g",q:"Which sentence is correct?",opts:["Ich gehe nach Hause.","Ich bin nach Hause.","Ich gehe zu Hause."],a:0,why:"Movement: nach Hause gehen. Location: zu Hause sein."},
     {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I'm from Canada, but I live in Zurich.",a:["Ich komme aus Kanada, aber ich wohne in Zürich.","Ich komme aus Kanada, aber wohne in Zürich."],why:"aus for where you come from, in for where you live."},
-    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Describe your day in two sentences: where you are and where you go.",model:"Am Morgen bin ich im Büro.\nAm Mittag gehe ich zur Mensa und am Abend nach Hause."}
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Describe your day in two sentences. Say where you are (ich bin …) and where you go (ich gehe …).",model:"Am Morgen bin ich im Büro.\nAm Mittag gehe ich in die Mensa und am Abend nach Hause.",checks:[{"need": "\\bbin\\b", "label": "Where you are, with sein: ich bin …"}, {"need": "\\bgehe\\b", "label": "Where you go, with gehen: ich gehe …"}, {"need": "\\b(nach|zum|zur|in die|ins)\\b", "label": "A direction: nach, zum, zur or in die"}, {"avoid": "\\bbin\\b[^.!?]*\\bnach hause", "label": "nach Hause goes with gehen, not sein (ich bin zu Hause)"}, {"avoid": "\\bgehe\\b[^.!?]*\\bzu hause", "label": "zu Hause goes with sein, not gehen (ich gehe nach Hause)"}]}
   ]
 },
 {
@@ -370,18 +385,18 @@ const WEEKS = [
     </table></div>
     <h3>Tricky letters</h3>
     <p><b>W</b> [veː] sounds like English v. <b>V</b> [fau] sounds like f. <b>J</b> [jɔt]. <b>Z</b> [tsɛt]. <b>E</b> [eː]. <b>I</b> [iː].</p>`,
-  words:[["Freut mich.","nice to meet you"],["Mich auch.","me too"],["Wie bitte?","pardon?"],["Tut mir leid.","I'm sorry"],["Können Sie das wiederholen?","can you repeat that?"],["Gern geschehen.","you're welcome"],["buchstabieren","to spell"],["der Familienname","surname"],["ein bisschen","a little"],["auch","also, too"],["jetzt","now"],["der Lieblingsort","favorite place"],["Gehen wir etwas trinken?","shall we get a drink?"]],
+  words:[["Freut mich.","It's a pleasure (to meet you)."],["Mich auch.","me too"],["Wie bitte?","I beg your pardon?"],["Tut mir Leid, ich verstehe nicht.","Excuse me, I don't understand."],["Können Sie wiederholen, bitte?","Can you repeat, please?"],["Gern geschehen.","you're welcome"],["buchstabieren","spell"],["der Familienname","surname"],["ein bisschen","a little / a bit"],["auch","too / as well / also"],["jetzt","now"],["der Lieblingsort","favourite place"],["Gehen wir etwas trinken?","Shall we go for a drink?"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"Gern geschehen.",back:"You're welcome.",ex:"Vielen Dank! Gern geschehen."},
-    {t:"flash",lv:1,d:1,k:"v",front:"ein bisschen",back:"a little",ex:"Ich spreche ein bisschen Deutsch."},
-    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"Nice to meet you. / Me too.",back:"Freut mich. / Mich auch."},
-    {t:"flash",lv:1,d:1,k:"v",front:"der Lieblingsort",back:"favorite place",ex:"Mein Lieblingsort ist der Lindenhof."},
-    {t:"match",lv:1,d:1,k:"v",q:"Match the phrases.",pairs:[["Wie bitte?","pardon?"],["Tut mir leid.","I'm sorry."],["Mach's gut!","take care"],["Bis bald.","see you soon"],["Danke, gleichfalls.","thanks, same to you"]]},
+    {t:"flash",lv:1,d:1,k:"v",front:"ein bisschen",back:"a little / a bit",ex:"Ich spreche ein bisschen Deutsch."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"It's a pleasure (to meet you). / Me too.",back:"Freut mich. / Mich auch."},
+    {t:"flash",lv:1,d:1,k:"v",front:"der Lieblingsort",back:"favourite place",ex:"Mein Lieblingsort ist der Lindenhof."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the phrases.",pairs:[["Wie bitte?","I beg your pardon?"],["Tut mir Leid.","I'm sorry."],["Mach's gut!","Take care!"],["Bis bald.","See you soon."],["Danke, gleichfalls.","Thank you, same to you."]]},
     {t:"mc",lv:2,d:1,k:"gv",ctx:"Your new flatmate says „Hoi!“",q:"You answer:",opts:["Hoi! Wie heisst du?","Grüezi! Wie heissen Sie?","Auf Wiedersehen!"],a:0,why:"Hoi is informal, so you answer with du."},
     {t:"mc",lv:2,d:2,k:"v",ctx:"On the phone, someone spells: ve, a, ha, el.",q:"Which name is it?",opts:["Wahl","Vahl","Wall"],a:0,why:"The letter W is said [ve]. H is [ha]. The letter V would be [fau]."},
     {t:"mc",lv:2,d:3,k:"v",ctx:"Someone spells: fau, o, ge, e, el.",q:"Which word is it?",opts:["Vogel","Fogel","Wogel"],a:0,why:"[fau] is the letter V. It sounds like f."},
-    {t:"gap",lv:3,d:2,k:"gv",q:"Wie ___ Sie? ___ Name ist Keller.",hints:["heissen","my"],a:[["heissen"],["Mein"]],why:"Formal Sie takes -en. Mein starts the sentence."},
-    {t:"gap",lv:3,d:2,k:"gv",q:"Wo ___ du? Ich ___ an der ETH.",hints:["arbeiten","arbeiten"],a:[["arbeitest"],["arbeite"]],why:"arbeit- ends in -t, so du takes -est."},
+    {t:"sort",lv:2,d:1,k:"gv",q:"Formal or informal?",groups:["formell (Sie)","informell (du)"],items:[["Grüezi",0],["Wie heissen Sie?",0],["Auf Wiedersehen",0],["Wie ist Ihr Name?",0],["Hoi",1],["Wie heisst du?",1],["Tschüss",1],["Wo arbeitest du?",1]],why:"Sie, Ihr and the -en verb form are formal. Hoi and Tschüss are informal."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Answer in a full sentence.",prompt:"Wo arbeitest du? (an der ETH)",a:["Ich arbeite an der ETH."],why:"ich arbeite. The course phrase is Ich arbeite an der ETH/UZH."},
     {t:"gap",lv:3,d:3,k:"gv",q:"Wie ist ___ Familienname? Können Sie das bitte ___?",hints:["your, formal","spell"],a:[["Ihr"],["buchstabieren"]],why:"Formal your is Ihr, with a capital. buchstabieren = to spell."},
     {t:"build",lv:4,d:2,k:"gv",q:"Build the question: Shall we go for a drink?",tiles:["etwas trinken","gehen","wir"],end:"?",a:["Gehen wir etwas trinken?"],verb:"gehen",why:"A suggestion starts with the verb."},
     {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: I speak English and a little German.",tiles:["spreche","ich","Englisch","und ein bisschen Deutsch"],end:".",a:["Ich spreche Englisch und ein bisschen Deutsch."],verb:"spreche",why:"Subject, verb, then the rest."},
@@ -389,7 +404,7 @@ const WEEKS = [
     {t:"fix",lv:4,d:3,k:"gv",q:"Tap the wrong word.",text:"Wo wohnen Sie und was ist dein Lieblingsort?",wrong:[6],fixed:"Wo wohnen Sie und was ist Ihr Lieblingsort?",why:"You started with Sie, so stay formal: Ihr."},
     {t:"write",lv:5,d:2,k:"g",q:"Make it formal.",prompt:"Woher kommst du?",a:["Woher kommen Sie?"],why:"Sie takes the -en form."},
     {t:"write",lv:5,d:3,k:"g",q:"Make it informal.",prompt:"Welche Sprachen sprechen Sie?",a:["Welche Sprachen sprichst du?"],why:"sprechen changes e to i for du: sprichst."},
-    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Introduce yourself to a classmate in three sentences: name, where you are from, what you do at ETH.",model:"Hoi, ich heisse Sam.\nIch komme aus Kanada und wohne jetzt in Zürich.\nIch mache mein PhD am Departement Maschinenbau."}
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Introduce yourself to a classmate in three sentences: name, where you are from, what you do at ETH.",model:"Hoi, ich heisse Sam.\nIch komme aus Kanada und wohne jetzt in Zürich.\nIch mache mein PhD am Departement Maschinenbau.",checks:[{"need": "\\b(ich heisse|mein name ist)\\b", "label": "Your name: ich heisse … / mein Name ist …"}, {"need": "\\bich komme aus\\b", "label": "Where you are from: ich komme aus …"}, {"need": "\\b(arbeite|studiere|mache)\\b", "label": "What you do: ich arbeite / studiere / mache …"}, {"avoid": "\\bich (?!nicht|jetzt|oft|erst|selbst|auch|nur)[a-z]+s?t\\b", "label": "No -st or -t ending after ich (not ich kommst)"}]}
   ]
 }
 ]},
@@ -411,18 +426,18 @@ const WEEKS = [
       <li>Formal <b>Sie</b> uses the same verb form as <b>wir</b>.</li>
       <li>Formal pronouns always take a capital: <b>Sie, Ihr, Ihnen</b>.</li>
     </ul>`,
-  words:[["das Kreisbüro","district registration office"],["sich anmelden","to register"],["der Vorname","first name"],["der Familienname","surname"],["die Strasse","street"],["die Hausnummer","house number"],["die Postleitzahl (PLZ)","postal code"],["der Ort","town"],["der Beruf","job"],["das Alter","age"],["der Zivilstand","marital status"],["ledig","single"],["verheiratet","married"],["geschieden","divorced"],["verwitwet","widowed"],["der Ausweis","ID card"],["die Aufenthaltsbewilligung","residence permit"],["die Unterschrift","signature"]],
+  words:[["das Kreisbüro","district registration office"],["sich anmelden","to register"],["der Vorname","first name"],["der Familienname","surname"],["die Strasse","street"],["die Hausnummer","house number"],["die Postleitzahl (PLZ)","postal code"],["der Ort","town"],["der Beruf","job"],["das Alter","age"],["der Zivilstand","marital status"],["ledig","unmarried, single"],["verheiratet","married"],["geschieden","divorced"],["verwitwet","widowed"],["der Ausweis","ID card, pass"],["die Aufenthaltsbewilligung","residence permit"],["die Unterschrift","signature"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"die Aufenthaltsbewilligung",back:"residence permit",ex:"Welche Aufenthaltsbewilligung haben Sie?"},
-    {t:"flash",lv:1,d:1,k:"v",front:"ledig",back:"single, never married",ex:"Sind Sie verheiratet? Nein, ich bin ledig."},
+    {t:"flash",lv:1,d:1,k:"v",front:"ledig",back:"unmarried, single",ex:"Sind Sie verheiratet? Nein, ich bin ledig."},
     {t:"flash",lv:1,d:1,k:"v",rev:true,front:"signature",back:"die Unterschrift",ex:"Unterschreiben Sie bitte hier."},
-    {t:"match",lv:1,d:1,k:"v",q:"Match the form fields.",pairs:[["der Ausweis","ID card"],["die Unterschrift","signature"],["das Alter","age"],["der Beruf","job"],["der Vorname","first name"],["der Ort","town"]]},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the form fields.",pairs:[["der Ausweis","ID card, pass"],["die Unterschrift","signature"],["das Alter","age"],["der Beruf","job"],["der Vorname","first name"],["der Ort","town"]]},
     {t:"mc",lv:2,d:1,k:"v",q:"On a form, what does „Zivilstand“ ask for?",opts:["Marital status","Nationality","Place of residence","Age"],a:0,why:"The answers are ledig, verheiratet, geschieden or verwitwet."},
     {t:"mc",lv:2,d:1,k:"v",q:"The form field says „PLZ“. Which question fits?",opts:["Wie ist die Postleitzahl?","Wie ist Ihre Telefonnummer?","Welche Hausnummer?"],a:0,why:"PLZ is short for Postleitzahl. Zürich Oerlikon is 8050."},
-    {t:"mc",lv:2,d:2,k:"gv",ctx:"You have never been married.",q:"Sind Sie verheiratet? Nein, ich bin ___.",opts:["ledig","geschieden","verwitwet"],a:0,why:"geschieden = divorced. verwitwet = widowed."},
+    {t:"mc",lv:2,d:2,k:"gv",ctx:"The clerk asks „Sind Sie verheiratet?“ You have never been married.",q:"Which answer is right?",opts:["Nein, ich bin ledig.","Nein, ich bin geschieden.","Nein, ich bin verwitwet."],a:0,why:"ledig = unmarried, single. geschieden = divorced. verwitwet = widowed."},
     {t:"gap",lv:3,d:2,k:"gv",ctx:"At the Kreisbüro counter.",q:"___ ___ Sie?",reply:"Aus Kanada.",hints:["question word","kommen"],a:[["Woher"],["kommen"]],why:"Woher asks where from. Sie takes -en."},
-    {t:"gap",lv:3,d:2,k:"gv",q:"Wie ___ Ihr Vorname? Mein ___ ist Lea.",hints:["sein","first name"],a:[["ist"],["Vorname"]],why:"Ihr Vorname is er, so ist. Vorname is a noun and takes a capital."},
-    {t:"gap",lv:3,d:3,k:"gv",q:"___ sind Sie in der Schweiz?",reply:"Seit zwei Jahren.",hints:["question word"],a:[["Seit wann"]],why:"The answer starts with seit, so ask seit wann."},
+    {t:"write",lv:3,d:2,k:"gv",ctx:"At the Kreisbüro counter. Your first name is Lea.",q:"The clerk asks „Wie ist Ihr Vorname?“ Answer in a full sentence.",a:["Mein Vorname ist Lea.","Ich heisse Lea."],why:"Answer with Mein Vorname ist … or Ich heisse …"},
+    {t:"sort",lv:4,d:2,k:"gv",q:"Wie or was? Sort the questions from the form.",groups:["Wie …?","Was …?"],items:[["… ist Ihr Name?",0],["… ist Ihre Adresse?",0],["… ist Ihre Telefonnummer?",0],["… alt sind Sie?",0],["… sind Sie von Beruf?",1],["… studieren Sie?",1],["… bedeutet PLZ?",1]],why:"Name, address, number and age take wie. Beruf, studies and meanings take was."},
     {t:"gap",lv:3,d:2,k:"v",q:"Was für einen ___ haben Sie?",reply:"Einen Pass.",hints:["ID document"],a:[["Ausweis"]],why:"der Ausweis, so einen Ausweis."},
     {t:"build",lv:4,d:1,k:"g",q:"Build the question: What is your job?",tiles:["sind","Sie","was","von Beruf"],end:"?",a:["Was sind Sie von Beruf?"],verb:"sind",why:"Question word first, verb second, then the subject."},
     {t:"caps",lv:4,d:2,k:"gv",q:"Tap every word that needs a capital letter.",text:"wie ist ihre telefonnummer im geschäft?",a:"Wie ist Ihre Telefonnummer im Geschäft?",why:"Wie starts the sentence. Ihre is formal. Telefonnummer and Geschäft are nouns."},
@@ -430,7 +445,7 @@ const WEEKS = [
     {t:"fix",lv:4,d:3,k:"gv",q:"There are two mistakes. Tap both.",text:"Was ist Ihr Vorname und wie alt bist Sie?",wrong:[0,7],fixed:"Wie ist Ihr Vorname und wie alt sind Sie?",why:"Names take wie. Sie takes sind."},
     {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Ich bin Ingenieurin von Beruf.",a:["Was sind Sie von Beruf?","Was bist du von Beruf?"],why:"Beruf questions use was: Was sind Sie von Beruf?"},
     {t:"write",lv:5,d:3,k:"gv",q:"You are the clerk. Ask formally for the phone number at work.",prompt:"phone number at work = die Telefonnummer im Geschäft",a:["Wie ist Ihre Telefonnummer im Geschäft?"],why:"wie for numbers, Ihre for formal your."},
-    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Answer the Kreisbüro form in full sentences: name, origin, address, job, marital status.",model:"Ich heisse Sam Lee.\nIch komme aus Kanada.\nIch wohne an der Hofwiesenstrasse 12, 8057 Zürich.\nIch bin Doktorand von Beruf.\nIch bin ledig."}
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Answer the Kreisbüro form in full sentences: name, origin, address, job, marital status.",model:"Ich heisse Sam Lee.\nIch komme aus Kanada.\nIch wohne an der Hofwiesenstrasse 12, 8057 Zürich.\nIch bin Doktorand von Beruf.\nIch bin ledig.",checks:[{"need": "\\b(ich heisse|mein name ist|mein vorname ist)\\b", "label": "Name: ich heisse … / mein Name ist …"}, {"need": "\\bich komme aus\\b", "label": "Origin: ich komme aus …"}, {"need": "\\bich wohne\\b", "label": "Address: ich wohne …"}, {"need": "\\b(von beruf|ich bin [a-z]+(in|er|or|ent|and|ant|ist)\\b|ich arbeite|ich studiere)", "label": "Job: ich bin … von Beruf / ich arbeite …"}, {"need": "\\b(ledig|verheiratet|geschieden|verwitwet)\\b", "label": "Marital status: ledig, verheiratet, geschieden or verwitwet"}, {"avoid": "\\bich (?!nicht|jetzt|oft|erst|selbst|auch|nur)[a-z]+s?t\\b", "label": "No -st or -t ending after ich"}]}
   ]
 },
 {
@@ -452,26 +467,26 @@ const WEEKS = [
       <li>Most countries have no article: aus Italien. Some do: aus <b>der</b> Schweiz, aus <b>der</b> Türkei, aus <b>den</b> USA.</li>
       <li>sprechen: ich spreche, <b>du sprichst</b>, <b>er spricht</b>.</li>
     </ul>`,
-  words:[["Deutschland / Deutsch","Germany / German"],["Frankreich / Französisch","France / French"],["Italien / Italienisch","Italy / Italian"],["Griechenland / Griechisch","Greece / Greek"],["Polen / Polnisch","Poland / Polish"],["Russland / Russisch","Russia / Russian"],["Schweden / Schwedisch","Sweden / Swedish"],["Portugal / Portugiesisch","Portugal / Portuguese"],["die Türkei / Türkisch","Turkey / Turkish"],["China / Chinesisch","China / Chinese"],["Japan / Japanisch","Japan / Japanese"],["die USA (pl.)","the USA"],["die Schweiz","Switzerland"]],
+  wordsHead:["Land","der Mann / die Frau"],
+  words:[["China","der Chinese / die Chinesin"],["Deutschland","der Deutsche / die Deutsche"],["Frankreich","der Franzose / die Französin"],["Griechenland","der Grieche / die Griechin"],["Grossbritannien","der Brite / die Britin"],["Schweden","der Schwede / die Schwedin"],["die Türkei","der Türke / die Türkin"],["Polen","der Pole / die Polin"],["Russland","der Russe / die Russin"],["Indien","der Inder / die Inderin"],["Italien","der Italiener / die Italienerin"],["Japan","der Japaner / die Japanerin"],["Kanada","der Kanadier / die Kanadierin"],["Portugal","der Portugiese / die Portugiesin"],["die Schweiz","der Schweizer / die Schweizerin"],["die USA (pl.)","der Amerikaner / die Amerikanerin"]],
   items:[
-    {t:"flash",lv:1,d:2,k:"gv",front:"a man from France / a woman from France",back:"der Franzose / die Französin",ex:"Er ist Franzose. Er spricht Französisch."},
-    {t:"flash",lv:1,d:1,k:"gv",front:"a man from Switzerland / a woman from Switzerland",back:"der Schweizer / die Schweizerin",ex:"Ich komme aus der Schweiz."},
+    {t:"flash",rev:true,lv:1,d:2,k:"gv",front:"a man from France / a woman from France",back:"der Franzose / die Französin",ex:"Er ist Franzose. Er spricht Französisch."},
+    {t:"flash",rev:true,lv:1,d:1,k:"gv",front:"a man from Switzerland / a woman from Switzerland",back:"der Schweizer / die Schweizerin",ex:"Ich komme aus der Schweiz."},
     {t:"flash",lv:1,d:1,k:"v",rev:true,front:"Sweden / Swedish (the language)",back:"Schweden / Schwedisch"},
     {t:"match",lv:1,d:1,k:"v",q:"Match each country with its language.",pairs:[["Griechenland","Griechisch"],["Polen","Polnisch"],["Russland","Russisch"],["Portugal","Portugiesisch"],["die Türkei","Türkisch"],["China","Chinesisch"]]},
-    {t:"mc",lv:2,d:1,k:"gv",q:"Giulia kommt aus Italien. Sie ist ___.",opts:["Italienerin","Italiener","italienisch"],a:0,why:"A woman from Italy is Italienerin. No article after ist."},
-    {t:"mc",lv:2,d:2,k:"g",q:"Ich komme aus ___ Schweiz.",opts:["der","die","(no article)"],a:0,why:"die Schweiz keeps its article. After aus, die becomes der."},
+    {t:"mc",lv:2,d:1,k:"gv",q:"Giulia kommt aus Italien. Which sentence is correct?",opts:["Sie ist Italienerin.","Sie ist Italiener.","Sie ist eine italienisch."],a:0,why:"A woman from Italy is Italienerin. There is no article after ist."},
+    {t:"sort",lv:2,d:2,k:"g",q:"Which countries keep their article after aus?",groups:["with article: aus der / den …","no article: aus …"],items:[["die Schweiz",0],["die Türkei",0],["die USA",0],["Deutschland",1],["Italien",1],["Japan",1],["Kanada",1],["Frankreich",1]],why:"aus der Schweiz, aus der Türkei, aus den USA. Most countries have no article: aus Italien."},
     {t:"mc",lv:2,d:2,k:"g",q:"Sie kommt aus ___ USA.",opts:["den","der","die"],a:0,why:"die USA is plural. After aus it becomes den."},
-    {t:"mc",lv:2,d:1,k:"g",q:"Ich komme aus ___ Deutschland.",opts:["(no article)","der","dem"],a:0,why:"Most countries have no article."},
-    {t:"gap",lv:3,d:2,k:"gv",q:"Pierre kommt aus ___. Er ist ___.",hints:["France","nationality"],a:[["Frankreich"],["Franzose"]],why:"The -e group: der Franzose, die Französin."},
+    {t:"sort",lv:4,d:3,k:"gv",q:"How do you say it for a woman? Sort the countries by pattern.",groups:["-e → -in (der Schwede, die Schwedin)","-er → -erin (der Japaner, die Japanerin)"],items:[["Frankreich",0],["Schweden",0],["Polen",0],["die Türkei",0],["Italien",1],["Japan",1],["Kanada",1],["die Schweiz",1]],why:"The two groups from the course table. Frankreich is Franzose, Französin. Polen is Pole, Polin."},
     {t:"gap",lv:3,d:3,k:"gv",q:"Aiko ist ___ und ___ Japanisch und Englisch.",hints:["woman from Japan","sprechen"],a:[["Japanerin"],["spricht"]],why:"der Japaner, die Japanerin. sprechen with sie: spricht."},
-    {t:"gap",lv:3,d:3,k:"gv",q:"Kommst du aus ___ Türkei? Ja, ich bin ___.",hints:["article","man from Turkey"],a:[["der"],["Türke"]],why:"aus der Türkei. A man from Turkey is Türke."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Rewrite the sentence about a woman.",prompt:"Er ist Türke und kommt aus der Türkei.",a:["Sie ist Türkin und kommt aus der Türkei."],why:"der Türke, die Türkin. sie kommt."},
     {t:"build",lv:4,d:2,k:"gv",q:"Build the question: Which languages do you speak?",tiles:["sprichst","welche","du","Sprachen"],end:"?",a:["Welche Sprachen sprichst du?"],verb:"sprichst",why:"„Welche Sprachen“ is one block on position 1."},
     {t:"caps",lv:4,d:2,k:"gv",q:"Tap every word that needs a capital letter.",text:"ich spreche englisch und ein bisschen deutsch.",a:"Ich spreche Englisch und ein bisschen Deutsch.",why:"Languages are nouns, so they take capitals."},
     {t:"fix",lv:4,d:3,k:"gv",q:"There are two mistakes. Tap both.",text:"Er kommt aus die Schweiz und spricht französisch.",wrong:[3,7],fixed:"Er kommt aus der Schweiz und spricht Französisch.",why:"aus der Schweiz. The language Französisch takes a capital."},
     {t:"mc",lv:4,d:2,k:"g",ctx:"You are Canadian.",q:"Bist du nicht Kanadierin?",opts:["Doch!","Ja!","Nein!"],a:0,why:"Negative question, positive answer: Doch."},
     {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"She is Italian and lives in Zurich.",a:["Sie ist Italienerin und wohnt in Zürich.","Sie ist Italienerin und sie wohnt in Zürich."],why:"No article before Italienerin. wohnen with sie: wohnt."},
     {t:"write",lv:5,d:3,k:"gv",q:"Write the question for this answer.",prompt:"Ich spreche Polnisch, Deutsch und ein bisschen Englisch.",a:["Welche Sprachen sprichst du?","Welche Sprachen sprechen Sie?"],why:"welche for a choice from a group. du sprichst."},
-    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Introduce a classmate: country, nationality, languages.",model:"Das ist Ana.\nSie kommt aus Portugal. Sie ist Portugiesin.\nSie spricht Portugiesisch, Englisch und ein bisschen Deutsch."}
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Introduce a classmate: country (kommt aus), nationality (ist …), languages (spricht …).",model:"Das ist Ana.\nSie kommt aus Portugal. Sie ist Portugiesin.\nSie spricht Portugiesisch, Englisch und ein bisschen Deutsch.",checks:[{"need": "\\b(er|sie) kommt aus\\b", "label": "Country: er / sie kommt aus …"}, {"need": "\\b(er|sie) ist\\b", "label": "Nationality: er / sie ist … (no article)"}, {"need": "\\b(er|sie) spricht\\b", "label": "Languages: er / sie spricht … (e changes to i)"}, {"avoid": "\\b(er|sie) (ist|ist ein|ist eine) (ein|eine)\\b", "label": "No article before the nationality (not sie ist eine …)"}, {"avoid": "\\b(er|sie) (sprecht|sprechst|spreche|kommst|komme)\\b", "label": "The er/sie forms: kommt, spricht"}, {"avoid": "spricht( [A-Za-zÄÖÜäöü]+,?)*? [a-zäöü]+isch\\b", "raw": true, "label": "Languages take a capital (Portugiesisch, not portugiesisch)"}]}
   ]
 },
 {
@@ -482,7 +497,7 @@ const WEEKS = [
     <div class="tbl"><table><tr><th></th><th>sein</th><th>haben</th></tr>
       <tr><td>ich</td><td>bin</td><td>habe</td></tr>
       <tr><td>du</td><td>bist</td><td>hast</td></tr>
-      <tr><td>er / sie / es</td><td>ist</td><td>hat</td></tr>
+      <tr><td>er / sie / es / man</td><td>ist</td><td>hat</td></tr>
       <tr><td>wir</td><td>sind</td><td>haben</td></tr>
       <tr><td>ihr</td><td>seid</td><td>habt</td></tr>
       <tr><td>sie / Sie</td><td>sind</td><td>haben</td></tr>
@@ -492,27 +507,27 @@ const WEEKS = [
       <li>Ja, and you too: <b>Ich auch.</b> Ja, but not you: <b>Ich nicht.</b></li>
       <li>Nein, and not you either: <b>Ich auch nicht.</b> Nein, but you are: <b>Ich schon.</b></li>
     </ul>`,
-  words:[["müde ↔ fit","tired ↔ fit"],["traurig ↔ glücklich","sad ↔ happy"],["krank ↔ gesund","sick ↔ healthy"],["nervös ↔ ruhig","nervous ↔ calm"],["satt ↔ hungrig","full ↔ hungry"],["sauer","angry"],["blau ↔ nüchtern","drunk ↔ sober"],["pleite ↔ reich","broke ↔ rich"],["pünktlich","punctual"],["der Durst / durstig","thirst / thirsty"],["viel Arbeit","a lot of work"],["der Abgabetermin","deadline"],["heute Abend zu Hause","at home tonight"]],
+  words:[["müde >< fit","tired >< fit"],["traurig >< glücklich","sad >< happy"],["krank >< gesund","sick >< well"],["nervös >< ruhig","nervous >< calm"],["satt >< hungrig","full >< hungry"],["sauer >< nicht sauer","angry >< not angry"],["blau >< nüchtern","drunk >< sober"],["verheiratet >< ledig","married >< not married"],["pleite >< reich","broke >< rich"],["pünktlich >< unpünktlich","punctual/unpunctual"],["heute Abend zu Hause","this evening at home"],["viel Arbeit","a lot of work"],["viel Stress","a lot of stress"],["einen Abgabetermin","a deadline"],["keine Zeit für nichts","no time for nothing"],["der Durst / durstig","thirst / thirsty"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"pleite",back:"broke (no money)",ex:"Am Monatsende bin ich oft pleite."},
-    {t:"flash",lv:1,d:1,k:"v",front:"der Abgabetermin",back:"deadline",ex:"Ich habe morgen einen Abgabetermin."},
-    {t:"flash",lv:1,d:2,k:"g",front:"How do you say „you are“ to a group of friends (ihr, sein)?",back:"ihr seid",ex:"Ihr seid heute sehr müde."},
+    {t:"flash",lv:1,d:1,k:"v",front:"der Abgabetermin",back:"a deadline",ex:"Ich habe morgen einen Abgabetermin."},
+    {t:"flash",rev:true,lv:1,d:2,k:"g",front:"How do you say „you are“ to a group of friends (ihr, sein)?",back:"ihr seid",ex:"Ihr seid heute sehr müde."},
     {t:"flash",lv:1,d:1,k:"g",rev:true,front:"we have",back:"wir haben"},
     {t:"match",lv:1,d:1,k:"v",q:"Match the opposites.",pairs:[["müde","fit"],["traurig","glücklich"],["krank","gesund"],["nervös","ruhig"],["satt","hungrig"],["pleite","reich"]]},
-    {t:"mc",lv:2,d:2,k:"gv",q:"Ich habe Durst. That means: Ich bin ___.",opts:["durstig","Durst","satt"],a:0,why:"der Durst is the noun, used with haben. durstig is the adjective, used with sein."},
+    {t:"mc",lv:2,d:2,k:"gv",q:"„Ich habe Durst.“ Which sentence means the same?",opts:["Ich bin durstig.","Ich bin Durst.","Ich habe durstig."],a:0,why:"der Durst is a noun, used with haben. durstig is an adjective, used with sein."},
     {t:"mc",lv:2,d:1,k:"v",q:"Nach der Party ist Tom blau. What is Tom?",opts:["drunk","sad","cold"],a:0,why:"blau sein is slang for drunk. The opposite is nüchtern."},
     {t:"mc",lv:2,d:2,k:"gv",ctx:"Your friend says this. You are not tired either.",q:"„Ich bin nicht müde. Und du?“",opts:["Ich auch nicht.","Ich auch.","Ich schon."],a:0,why:"Ich auch nicht = me neither."},
     {t:"mc",lv:2,d:3,k:"gv",ctx:"Your friend says this. You are not tired.",q:"„Ich bin müde. Und du?“",opts:["Ich nicht.","Ich auch nicht.","Ich auch."],a:0,why:"Ich nicht = I'm not. Use it when your friend's statement is not true for you."},
-    {t:"gap",lv:3,d:1,k:"g",q:"Ich ___ Hunger.",hints:["haben"],a:[["habe"]],why:"Hunger is a noun, so haben."},
+    {t:"sort",lv:2,d:1,k:"gv",q:"haben or sein?",groups:["Ich habe …","Ich bin …"],items:[["Hunger",0],["Durst",0],["viel Arbeit",0],["ein Problem",0],["müde",1],["hungrig",1],["pleite",1],["heute Abend zu Hause",1]],why:"Nouns like Hunger, Durst and Arbeit go with haben. Adjectives like müde, hungrig and pleite go with sein."},
     {t:"gap",lv:3,d:2,k:"gv",q:"___ du müde? Nein, aber ich ___ Hunger.",hints:["sein","haben"],a:[["Bist"],["habe"]],why:"müde is an adjective, so sein. Hunger is a noun, so haben."},
     {t:"gap",lv:3,d:2,k:"gv",q:"Ihr ___ gestresst, denn ihr ___ viel Arbeit.",hints:["sein","haben"],a:[["seid"],["habt"]],why:"ihr seid, ihr habt."},
-    {t:"gap",lv:3,d:3,k:"gv",q:"Er ___ pleite und ___ keine Zeit.",hints:["sein","haben"],a:[["ist"],["hat"]],why:"er ist, er hat."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Rewrite the sentence with wir instead of er.",prompt:"Er ist pleite und hat keine Zeit für nichts.",a:["Wir sind pleite und haben keine Zeit für nichts."],why:"wir sind, wir haben."},
     {t:"mc",lv:3,d:2,k:"gv",ctx:"You do have time.",q:"Hast du keine Zeit?",opts:["Doch!","Ja!","Nein!"],a:0,why:"keine makes the question negative. Positive answer: Doch."},
     {t:"fix",lv:4,d:2,k:"gv",q:"There are two mistakes. Tap both.",text:"Ich bin Hunger und du hast müde.",wrong:[1,5],fixed:"Ich habe Hunger und du bist müde.",why:"Hunger haben. müde sein."},
     {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wir sind durstig und ihr sind satt.",wrong:[5],fixed:"Wir sind durstig und ihr seid satt.",why:"ihr seid."},
     {t:"build",lv:4,d:1,k:"g",q:"Build the question: Do you have a problem?",tiles:["ein Problem","du","hast"],end:"?",a:["Hast du ein Problem?"],verb:"hast",why:"A yes/no question starts with the verb."},
     {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I'm hungry. Are you hungry too?",a:["Ich habe Hunger. Hast du auch Hunger?","Ich bin hungrig. Bist du auch hungrig?"],why:"Hunger goes with haben, hungrig with sein. auch = too."},
-    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. How are you today? Write three sentences with sein and haben.",model:"Ich bin müde, aber glücklich.\nIch habe viel Arbeit und morgen einen Abgabetermin.\nHeute Abend bin ich zu Hause."}
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. How are you today? Write three sentences with sein and haben.",model:"Ich bin müde, aber glücklich.\nIch habe viel Arbeit und morgen einen Abgabetermin.\nHeute Abend bin ich zu Hause.",checks:[{"need": "\\b(bin|bist|ist|sind|seid)\\b", "label": "A sentence with sein"}, {"need": "\\b(habe|hast|hat|haben|habt)\\b", "label": "A sentence with haben"}, {"avoid": "\\bbin (hunger|durst|stress|zeit|arbeit|viel)\\b", "label": "Hunger, Durst, Stress and Arbeit go with haben (ich habe Hunger)"}, {"avoid": "\\bhabe (muede|hungrig|durstig|pleite|krank|traurig|gluecklich|gestresst)\\b", "label": "Adjectives go with sein (ich bin müde)"}, {"avoid": "\\bich (ist|bist|hat|hast)\\b", "label": "ich bin, ich habe"}]}
   ]
 },
 {
@@ -530,16 +545,15 @@ const WEEKS = [
       <li><b>und, aber, oder, denn</b> sit on position 0. They do not move the verb: ..., denn ich arbeite viel.</li>
       <li>Time before place: Roberto wohnt <b>seit 2 Wochen</b> <b>in Altstetten</b>.</li>
     </ul>`,
-  words:[["jetzt","now"],["manchmal","sometimes"],["oft","often"],["dort","there"],["ungefähr","about"],["schnell","quickly"],["am Morgen / Mittag / Abend","in the morning / at noon / in the evening"],["die WG","shared flat"],["ruhig","quiet"],["das Fenster","window"],["der See","lake"],["mit dem Tram","by tram"],["die Mensa","cafeteria"],["kein Problem","no problem"],["denn","because"]],
+  words:[["jetzt","now"],["manchmal","sometimes"],["oft","often"],["dort","there"],["ungefähr","around"],["schnell","quickly"],["am Morgen / Mittag / Abend","in the morning / at noon / in the evening"],["die WG","shared flat"],["ruhig","quiet"],["das Fenster","window"],["der See","lake"],["mit dem Tram","by tram"],["die Mensa","cafeteria"],["kein Problem","no problem"],["denn","because"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"manchmal",back:"sometimes",ex:"Manchmal regnet es."},
-    {t:"flash",lv:1,d:1,k:"v",front:"ungefähr",back:"about, roughly",ex:"Das Essen kostet ungefähr zehn Franken."},
+    {t:"flash",lv:1,d:1,k:"v",front:"ungefähr",back:"around",ex:"Das Essen kostet ungefähr zehn Franken."},
     {t:"flash",lv:1,d:2,k:"g",front:"denn",back:"because",ex:"Ich habe keine Zeit, denn ich arbeite viel. The word order after denn does not change."},
-    {t:"match",lv:1,d:1,k:"v",q:"Match the little words from Anna's text.",pairs:[["manchmal","sometimes"],["oft","often"],["ungefähr","about"],["schnell","quickly"],["dort","there"],["jetzt","now"]]},
-    {t:"mc",lv:2,d:1,k:"gv",q:"Mein Zimmer ist klein, ___ ich liebe es.",opts:["aber","denn","oder"],a:0,why:"aber = but. It sets up a contrast."},
-    {t:"mc",lv:2,d:2,k:"gv",q:"Ich habe nicht viel Zeit, ___ ich arbeite viel.",opts:["denn","aber","oder"],a:0,why:"denn = because. It gives the reason."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the little words from Anna's text.",pairs:[["manchmal","sometimes"],["oft","often"],["ungefähr","around"],["schnell","quickly"],["dort","there"],["jetzt","now"]]},
+    {t:"sort",lv:4,d:2,k:"gv",q:"aber or denn? Sort the sentences.",groups:["aber (but)","denn (because)"],items:[["Mein Zimmer ist nicht gross, … ich liebe es.",0],["Zürich ist schön, … manchmal regnet es.",0],["Das Tram kommt spät, … das ist kein Problem.",0],["Ich habe nicht viel Zeit, … ich arbeite viel.",1],["Ich gehe in die Mensa, … ich habe Hunger.",1],["Ich lerne Deutsch, … ich lebe jetzt in Zürich.",1]],why:"aber sets up a contrast. denn gives a reason. Both sit on position 0."},
     {t:"mc",lv:2,d:1,k:"gv",q:"Trinkst du Kaffee ___ Tee?",opts:["oder","und","denn"],a:0,why:"oder = or."},
-    {t:"gap",lv:3,d:2,k:"gv",q:"Am Morgen ___ ich das Fenster und ___ die Vögel.",hints:["öffnen","hören"],a:[["öffne"],["höre"]],why:"ich takes -e. Am Morgen is on position 1, so the verb comes next."},
+    {t:"write",lv:3,d:2,k:"g",q:"Rewrite the sentence. Start with am Morgen.",prompt:"Ich höre am Morgen die Vögel.",a:["Am Morgen höre ich die Vögel."],why:"Am Morgen takes position 1. The verb stays second, so ich moves behind it."},
     {t:"gap",lv:3,d:2,k:"gv",q:"Das Essen ___ ungefähr zehn Franken ___ es ist gut.",hints:["kosten","and"],a:[["kostet"],["und"]],why:"kost- ends in -t, so -et. und is on position 0."},
     {t:"gap",lv:3,d:3,k:"gv",q:"Im Sommer ___ viele Leute an den See, aber ich ___ nicht viel Zeit.",hints:["gehen","haben"],a:[["gehen"],["habe"]],why:"viele Leute is plural: gehen. ich habe."},
     {t:"build",lv:3,d:1,k:"g",q:"Build the sentence: Zurich is beautiful.",tiles:["ist","schön","Zürich"],end:".",a:["Zürich ist schön."],verb:"ist",why:"Subject, verb, rest."},
@@ -550,7 +564,7 @@ const WEEKS = [
     {t:"fix",lv:4,d:3,k:"gv",q:"One word does not fit the meaning. Tap it.",text:"Manchmal regnet es, denn die Sonne scheint oft.",wrong:[3],fixed:"Manchmal regnet es, aber die Sonne scheint oft.",why:"Sunshine is not the reason for rain. It is a contrast, so aber."},
     {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Start with manchmal.",prompt:"Sometimes I take the tram to ETH.",a:["Manchmal gehe ich mit dem Tram zur ETH.","Manchmal fahre ich mit dem Tram zur ETH."],why:"Manchmal on position 1, verb second, ich third."},
     {t:"write",lv:5,d:3,k:"g",q:"Join the two sentences with denn.",prompt:"Ich bleibe zu Hause. Ich bin müde.",a:["Ich bleibe zu Hause, denn ich bin müde."],why:"denn is on position 0, so the word order after it stays the same."},
-    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write three sentences about your day like Anna. Start them with am Morgen, am Mittag and am Abend.",model:"Am Morgen öffne ich das Fenster und trinke Kaffee.\nAm Mittag gehe ich mit Kollegen in die Mensa.\nAm Abend lerne ich Deutsch, denn ich habe morgen Kurs."}
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write three sentences about your day like Anna. Start them with am Morgen, am Mittag and am Abend.",model:"Am Morgen öffne ich das Fenster und trinke Kaffee.\nAm Mittag gehe ich mit Kollegen in die Mensa.\nAm Abend lerne ich Deutsch, denn ich habe morgen Kurs.",checks:[{"need": "\\bam morgen [a-z]+e ich\\b", "label": "Am Morgen + verb + ich"}, {"need": "\\bam mittag [a-z]+e ich\\b", "label": "Am Mittag + verb + ich"}, {"need": "\\bam abend [a-z]+e ich\\b", "label": "Am Abend + verb + ich"}, {"avoid": "\\bam (morgen|mittag|abend),? ich\\b", "label": "The verb comes right after the time word, before ich"}]}
   ]
 },
 {
@@ -571,27 +585,27 @@ const WEEKS = [
     </table></div>
     <h3>From best to worst</h3>
     <p>ausgezeichnet · sehr gut · gut · ziemlich gut · ganz gut · es geht so · nicht so gut · ziemlich schlecht · schlecht · sehr schlecht · furchtbar</p>`,
-  words:[["Grüezi","hello, formal (CH)"],["Hoi","hi, informal (CH)"],["Uf Wiederluege","goodbye, formal (CH)"],["Tschüss","bye, informal"],["Entschuldigung","excuse me / sorry"],["Kein Problem","no problem"],["Danke, gleichfalls.","thanks, same to you"],["Mach's gut!","take care"],["Gesundheit!","bless you"],["Gute Besserung!","get well soon"],["Prost!","cheers"],["Schade","what a pity"],["Was bedeutet ...?","what does ... mean?"],["Ich habe eine Frage.","I have a question"],["Ich verstehe das nicht.","I don't understand that"],["Bitte noch einmal.","once more, please"],["Ich weiss es nicht.","I don't know"],["Ich passe.","I pass"],["Frag nicht!","don't ask"]],
+  words:[["Grüezi","Good day / how do you do / hello (CH)"],["Hoi","Hi / hello (CH)"],["Uf Wiederluege","goodbye, formal (CH)"],["Tschüss","Bye"],["Entschuldigung","excuse me / sorry"],["Kein Problem","no problem"],["Danke, gleichfalls.","Thank you, same to you."],["Mach's gut!","Take care!"],["Gesundheit!","bless you"],["Gute Besserung!","get well soon"],["Prost!","cheers"],["Schade","what a pity"],["Was bedeutet ...?","what does ... mean?"],["Ich habe eine Frage.","I have a question"],["Ich verstehe das nicht.","I don't understand that"],["Bitte noch einmal.","once more, please"],["Ich weiss es nicht.","I don't know"],["Ich passe.","I pass"],["Frag nicht!","don't ask"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"Gute Besserung!",back:"Get well soon!",ex:"Du bist krank? Gute Besserung!"},
     {t:"flash",lv:1,d:1,k:"v",front:"Ich passe.",back:"I pass.",ex:"Weisst du die Antwort? Nein, ich passe."},
-    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"Thanks, same to you.",back:"Danke, gleichfalls."},
-    {t:"flash",lv:1,d:1,k:"v",front:"Grüezi",back:"hello, formal (Swiss German)",ex:"Grüezi, Frau Keller!"},
-    {t:"match",lv:1,d:1,k:"v",q:"Match each greeting with what it means.",pairs:[["Grüezi","hello, formal (CH)"],["Hoi","hi, informal (CH)"],["Uf Wiederluege","goodbye, formal (CH)"],["Tschüss","bye, informal"],["Guten Abend","good evening"]]},
-    {t:"match",lv:1,d:1,k:"v",q:"Match the phrases.",pairs:[["Gesundheit!","bless you"],["Prost!","cheers"],["Schade!","what a pity"],["Mach's gut!","take care"],["Frag nicht!","don't ask"]]},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"Thank you, same to you.",back:"Danke, gleichfalls."},
+    {t:"flash",lv:1,d:1,k:"v",front:"Grüezi",back:"Good day / how do you do / hello (Swiss German, formal)",ex:"Grüezi, Frau Keller!"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match each greeting with what it means.",pairs:[["Grüezi","hello (formal, CH)"],["Hoi","Hi / hello (CH)"],["Uf Wiederluege","goodbye (formal, CH)"],["Tschüss","Bye"],["Guten Abend","good evening"]]},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the phrases.",pairs:[["Gesundheit!","bless you"],["Prost!","cheers"],["Schade!","what a pity"],["Mach's gut!","Take care!"],["Frag nicht!","don't ask"]]},
     {t:"mc",lv:2,d:1,k:"v",ctx:"8 am. You meet your professor in the corridor.",q:"What do you say?",opts:["Guten Morgen, Frau Keller.","Hoi Frau Keller.","Tschüss, Frau Keller."],a:0,why:"Guten Morgen is formal and fits the time. Hoi is for friends."},
     {t:"mc",lv:2,d:2,k:"v",ctx:"You leave the Kreisbüro.",q:"What do you say to the clerk?",opts:["Uf Wiederluege!","Hoi!","Prost!"],a:0,why:"Uf Wiederluege is the Swiss German Auf Wiedersehen."},
     {t:"mc",lv:2,d:2,k:"g",ctx:"You ask about Tom.",q:"Wie geht es ___?",opts:["ihm","ihr","dir"],a:0,why:"er becomes ihm here."},
     {t:"mc",lv:2,d:1,k:"v",q:"Wie geht es dir? Which answer means you feel best?",opts:["ausgezeichnet","ziemlich gut","ganz gut","es geht so"],a:0,why:"ausgezeichnet = excellent."},
-    {t:"gap",lv:3,d:2,k:"gv",q:"Wie geht es ___? Mir geht es ___, danke.",hints:["you, informal","good"],a:[["dir"],["gut","sehr gut","ganz gut","ziemlich gut","ausgezeichnet"]],why:"Informal: dir. Any positive answer from the scale works."},
+    {t:"sort",lv:2,d:1,k:"v",q:"Wie geht es dir? Sort the answers.",groups:["gut","schlecht"],items:[["ausgezeichnet",0],["sehr gut",0],["ziemlich gut",0],["ganz gut",0],["nicht so gut",1],["ziemlich schlecht",1],["furchtbar",1],["Es könnte besser sein.",1]],why:"From the course list: ausgezeichnet is the top and furchtbar the bottom."},
     {t:"gap",lv:3,d:3,k:"gv",q:"Wie geht es Tom? ___ geht es nicht so gut. Er ___ krank.",hints:["him","sein"],a:[["Ihm"],["ist"]],why:"Tom is er, so Ihm. er ist."},
-    {t:"gap",lv:3,d:2,k:"gv",q:"Was ___ „Tisch“? Es ___ „table“.",hints:["bedeuten","bedeuten"],a:[["bedeutet"],["bedeutet"]],why:"bedeut- ends in -t, so -et."},
+    {t:"write",lv:3,d:2,k:"gv",q:"A classmate asks „Was bedeutet Tisch?“ Answer in a full sentence.",prompt:"Tisch = table",a:["Es bedeutet table.","Tisch bedeutet table.","Das bedeutet table."],why:"bedeuten with es: es bedeutet. The course answer is Es bedeutet …"},
     {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Guten Tag, Herr Meier! Wie geht es dir?",wrong:[7],fixed:"Guten Tag, Herr Meier! Wie geht es Ihnen?",why:"Herr Meier gets the formal Ihnen."},
     {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Lisa ist krank. Ihm geht es schlecht.",wrong:[3],fixed:"Lisa ist krank. Ihr geht es schlecht.",why:"Lisa is sie, so Ihr."},
     {t:"build",lv:4,d:2,k:"g",q:"Build the sentence: I don't understand that.",tiles:["verstehe","ich","nicht","das"],end:".",a:["Ich verstehe das nicht."],verb:"verstehe",why:"nicht goes at the end, after das."},
     {t:"write",lv:5,d:1,k:"v",q:"Someone sneezes. What do you say?",prompt:"(one word)",a:["Gesundheit!"],why:"Gesundheit literally means health."},
     {t:"write",lv:5,d:3,k:"gv",q:"Your professor asks „Wie geht es Ihnen?“ Answer that you are quite well, and politely ask back.",prompt:"quite well = ziemlich gut",a:["Mir geht es ziemlich gut, danke. Und Ihnen?","Ziemlich gut, danke. Und Ihnen?","Mir geht es ziemlich gut. Und Ihnen?","Danke, ziemlich gut. Und Ihnen?","Ziemlich gut. Und Ihnen?","Danke, mir geht es ziemlich gut. Und Ihnen?"],why:"Your answer starts with Mir. To ask a professor back, use the formal Und Ihnen?"},
-    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write a mini dialogue with a classmate: greet, ask how they are, answer, say goodbye.",model:"A: Hoi Lea! Wie geht es dir?\nB: Ganz gut, danke. Und dir?\nA: Es geht so. Ich habe viel Stress.\nB: Oh, schade. Mach's gut!\nA: Danke, tschüss!"}
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write a mini dialogue with a classmate: greet, ask how they are, answer, say goodbye.",model:"A: Hoi Lea! Wie geht es dir?\nB: Ganz gut, danke. Und dir?\nA: Es geht so. Ich habe viel Stress.\nB: Oh, schade. Mach's gut!\nA: Danke, tschüss!",checks:[{"need": "\\b(hoi|hallo|gruezi|ciao|guten (morgen|tag|abend))\\b", "label": "A greeting: Hoi, Hallo, Grüezi …"}, {"need": "\\bwie geht('s| es)? ?(es )?(dir|ihnen)?\\b", "label": "The question: Wie geht es dir?"}, {"need": "\\b(gut|schlecht|es geht so|ausgezeichnet|furchtbar|naja)\\b", "label": "An answer from the list: gut, es geht so …"}, {"need": "\\b(tschuess|ciao|auf wiedersehen|uf wiederluege|bis bald|bis morgen|mach'?s gut|schoenen (tag|abend))\\b", "label": "A goodbye: Tschüss, Mach's gut, Bis bald …"}]}
   ]
 },
 {
@@ -608,11 +622,11 @@ const WEEKS = [
     <ul><li>vowel + h: fahren, Uhr</li><li>ie: viel, sie</li><li>double vowel: Meer</li><li>vowel + 1 consonant: Hase, lesen</li></ul>
     <h3>Short vowel</h3>
     <ul><li>vowel + 2 or more consonants: hassen, Punkt, links</li></ul>`,
-  words:[["der Vokal","vowel"],["der Konsonant","consonant"],["lang ↔ kurz","long ↔ short"],["der Buchstabe","letter"],["gross schreiben","write with a capital"],["der Hase / hassen","rabbit / to hate"],["das Meer","sea"],["die Stadt","city"],["das Velo","bicycle (CH)"]],
+  words:[["der Vokal","vowel"],["der Konsonant","consonant"],["lang >< kurz","long >< short"],["der Buchstabe","letter"],["gross schreiben","write with a capital"],["der Hase / hassen","rabbit / to hate"],["das Meer","sea"],["die Stadt","city"],["das Velo","bicycle (CH)"]],
   items:[
-    {t:"flash",lv:1,d:1,k:"g",front:"In German, which words start with a capital letter?",back:"the first word of a sentence, every noun and name, and formal Sie, Ihr, Ihnen",ex:"Guten Tag, Frau Meier. Wie geht es Ihnen?"},
-    {t:"flash",lv:1,d:2,k:"v",front:"fahren, viel, Meer, Hase: is the stressed vowel long or short?",back:"long",ex:"A vowel is long when an h follows it (fahren), when it is written ie (viel), when it is doubled (Meer), or when only one consonant follows (Hase)."},
-    {t:"flash",lv:1,d:2,k:"v",front:"hassen, Punkt, Stadt: is the stressed vowel long or short?",back:"short",ex:"A vowel is short when two or more consonants follow it: ss, nk, dt."},
+    {t:"flash",dirLabel:"Rule",lv:1,d:1,k:"g",front:"In German, which words start with a capital letter?",back:"the first word of a sentence, every noun and name, and formal Sie, Ihr, Ihnen",ex:"Guten Tag, Frau Meier. Wie geht es Ihnen?"},
+    {t:"flash",dirLabel:"Aussprache",lv:1,d:2,k:"v",front:"fahren, viel, Meer, Hase: is the stressed vowel long or short?",back:"long",ex:"A vowel is long when an h follows it (fahren), when it is written ie (viel), when it is doubled (Meer), or when only one consonant follows (Hase)."},
+    {t:"flash",dirLabel:"Aussprache",lv:1,d:2,k:"v",front:"hassen, Punkt, Stadt: is the stressed vowel long or short?",back:"short",ex:"A vowel is short when two or more consonants follow it: ss, nk, dt."},
     {t:"mc",lv:2,d:1,k:"v",q:"hassen: is the stressed vowel long or short?",opts:["short","long"],a:0,why:"a + ss (two consonants) = short."},
     {t:"mc",lv:2,d:1,k:"v",q:"der Hase: is the stressed vowel long or short?",opts:["long","short"],a:0,why:"a + one consonant = long."},
     {t:"mc",lv:2,d:1,k:"v",q:"fahren: is the stressed vowel long or short?",opts:["long","short"],a:0,why:"vowel + h = long."},
@@ -720,9 +734,10 @@ function start(kind, idx){
     idx = -1;
   } else if (kind === "cards"){
     sec = Object.assign({}, stops[idx], {id: stops[idx].id + "-cards", cards: true, title: stops[idx].stop + ": Karteikarten"});
+    const hd = stops[idx].wordsHead || ["Deutsch", "English"];
     items = shuffle(stops[idx].words).slice(0, 14).map(([de, en]) => Math.random() < 0.5
-      ? {t: "flash", lv: 1, d: 1, k: "v", front: de, back: en}
-      : {t: "flash", lv: 1, d: 1, k: "v", rev: true, front: en, back: de});
+      ? {t: "flash", lv: 1, d: 1, k: "v", front: de, back: en, dirLabel: hd[0] + " → " + hd[1]}
+      : {t: "flash", lv: 1, d: 1, k: "v", rev: true, front: en, back: de, dirLabel: hd[1] + " → " + hd[0]});
   } else {
     sec = stops[idx];
     if (sec.mix){
@@ -775,7 +790,8 @@ function renderRef(){
   }
   const base = stopsOf(weekIdx)[S.idx];
   ref.append(h("div", {html: base.cheat, style: "display:grid;gap:10px"}));
-  const tbl = h("table", {}, h("tr", {}, h("th", {}, "Deutsch"), h("th", {}, "English")),
+  const head = base.wordsHead || ["Deutsch", "English"];
+  const tbl = h("table", {}, h("tr", {}, h("th", {}, head[0]), h("th", {}, head[1])),
     base.words.map(([de, en]) => h("tr", {}, h("td", {}, de), h("td", {}, en))));
   ref.append(h("details", {open: window.innerWidth > 880}, h("summary", {}, `Wörter (${base.words.length})`),
     h("div", {style: "display:grid;gap:10px;margin-top:8px"},
@@ -840,7 +856,7 @@ function renderItem(){
     const nb = document.getElementById("nextBtn"); if (nb) nb.focus({preventScroll: true});
   };
 
-  const body = ({flash: bodyFlash, mc: bodyMC, match: bodyMatch, gap: bodyGap, build: bodyBuild, fix: bodyFix, caps: bodyCaps, write: bodyWrite, open: bodyOpen})[it.t](it, checkBtn, finish, actions);
+  const body = ({flash: bodyFlash, mc: bodyMC, match: bodyMatch, gap: bodyGap, build: bodyBuild, fix: bodyFix, caps: bodyCaps, write: bodyWrite, open: bodyOpen, sort: bodySort})[it.t](it, checkBtn, finish, actions);
   card.append(body.el, actions, fbSlot);
   stage.append(card);
 
@@ -881,7 +897,7 @@ function bodyFlash(it, checkBtn, finish, actions){
   let flipped = false;
   const card = h("div", {class: "flash", role: "button", tabindex: "0", "aria-label": "Flip the card"});
   const inner = h("div", {},
-    h("div", {class: "dir"}, it.rev ? "English → Deutsch" : "Deutsch → English"),
+    h("div", {class: "dir"}, it.dirLabel || (it.rev ? "English → Deutsch" : "Deutsch → English")),
     h("div", {class: "front"}, it.front),
     h("div", {class: "tap"}, "Say the answer out loud, then tap to flip"));
   card.append(inner);
@@ -1132,27 +1148,72 @@ function bodyWrite(it){
   }};
 }
 
-/* ---------- open writing: compare with a model, grade yourself ---------- */
-function bodyOpen(it, checkBtn, finish, actions){
+/* ---------- sort into two groups ---------- */
+function bodySort(it, checkBtn){
+  const el = h("div", {style: "display:grid;gap:14px"});
+  el.append(h("p", {class: "q"}, it.q));
+  const rows = shuffle(it.items.map((x, i) => i));
+  const pick = {};
+  const list = h("div", {class: "sortlist"});
+  const rowEls = {};
+  rows.forEach(i => {
+    const [text] = it.items[i];
+    const seg = h("div", {class: "seg", role: "group", "aria-label": text});
+    const btns = it.groups.map((g, gi) => h("button", {type: "button", "aria-pressed": "false", onclick: () => {
+      if (S.answered) return;
+      pick[i] = gi;
+      btns.forEach((b, bj) => b.setAttribute("aria-pressed", String(bj === gi)));
+      checkBtn.disabled = Object.keys(pick).length !== it.items.length;
+    }}, g));
+    seg.append(...btns);
+    const row = h("div", {class: "srow"}, h("span", {class: "txt"}, text), seg);
+    rowEls[i] = row; list.append(row);
+  });
+  el.append(list);
+  checkBtn.disabled = true;
+  return {el, check(){
+    let wrong = 0;
+    rows.forEach(i => {
+      const good = pick[i] === it.items[i][1];
+      rowEls[i].classList.add(good ? "ok" : "bad");
+      if (!good){ wrong++; rowEls[i].append(h("span", {class: "fixnote"}, "→ " + it.groups[it.items[i][1]])); }
+    });
+    return {ok: wrong === 0, answer: "sort again", answerHtml: wrong ? `${wrong} of ${it.items.length} in the wrong group.` : null};
+  }};
+}
+
+/* ---------- guided writing: checked against a rubric ----------
+   need: pattern that must appear. avoid: a typical mistake.
+   Text is lowercased, ß -> ss, umlauts -> ae/oe/ue. raw: test the original text instead. */
+function rubricText(v){
+  return v.toLowerCase().replace(/ß/g, "ss").replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/[’`]/g, "'");
+}
+function bodyOpen(it){
   const el = h("div", {style: "display:grid;gap:14px"});
   el.append(h("p", {class: "q"}, it.q));
   const ta = h("textarea", {class: "free", id: "open-" + S.i, rows: "4", spellcheck: "false", "aria-label": "Your text"});
   ta.addEventListener("focus", () => lastInput = ta);
   lastInput = ta;
-  const compare = h("button", {class: "btn", type: "button"}, "Compare with a model");
-  const area = h("div", {style: "display:grid;gap:10px"});
-  compare.addEventListener("click", () => {
-    if (!ta.value.trim()){ ta.focus(); return; }
-    ta.readOnly = true; compare.remove();
-    area.append(
-      h("div", {class: "fb ok", style: "background:var(--accent-soft)"}, h("strong", {style: "color:var(--accent)"}, "One possible answer"), h("div", {class: "model"}, it.model),
-        h("div", {class: "why"}, "Check: verb on position 2? Right endings? Nouns with capitals?")),
-      h("div", {class: "actions"},
-        h("button", {class: "btn good", type: "button", onclick: () => finish({ok: true, answer: it.model, title: "Gut gemacht!"})}, "Mine works"),
-        h("button", {class: "btn redo", type: "button", onclick: () => finish({ok: false, answer: "compare with the model again", title: "Noted. Try this one again next round."})}, "I need more practice")));
-  });
-  el.append(ta, umlautBar(), h("div", {class: "actions"}, compare), area);
-  return {el, custom: true, hint: "No single right answer. Write, then compare.", focus(){ ta.focus({preventScroll: true}); }};
+  el.append(ta, umlautBar());
+  return {el, focus(){ ta.focus({preventScroll: true}); }, check(){
+    const raw = ta.value;
+    if (!raw.trim()) return null;
+    ta.readOnly = true;
+    const low = rubricText(raw);
+    let ok = true;
+    const lis = it.checks.map(c => {
+      const target = c.raw ? raw : low;
+      const re = new RegExp(c.need || c.avoid, c.raw ? "g" : "gi");
+      const hits = (target.match(re) || []).length;
+      const pass = c.need ? hits >= (c.min || 1) : hits === 0;
+      if (!pass) ok = false;
+      return `<li class="${pass ? "pass" : "fail"}"><span class="m">${pass ? "✓" : "✗"}</span><span>${esc(c.label)}</span></li>`;
+    });
+    return {ok, answer: "see the checklist", canOverride: true,
+      title: ok ? "Alles da!" : "Almost. Check the list.",
+      answerHtml: `<ul class="rubric">${lis.join("")}</ul>`,
+      modelText: "One possible answer:\n" + it.model};
+  }};
 }
 
 /* =====================================================================
