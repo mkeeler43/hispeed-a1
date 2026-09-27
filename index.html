@@ -642,6 +642,205 @@ const WEEKS = [
     {t:"write",lv:5,d:2,k:"gv",q:"Write it with the right capitals.",prompt:"hast du am abend zeit?",a:["Hast du am Abend Zeit?"],why:"Abend and Zeit are nouns."}
   ]
 }
+]},
+
+{ id:"w3", n:3, label:"Woche 3", stops:[
+{
+  id:"w3-unregel", stop:"Unregelmässig", title:"Unregelmässige Verben: a → ä, e → i / ie",
+  grammar:"Vokalwechsel bei du und er/sie/es/man", vocab:"Wortschatz: unregelmässige Verben",
+  cheat:`
+    <h3>Unregelmässige Verben</h3>
+    <p>Unregelmässige Verben ändern den Vokal bei <b>du</b> und <b>er/sie/es/man</b>. Diese Verben muss man auswendig lernen.</p>
+    <div class="tbl"><table><tr><th></th><th>fahren</th><th>sprechen</th><th>lesen</th></tr>
+      <tr><td>ich</td><td>fahre</td><td>spreche</td><td>lese</td></tr>
+      <tr><td>du</td><td>f<b>ä</b>hrst</td><td>spr<b>i</b>chst</td><td>l<b>ie</b>st</td></tr>
+      <tr><td>er / sie / es / man</td><td>f<b>ä</b>hrt</td><td>spr<b>i</b>cht</td><td>l<b>ie</b>st</td></tr>
+      <tr><td>wir</td><td>fahren</td><td>sprechen</td><td>lesen</td></tr>
+      <tr><td>ihr</td><td>fahrt</td><td>sprecht</td><td>lest</td></tr>
+      <tr><td>sie / Sie</td><td>fahren</td><td>sprechen</td><td>lesen</td></tr>
+    </table></div>
+    <ul>
+      <li><b>a → ä</b>: gefallen, laufen, fallen, tragen, halten, fangen, schlafen</li>
+      <li><b>e → i</b>: helfen, geben, treffen, essen, werfen, sterben, vergessen, messen, unterbrechen, widersprechen</li>
+      <li><b>e → ie</b>: sehen, stehlen, befehlen, empfehlen</li>
+      <li>Achtung: nehmen (du nimmst, er/sie/es/man nimmt), treten (du trittst, er/sie/es/man tritt)</li>
+    </ul>`,
+  words:[["sein · du bist · er ist","to be"],["haben · du hast · er hat","to have"],["sprechen · du sprichst · er spricht","to speak"],["wissen · du weisst · er weiss","to know"],["vergessen · du vergisst · er vergisst","to forget"],["sehen · du siehst · er sieht","to see"],["fahren · du fährst · er fährt","to drive"],["lesen · du liest · er liest","to read"],["nehmen · du nimmst · er nimmt","to take"],["laufen · du läufst · er läuft","to walk, to run"],["gefallen · du gefällst mir · er gefällt mir","to like"],["fallen · du fällst · er fällt","to fall"],["halten · du hältst · er hält","to hold, to stop"],["fangen · du fängst · er fängt","to catch"],["helfen · du hilfst · er hilft","to help"],["geben · du gibst · er gibt","to give"],["essen · du isst · er isst","to eat"],["werfen · du wirfst · er wirft","to throw"],["sterben · du stirbst · er stirbt","to die"],["empfehlen · du empfiehlst · er empfiehlt","to recommend"],["stehlen · du stiehlst · er stiehlt","to steal"],["treffen · du triffst · er trifft","to meet"],["schlafen · du schläfst · er schläft","to sleep"],["messen · du misst · er misst","measure"],["tragen · du trägst · er trägt","to wear, to carry"],["unterbrechen · du unterbrichst · er unterbricht","to interrupt"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"gv",front:"treffen",back:"to meet · du triffst, er trifft",ex:"In der Pause trifft er seine Freunde."},
+    {t:"flash",lv:1,d:1,k:"gv",front:"vergessen",back:"to forget · du vergisst, er vergisst",ex:"Hoffentlich vergisst er nichts."},
+    {t:"flash",lv:1,d:2,k:"gv",rev:true,front:"to recommend",back:"empfehlen · du empfiehlst, er empfiehlt"},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"In an irregular verb, which forms change the vowel?",back:"only du and er/sie/es/man",ex:"ich fahre, du fährst, er fährt, wir fahren, ihr fahrt, sie fahren"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the verbs.",pairs:[["fangen","to catch"],["werfen","to throw"],["stehlen","to steal"],["tragen","to wear, to carry"],["halten","to hold, to stop"],["messen","measure"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Which vowel change does each verb have?",groups:["a → ä","e → i","e → ie"],items:[["fahren",0],["schlafen",0],["laufen",0],["tragen",0],["sprechen",1],["helfen",1],["essen",1],["geben",1],["lesen",2],["sehen",2],["stehlen",2]],why:"The three groups from the course sheet. nehmen and treten are special: du nimmst, du trittst."},
+    {t:"sort",lv:2,d:2,k:"gv",q:"Regelmässig (R) oder unregelmässig (U)?",groups:["R","U"],items:[["fragen",0],["sagen",0],["warten",0],["öffnen",0],["schreiben",0],["gehen",0],["lesen",1],["treffen",1],["schlafen",1],["nehmen",1],["fallen",1],["sprechen",1]],why:"Irregular verbs change the vowel with du and er: er liest, er trifft. Regular ones keep it: er fragt, er geht."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Which sentence is correct?",opts:["Er fährt mit dem Tram.","Er fahrt mit dem Tram.","Er fähr mit dem Tram."],a:0,why:"fahren: a → ä for er, plus the normal -t: er fährt."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Which form has a vowel change?",opts:["du siehst","ihr seht","wir sehen"],a:0,why:"Only du and er/sie/es/man change the vowel. ihr seht and wir sehen stay regular."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Du ___ Deutsch und ___ viele Bücher.",hints:["sprechen","lesen"],a:[["sprichst"],["liest"]],why:"sprechen: e → i, du sprichst. lesen: e → ie, du liest."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"Er ___ den Bus oder er ___ mit dem Velo zur ETH.",hints:["nehmen","fahren"],a:[["nimmt"],["fährt"]],why:"nehmen is special: er nimmt. fahren: er fährt."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Rewrite the sentence with er instead of ich.",prompt:"Ich schlafe bis sieben Uhr und esse Frühstück.",a:["Er schläft bis sieben Uhr und isst Frühstück.","Er schläft bis sieben Uhr und er isst Frühstück."],why:"schlafen: er schläft. essen: er isst."},
+    {t:"write",lv:3,d:1,k:"g",q:"Answer with Ja, in a full sentence.",prompt:"Hilfst du?",a:["Ja, ich helfe."],why:"The vowel changes only for du. With ich it is back to helfe."},
+    {t:"write",lv:3,d:2,k:"g",q:"Answer with Nein, in a full sentence.",prompt:"Liest du?",a:["Nein, ich lese nicht."],why:"ich lese. nicht goes at the end."},
+    {t:"fix",lv:4,d:2,k:"g",q:"There are two mistakes. Tap both.",text:"Du fahrst und er sprecht Deutsch.",wrong:[1,4],fixed:"Du fährst und er spricht Deutsch.",why:"du fährst (a → ä). er spricht (e → i)."},
+    {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Ihr fährt zur ETH und wir esst in der Mensa.",wrong:[1,6],fixed:"Ihr fahrt zur ETH und wir essen in der Mensa.",why:"ihr keeps the vowel: ihr fahrt. wir takes -en: wir essen."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Er nehmt eine Suppe und gibt mir Tipps.",wrong:[1],fixed:"Er nimmt eine Suppe und gibt mir Tipps.",why:"nehmen is special: er nimmt."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: During the break he meets his friends.",tiles:["in der Pause","trifft","er","seine Freunde"],end:".",a:["In der Pause trifft er seine Freunde.","Er trifft in der Pause seine Freunde."],verb:"trifft",why:"The verb stays on position 2. treffen: er trifft."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"He reads a book and she sleeps.",a:["Er liest ein Buch und sie schläft."],why:"lesen: er liest. schlafen: sie schläft."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. What do you do on a normal day? Write three or four sentences. Use at least two irregular verbs with ich, and one with er or sie about a friend.",model:"Ich schlafe bis sieben Uhr.\nDann esse ich Frühstück und fahre mit dem Tram zur ETH.\nAm Mittag treffe ich meine Freundin. Sie isst immer eine Suppe.",checks:[{"need":"\\b(fahre|schlafe|lese|spreche|esse|nehme|treffe|sehe|laufe|helfe|gebe|trage|vergesse|weiss|fange|werfe|halte)\\b","min":2,"label":"At least two irregular verbs with ich (ich fahre, ich esse …)"},{"need":"\\b(faehrt|schlaeft|liest|spricht|isst|nimmt|trifft|sieht|laeuft|hilft|gibt|traegt|vergisst|weiss|faengt|wirft|haelt)\\b","label":"One irregular verb with er or sie (er fährt, sie liest …)"},{"avoid":"\\bich (faehrst|faehrt|schlaefst|schlaeft|liest|spricht|sprichst|isst|nimmt|nimmst|trifft|triffst|siehst|sieht|laeufst|laeuft|hilfst|hilft|gibst|gibt|traegst|traegt)\\b","label":"No vowel change with ich (ich fahre, not ich fährst)"},{"avoid":"\\b(er|sie|es|man) (fahrt|schlaft|lest|sprecht|esst|nehmt|trefft|seht|lauft|helft|gebt|tragt|vergesst)\\b","label":"er/sie changes the vowel (er fährt, not er fahrt)"}]}
+  ]
+},
+{
+  id:"w3-brief", stop:"Robertos Brief", title:"Die ersten Wochen in Zürich: ein Brief von 1987",
+  grammar:"Satzbau: Verb auf Position 2, Zeit vor Ort", vocab:"Wortschatz: Die ersten Wochen in Zürich und an der ETH",
+  cheat:`
+    <h3>Verb auf Position 2</h3>
+    <div class="tbl"><table class="pos2"><tr><th>Pos. 1</th><th>Verb</th><th>Rest</th></tr>
+      <tr><td>Roberto</td><td>wohnt</td><td>seit 2 Wochen in Altstetten.</td></tr>
+      <tr><td>Seit 2 Wochen</td><td>wohnt</td><td>Roberto in Altstetten.</td></tr>
+      <tr><td>In Altstetten</td><td>wohnt</td><td>Roberto seit 2 Wochen.</td></tr>
+    </table></div>
+    <ul>
+      <li>The conjugated verb must stand on position 2.</li>
+      <li>After the verb, put time expressions before place expressions: <b>seit 2 Wochen</b> before <b>in Altstetten</b>.</li>
+    </ul>`,
+  words:[["das Semester","semester"],["hat … begonnen","has … started"],["der See, -n","lake"],["der Berg, -e","mountain"],["der Zug, Züge","train"],["toll","great"],["die Aussicht, -en","view"],["gemütlich","cozy"],["jeden","every"],["mit dem Velo","by bicycle"],["riesig","huge"],["das Gebäude, -","building"],["am Anfang","at the beginning"],["manchmal","sometimes"],["der Kursraum, Kursräume","course room"],["der Hörsaal, Hörsäle","lecture hall"],["wissen, ich weiss","to know, I know"],["die Vorlesung, -en","lecture"],["fast alle","almost all"],["darum","therefore, that's why"],["zum Glück","luckily, fortunately"],["langsam","slowly"],["meistens","mostly"],["beim Essen","while eating"],["schwierig","difficult"],["versuchen","try"],["Ich hoffe","I hope"],["bald","soon"],["Liebe Grüsse","best regards"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"riesig",back:"huge",ex:"Der Campus ist riesig und es gibt viele Gebäude."},
+    {t:"flash",lv:1,d:2,k:"v",front:"darum",back:"therefore, that's why",ex:"Fast alle Kurse sind auf Englisch, darum besuche ich auch noch einen Deutschkurs."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"luckily, fortunately",back:"zum Glück",ex:"Meine Dozentin spricht zum Glück langsam."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the words from Roberto's letter.",pairs:[["die Aussicht","view"],["das Gebäude","building"],["meistens","mostly"],["langsam","slowly"],["schwierig","difficult"],["Liebe Grüsse","best regards"]]},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From the letter: „Jeden Morgen fahre ich mit dem Velo zur ETH Hönggerberg oder ich nehme den Bus.“",q:"How does Roberto get to ETH?",opts:["By bicycle or by bus","By tram","On foot"],a:0,why:"mit dem Velo = by bicycle. den Bus nehmen = to take the bus."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"From the letter: „Fast alle Kurse sind auf Englisch, darum besuche ich auch noch einen Deutschkurs.“",q:"Why does Roberto take a German course?",opts:["Almost all his courses are in English.","His lecturer speaks slowly.","He lives in Altstetten."],a:0,why:"darum = that's why. The reason comes before it."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"From the letter: „Am Anfang des Semesters habe ich manchmal einen Raum gesucht und ihn nicht gefunden.“",q:"What was the problem at the beginning?",opts:["He sometimes couldn't find a room.","His room was too small.","He had no time."],a:0,why:"gesucht = looked for. nicht gefunden = didn't find."},
+    {t:"sort",lv:2,d:2,k:"v",q:"Richtig oder falsch? Think about Roberto's letter.",groups:["richtig","falsch"],items:[["Roberto wohnt in Altstetten.",0],["Sein Zimmer ist gross.",1],["Die Dozentin spricht langsam.",0],["Roberto isst meistens zu Hause.",1],["Nachmittags lernt er in der Bibliothek.",0],["Zürich gefällt ihm nicht.",1]],why:"His room is klein, aber gemütlich. He eats meistens in der Mensa. And: Zürich gefällt mir!"},
+    {t:"gap",lv:3,d:2,k:"v",ctx:"Roberto and Magda text. Fill in Roberto's words.",q:"Cool, kleine Stadt, Berge und ein ___. Mein Zimmer ist auch ___, aber ok.",hints:["lake","small"],a:[["See"],["klein"]],why:"der See = lake. In the letter: mein Zimmer ist klein, aber gemütlich."},
+    {t:"gap",lv:3,d:3,k:"gv",ctx:"Magda asks: Und die ETH?",q:"Ist ___, war nicht easy am Anfang. Aber jetzt ___ es mir.",hints:["huge","gefallen"],a:[["riesig"],["gefällt"]],why:"riesig = huge. gefallen: es gefällt mir (a → ä)."},
+    {t:"build",lv:3,d:2,k:"gv",q:"Build the sentence: Roberto rides his bike to ETH.",tiles:["Roberto","fährt","mit dem Velo","zur ETH"],end:".",a:["Roberto fährt mit dem Velo zur ETH.","Mit dem Velo fährt Roberto zur ETH.","Zur ETH fährt Roberto mit dem Velo."],verb:"fährt",why:"The verb stays on position 2. fahren: er fährt."},
+    {t:"build",lv:4,d:3,k:"gv",q:"Build the sentence. Start with meistens.",tiles:["meistens","isst","Roberto","in der Mensa","zu Mittag"],end:".",a:["Meistens isst Roberto in der Mensa zu Mittag.","Meistens isst Roberto zu Mittag in der Mensa."],verb:"isst",why:"Meistens on position 1 pushes Roberto behind the verb. essen: er isst."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: While eating, he talks with colleagues.",tiles:["beim Essen","spricht","er","mit Kollegen"],end:".",a:["Beim Essen spricht er mit Kollegen.","Er spricht beim Essen mit Kollegen."],verb:"spricht",why:"sprechen: er spricht. Verb on position 2."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence follows the rule time before place?",opts:["Roberto wohnt seit 2 Wochen in Altstetten.","Roberto wohnt in Altstetten seit 2 Wochen.","Roberto seit 2 Wochen wohnt in Altstetten."],a:0,why:"seit 2 Wochen is time, in Altstetten is place. Time first. The third one breaks the verb-second rule."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Meine Dozentin sprecht zum Glück langsam und ich verstehe viel.",wrong:[2],fixed:"Meine Dozentin spricht zum Glück langsam und ich verstehe viel.",why:"sprechen: sie spricht."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write the sentence. The verb goes on position 2.",prompt:"heute · Magda und Roberto · texten",a:["Heute texten Magda und Roberto.","Magda und Roberto texten heute."],why:"Course solution: Heute texten Magda und Roberto."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write the sentence. The verb goes on position 2.",prompt:"am Abend · er · lesen · ein Buch",a:["Am Abend liest er ein Buch.","Er liest am Abend ein Buch."],why:"lesen: er liest. Am Abend on position 1 pushes er behind the verb."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Er wohnt in Altstetten.",a:["Wo wohnt Roberto?","Wo wohnt er?"],why:"The answer is a place, so the question is wo."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write three sentences to a friend about your first weeks in Zürich. Say where you live, how you get to ETH, and that you like it.",model:"Liebe Magda\nIch wohne in Oerlikon. Mein Zimmer ist klein, aber gemütlich.\nJeden Morgen fahre ich mit dem Tram zur ETH.\nZürich gefällt mir!\nLiebe Grüsse",checks:[{"need":"\\bich wohne\\b","label":"Where you live: ich wohne in …"},{"need":"\\b(fahre|nehme|gehe|laufe)\\b","label":"How you get there: ich fahre / nehme / gehe …"},{"need":"\\bgefaellt (es )?mir\\b","label":"That you like it: … gefällt mir"},{"avoid":"\\bich (faehrt|faehrst|nimmst|nimmt|laeufst|laeuft)\\b","label":"No vowel change with ich (ich fahre, ich nehme)"},{"avoid":"\\bich gefalle\\b","label":"To like something: es gefällt mir, not ich gefalle"}]}
+  ]
+},
+{
+  id:"w3-elias", stop:"Elias", title:"Ein Tag im Leben von Elias",
+  grammar:"unregelmässige Verben im Text", vocab:"Vocabulary: Text Elias",
+  cheat:`
+    <h3>Elias' verbs</h3>
+    <div class="tbl"><table><tr><th>Infinitiv</th><th>er</th></tr>
+      <tr><td>schlafen</td><td>er schläft</td></tr>
+      <tr><td>essen</td><td>er isst</td></tr>
+      <tr><td>fahren</td><td>er fährt</td></tr>
+      <tr><td>lesen</td><td>er liest</td></tr>
+      <tr><td>wissen</td><td>er weiss</td></tr>
+      <tr><td>vergessen</td><td>er vergisst</td></tr>
+      <tr><td>treffen</td><td>er trifft</td></tr>
+      <tr><td>nehmen</td><td>er nimmt</td></tr>
+      <tr><td>messen</td><td>er misst</td></tr>
+      <tr><td>helfen</td><td>er hilft</td></tr>
+      <tr><td>fangen</td><td>er fängt</td></tr>
+      <tr><td>laufen</td><td>er läuft</td></tr>
+    </table></div>
+    <p>wissen is special: ich weiss, du weisst, <b>er weiss</b> (no -t).</p>`,
+  words:[["steht … auf","stands up"],["das Frühstück","breakfast"],["um acht Uhr","at 8 o'clock"],["im Büro","in the office"],["schwer","difficult"],["die Notizen","notes"],["hoffentlich","hopefully"],["nichts","nothing"],["in der Pause","during the break"],["zusammen","together"],["heute","today"],["die Suppe","soup"],["der Salat","salad"],["am Nachmittag","in the afternoon"],["die Flüssigkeit","liquid"],["die Tipps","hint"],["einmal","once, one time"],["das Glas","glass"],["runter","down"],["schnell","quickly"],["zum Glück","luckily"],["kaputt","broken"],["nach der Arbeit","after work"],["eine schwere Tasche","a heavy bag"],["andere","other"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"hoffentlich",back:"hopefully",ex:"Hoffentlich vergisst er nichts."},
+    {t:"flash",lv:1,d:1,k:"v",front:"die Flüssigkeit",back:"liquid",ex:"Er misst eine Flüssigkeit."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"during the break",back:"in der Pause",ex:"In der Pause trifft er seine Freunde."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the words from the Elias text.",pairs:[["zusammen","together"],["einmal","once, one time"],["runter","down"],["kaputt","broken"],["nichts","nothing"],["am Nachmittag","in the afternoon"]]},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From the text: „Die Mensa gefällt ihm, das Essen kostet nicht viel.“",q:"What does Elias think of the Mensa?",opts:["He likes it. The food doesn't cost much.","He doesn't like it.","The food is too expensive."],a:0,why:"gefällt ihm = he likes it. kostet nicht viel = doesn't cost much."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"From the text: „Einmal fällt ein Glas runter. Elias fängt es schnell.“",q:"What happens?",opts:["A glass falls, and Elias catches it.","Elias breaks a glass.","Elias throws a glass."],a:0,why:"fallen: es fällt. fangen: er fängt."},
+    {t:"sort",lv:2,d:2,k:"gv",q:"Who does what in the text?",groups:["Elias","der Professor","die Supervisorin"],items:[["liest ein Buch im Tram",0],["schreibt Notizen",0],["misst eine Flüssigkeit",0],["fängt das Glas",0],["spricht auf Deutsch über ein neues Paper",1],["gibt ihm Tipps",2]],why:"Elias is the one who reads, writes notes, measures and catches. The professor talks about a paper. The supervisor gives tips."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Er ___ bis sieben Uhr, dann steht er auf und ___ Frühstück.",hints:["schlafen","essen"],a:[["schläft"],["isst"]],why:"schlafen: er schläft (a → ä). essen: er isst (e → i)."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"Er ___ eine Flüssigkeit und ___ seiner Supervisorin.",hints:["messen","helfen"],a:[["misst"],["hilft"]],why:"messen: er misst. helfen: er hilft. Both e → i."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Rewrite the sentence with ich instead of er.",prompt:"Er nimmt eine Suppe und einen Salat.",a:["Ich nehme eine Suppe und einen Salat."],why:"The vowel change is only for du and er: ich nehme."},
+    {t:"write",lv:3,d:3,k:"gv",q:"Rewrite the sentence with du instead of er.",prompt:"Er sieht viele Studenten.",a:["Du siehst viele Studenten."],why:"sehen: du siehst (e → ie)."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Im Büro spricht der Professor auf Deutsch.","Im Büro sprecht der Professor auf Deutsch.","Im Büro der Professor spricht auf Deutsch."],a:0,why:"sprechen: er spricht. Im Büro is position 1, so the verb comes right after it."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Eine Person tragt eine schwere Tasche.",wrong:[2],fixed:"Eine Person trägt eine schwere Tasche.",why:"tragen: sie trägt (a → ä)."},
+    {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Er weisst: Deutsch ist schwer! Hoffentlich vergesst er nichts.",wrong:[1,6],fixed:"Er weiss: Deutsch ist schwer! Hoffentlich vergisst er nichts.",why:"wissen: er weiss, with no -t. vergessen: er vergisst."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: After work, Elias walks across the campus.",tiles:["nach der Arbeit","läuft","Elias","durch den Campus"],end:".",a:["Nach der Arbeit läuft Elias durch den Campus.","Elias läuft nach der Arbeit durch den Campus."],verb:"läuft",why:"laufen: er läuft. Time (nach der Arbeit) before place (durch den Campus)."},
+    {t:"build",lv:4,d:3,k:"gv",q:"Build the sentence. Start with the time.",tiles:["um acht Uhr","fährt","er","mit dem Tram","zur ETH"],end:".",a:["Um acht Uhr fährt er mit dem Tram zur ETH."],verb:"fährt",why:"Um acht Uhr on position 1, verb second, er third."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Er trifft seine Freunde in der Pause.",a:["Wann trifft er seine Freunde?","Wann trifft Elias seine Freunde?"],why:"in der Pause is a time, so ask with wann."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German. Start with zum Glück.",prompt:"Luckily, nothing breaks.",a:["Zum Glück geht nichts kaputt."],why:"From the text: Zum Glück geht nichts kaputt."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write three sentences about a colleague's day, like the Elias text. Use at least three irregular verbs with er or sie.",model:"Meine Kollegin Sara schläft bis sieben Uhr.\nDann fährt sie mit dem Velo zur ETH.\nAm Mittag isst sie in der Mensa und trifft ihre Freunde.",checks:[{"need":"\\b(faehrt|schlaeft|liest|spricht|isst|nimmt|trifft|sieht|laeuft|hilft|gibt|traegt|vergisst|weiss|faengt|faellt|misst|wirft|haelt)\\b","min":3,"label":"At least three irregular verbs with er or sie (er fährt, sie isst …)"},{"avoid":"\\b(er|sie|es|man) (fahrt|schlaft|lest|sprecht|esst|nehmt|trefft|seht|lauft|helft|gebt|tragt|vergesst|fangt|messt|werft)\\b","label":"er/sie changes the vowel (sie fährt, not sie fahrt)"},{"avoid":"\\b(er|sie) weisst\\b","label":"wissen: er weiss, with no -t"}]}
+  ]
+},
+{
+  id:"w3-haus", stop:"Haus & Möbel", title:"Wohnen: die Räume und die Möbel",
+  grammar:"der, die, das und er, sie, es", vocab:"Das Haus, die Möbel",
+  cheat:`
+    <h3>Always learn the noun with its article</h3>
+    <div class="tbl"><table><tr><th></th><th>maskulin</th><th>feminin</th><th>neutrum</th></tr>
+      <tr><td>the</td><td>der Tisch</td><td>die Lampe</td><td>das Bett</td></tr>
+      <tr><td>pronoun</td><td>er</td><td>sie</td><td>es</td></tr>
+    </table></div>
+    <p>Die Wohnung ist nicht sehr gross. <b>Sie</b> hat zweieinhalb Zimmer.</p>
+    <h3>Die Räume</h3>
+    <p>der Keller · das Kinderzimmer · das Schlafzimmer · die Küche · die Waschküche · das Esszimmer · das Wohnzimmer · die Terrasse · der Balkon · das Badezimmer (das Bad) · der Estrich (CH) / der Dachstock (D) · der Gang (CH) / der Flur (D)</p>`,
+  words:[["der Keller","basement"],["das Kinderzimmer","children's room"],["das Schlafzimmer","bedroom"],["die Küche","kitchen"],["die Waschküche","laundry room"],["das Esszimmer","dining room"],["das Wohnzimmer","living room"],["die Terrasse","terrace"],["der Balkon","balcony"],["das Badezimmer (das Bad)","bathroom"],["der Estrich (CH) / der Dachstock (D)","attic"],["der Gang (CH) / der Flur (D)","hallway"],["der Stuhl","chair"],["der Sessel","armchair"],["das Sofa","sofa"],["die Lampe","lamp"],["der Fernseher","TV"],["der Tisch","table"],["das Bild","picture"],["der Teppich","rug"],["die Kommode","chest of drawers"],["die Heizung","heater"],["das Bett","bed"],["der Nachttisch","bedside table"],["die Stehlampe","floor lamp"],["der Schrank","wardrobe, cupboard"],["das Fenster","window"],["der Duschvorhang","shower curtain"],["das Lavabo (CH)","sink"],["die Dusche","shower"],["die Badewanne","bathtub"],["die Toilette, das Klo","toilet"],["der Spiegel","mirror"],["die Tür","door"],["der Hocker","stool"],["der Herd","stove"],["der Abfalleimer","bin"],["die Waschmaschine","washing machine"],["der Kühlschrank","fridge"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"der Estrich (CH)",back:"attic",ex:"Meine Nachbarn haben einen grösseren Estrich als ich."},
+    {t:"flash",lv:1,d:1,k:"v",front:"das Lavabo (CH)",back:"sink",ex:"Das Lavabo ist im Badezimmer."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"fridge",back:"der Kühlschrank",ex:"Der Kühlschrank ist in der Küche."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"der Tisch, die Lampe, das Bett: which pronoun replaces each?",back:"er · sie · es",ex:"Die Wohnung ist nicht sehr gross. Sie hat zweieinhalb Zimmer."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the rooms.",pairs:[["das Schlafzimmer","bedroom"],["die Küche","kitchen"],["die Waschküche","laundry room"],["der Gang (CH)","hallway"],["das Wohnzimmer","living room"],["der Keller","basement"]]},
+    {t:"sort",lv:2,d:2,k:"gv",q:"der, die oder das?",groups:["der","die","das"],items:[["Stuhl",0],["Sessel",0],["Teppich",0],["Schrank",0],["Lampe",1],["Dusche",1],["Tür",1],["Heizung",1],["Sofa",2],["Bett",2],["Bild",2],["Fenster",2]],why:"There are no safe rules. Learn every noun with its article: der Stuhl, die Lampe, das Sofa."},
+    {t:"sort",lv:2,d:2,k:"v",q:"In which room do you usually find it?",groups:["die Küche","das Badezimmer","das Schlafzimmer"],items:[["der Herd",0],["der Kühlschrank",0],["der Hocker",0],["die Dusche",1],["der Spiegel",1],["die Badewanne",1],["das Bett",2],["der Nachttisch",2],["die Kommode",2]],why:"The same groups as the pictures in the script."},
+    {t:"mc",lv:2,d:1,k:"v",q:"What is „die Waschküche“?",opts:["laundry room","kitchen","bathroom"],a:0,why:"waschen = to wash, die Küche = kitchen. In many Swiss houses the washing machine is in the Waschküche."},
+    {t:"mc",lv:3,d:2,k:"g",ctx:"„Der Fernseher ist neu.“",q:"Which sentence continues correctly?",opts:["Er ist sehr gross.","Sie ist sehr gross.","Es ist sehr gross."],a:0,why:"der Fernseher is masculine, so the pronoun is er."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"___ Sofa ist alt, aber ___ Lampe ist neu.",hints:["article","article"],a:[["Das"],["die"]],why:"das Sofa, die Lampe."},
+    {t:"write",lv:3,d:2,k:"g",q:"Rewrite the second sentence with a pronoun.",prompt:"Die Küche ist klein. Die Küche ist aber hell.",a:["Die Küche ist klein. Sie ist aber hell.","Die Küche ist klein, sie ist aber hell."],why:"die Küche is feminine, so sie."},
+    {t:"write",lv:3,d:1,k:"gv",q:"Answer in a full sentence.",prompt:"Wo ist der Spiegel? (im Badezimmer)",a:["Der Spiegel ist im Badezimmer.","Er ist im Badezimmer."],why:"der Spiegel, or the pronoun er."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Das Bett ist gross und der Lampe ist klein.",wrong:[5],fixed:"Das Bett ist gross und die Lampe ist klein.",why:"die Lampe is feminine."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Der Schrank ist neu, aber sie ist hässlich.",wrong:[5],fixed:"Der Schrank ist neu, aber er ist hässlich.",why:"der Schrank is masculine, so the pronoun is er."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: The fridge is in the kitchen.",tiles:["der Kühlschrank","ist","in der Küche"],end:".",a:["Der Kühlschrank ist in der Küche.","In der Küche ist der Kühlschrank."],verb:"ist",why:"Verb on position 2."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German. Hint: einen Balkon.",prompt:"My flat has a kitchen, a bathroom and a balcony.",a:["Meine Wohnung hat eine Küche, ein Bad und einen Balkon.","Meine Wohnung hat eine Küche, ein Badezimmer und einen Balkon."],why:"Like Cleo: Sie hat Küche, Bad und einen Balkon. After hat, der becomes einen."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Describe one room in your flat in three sentences. Name the room and at least three pieces of furniture with their article.",model:"Mein Wohnzimmer ist hell und gemütlich.\nEs gibt ein Sofa, einen Tisch und eine Lampe.\nDer Fernseher ist alt, aber das Bild ist schön.",checks:[{"need":"\\b(wohnzimmer|schlafzimmer|kueche|badezimmer|bad|esszimmer|kinderzimmer|zimmer)\\b","label":"The room: das Wohnzimmer, die Küche …"},{"need":"\\b(der|die|das|ein|eine|einen|mein|meine|meinen) (stuhl|sessel|sofa|lampe|fernseher|tisch|bild|teppich|kommode|heizung|bett|nachttisch|stehlampe|schrank|fenster|duschvorhang|lavabo|dusche|badewanne|toilette|klo|spiegel|tuer|hocker|herd|abfalleimer|waschmaschine|kuehlschrank)\\b","min":3,"label":"At least three pieces of furniture with an article"},{"avoid":"\\b(die|eine|meine|das) (stuhl|tisch|teppich|nachttisch|schrank|duschvorhang|herd|kuehlschrank)\\b","label":"der words: der Stuhl, der Tisch, der Schrank, der Herd …"},{"avoid":"\\b(das|ein) (lampe|kommode|heizung|stehlampe|dusche|badewanne|toilette|tuer|waschmaschine)\\b","label":"die words: die Lampe, die Kommode, die Dusche, die Tür …"},{"avoid":"\\b(der|die|eine) (sofa|bild|bett|lavabo|klo)\\b","label":"das words: das Sofa, das Bild, das Bett …"}]}
+  ]
+},
+{
+  id:"w3-wohnen", stop:"Wie wohnst du?", title:"Cleo Lüthi erzählt: So wohne ich",
+  grammar:"Die Wohnung = sie, Das gefällt mir, im ersten Stock", vocab:"Wohnsituation, Adjektive (Gegenteile), die Stadt Zürich",
+  cheat:`
+    <h3>Talking about your flat</h3>
+    <ul>
+      <li>Meine Wohnung ist in Zürich, im Kreis 5.</li>
+      <li>Sie hat zweieinhalb Zimmer. (die Wohnung = sie)</li>
+      <li>Sie liegt im dritten Stock. / im Erdgeschoss</li>
+      <li>Die Lage ist ein Vorteil. Die alte Küche ist ein Nachteil.</li>
+      <li>Das gefällt mir. Ich wohne gern hier.</li>
+    </ul>
+    <h3>Adjektive (Gegenteile)</h3>
+    <p>gross >< klein · hell >< dunkel · alt >< modern, neu · ruhig >< laut · praktisch >< unpraktisch · schön >< hässlich · günstig >< teuer</p>
+    <h3>Die Stadtkreise (Auswahl)</h3>
+    <p>Kreis 1 Altstadt · Kreis 5 Industrie Quartier · Kreis 6 Unterstrass/Oberstrass · Kreis 9 Altstetten/Albisrieden · Kreis 10 Höngg · Kreis 11 Oerlikon/Seebach/Affoltern</p>`,
+  words:[["die Miete","rent"],["günstig","low priced, cheap"],["teuer","expensive"],["liegen","to be located (to lie)"],["der Vorteil, -e","advantage"],["der Nachteil, -e","disadvantage"],["in der Nähe von …","near by, close to …"],["Das gefällt mir.","I like that."],["Ich wohne im ersten Stock.","on the first floor"],["im Erdgeschoss","on the ground floor"],["die Lage","location"],["gemütlich","cozy"],["das macht nichts","that doesn't matter"],["genug","enough"],["der Platz, die Plätze","space, room"],["hell >< dunkel","bright, sunny >< dark"],["gross >< klein","big, tall >< small"],["alt >< modern, neu","old >< modern, new"],["ruhig >< laut","quiet >< loud, noisy"],["praktisch >< unpraktisch","useful, practical >< unhandy"],["schön >< hässlich","pretty, beautiful >< ugly"],["die WG (Wohngemeinschaft)","shared flat"],["der Mitbewohner, -","flatmate (male)"],["die Mitbewohnerin, -nen","flatmate (female)"],["ziemlich","quite, rather"],["der Kreis, die Kreise","district"],["das Quartier, die Quartiere","district/neighbourhood"],["die Nebenkosten","additional costs"],["die Wohnungsbesichtigung","apartment viewing"],["die Verkehrsanbindungen","transport connections"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"die Nebenkosten",back:"additional costs",ex:"Wie teuer sind die Nebenkosten von deiner Wohnung?"},
+    {t:"flash",lv:1,d:1,k:"v",front:"das macht nichts",back:"that doesn't matter",ex:"Auch die Küche ist relativ klein. Aber das macht nichts."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"on the ground floor",back:"im Erdgeschoss",ex:"Ich wohne im Erdgeschoss."},
+    {t:"flash",lv:1,d:2,k:"v",front:"die Wohnungsbesichtigung",back:"apartment viewing",ex:"Am Samstag habe ich eine Wohnungsbesichtigung!"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the opposites.",pairs:[["hell","dunkel"],["ruhig","laut"],["alt","neu"],["praktisch","unpraktisch"],["schön","hässlich"],["günstig","teuer"]]},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From Cleo's text: „Die Wohnung liegt sehr zentral, in der Nähe vom Limmatplatz. Das ist ein Vorteil.“",q:"Why is the location an advantage?",opts:["It is central, close to Limmatplatz.","It is cheap.","It is quiet."],a:0,why:"zentral = central. in der Nähe vom = close to."},
+    {t:"sort",lv:2,d:2,k:"v",q:"Vorteil oder Nachteil? Sort what Cleo says about her flat.",groups:["Vorteil","Nachteil"],items:[["Die Wohnung liegt sehr zentral.",0],["Das Wohnzimmer ist hell und gemütlich.",0],["Der Balkon ist schön.",0],["Die Miete ist relativ günstig.",0],["Das Schlafzimmer ist sehr klein.",1],["Die Küche ist relativ klein.",1]],why:"Cleo's Nachteile: das Schlafzimmer ist sehr klein, auch die Küche ist relativ klein. Aber das macht nichts."},
+    {t:"mc",lv:2,d:2,k:"v",q:"Cleo's flat „liegt im dritten Stock“. Where is it?",opts:["on the third floor","in district 3","it has three rooms"],a:0,why:"der Stock = floor. im ersten, zweiten, dritten Stock."},
+    {t:"mc",lv:2,d:2,k:"v",q:"Which Kreis is Oerlikon in?",opts:["Kreis 11","Kreis 1","Kreis 5"],a:0,why:"From the list in the script: Kreis 11 Oerlikon/Seebach/Affoltern."},
+    {t:"gap",lv:3,d:2,k:"gv",ctx:"From the Wohnsituation dialogue.",q:"Wohnst du mit einem Mitbewohner in einer ___ oder alleine? Ich wohne alleine. Es gibt nicht genug ___.",hints:["shared flat","space"],a:[["Wohngemeinschaft","WG"],["Platz"]],why:"die Wohngemeinschaft (WG). der Platz = space, room."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Answer in a full sentence. Use sie for die Wohnung.",prompt:"Wie viele Zimmer hat die Wohnung? (3)",a:["Sie hat drei Zimmer.","Sie hat 3 Zimmer."],why:"die Wohnung is feminine, so sie. Sample answer in the script: Sie hat … Zimmer."},
+    {t:"write",lv:3,d:3,k:"gv",q:"Answer in a full sentence.",prompt:"Wohnst du alleine oder in einer WG? (in a WG, with 2 flatmates)",a:["Ich wohne in einer WG mit 2 Mitbewohnern.","Ich wohne in einer WG mit zwei Mitbewohnern.","Ich teile eine Wohnung mit 2 Mitbewohnern.","Ich teile eine Wohnung mit zwei Mitbewohnern."],why:"Sample answer in the script: Ich teile eine Wohnung mit 3 Mitbewohnern."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Meine Wohnung ist gemütlich, aber er ist sehr alt.",wrong:[5],fixed:"Meine Wohnung ist gemütlich, aber sie ist sehr alt.",why:"die Wohnung is feminine, so sie."},
+    {t:"fix",lv:4,d:3,k:"gv",q:"Tap the wrong word.",text:"Die Wohnung liegt zentral. Das gefällt ich.",wrong:[6],fixed:"Die Wohnung liegt zentral. Das gefällt mir.",why:"The fixed phrase is Das gefällt mir. = I like that."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: I get there in 15 minutes by bike.",tiles:["ich","bin","in 15 Minuten","mit dem Velo","dort"],end:".",a:["Ich bin in 15 Minuten mit dem Velo dort.","In 15 Minuten bin ich mit dem Velo dort."],verb:"bin",why:"Sample answer in the script: Ich bin in 15 Minuten mit dem Velo dort."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"My flat is not very big.",a:["Meine Wohnung ist nicht sehr gross."],why:"From Cleo's text."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German. Use liegen.",prompt:"The flat is centrally located, close to Limmatplatz.",a:["Die Wohnung liegt sehr zentral, in der Nähe vom Limmatplatz.","Die Wohnung liegt zentral, in der Nähe vom Limmatplatz."],why:"liegen = to be located. in der Nähe vom Limmatplatz."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I like living here.",a:["Ich wohne gern hier."],why:"From Cleo's text: Ich wohne gern hier."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. How do you live? Write three or four sentences: where you live (Kreis or Quartier), how big your flat is, one Vorteil and one Nachteil.",model:"Ich wohne in Oerlikon, im Kreis 11.\nMeine Wohnung hat zwei Zimmer und einen Balkon.\nDie Lage ist ein Vorteil, ich bin in 10 Minuten an der ETH.\nDie kleine Küche ist ein Nachteil, aber das macht nichts.",checks:[{"need":"\\bich wohne\\b","label":"Where you live: ich wohne in …"},{"need":"\\b(zimmer|gross|klein)\\b","label":"How big: … Zimmer, gross or klein"},{"need":"\\bvorteil(e)?\\b","label":"One Vorteil"},{"need":"\\bnachteil(e)?\\b","label":"One Nachteil"},{"avoid":"\\bdas gefaellt ich\\b","label":"Das gefällt mir, not ich"},{"avoid":"\\b(meine )?wohnung\\b[^.!?]*\\b, (er|es) (ist|hat|liegt)\\b","label":"die Wohnung is sie"}]}
+  ]
+}
 ]}
 ];
 
@@ -727,7 +926,7 @@ function start(kind, idx){
   const stops = stopsOf(weekIdx);
   let sec, items;
   if (kind === "all"){
-    sec = {id: "all-mix", stop: "Alles", mix: true, title: "Woche 1 und 2 gemischt", grammar: "alles", vocab: "alles"};
+    sec = {id: "all-mix", stop: "Alles", mix: true, title: "Alle Wochen gemischt", grammar: "alles", vocab: "alles"};
     const pool = [];
     WEEKS.forEach(w => w.stops.forEach(s => s.items.forEach(it => pool.push(Object.assign({src: w.label + " · " + s.stop}, it)))));
     items = arrange(sampleByLevel(pool, 4));
@@ -757,7 +956,7 @@ function start(kind, idx){
    CHROME: week tabs, tram line, reference panel
    ===================================================================== */
 function renderTop(){
-  document.getElementById("h1").innerHTML = S.kind === "all" ? `Woche <span class="num">1+2</span>` : `Woche <span class="num">${WEEKS[weekIdx].n}</span>`;
+  document.getElementById("h1").innerHTML = S.kind === "all" ? `Woche <span class="num">${WEEKS.map(w => w.n).join("+")}</span>` : `Woche <span class="num">${WEEKS[weekIdx].n}</span>`;
   const box = document.getElementById("weeks");
   box.innerHTML = "";
   WEEKS.forEach((w, i) => box.append(h("button", {class: "wk", type: "button", "aria-pressed": String(S.kind !== "all" && i === weekIdx), onclick: () => { weekIdx = i; start("stop", 0); }}, w.label)));
