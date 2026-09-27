@@ -1,0 +1,1241 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Hispeed A1 Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F2F5F9; --surface:#FFFFFF; --ink:#132033; --muted:#5A6779; --line:#D7DEE8;
+  --accent:#1C5DB0; --accent-ink:#FFFFFF; --accent-soft:#E2EBF8;
+  --ok:#1D7A4B; --ok-soft:#E0F2E7; --bad:#C0392B; --bad-soft:#FBE5E1;
+  --verb:#F3C74B; --verb-ink:#3A2A00;
+  --l1:#8FA7C4; --l2:#5F8FCB; --l3:#1C5DB0; --l4:#6A45B8; --l5:#B8457A;
+  --display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body:"Public Sans", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#0E1520; --surface:#162131; --ink:#E6ECF3; --muted:#98A4B5; --line:#2A3749;
+    --accent:#6FA4EE; --accent-ink:#0B1422; --accent-soft:#1A2D48;
+    --ok:#62C590; --ok-soft:#14301F; --bad:#F2806F; --bad-soft:#3A1B17;
+    --verb:#E0B53C; --verb-ink:#221800;
+    --l1:#6D83A0; --l2:#6F9BD8; --l3:#8DB6F2; --l4:#A98BE8; --l5:#E68AB3;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#0E1520; --surface:#162131; --ink:#E6ECF3; --muted:#98A4B5; --line:#2A3749;
+  --accent:#6FA4EE; --accent-ink:#0B1422; --accent-soft:#1A2D48;
+  --ok:#62C590; --ok-soft:#14301F; --bad:#F2806F; --bad-soft:#3A1B17;
+  --verb:#E0B53C; --verb-ink:#221800;
+  --l1:#6D83A0; --l2:#6F9BD8; --l3:#8DB6F2; --l4:#A98BE8; --l5:#E68AB3;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px;padding-block:24px 64px}
+@media (max-width:480px){.wrap{padding-inline:16px}}
+
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 24px;margin-bottom:18px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 4px}
+h1{font-family:var(--display);font-stretch:118%;font-weight:800;font-size:clamp(32px,5.5vw,50px);line-height:1;margin:0;letter-spacing:-.01em}
+h1 .num{color:var(--accent)}
+.top p.sub{margin:6px 0 0;color:var(--muted);max-width:56ch}
+
+.weeks{display:flex;gap:6px;flex-wrap:wrap}
+.wk{font:inherit;font-weight:700;padding:9px 16px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.wk[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.wk.alt{border-style:dashed}
+
+.line{overflow-x:auto;margin:0 -4px 22px;padding:4px}
+.line ol{list-style:none;margin:0;padding:0;display:flex;min-width:max-content}
+.line li{position:relative;flex:1 0 116px}
+.line li::before{content:"";position:absolute;top:13px;left:0;right:0;height:4px;background:var(--line)}
+.line li:first-child::before{left:50%}
+.line li:last-child::before{right:50%}
+.line li.passed::before{background:var(--accent)}
+.stop{position:relative;display:flex;flex-direction:column;align-items:center;gap:7px;width:100%;background:none;border:0;padding:0 6px 4px;color:var(--ink);font:inherit;cursor:pointer;border-radius:8px}
+.stop .dot{width:30px;height:30px;border-radius:50%;background:var(--surface);border:4px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--muted);transition:transform .15s}
+.stop:hover .dot{transform:scale(1.08)}
+.stop .lbl{font-size:13px;font-weight:600;text-align:center;line-height:1.25}
+.stop .best{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;min-height:1em}
+li.done .dot{border-color:var(--ok);color:var(--ok)}
+li.active .dot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+li.active .lbl{color:var(--accent)}
+
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+@media (max-width:880px){.grid{grid-template-columns:minmax(0,1fr)}}
+
+.sechead{margin-bottom:14px;display:grid;gap:8px}
+.sechead h2{font-family:var(--display);font-stretch:110%;font-weight:750;font-size:26px;line-height:1.15;margin:0;text-wrap:balance}
+.blend{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:14px;color:var(--muted)}
+.blend b{color:var(--ink);font-weight:600}
+.order{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.order button{font:inherit;font-size:13px;padding:4px 10px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.order button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);font-weight:700}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:16px}
+@media (max-width:480px){.card{padding:16px}}
+.cardtop{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.tags{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.tag.g{background:var(--accent-soft);color:var(--accent)}
+.tag.v{background:var(--verb);color:var(--verb-ink)}
+.tag.src{background:transparent;border:1px solid var(--line);color:var(--muted)}
+
+/* Bloom ladder */
+.bloom{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.04em}
+.ladder{display:flex;gap:2px;align-items:flex-end}
+.ladder i{display:block;width:6px;border-radius:2px;background:var(--line)}
+.ladder i:nth-child(1){height:6px}.ladder i:nth-child(2){height:9px}.ladder i:nth-child(3){height:12px}.ladder i:nth-child(4){height:15px}.ladder i:nth-child(5){height:18px}
+.diff{color:var(--muted);letter-spacing:1px;font-size:11px}
+
+.ctx{font-size:14px;color:var(--muted);margin:0}
+.q{font-family:var(--display);font-stretch:104%;font-size:22px;font-weight:600;line-height:1.5;margin:0}
+.reply{align-self:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:12px 12px 12px 3px;padding:8px 14px;font-size:17px}
+.reply::before{content:attr(data-l);display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+input.blank{font:inherit;font-weight:600;color:var(--accent);background:var(--accent-soft);border:0;border-bottom:3px solid var(--accent);border-radius:6px 6px 0 0;padding:0 8px;width:7.5em;max-width:100%}
+input.blank:focus{outline:none;background:var(--surface);box-shadow:0 0 0 2px var(--accent)}
+input.blank.ok{color:var(--ok);border-color:var(--ok);background:var(--ok-soft)}
+input.blank.bad{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.hint{color:var(--muted);font-weight:400;font-size:15px}
+.free{font:inherit;font-size:18px;width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);resize:vertical}
+.free:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.umlauts{display:flex;gap:6px;flex-wrap:wrap}
+.umlauts button{font:inherit;font-weight:600;min-width:40px;padding:4px 10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;cursor:pointer}
+
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;padding:12px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;cursor:pointer;display:flex;gap:12px;align-items:center}
+.opt .k{font-size:12px;font-weight:700;color:var(--muted);width:20px;height:20px;border:1px solid var(--line);border-radius:5px;display:grid;place-items:center;flex:none}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt.sel{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt.ok{border-color:var(--ok);background:var(--ok-soft)}
+.opt.bad{border-color:var(--bad);background:var(--bad-soft)}
+.opt:disabled{cursor:default}
+
+/* flashcard */
+.flash{border:1px solid var(--line);border-radius:14px;min-height:170px;display:grid;place-items:center;text-align:center;padding:22px;background:var(--paper);cursor:pointer}
+.flash .front{font-family:var(--display);font-stretch:112%;font-size:30px;font-weight:700;line-height:1.2}
+.flash .dir{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:8px}
+.flash .back{font-size:22px;font-weight:700;color:var(--accent);margin-top:14px}
+.flash .ex{font-size:15px;color:var(--muted);margin-top:6px}
+.flash .tap{font-size:13px;color:var(--muted);margin-top:14px}
+
+/* builder */
+.slots{min-height:56px;border:2px dashed var(--line);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.slots.empty::before{content:"Tap the words in order";color:var(--muted);font-size:14px;padding-left:6px}
+.pool{display:flex;flex-wrap:wrap;gap:8px}
+.tile{font:inherit;font-weight:600;padding:8px 12px;border-radius:9px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.slots .tile{background:var(--accent-soft);border-color:transparent}
+.tile.used{visibility:hidden}
+.tile .pos{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+/* match */
+.match{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px}
+.match .col{display:grid;gap:8px;align-content:start}
+.mi{font:inherit;padding:10px 12px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-align:left}
+.mi.sel{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.mi.done{background:var(--ok-soft);border-color:var(--ok);color:var(--ok);cursor:default}
+.mi.wrong{animation:shake .3s;border-color:var(--bad)}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* word tokens (caps and error hunt) */
+.caps{display:flex;flex-wrap:wrap;gap:6px;font-size:20px}
+.cw{font:inherit;padding:4px 8px;border-radius:7px;border:1px solid transparent;background:var(--paper);color:var(--ink);cursor:pointer}
+.cw.up{border-color:var(--accent);color:var(--accent);font-weight:700}
+.cw.flag{border-color:var(--bad);color:var(--bad);text-decoration:line-through;text-decoration-thickness:2px}
+.cw.ok{border-color:var(--ok);color:var(--ok);background:var(--ok-soft);text-decoration:none}
+.cw.bad{border-color:var(--bad);color:var(--bad);background:var(--bad-soft)}
+.cw.miss{border:2px dashed var(--bad)}
+
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{font:inherit;font-weight:700;padding:11px 20px;border-radius:10px;border:0;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.good{background:var(--ok);color:var(--surface)}
+.btn.redo{background:transparent;color:var(--bad);border:1px solid var(--bad)}
+.keyhint{font-size:12px;color:var(--muted)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.fb{border-radius:10px;padding:12px 14px;display:grid;gap:6px}
+.fb.ok{background:var(--ok-soft)}
+.fb.bad{background:var(--bad-soft)}
+.fb strong{font-family:var(--display);font-size:17px}
+.fb.ok strong{color:var(--ok)}
+.fb.bad strong{color:var(--bad)}
+.fb .ans{font-weight:600}
+.fb .why{font-size:15px}
+.fb .model{white-space:pre-line;font-weight:600;background:var(--surface);border-radius:8px;padding:8px 10px}
+.fb .override{justify-self:start;font:inherit;font-size:13px;background:none;border:1px dashed var(--muted);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+mark.v{background:var(--verb);color:var(--verb-ink);padding:0 4px;border-radius:4px}
+mark.fix{background:var(--ok-soft);color:var(--ok);padding:0 4px;border-radius:4px;font-weight:700}
+
+.score{font-family:var(--display);font-stretch:120%;font-weight:800;font-size:56px;line-height:1;font-variant-numeric:tabular-nums}
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.split div{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.split small{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.split b{font-size:20px;font-variant-numeric:tabular-nums}
+.lvls{display:grid;gap:6px}
+.lvrow{display:grid;grid-template-columns:120px 1fr 44px;gap:10px;align-items:center;font-size:14px}
+.lvrow .track{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.lvrow .track i{display:block;height:100%}
+.lvrow span:last-child{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.missed{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.missed li{border-left:3px solid var(--bad);padding:4px 0 4px 12px;font-size:15px}
+.missed li span{color:var(--muted)}
+
+.ref{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:14px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);max-height:calc(100vh - 32px);overflow:auto}
+@media (max-width:880px){.ref{position:static;max-height:none}}
+.ref h3{font-family:var(--display);font-stretch:112%;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin:0;color:var(--muted)}
+.ref p,.ref li{font-size:14px;margin:0}
+.ref ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.tbl{overflow-x:auto}
+.ref table{border-collapse:collapse;width:100%;font-size:14px}
+.ref td,.ref th{padding:5px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.ref th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ref td:first-child{font-weight:600}
+.pos2 td:nth-child(2){background:var(--verb);color:var(--verb-ink);font-weight:700}
+details summary{cursor:pointer;font-weight:600}
+.foot{margin-top:28px;font-size:13px;color:var(--muted);display:grid;gap:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">Hispeed A1 · HS 26</p>
+      <h1 id="h1">Woche <span class="num">1</span></h1>
+      <p class="sub">Every stop climbs from flashcards to writing your own sentences. Most questions train a grammar rule and its vocabulary together.</p>
+    </div>
+    <div class="weeks" id="weeks"></div>
+  </header>
+
+  <nav class="line" aria-label="Stations"><ol id="stops"></ol></nav>
+
+  <main class="grid">
+    <section id="stage" aria-live="polite"></section>
+    <aside class="ref" id="ref"></aside>
+  </main>
+
+  <div class="foot">
+    <span>Levels follow Bloom: 1 Erinnern (remember), 2 Verstehen (understand), 3 Anwenden (apply), 4 Analysieren (analyze), 5 Erschaffen (create). Dots show difficulty.</span>
+    <span>Personal study tool based on the Hispeed A1 scripts (Gredig, Blöchlinger). Swiss spelling: ss instead of ß.</span>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   CONTENT
+   Item fields: t = type, lv = Bloom level 1-5, d = difficulty 1-3,
+   k = "g" grammar, "v" vocab, "gv" both.
+   Types: flash, mc, match, gap, build, fix, caps, write, open
+   ===================================================================== */
+const WEEKS = [
+{ id:"w1", n:1, label:"Woche 1", stops:[
+{
+  id:"w1-verben", stop:"Verben", title:"Regelmässige Verben im Präsens",
+  grammar:"Endungen, -est/-et, Stamm auf -s/-ss/-z", vocab:"Liste regelmässige Verben",
+  cheat:`
+    <h3>Endings</h3>
+    <div class="tbl"><table><tr><th></th><th>lernen</th><th>arbeiten</th><th>heissen</th></tr>
+      <tr><td>ich</td><td>lern<b>e</b></td><td>arbeit<b>e</b></td><td>heiss<b>e</b></td></tr>
+      <tr><td>du</td><td>lern<b>st</b></td><td>arbeit<b>est</b></td><td>heiss<b>t</b></td></tr>
+      <tr><td>er / sie / es</td><td>lern<b>t</b></td><td>arbeit<b>et</b></td><td>heiss<b>t</b></td></tr>
+      <tr><td>wir</td><td>lern<b>en</b></td><td>arbeit<b>en</b></td><td>heiss<b>en</b></td></tr>
+      <tr><td>ihr</td><td>lern<b>t</b></td><td>arbeit<b>et</b></td><td>heiss<b>t</b></td></tr>
+      <tr><td>sie / Sie</td><td>lern<b>en</b></td><td>arbeit<b>en</b></td><td>heiss<b>en</b></td></tr>
+    </table></div>
+    <ul>
+      <li>Stem ends in <b>-t, -d</b> or consonant + <b>n</b>: add <b>-e-</b> for du, er, ihr. du arbeitest, er findet, ihr öffnet, es regnet.</li>
+      <li>Stem ends in <b>-s, -ss, -z</b>: du only adds <b>-t</b>. du heisst, du löst, du ergänzt.</li>
+    </ul>`,
+  words:[["lernen","to learn"],["verstehen","to understand"],["fragen","to ask"],["antworten","to answer"],["schreiben","to write"],["wiederholen","to repeat"],["üben","to practice"],["notieren","to note down"],["suchen","to look for"],["finden","to find"],["öffnen","to open"],["warten","to wait"],["rechnen","to calculate"],["zeichnen","to draw"],["bezahlen","to pay"],["kaufen","to buy"],["brauchen","to need"],["bleiben","to stay"],["wohnen","to live (reside)"],["leben","to live, be alive"],["geniessen","to enjoy"],["lösen","to solve"],["ergänzen","to fill in"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"verstehen",back:"to understand",ex:"Ich verstehe das nicht."},
+    {t:"flash",lv:1,d:1,k:"v",front:"wiederholen",back:"to repeat",ex:"Können Sie das bitte wiederholen?"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"to wait",back:"warten",ex:"Ich warte auf das Tram."},
+    {t:"flash",lv:1,d:2,k:"g",front:"du + arbeiten",back:"du arbeitest",ex:"The stem ends in -t, so add -e- before -st."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the verbs.",pairs:[["suchen","to look for"],["bezahlen","to pay"],["zeichnen","to draw"],["bleiben","to stay"],["brauchen","to need"],["geniessen","to enjoy"]]},
+    {t:"mc",lv:2,d:1,k:"g",q:"___ lernst Deutsch.",opts:["Du","Ich","Er"],a:0,why:"The ending -st belongs to du."},
+    {t:"mc",lv:2,d:2,k:"g",q:"„Sie studieren Mathematik, oder?“ Who is Sie?",opts:["They, or formal you. At the start of a sentence you can't tell.","Only she","Only formal you"],a:0,why:"Sie and sie both take -en. At the start of a sentence both are written with a capital."},
+    {t:"gap",lv:3,d:1,k:"gv",q:"Wir ___ jeden Abend die Hausaufgaben.",hints:["machen"],a:[["machen"]],why:"wir takes -en."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Du ___ die Tür und ___ auf Anna.",hints:["öffnen","warten"],a:[["öffnest"],["wartest"]],why:"Both stems need the extra -e-: öffn-e-st, wart-e-st."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Wie ___ du? Ich ___ Lea.",hints:["heissen","heissen"],a:[["heisst"],["heisse"]],why:"Stem ends in -ss, so du only adds -t: du heisst."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"Er ___ die Übung und ___ die Antwort.",hints:["lösen","notieren"],a:[["löst"],["notiert"]],why:"er takes -t: er löst, er notiert."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Du arbeitst am Computer.",wrong:[1],fixed:"Du arbeitest am Computer.",why:"arbeit- ends in -t, so du needs -est."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Er heisst Tom und er findt das Buch.",wrong:[5],fixed:"Er heisst Tom und er findet das Buch.",why:"find- ends in -d, so er needs -et."},
+    {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Du heissst Maria und ihr wohnen in Bern.",wrong:[1,5],fixed:"Du heisst Maria und ihr wohnt in Bern.",why:"du heisst has only one -t ending. ihr takes -t: ihr wohnt."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Start with the time: In the evening we repeat the words.",tiles:["am Abend","wiederholen","wir","die Wörter"],end:".",a:["Am Abend wiederholen wir die Wörter.","Wir wiederholen am Abend die Wörter."],verb:"wiederholen",why:"The verb stays on position 2. The subject moves behind it."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I'm learning German and I understand a lot. (a lot = viel)",a:["Ich lerne Deutsch und ich verstehe viel.","Ich lerne Deutsch und verstehe viel."],why:"lernen and verstehen both take -e for ich."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Describe how you study in one or two sentences. Use at least two verbs from the list.",model:"Ich notiere die Wörter und ich wiederhole sie am Abend. Dann übe ich auf Quizlet."}
+  ]
+},
+{
+  id:"w1-fragen", stop:"Fragen", title:"Fragen stellen: W-Fragen und Ja/Nein/Doch",
+  grammar:"Verbposition in Fragen, Doch", vocab:"Fragewörter",
+  cheat:`
+    <h3>Where the verb goes</h3>
+    <div class="tbl"><table class="pos2"><tr><th>Pos. 1</th><th>Verb</th><th>Rest</th></tr>
+      <tr><td>Woher</td><td>kommst</td><td>du?</td></tr>
+      <tr><td>Wie lange</td><td>bleibst</td><td>du in Zürich?</td></tr>
+    </table></div>
+    <p>A yes/no question has no question word. The verb moves to position 1: <b>Kommst du aus Chile?</b></p>
+    <h3>Ja, Nein, Doch</h3>
+    <ul>
+      <li>Positive question: <b>Ja</b> or <b>Nein</b>.</li>
+      <li>Negative question (nicht, kein) and your answer is positive: <b>Doch</b>.</li>
+      <li>Name, number, address: ask with <b>wie</b>, not was.</li>
+    </ul>`,
+  words:[["wer","who"],["was","what"],["wie","how"],["wie lange","how long"],["seit wann","since when"],["wann","when"],["wie viel","how much"],["wie viele","how many"],["woher","where from"],["wo","where"],["wohin","where to"],["welche","which"],["doch","yes (to a negative question)"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"seit wann",back:"since when",ex:"Seit wann wohnst du in Zürich?"},
+    {t:"flash",lv:1,d:1,k:"v",front:"wie viele",back:"how many",ex:"Wie viele Kurse hast du?"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"how long",back:"wie lange",ex:"Wie lange bleibst du in Zürich?"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the question words.",pairs:[["wer","who"],["was","what"],["wann","when"],["woher","where from"],["wohin","where to"],["welche","which"]]},
+    {t:"mc",lv:2,d:1,k:"gv",q:"___ kostet ein Kaffee?",reply:"Vier Franken.",opts:["Wie viel","Wie viele","Wann"],a:0,why:"wie viel for amounts like money. wie viele for things you count."},
+    {t:"mc",lv:2,d:2,k:"gv",q:"___ studierst du in Zürich?",reply:"Seit 2024.",opts:["Seit wann","Wie lange","Wann"],a:0,why:"The answer is a starting point, so the question is seit wann."},
+    {t:"mc",lv:2,d:2,k:"g",ctx:"You are from Chile.",q:"Kommst du nicht aus Chile?",opts:["Doch.","Ja.","Nein."],a:0,why:"Negative question, positive answer: Doch."},
+    {t:"mc",lv:2,d:3,k:"g",ctx:"You are not hungry.",q:"Hast du keinen Hunger?",opts:["Nein.","Doch.","Ja."],a:0,why:"You agree with the negative question, so the answer is Nein."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"___ ___ du?",reply:"Ich wohne in Oerlikon.",hints:["question word","wohnen"],a:[["Wo"],["wohnst"]],why:"Wo asks for a place. wohnen with du: wohnst."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"___ ___ der Kurs?",reply:"Um 12:15 Uhr.",hints:["question word","beginnen"],a:[["Wann"],["beginnt"]],why:"Wann asks for a time. der Kurs is er, so beginnt."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"___ Sprachen ___ du?",reply:"Deutsch und Englisch.",hints:["which","sprechen"],a:[["Welche"],["sprichst"]],why:"sprechen changes e to i for du: du sprichst."},
+    {t:"build",lv:4,d:1,k:"g",q:"Build the question: Aren't you from Chile?",tiles:["du","aus Chile","kommst","nicht"],end:"?",a:["Kommst du nicht aus Chile?"],verb:"kommst",why:"Yes/no question, so the verb goes first."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the question: How long are you staying in Zurich?",tiles:["bleibst","wie lange","in Zürich","du"],end:"?",a:["Wie lange bleibst du in Zürich?"],verb:"bleibst",why:"„Wie lange“ is one block on position 1. The verb is second."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Was ist deine Telefonnummer?",wrong:[0],fixed:"Wie ist deine Telefonnummer?",why:"German asks for numbers, names and addresses with wie."},
+    {t:"fix",lv:4,d:1,k:"g",q:"Tap the wrong word.",text:"Wo wohnt du in Zürich?",wrong:[1],fixed:"Wo wohnst du in Zürich?",why:"du takes -st: wohnst."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Sie kommt aus Berlin.",a:["Woher kommt sie?"],why:"The answer is about sie, so ask about sie: kommt sie."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write the question for this answer.",prompt:"Ich bin seit drei Monaten in der Schweiz.",a:["Seit wann bist du in der Schweiz?","Seit wann sind Sie in der Schweiz?","Wie lange bist du schon in der Schweiz?"],why:"seit in the answer means the question is seit wann."},
+    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Write a negative question that a classmate will answer with Doch. Then write the answer.",model:"Trinkst du keinen Kaffee?\nDoch, jeden Morgen!"}
+  ]
+},
+{
+  id:"w1-wohin", stop:"Woher/Wohin", title:"Woher, wo, wohin?",
+  grammar:"aus, in, nach, zum, zur", vocab:"Orte an der Uni",
+  cheat:`
+    <h3>Three directions</h3>
+    <div class="tbl"><table><tr><th>Frage</th><th>Präposition</th><th>Beispiel</th></tr>
+      <tr><td>Woher?</td><td>aus</td><td>Ich komme aus Malta.</td></tr>
+      <tr><td>Wo?</td><td>in</td><td>Ich wohne in Zürich.</td></tr>
+      <tr><td>Wohin?</td><td>nach</td><td>Ich gehe nach Basel.</td></tr>
+      <tr><td>Wohin?</td><td>zum (der, das)</td><td>Ich gehe zum Coop.</td></tr>
+      <tr><td>Wohin?</td><td>zur (die)</td><td>Ich gehe zur ETH.</td></tr>
+    </table></div>
+    <ul>
+      <li>nach for cities and countries without an article, and for <b>nach Hause</b> (going home).</li>
+      <li><b>zu Hause</b> means at home: Ich bin zu Hause.</li>
+      <li>Countries with an article: aus der Schweiz, aus den USA.</li>
+    </ul>`,
+  words:[["das Büro","office"],["das Labor","lab"],["die Mensa","cafeteria"],["der Hörsaal","lecture hall"],["das Institut","institute"],["die Universität","university"],["die Vorlesung","lecture"],["nach Hause","(going) home"],["zu Hause","at home"],["die Ferien (pl.)","holidays"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"der Hörsaal",back:"lecture hall",ex:"Die Vorlesung ist im Hörsaal."},
+    {t:"flash",lv:1,d:1,k:"v",front:"die Mensa",back:"cafeteria",ex:"Am Mittag gehe ich zur Mensa."},
+    {t:"flash",lv:1,d:2,k:"g",front:"Wohin? + die ETH",back:"zur ETH",ex:"Feminine: zu + der = zur."},
+    {t:"match",lv:2,d:2,k:"g",q:"Match the question with its answer.",pairs:[["Woher?","aus Italien"],["Wo?","in Zürich"],["Wohin? (Basel)","nach Basel"],["Wohin? (der Coop)","zum Coop"],["Wohin? (die ETH)","zur ETH"]]},
+    {t:"mc",lv:2,d:1,k:"g",q:"Ich gehe ___ Hause.",opts:["nach","zu","in"],a:0,why:"Going home: nach Hause."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Ich bin heute Abend ___ Hause.",opts:["zu","nach","in"],a:0,why:"Being at home: zu Hause."},
+    {t:"mc",lv:2,d:2,k:"gv",q:"Ich gehe ___ Mensa.",hint:"(die Mensa)",opts:["zur","zum","nach"],a:0,why:"die Mensa is feminine, so zur."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Ich ___ aus Indien und ___ in Oerlikon.",hints:["kommen","wohnen"],a:[["komme"],["wohne"]],why:"ich takes -e."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Wir gehen ___ Labor und dann ___ Hause.",hints:["das Labor",""],a:[["zum"],["nach"]],why:"das Labor is neuter, so zum. Going home is nach Hause."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"___ gehst du? Ich gehe ___ Vorlesung.",hints:["question word","die Vorlesung"],a:[["Wohin"],["zur"]],why:"A direction needs wohin. die Vorlesung is feminine, so zur."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"Sie kommt ___ ___ Schweiz, aber sie wohnt ___ Berlin.",hints:["","",""],a:[["aus"],["der"],["in"]],why:"aus der Schweiz, because die Schweiz keeps its article. in Berlin for where she lives."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Start with today: Today I'm going to Coop.",tiles:["heute","gehe","ich","zum Coop"],end:".",a:["Heute gehe ich zum Coop.","Ich gehe heute zum Coop."],verb:"gehe",why:"heute on position 1 pushes ich behind the verb."},
+    {t:"fix",lv:4,d:2,k:"g",q:"There are two mistakes. Tap both.",text:"Ich komme von Italien und wohne nach Zürich.",wrong:[2,6],fixed:"Ich komme aus Italien und wohne in Zürich.",why:"Woher takes aus. Wo takes in."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Ich gehe heute zum ETH.",wrong:[3],fixed:"Ich gehe heute zur ETH.",why:"die ETH is feminine, so zur."},
+    {t:"mc",lv:4,d:3,k:"g",q:"Which sentence is correct?",opts:["Ich gehe nach Hause.","Ich bin nach Hause.","Ich gehe zu Hause."],a:0,why:"Movement: nach Hause gehen. Location: zu Hause sein."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I'm from Canada, but I live in Zurich.",a:["Ich komme aus Kanada, aber ich wohne in Zürich.","Ich komme aus Kanada, aber wohne in Zürich."],why:"aus for where you come from, in for where you live."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Describe your day in two sentences: where you are and where you go.",model:"Am Morgen bin ich im Büro.\nAm Mittag gehe ich zur Mensa und am Abend nach Hause."}
+  ]
+},
+{
+  id:"w1-kontakte", stop:"Kontakte", title:"Erste Kontakte: Sie oder du?",
+  grammar:"Sie und du, Ihr und dein", vocab:"Begrüssen, Kennenlernen, Buchstabieren",
+  cheat:`
+    <h3>Sie or du</h3>
+    <div class="tbl"><table><tr><th>Sie</th><th>du</th></tr>
+      <tr><td>Wie heissen Sie?</td><td>Wie heisst du?</td></tr>
+      <tr><td>Woher kommen Sie?</td><td>Woher kommst du?</td></tr>
+      <tr><td>Wo arbeiten Sie?</td><td>Wo arbeitest du?</td></tr>
+      <tr><td>Wie ist Ihr Name?</td><td>Wie ist dein Name?</td></tr>
+      <tr><td>Seit wann sind Sie hier?</td><td>Seit wann bist du hier?</td></tr>
+    </table></div>
+    <h3>Tricky letters</h3>
+    <p><b>W</b> [veː] sounds like English v. <b>V</b> [fau] sounds like f. <b>J</b> [jɔt]. <b>Z</b> [tsɛt]. <b>E</b> [eː]. <b>I</b> [iː].</p>`,
+  words:[["Freut mich.","nice to meet you"],["Mich auch.","me too"],["Wie bitte?","pardon?"],["Tut mir leid.","I'm sorry"],["Können Sie das wiederholen?","can you repeat that?"],["Gern geschehen.","you're welcome"],["buchstabieren","to spell"],["der Familienname","surname"],["ein bisschen","a little"],["auch","also, too"],["jetzt","now"],["der Lieblingsort","favorite place"],["Gehen wir etwas trinken?","shall we get a drink?"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"Gern geschehen.",back:"You're welcome.",ex:"Vielen Dank! Gern geschehen."},
+    {t:"flash",lv:1,d:1,k:"v",front:"ein bisschen",back:"a little",ex:"Ich spreche ein bisschen Deutsch."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"Nice to meet you. / Me too.",back:"Freut mich. / Mich auch."},
+    {t:"flash",lv:1,d:1,k:"v",front:"der Lieblingsort",back:"favorite place",ex:"Mein Lieblingsort ist der Lindenhof."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the phrases.",pairs:[["Wie bitte?","pardon?"],["Tut mir leid.","I'm sorry."],["Mach's gut!","take care"],["Bis bald.","see you soon"],["Danke, gleichfalls.","thanks, same to you"]]},
+    {t:"mc",lv:2,d:1,k:"gv",ctx:"Your new flatmate says „Hoi!“",q:"You answer:",opts:["Hoi! Wie heisst du?","Grüezi! Wie heissen Sie?","Auf Wiedersehen!"],a:0,why:"Hoi is informal, so you answer with du."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"On the phone, someone spells: ve, a, ha, el.",q:"Which name is it?",opts:["Wahl","Vahl","Wall"],a:0,why:"The letter W is said [ve]. H is [ha]. The letter V would be [fau]."},
+    {t:"mc",lv:2,d:3,k:"v",ctx:"Someone spells: fau, o, ge, e, el.",q:"Which word is it?",opts:["Vogel","Fogel","Wogel"],a:0,why:"[fau] is the letter V. It sounds like f."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Wie ___ Sie? ___ Name ist Keller.",hints:["heissen","my"],a:[["heissen"],["Mein"]],why:"Formal Sie takes -en. Mein starts the sentence."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Wo ___ du? Ich ___ an der ETH.",hints:["arbeiten","arbeiten"],a:[["arbeitest"],["arbeite"]],why:"arbeit- ends in -t, so du takes -est."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"Wie ist ___ Familienname? Können Sie das bitte ___?",hints:["your, formal","spell"],a:[["Ihr"],["buchstabieren"]],why:"Formal your is Ihr, with a capital. buchstabieren = to spell."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the question: Shall we go for a drink?",tiles:["etwas trinken","gehen","wir"],end:"?",a:["Gehen wir etwas trinken?"],verb:"gehen",why:"A suggestion starts with the verb."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: I speak English and a little German.",tiles:["spreche","ich","Englisch","und ein bisschen Deutsch"],end:".",a:["Ich spreche Englisch und ein bisschen Deutsch."],verb:"spreche",why:"Subject, verb, then the rest."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wie heisst Sie, Frau Meier?",wrong:[1],fixed:"Wie heissen Sie, Frau Meier?",why:"Formal Sie takes -en: heissen."},
+    {t:"fix",lv:4,d:3,k:"gv",q:"Tap the wrong word.",text:"Wo wohnen Sie und was ist dein Lieblingsort?",wrong:[6],fixed:"Wo wohnen Sie und was ist Ihr Lieblingsort?",why:"You started with Sie, so stay formal: Ihr."},
+    {t:"write",lv:5,d:2,k:"g",q:"Make it formal.",prompt:"Woher kommst du?",a:["Woher kommen Sie?"],why:"Sie takes the -en form."},
+    {t:"write",lv:5,d:3,k:"g",q:"Make it informal.",prompt:"Welche Sprachen sprechen Sie?",a:["Welche Sprachen sprichst du?"],why:"sprechen changes e to i for du: sprichst."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Introduce yourself to a classmate in three sentences: name, where you are from, what you do at ETH.",model:"Hoi, ich heisse Sam.\nIch komme aus Kanada und wohne jetzt in Zürich.\nIch mache ein PhD am Departement Maschinenbau."}
+  ]
+}
+]},
+
+{ id:"w2", n:2, label:"Woche 2", stops:[
+{
+  id:"personalien", stop:"Personalien", title:"Personalien: im Kreisbüro",
+  grammar:"W-Fragen, Verb auf Position 2, formell Sie", vocab:"Das Formular",
+  cheat:`
+    <h3>W-Frage: the verb comes second</h3>
+    <div class="tbl"><table class="pos2"><tr><th>Pos. 1</th><th>Verb</th><th>Rest</th></tr>
+      <tr><td>Wie</td><td>heissen</td><td>Sie?</td></tr>
+      <tr><td>Woher</td><td>kommen</td><td>Sie?</td></tr>
+      <tr><td>Wie alt</td><td>sind</td><td>Sie?</td></tr>
+      <tr><td>Was</td><td>sind</td><td>Sie von Beruf?</td></tr>
+      <tr><td>Seit wann</td><td>sind</td><td>Sie in der Schweiz?</td></tr>
+    </table></div>
+    <ul>
+      <li>Formal <b>Sie</b> uses the same verb form as <b>wir</b>.</li>
+      <li>Formal pronouns always take a capital: <b>Sie, Ihr, Ihnen</b>.</li>
+    </ul>`,
+  words:[["das Kreisbüro","district registration office"],["sich anmelden","to register"],["der Vorname","first name"],["der Familienname","surname"],["die Strasse","street"],["die Hausnummer","house number"],["die Postleitzahl (PLZ)","postal code"],["der Ort","town"],["der Beruf","job"],["das Alter","age"],["der Zivilstand","marital status"],["ledig","single"],["verheiratet","married"],["geschieden","divorced"],["verwitwet","widowed"],["der Ausweis","ID card"],["die Aufenthaltsbewilligung","residence permit"],["die Unterschrift","signature"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"die Aufenthaltsbewilligung",back:"residence permit",ex:"Welche Aufenthaltsbewilligung haben Sie?"},
+    {t:"flash",lv:1,d:1,k:"v",front:"ledig",back:"single, never married",ex:"Sind Sie verheiratet? Nein, ich bin ledig."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"signature",back:"die Unterschrift",ex:"Unterschreiben Sie bitte hier."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the form fields.",pairs:[["der Ausweis","ID card"],["die Unterschrift","signature"],["das Alter","age"],["der Beruf","job"],["der Vorname","first name"],["der Ort","town"]]},
+    {t:"mc",lv:2,d:1,k:"v",q:"On a form, what does „Zivilstand“ ask for?",opts:["Marital status","Nationality","Place of residence","Age"],a:0,why:"The answers are ledig, verheiratet, geschieden or verwitwet."},
+    {t:"mc",lv:2,d:1,k:"v",q:"The form field says „PLZ“. Which question fits?",opts:["Wie ist die Postleitzahl?","Wie ist Ihre Telefonnummer?","Welche Hausnummer?"],a:0,why:"PLZ is short for Postleitzahl. Zürich Oerlikon is 8050."},
+    {t:"mc",lv:2,d:2,k:"gv",ctx:"You have never been married.",q:"Sind Sie verheiratet? Nein, ich bin ___.",opts:["ledig","geschieden","verwitwet"],a:0,why:"geschieden = divorced. verwitwet = widowed."},
+    {t:"gap",lv:3,d:2,k:"gv",ctx:"At the Kreisbüro counter.",q:"___ ___ Sie?",reply:"Aus Kanada.",hints:["question word","kommen"],a:[["Woher"],["kommen"]],why:"Woher asks where from. Sie takes -en."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Wie ___ Ihr Vorname? Mein ___ ist Lea.",hints:["sein","first name"],a:[["ist"],["Vorname"]],why:"Ihr Vorname is er, so ist. Vorname is a noun and takes a capital."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"___ sind Sie in der Schweiz?",reply:"Seit zwei Jahren.",hints:["question word"],a:[["Seit wann"]],why:"The answer starts with seit, so ask seit wann."},
+    {t:"gap",lv:3,d:2,k:"v",q:"Was für einen ___ haben Sie?",reply:"Einen Schweizer Pass.",hints:["ID document"],a:[["Ausweis"]],why:"der Ausweis, so einen Ausweis."},
+    {t:"build",lv:4,d:1,k:"g",q:"Build the question: What is your job?",tiles:["sind","Sie","was","von Beruf"],end:"?",a:["Was sind Sie von Beruf?"],verb:"sind",why:"Question word first, verb second, then the subject."},
+    {t:"caps",lv:4,d:2,k:"gv",q:"Tap every word that needs a capital letter.",text:"wie ist ihre telefonnummer im geschäft?",a:"Wie ist Ihre Telefonnummer im Geschäft?",why:"Wie starts the sentence. Ihre is formal. Telefonnummer and Geschäft are nouns."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wie heisst Sie? Ich heisse Lea Brunner.",wrong:[1],fixed:"Wie heissen Sie? Ich heisse Lea Brunner.",why:"Formal Sie takes -en."},
+    {t:"fix",lv:4,d:3,k:"gv",q:"There are two mistakes. Tap both.",text:"Was ist Ihr Vorname und wie alt bist Sie?",wrong:[0,7],fixed:"Wie ist Ihr Vorname und wie alt sind Sie?",why:"Names take wie. Sie takes sind."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Ich bin Ingenieurin von Beruf.",a:["Was sind Sie von Beruf?","Was bist du von Beruf?"],why:"Beruf questions use was: Was sind Sie von Beruf?"},
+    {t:"write",lv:5,d:3,k:"gv",q:"The clerk needs your work number. Write the clerk's question, formally.",prompt:"work phone = die Telefonnummer im Geschäft",a:["Wie ist Ihre Telefonnummer im Geschäft?"],why:"wie for numbers, Ihre for formal your."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Answer the Kreisbüro form in full sentences: name, origin, address, job, marital status.",model:"Ich heisse Sam Lee.\nIch komme aus Kanada.\nIch wohne an der Hofwiesenstrasse 12, 8057 Zürich.\nIch bin Doktorand von Beruf.\nIch bin ledig."}
+  ]
+},
+{
+  id:"laender", stop:"Länder", title:"Länder, Sprachen, Leute",
+  grammar:"kommen aus, sprechen, sein + Nationalität", vocab:"Länder und Sprachen",
+  cheat:`
+    <h3>Two patterns for people</h3>
+    <div class="tbl"><table><tr><th>Land</th><th>er</th><th>sie</th></tr>
+      <tr><td>Frankreich</td><td>der Franzose</td><td>die Französin</td></tr>
+      <tr><td>Schweden</td><td>der Schwede</td><td>die Schwedin</td></tr>
+      <tr><td>die Türkei</td><td>der Türke</td><td>die Türkin</td></tr>
+      <tr><td>Italien</td><td>der Italiener</td><td>die Italienerin</td></tr>
+      <tr><td>die Schweiz</td><td>der Schweizer</td><td>die Schweizerin</td></tr>
+      <tr><td>Japan</td><td>der Japaner</td><td>die Japanerin</td></tr>
+    </table></div>
+    <ul>
+      <li>No article with sein: <b>Ich bin Italienerin.</b></li>
+      <li>A language is a noun, so it takes a capital: <b>Ich spreche Deutsch.</b></li>
+      <li>Most countries have no article: aus Italien. Some do: aus <b>der</b> Schweiz, aus <b>der</b> Türkei, aus <b>den</b> USA.</li>
+      <li>sprechen: ich spreche, <b>du sprichst</b>, <b>er spricht</b>.</li>
+    </ul>`,
+  words:[["Deutschland","Deutsch"],["Frankreich","Französisch"],["Italien","Italienisch"],["Griechenland","Griechisch"],["Polen","Polnisch"],["Russland","Russisch"],["Schweden","Schwedisch"],["Portugal","Portugiesisch"],["die Türkei","Türkisch"],["China","Chinesisch"],["Japan","Japanisch"],["die USA (pl.)","Englisch"],["die Schweiz","Deutsch, Französisch, Italienisch, Rätoromanisch"]],
+  items:[
+    {t:"flash",lv:1,d:2,k:"gv",front:"Frankreich: er / sie",back:"der Franzose / die Französin",ex:"Er ist Franzose. Er spricht Französisch."},
+    {t:"flash",lv:1,d:1,k:"gv",front:"die Schweiz: er / sie",back:"der Schweizer / die Schweizerin",ex:"Ich komme aus der Schweiz."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"Sweden: country and language",back:"Schweden · Schwedisch"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match each country with its language.",pairs:[["Griechenland","Griechisch"],["Polen","Polnisch"],["Russland","Russisch"],["Portugal","Portugiesisch"],["die Türkei","Türkisch"],["China","Chinesisch"]]},
+    {t:"mc",lv:2,d:1,k:"gv",q:"Giulia kommt aus Italien. Sie ist ___.",opts:["Italienerin","Italiener","italienisch"],a:0,why:"A woman from Italy is Italienerin. No article after ist."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Ich komme aus ___ Schweiz.",opts:["der","die","(no article)"],a:0,why:"die Schweiz keeps its article. After aus, die becomes der."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Sie kommt aus ___ USA.",opts:["den","der","die"],a:0,why:"die USA is plural. After aus it becomes den."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Ich komme aus ___ Deutschland.",opts:["(no article)","der","dem"],a:0,why:"Most countries have no article."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Pierre kommt aus ___. Er ist ___.",hints:["France","nationality"],a:[["Frankreich"],["Franzose"]],why:"The -e group: der Franzose, die Französin."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"Aiko ist ___ und ___ Japanisch und Englisch.",hints:["woman from Japan","sprechen"],a:[["Japanerin"],["spricht"]],why:"der Japaner, die Japanerin. sprechen with sie: spricht."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"Kommst du aus ___ Türkei? Ja, ich bin ___.",hints:["article","man from Turkey"],a:[["der"],["Türke"]],why:"aus der Türkei. A man from Turkey is Türke."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the question: Which languages do you speak?",tiles:["sprichst","welche","du","Sprachen"],end:"?",a:["Welche Sprachen sprichst du?"],verb:"sprichst",why:"„Welche Sprachen“ is one block on position 1."},
+    {t:"caps",lv:4,d:2,k:"gv",q:"Tap every word that needs a capital letter.",text:"ich spreche englisch und ein bisschen deutsch.",a:"Ich spreche Englisch und ein bisschen Deutsch.",why:"Languages are nouns, so they take capitals."},
+    {t:"fix",lv:4,d:3,k:"gv",q:"There are two mistakes. Tap both.",text:"Er kommt aus die Schweiz und spricht französisch.",wrong:[3,7],fixed:"Er kommt aus der Schweiz und spricht Französisch.",why:"aus der Schweiz. The language Französisch takes a capital."},
+    {t:"mc",lv:4,d:2,k:"g",ctx:"You are Canadian.",q:"Bist du nicht Kanadierin?",opts:["Doch!","Ja!","Nein!"],a:0,why:"Negative question, positive answer: Doch."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"She is Italian and lives in Zurich.",a:["Sie ist Italienerin und wohnt in Zürich.","Sie ist Italienerin und sie wohnt in Zürich."],why:"No article before Italienerin. wohnen with sie: wohnt."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write the question for this answer.",prompt:"Ich spreche Polnisch, Deutsch und ein bisschen Englisch.",a:["Welche Sprachen sprichst du?","Welche Sprachen sprechen Sie?"],why:"welche for a choice from a group. du sprichst."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Introduce a classmate: country, nationality, languages.",model:"Das ist Ana.\nSie kommt aus Portugal. Sie ist Portugiesin.\nSie spricht Portugiesisch, Englisch und ein bisschen Deutsch."}
+  ]
+},
+{
+  id:"seinhaben", stop:"sein & haben", title:"sein und haben: Wie bist du heute?",
+  grammar:"sein und haben im Präsens, ich auch / ich nicht", vocab:"Bist du ...? Hast du ...?",
+  cheat:`
+    <h3>Präsens</h3>
+    <div class="tbl"><table><tr><th></th><th>sein</th><th>haben</th></tr>
+      <tr><td>ich</td><td>bin</td><td>habe</td></tr>
+      <tr><td>du</td><td>bist</td><td>hast</td></tr>
+      <tr><td>er / sie / es</td><td>ist</td><td>hat</td></tr>
+      <tr><td>wir</td><td>sind</td><td>haben</td></tr>
+      <tr><td>ihr</td><td>seid</td><td>habt</td></tr>
+      <tr><td>sie / Sie</td><td>sind</td><td>haben</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Ich habe Hunger</b> = <b>Ich bin hungrig</b>. Noun with haben, adjective with sein.</li>
+      <li>Ja, and you too: <b>Ich auch.</b> Ja, but not you: <b>Ich nicht.</b></li>
+      <li>Nein, and not you either: <b>Ich auch nicht.</b> Nein, but you are: <b>Ich schon.</b></li>
+    </ul>`,
+  words:[["müde >< fit","tired >< fit"],["traurig >< glücklich","sad >< happy"],["krank >< gesund","sick >< healthy"],["nervös >< ruhig","nervous >< calm"],["satt >< hungrig","full >< hungry"],["sauer","angry"],["blau >< nüchtern","drunk >< sober"],["pleite >< reich","broke >< rich"],["pünktlich","punctual"],["der Durst / durstig","thirst / thirsty"],["viel Arbeit","a lot of work"],["der Abgabetermin","deadline"],["heute Abend zu Hause","at home tonight"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"pleite",back:"broke (no money)",ex:"Am Ende vom Monat bin ich pleite."},
+    {t:"flash",lv:1,d:1,k:"v",front:"der Abgabetermin",back:"deadline",ex:"Ich habe morgen einen Abgabetermin."},
+    {t:"flash",lv:1,d:2,k:"g",front:"ihr + sein",back:"ihr seid",ex:"Ihr seid heute sehr müde."},
+    {t:"flash",lv:1,d:1,k:"g",rev:true,front:"we have",back:"wir haben"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the opposites.",pairs:[["müde","fit"],["traurig","glücklich"],["krank","gesund"],["nervös","ruhig"],["satt","hungrig"],["pleite","reich"]]},
+    {t:"mc",lv:2,d:2,k:"gv",q:"Ich habe Durst. That means: Ich bin ___.",opts:["durstig","Durst","satt"],a:0,why:"der Durst is the noun, used with haben. durstig is the adjective, used with sein."},
+    {t:"mc",lv:2,d:1,k:"v",q:"Nach der Party ist Tom blau. What is Tom?",opts:["drunk","sad","cold"],a:0,why:"blau sein is slang for drunk. The opposite is nüchtern."},
+    {t:"mc",lv:2,d:2,k:"gv",ctx:"Your friend says no. You are not tired either.",q:"Bist du müde? Nein. Und du?",opts:["Ich auch nicht.","Ich auch.","Ich schon."],a:0,why:"Ich auch nicht = me neither."},
+    {t:"mc",lv:2,d:3,k:"gv",ctx:"Your friend says yes. You are not tired.",q:"Bist du müde? Ja. Und du?",opts:["Ich nicht.","Ich auch nicht.","Ich auch."],a:0,why:"Ich nicht answers a Ja you do not share."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Ich ___ Hunger.",hints:["haben"],a:[["habe"]],why:"Hunger is a noun, so haben."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"___ du müde? Nein, aber ich ___ Hunger.",hints:["sein","haben"],a:[["Bist"],["habe"]],why:"müde is an adjective, so sein. Hunger is a noun, so haben."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Ihr ___ gestresst, denn ihr ___ viel Arbeit.",hints:["sein","haben"],a:[["seid"],["habt"]],why:"ihr seid, ihr habt."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"Er ___ pleite und ___ keine Zeit für nichts.",hints:["sein","haben"],a:[["ist"],["hat"]],why:"er ist, er hat."},
+    {t:"mc",lv:3,d:2,k:"gv",ctx:"You do have time.",q:"Hast du keine Zeit?",opts:["Doch!","Ja!","Nein!"],a:0,why:"keine makes the question negative. Positive answer: Doch."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"There are two mistakes. Tap both.",text:"Ich bin Hunger und du hast müde.",wrong:[1,5],fixed:"Ich habe Hunger und du bist müde.",why:"Hunger haben. müde sein."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wir sind durstig und ihr sind satt.",wrong:[5],fixed:"Wir sind durstig und ihr seid satt.",why:"ihr seid."},
+    {t:"build",lv:4,d:1,k:"g",q:"Build the question: Do you have a problem?",tiles:["ein Problem","du","hast"],end:"?",a:["Hast du ein Problem?"],verb:"hast",why:"A yes/no question starts with the verb."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"Are you tired? Me too.",a:["Bist du müde? Ich auch."],why:"Bist du ...? Ich auch = me too."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. How are you today? Write three sentences with sein and haben.",model:"Ich bin müde, aber glücklich.\nIch habe viel Arbeit und morgen einen Abgabetermin.\nHeute Abend bin ich zu Hause."}
+  ]
+},
+{
+  id:"position2", stop:"Position II", title:"Satzbau mit Annas Text",
+  grammar:"Verb auf Position 2, und / aber / oder / denn, Zeit vor Ort", vocab:"Text Anna: Alltag in Zürich",
+  cheat:`
+    <h3>The verb is always second</h3>
+    <div class="tbl"><table class="pos2"><tr><th>Pos. 1</th><th>Verb</th><th>Rest</th></tr>
+      <tr><td>Ich</td><td>öffne</td><td>am Morgen das Fenster.</td></tr>
+      <tr><td>Am Morgen</td><td>öffne</td><td>ich das Fenster.</td></tr>
+      <tr><td>Manchmal</td><td>regnet</td><td>es.</td></tr>
+    </table></div>
+    <ul>
+      <li>If something else goes first, the subject moves behind the verb.</li>
+      <li><b>und, aber, oder, denn</b> sit on position 0. They do not move the verb: ..., denn ich arbeite viel.</li>
+      <li>Time before place: Roberto wohnt <b>seit 2 Wochen</b> <b>in Altstetten</b>.</li>
+    </ul>`,
+  words:[["jetzt","now"],["manchmal","sometimes"],["oft","often"],["dort","there"],["ungefähr","about"],["schnell","quickly"],["am Morgen / Mittag / Abend","in the morning / at noon / in the evening"],["die WG","shared flat"],["ruhig","quiet"],["das Fenster","window"],["der See","lake"],["mit dem Tram","by tram"],["die Mensa","cafeteria"],["kein Problem","no problem"],["denn","because"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"manchmal",back:"sometimes",ex:"Manchmal regnet es."},
+    {t:"flash",lv:1,d:1,k:"v",front:"ungefähr",back:"about, roughly",ex:"Das Essen kostet ungefähr zehn Franken."},
+    {t:"flash",lv:1,d:2,k:"g",front:"denn",back:"because (position 0)",ex:"Ich habe keine Zeit, denn ich arbeite viel."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the little words from Anna's text.",pairs:[["manchmal","sometimes"],["oft","often"],["ungefähr","about"],["schnell","quickly"],["dort","there"],["jetzt","now"]]},
+    {t:"mc",lv:2,d:1,k:"gv",q:"Mein Zimmer ist klein, ___ ich liebe es.",opts:["aber","denn","oder"],a:0,why:"aber = but. It sets up a contrast."},
+    {t:"mc",lv:2,d:2,k:"gv",q:"Ich habe nicht viel Zeit, ___ ich arbeite viel.",opts:["denn","aber","oder"],a:0,why:"denn = because. It gives the reason."},
+    {t:"mc",lv:2,d:1,k:"gv",q:"Trinkst du Kaffee ___ Tee?",opts:["oder","und","denn"],a:0,why:"oder = or."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Am Morgen ___ ich das Fenster und ___ die Vögel.",hints:["öffnen","hören"],a:[["öffne"],["höre"]],why:"ich takes -e. Am Morgen is on position 1, so the verb comes next."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Das Essen ___ ungefähr zehn Franken ___ es ist gut.",hints:["kosten","and"],a:[["kostet"],["und"]],why:"kost- ends in -t, so -et. und is on position 0."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"Im Sommer ___ viele Leute an den See, aber ich ___ nicht viel Zeit.",hints:["gehen","haben"],a:[["gehen"],["habe"]],why:"viele Leute is plural: gehen. ich habe."},
+    {t:"build",lv:3,d:1,k:"g",q:"Build the sentence: Zurich is beautiful.",tiles:["ist","schön","Zürich"],end:".",a:["Zürich ist schön."],verb:"ist",why:"Subject, verb, rest."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Start with the time: In the morning I open the window.",tiles:["am Morgen","öffne","ich","das Fenster"],end:".",a:["Am Morgen öffne ich das Fenster.","Ich öffne am Morgen das Fenster."],verb:"öffne",why:"When am Morgen comes first, ich moves behind the verb."},
+    {t:"build",lv:4,d:3,k:"g",q:"Build the sentence. Remember: time before place.",tiles:["Roberto","wohnt","in Altstetten","seit 2 Wochen"],end:".",a:["Roberto wohnt seit 2 Wochen in Altstetten.","Seit 2 Wochen wohnt Roberto in Altstetten.","In Altstetten wohnt Roberto seit 2 Wochen."],verb:"wohnt",why:"After the verb, the time comes before the place."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: I take the tram to ETH.",tiles:["ich","mit dem Tram","gehe","zur ETH"],end:".",a:["Ich gehe mit dem Tram zur ETH.","Mit dem Tram gehe ich zur ETH.","Zur ETH gehe ich mit dem Tram."],verb:"gehe",why:"Any block can go first. The verb stays on position 2."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence has the verb on position 2?",opts:["Am Abend warte ich auf das Tram.","Am Abend ich warte auf das Tram.","Ich am Abend warte auf das Tram."],a:0,why:"Am Abend is position 1. warte must come right after it."},
+    {t:"fix",lv:4,d:3,k:"gv",q:"One word makes no sense. Tap it.",text:"Manchmal regnet es, denn die Sonne scheint oft.",wrong:[3],fixed:"Manchmal regnet es, aber die Sonne scheint oft.",why:"Sunshine is not the reason for rain. It is a contrast, so aber."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Start with manchmal.",prompt:"Sometimes I take the tram to ETH.",a:["Manchmal gehe ich mit dem Tram zur ETH.","Manchmal fahre ich mit dem Tram zur ETH."],why:"Manchmal on position 1, verb second, ich third."},
+    {t:"write",lv:5,d:3,k:"g",q:"Join the two sentences with denn.",prompt:"Ich bleibe zu Hause. Ich bin müde.",a:["Ich bleibe zu Hause, denn ich bin müde."],why:"denn is on position 0, so the word order after it stays the same."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write three sentences about your day like Anna. Start them with am Morgen, am Mittag and am Abend.",model:"Am Morgen öffne ich das Fenster und trinke Kaffee.\nAm Mittag gehe ich mit Kollegen in die Mensa.\nAm Abend lerne ich Deutsch, denn ich habe morgen Kurs."}
+  ]
+},
+{
+  id:"wiegehts", stop:"Wie geht's?", title:"Grüezi! Wie geht's? Deutsch im Alltag",
+  grammar:"dir, Ihnen, ihm, ihr", vocab:"Begrüssen, Wie geht es dir?, Alltagsphrasen",
+  cheat:`
+    <h3>Asking how someone is</h3>
+    <div class="tbl"><table><tr><th>about</th><th>question</th><th>answer</th></tr>
+      <tr><td>du</td><td>Wie geht es dir?</td><td>Mir geht es gut.</td></tr>
+      <tr><td>Sie</td><td>Wie geht es Ihnen?</td><td>Mir geht es gut.</td></tr>
+      <tr><td>er</td><td>Wie geht es ihm?</td><td>Ihm geht es gut.</td></tr>
+      <tr><td>sie</td><td>Wie geht es ihr?</td><td>Ihr geht es gut.</td></tr>
+    </table></div>
+    <h3>Hello and goodbye</h3>
+    <div class="tbl"><table><tr><th></th><th>formell</th><th>informell</th></tr>
+      <tr><td>hello</td><td>Guten Tag / Grüezi (CH)</td><td>Hallo / Hoi (CH) / Ciao</td></tr>
+      <tr><td>bye</td><td>Auf Wiedersehen / Uf Wiederluege (CH)</td><td>Tschüss / Ciao</td></tr>
+    </table></div>
+    <h3>From best to worst</h3>
+    <p>ausgezeichnet · sehr gut · gut · ziemlich gut · ganz gut · es geht so · nicht so gut · ziemlich schlecht · schlecht · sehr schlecht · furchtbar</p>`,
+  words:[["Grüezi","hello, formal (CH)"],["Hoi","hi, informal (CH)"],["Uf Wiederluege","goodbye, formal (CH)"],["Tschüss","bye, informal"],["Entschuldigung","excuse me / sorry"],["Kein Problem","no problem"],["Danke, gleichfalls.","thanks, same to you"],["Mach's gut!","take care"],["Gesundheit!","bless you"],["Gute Besserung!","get well soon"],["Prost!","cheers"],["Schade","what a pity"],["Was bedeutet ...?","what does ... mean?"],["Ich habe eine Frage.","I have a question"],["Ich verstehe das nicht.","I don't understand that"],["Bitte noch einmal.","once more, please"],["Ich weiss es nicht.","I don't know"],["Ich passe.","I pass"],["Frag nicht!","don't ask"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"Gute Besserung!",back:"Get well soon!",ex:"Du bist krank? Gute Besserung!"},
+    {t:"flash",lv:1,d:1,k:"v",front:"Ich passe.",back:"I pass.",ex:"Weisst du die Antwort? Nein, ich passe."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"Thanks, same to you.",back:"Danke, gleichfalls."},
+    {t:"flash",lv:1,d:1,k:"v",front:"Grüezi",back:"hello, formal (Swiss German)",ex:"Grüezi, Frau Keller!"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match each greeting with what it means.",pairs:[["Grüezi","hello, formal (CH)"],["Hoi","hi, informal (CH)"],["Uf Wiederluege","goodbye, formal (CH)"],["Tschüss","bye, informal"],["Guten Abend","good evening"]]},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the phrases.",pairs:[["Gesundheit!","bless you"],["Prost!","cheers"],["Schade!","what a pity"],["Mach's gut!","take care"],["Frag nicht!","don't ask"]]},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"8 am. You meet your professor in the corridor.",q:"What do you say?",opts:["Guten Morgen, Frau Keller.","Hoi Frau Keller.","Tschüss, Frau Keller."],a:0,why:"Guten Morgen is formal and fits the time. Hoi is for friends."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"You leave the Kreisbüro.",q:"What do you say to the clerk?",opts:["Uf Wiederluege!","Hoi!","Prost!"],a:0,why:"Uf Wiederluege is the Swiss German Auf Wiedersehen."},
+    {t:"mc",lv:2,d:2,k:"g",ctx:"You ask about Tom.",q:"Wie geht es ___?",opts:["ihm","ihr","dir"],a:0,why:"er becomes ihm here."},
+    {t:"mc",lv:2,d:1,k:"v",q:"Which answer is the best?",opts:["ausgezeichnet","ziemlich gut","ganz gut","es geht so"],a:0,why:"ausgezeichnet = excellent."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Wie geht es ___? Mir geht es ___, danke.",hints:["you, informal","good"],a:[["dir"],["gut","sehr gut","ganz gut","ziemlich gut","ausgezeichnet"]],why:"Informal: dir. Any positive answer from the scale works."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"Wie geht es Tom? ___ geht es nicht so gut. Er ___ krank.",hints:["him","sein"],a:[["Ihm"],["ist"]],why:"Tom is er, so Ihm. er ist."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Was ___ „Tisch“? Es ___ „table“.",hints:["bedeuten","bedeuten"],a:[["bedeutet"],["bedeutet"]],why:"bedeut- ends in -t, so -et."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Guten Tag, Herr Meier! Wie geht es dir?",wrong:[7],fixed:"Guten Tag, Herr Meier! Wie geht es Ihnen?",why:"Herr Meier gets the formal Ihnen."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Lisa ist krank. Ihm geht es schlecht.",wrong:[3],fixed:"Lisa ist krank. Ihr geht es schlecht.",why:"Lisa is sie, so Ihr."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence: I don't understand that.",tiles:["verstehe","ich","nicht","das"],end:".",a:["Ich verstehe das nicht."],verb:"verstehe",why:"nicht goes at the end, after das."},
+    {t:"write",lv:5,d:1,k:"v",q:"Someone sneezes. What do you say?",prompt:"(one word)",a:["Gesundheit!"],why:"Gesundheit literally means health."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Ask your professor how she is. Then answer her question back: you are quite well.",prompt:"quite well = ziemlich gut",a:["Wie geht es Ihnen? Mir geht es ziemlich gut.","Wie geht es Ihnen? Ziemlich gut."],why:"Formal Ihnen. Your answer starts with Mir."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write a mini dialogue with a classmate: greet, ask how they are, answer, say goodbye.",model:"A: Hoi Lea! Wie geht es dir?\nB: Ganz gut, danke. Und dir?\nA: Es geht so. Ich habe viel Stress.\nB: Oh, schade. Mach's gut!\nA: Danke, tschüss!"}
+  ]
+},
+{
+  id:"grossklein", stop:"Gross/klein", title:"Gross oder klein? Lang oder kurz?",
+  grammar:"Grossschreibung", vocab:"Aussprache: lange und kurze Vokale",
+  cheat:`
+    <h3>Capital letters</h3>
+    <ul>
+      <li>The first word of a sentence.</li>
+      <li>All nouns and names: die Frau, das Velo, Irene Maier.</li>
+      <li>Formal pronouns: Sie, Ihr, Ihnen.</li>
+    </ul>
+    <h3>Long vowel</h3>
+    <ul><li>vowel + h: fahren, Uhr</li><li>ie: viel, sie</li><li>double vowel: Meer</li><li>vowel + 1 consonant: Hase, lesen</li></ul>
+    <h3>Short vowel</h3>
+    <ul><li>vowel + 2 or more consonants: hassen, Punkt, links</li></ul>`,
+  words:[["der Vokal","vowel"],["der Konsonant","consonant"],["lang >< kurz","long >< short"],["der Buchstabe","letter"],["gross schreiben","write with a capital"],["der Hase / hassen","rabbit / to hate"],["das Meer","sea"],["die Stadt","city"],["das Velo","bicycle (CH)"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",front:"Which words take a capital?",back:"sentence start · nouns and names · Sie, Ihr, Ihnen"},
+    {t:"flash",lv:1,d:2,k:"v",front:"vowel + h · ie · double vowel · vowel + 1 consonant",back:"long vowel",ex:"fahren, viel, Meer, Hase"},
+    {t:"mc",lv:2,d:1,k:"v",q:"hassen: is the stressed vowel long or short?",opts:["short","long"],a:0,why:"a + ss (two consonants) = short."},
+    {t:"mc",lv:2,d:1,k:"v",q:"der Hase: is the stressed vowel long or short?",opts:["long","short"],a:0,why:"a + one consonant = long."},
+    {t:"mc",lv:2,d:1,k:"v",q:"fahren: is the stressed vowel long or short?",opts:["long","short"],a:0,why:"vowel + h = long."},
+    {t:"mc",lv:2,d:2,k:"v",q:"die Stadt: is the stressed vowel long or short?",opts:["short","long"],a:0,why:"a + dt (two consonants) = short."},
+    {t:"mc",lv:2,d:2,k:"v",q:"viel: is the stressed vowel long or short?",opts:["long","short"],a:0,why:"ie = long."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Woher kommen ___, Frau Keller?",opts:["Sie","sie"],a:0,why:"You talk to Frau Keller, so formal Sie."},
+    {t:"caps",lv:3,d:1,k:"gv",q:"Tap every word that needs a capital letter.",text:"mein zimmer ist klein, aber gemütlich.",a:"Mein Zimmer ist klein, aber gemütlich.",why:"Only the first word and the noun Zimmer. Adjectives stay small."},
+    {t:"caps",lv:3,d:2,k:"gv",q:"Tap every word that needs a capital letter.",text:"ich studiere physik an der uni in zürich.",a:"Ich studiere Physik an der Uni in Zürich.",why:"Physik and Uni are nouns. Zürich is a name."},
+    {t:"caps",lv:4,d:2,k:"gv",q:"Tap every word that needs a capital letter.",text:"hast du hunger? nein, aber ich habe durst.",a:"Hast du Hunger? Nein, aber ich habe Durst.",why:"Two sentences, two capitals at the start. Hunger and Durst are nouns."},
+    {t:"caps",lv:4,d:3,k:"gv",q:"Tap every word that needs a capital letter.",text:"guten tag, frau meier. wie geht es ihnen?",a:"Guten Tag, Frau Meier. Wie geht es Ihnen?",why:"Tag and Frau are nouns. Meier is a name. Ihnen is formal."},
+    {t:"caps",lv:4,d:3,k:"gv",q:"Tap every word that needs a capital letter.",text:"ist das ihr velo, herr keller?",a:"Ist das Ihr Velo, Herr Keller?",why:"You talk to Herr Keller, so Ihr is formal."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"There are two mistakes. Tap both.",text:"Ich wohne in zürich und habe ein velo.",wrong:[3,7],fixed:"Ich wohne in Zürich und habe ein Velo.",why:"Zürich is a name. Velo is a noun."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it with the right capitals.",prompt:"hast du am abend zeit?",a:["Hast du am Abend Zeit?"],why:"Abend and Zeit are nouns."}
+  ]
+}
+]}
+];
+
+const LEVELS = {1:["Erinnern","remember"],2:["Verstehen","understand"],3:["Anwenden","apply"],4:["Analysieren","analyze"],5:["Erschaffen","create"]};
+
+/* =====================================================================
+   HELPERS
+   ===================================================================== */
+function h(tag, attrs, ...kids){
+  const el = document.createElement(tag);
+  for (const [k,v] of Object.entries(attrs || {})){
+    if (k === "class") el.className = v;
+    else if (k === "html") el.innerHTML = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else if (v !== false && v != null) el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const c of kids.flat()){
+    if (c == null) continue;
+    el.append(c.nodeType ? c : document.createTextNode(c));
+  }
+  return el;
+}
+function shuffle(arr){
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function norm(s){
+  return s.normalize("NFC").replace(/ß/g, "ss").replace(/[„“”"‚‘’`]/g, "'").replace(/\s+/g, " ").trim().replace(/[.?!]+$/, "").trim();
+}
+/* loose: case, punctuation and ae/oe/ue spellings ignored */
+function loose(s){
+  return norm(s).toLowerCase().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/[.,!?;:'\-]/g, "").replace(/\s+/g, " ").trim();
+}
+function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function markVerb(sentence, verb){
+  if (!verb) return esc(sentence);
+  let done = false;
+  return sentence.split(" ").map(w => {
+    const core = w.replace(/[.?!,]/g, "");
+    if (!done && core.toLowerCase() === verb.toLowerCase()){ done = true; return esc(w).replace(esc(core), `<mark class="v">${esc(core)}</mark>`); }
+    return esc(w);
+  }).join(" ");
+}
+
+/* per-browser conveniences: best scores, order preference, last week */
+const STORE = "hispeed-trainer";
+function loadStore(){ try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e){ return {}; } }
+function saveStore(patch){ const s = Object.assign(loadStore(), patch); try { localStorage.setItem(STORE, JSON.stringify(s)); } catch(e){} }
+function saveBest(id, got, total){
+  const best = loadStore().best || {};
+  if (!best[id] || got / total >= best[id].got / best[id].total) best[id] = {got, total};
+  saveStore({best});
+}
+
+/* =====================================================================
+   SESSION STATE
+   ===================================================================== */
+let weekIdx = 0;
+let order = loadStore().order || "ramp";
+let S = null;
+let currentCheck = null;
+let lastInput = null;
+let mcKeys = null;
+let flashKeys = null;
+
+function arrange(items){
+  if (order === "mixed") return shuffle(items);
+  const out = [];
+  for (let lv = 1; lv <= 5; lv++) out.push(...shuffle(items.filter(it => it.lv === lv)));
+  return out;
+}
+function sampleByLevel(pool, perLevel){
+  const out = [];
+  for (let lv = 1; lv <= 5; lv++) out.push(...shuffle(pool.filter(it => it.lv === lv)).slice(0, perLevel));
+  return out;
+}
+
+function stopsOf(w){ return WEEKS[w].stops.concat([{id: WEEKS[w].id + "-mix", stop: "Mix", mix: true, title: WEEKS[w].label + ": Mix aus allen Stationen", grammar: "alle Stationen", vocab: "alle Stationen"}]); }
+
+function start(kind, idx){
+  const stops = stopsOf(weekIdx);
+  let sec, items;
+  if (kind === "all"){
+    sec = {id: "all-mix", stop: "Alles", mix: true, title: "Woche 1 und 2 gemischt", grammar: "alles", vocab: "alles"};
+    const pool = [];
+    WEEKS.forEach(w => w.stops.forEach(s => s.items.forEach(it => pool.push(Object.assign({src: w.label + " · " + s.stop}, it)))));
+    items = arrange(sampleByLevel(pool, 4));
+    idx = -1;
+  } else if (kind === "cards"){
+    sec = Object.assign({}, stops[idx], {id: stops[idx].id + "-cards", cards: true, title: stops[idx].stop + ": Karteikarten"});
+    items = shuffle(stops[idx].words).slice(0, 14).map(([de, en]) => Math.random() < 0.5
+      ? {t: "flash", lv: 1, d: 1, k: "v", front: de, back: en}
+      : {t: "flash", lv: 1, d: 1, k: "v", rev: true, front: en, back: de});
+  } else {
+    sec = stops[idx];
+    if (sec.mix){
+      const pool = [];
+      WEEKS[weekIdx].stops.forEach(s => s.items.forEach(it => pool.push(Object.assign({src: s.stop}, it))));
+      items = arrange(sampleByLevel(pool, 3));
+    } else {
+      items = arrange(sec.items);
+    }
+  }
+  S = {kind, idx, sec, items, i: 0, answered: false, results: []};
+  saveStore({week: weekIdx});
+  renderTop(); renderStops(); renderRef(); renderItem();
+}
+
+/* =====================================================================
+   CHROME: week tabs, tram line, reference panel
+   ===================================================================== */
+function renderTop(){
+  document.getElementById("h1").innerHTML = S.kind === "all" ? `Woche <span class="num">1+2</span>` : `Woche <span class="num">${WEEKS[weekIdx].n}</span>`;
+  const box = document.getElementById("weeks");
+  box.innerHTML = "";
+  WEEKS.forEach((w, i) => box.append(h("button", {class: "wk", type: "button", "aria-pressed": String(S.kind !== "all" && i === weekIdx), onclick: () => { weekIdx = i; start("stop", 0); }}, w.label)));
+  box.append(h("button", {class: "wk alt", type: "button", "aria-pressed": String(S.kind === "all"), onclick: () => start("all")}, "Alles mischen"));
+}
+
+function renderStops(){
+  const best = loadStore().best || {};
+  const ol = document.getElementById("stops");
+  ol.innerHTML = "";
+  stopsOf(weekIdx).forEach((sec, i) => {
+    const b = best[sec.id];
+    const active = S.kind !== "all" && i === S.idx;
+    ol.append(h("li", {class: [active ? "active" : "", b ? "done" : "", S.kind !== "all" && i < S.idx ? "passed" : ""].join(" ")},
+      h("button", {class: "stop", type: "button", "aria-current": active ? "step" : false, onclick: () => start("stop", i)},
+        h("span", {class: "dot"}, sec.mix ? "∗" : String(i + 1)),
+        h("span", {class: "lbl"}, sec.stop),
+        h("span", {class: "best"}, b ? `best ${b.got}/${b.total}` : ""))));
+  });
+}
+
+function renderRef(){
+  const ref = document.getElementById("ref");
+  ref.innerHTML = "";
+  if (S.sec.mix){
+    ref.append(h("h3", {}, "Spickzettel"), h("p", {}, "The mix takes a few questions from every level. Each card shows its stop. Open a cheat sheet below."));
+    const weeks = S.kind === "all" ? WEEKS : [WEEKS[weekIdx]];
+    weeks.forEach(w => w.stops.forEach(s => ref.append(h("details", {}, h("summary", {}, (weeks.length > 1 ? w.label + " · " : "") + s.stop), h("div", {html: s.cheat, style: "display:grid;gap:10px;margin-top:10px"})))));
+    return;
+  }
+  const base = stopsOf(weekIdx)[S.idx];
+  ref.append(h("div", {html: base.cheat, style: "display:grid;gap:10px"}));
+  const tbl = h("table", {}, h("tr", {}, h("th", {}, "Deutsch"), h("th", {}, "English")),
+    base.words.map(([de, en]) => h("tr", {}, h("td", {}, de), h("td", {}, en))));
+  ref.append(h("details", {open: window.innerWidth > 880}, h("summary", {}, `Wörter (${base.words.length})`),
+    h("div", {style: "display:grid;gap:10px;margin-top:8px"},
+      h("button", {class: "btn ghost", type: "button", onclick: () => start("cards", S.idx)}, "Practice these as flashcards"),
+      h("div", {class: "tbl"}, tbl))));
+}
+
+/* =====================================================================
+   ONE QUESTION
+   ===================================================================== */
+function metaFor(it){
+  const t = h("div", {class: "tags"});
+  const lv = LEVELS[it.lv];
+  const ladder = h("span", {class: "ladder", "aria-hidden": "true"});
+  for (let n = 1; n <= 5; n++) ladder.append(h("i", {style: n <= it.lv ? `background:var(--l${it.lv})` : ""}));
+  t.append(h("span", {class: "bloom", style: `color:var(--l${it.lv})`, title: `Bloom level ${it.lv}: ${lv[1]}`}, ladder, `${it.lv} · ${lv[0]}`));
+  t.append(h("span", {class: "diff", title: `difficulty ${it.d} of 3`}, "●".repeat(it.d) + "○".repeat(3 - it.d)));
+  if (it.k.includes("g")) t.append(h("span", {class: "tag g"}, "Grammatik"));
+  if (it.k.includes("v")) t.append(h("span", {class: "tag v"}, "Wortschatz"));
+  if (it.src) t.append(h("span", {class: "tag src"}, it.src));
+  return t;
+}
+
+function renderItem(){
+  const stage = document.getElementById("stage");
+  stage.innerHTML = "";
+  mcKeys = null; flashKeys = null;
+  const head = h("div", {class: "sechead"},
+    h("h2", {}, S.sec.title),
+    h("div", {class: "blend"}, h("span", {}, h("b", {}, "Grammatik: "), S.sec.grammar), h("span", {}, h("b", {}, "Wortschatz: "), S.sec.vocab)));
+  if (!S.sec.cards){
+    head.append(h("div", {class: "order"}, "Order:",
+      h("button", {type: "button", "aria-pressed": String(order === "ramp"), onclick: () => setOrder("ramp")}, "Level by level"),
+      h("button", {type: "button", "aria-pressed": String(order === "mixed"), onclick: () => setOrder("mixed")}, "Shuffled")));
+  }
+  stage.append(head);
+
+  if (S.i >= S.items.length){ stage.append(renderEnd()); currentCheck = null; return; }
+
+  const it = S.items[S.i];
+  S.answered = false;
+  const card = h("div", {class: "card"});
+  card.append(
+    h("div", {class: "cardtop"}, metaFor(it), h("span", {class: "count"}, `${S.i + 1} / ${S.items.length}`)),
+    h("div", {class: "bar"}, h("i", {style: `width:${(S.i / S.items.length) * 100}%`})));
+  if (it.ctx) card.append(h("p", {class: "ctx"}, it.ctx));
+
+  const actions = h("div", {class: "actions"});
+  const checkBtn = h("button", {class: "btn", type: "button"}, "Prüfen");
+  const hint = h("span", {class: "keyhint"}, "Enter to check");
+  const fbSlot = h("div");
+  actions.append(checkBtn, hint);
+
+  const finish = (r) => {
+    if (S.answered) return;
+    S.answered = true;
+    const rec = {it, ok: r.ok, shown: r.answer};
+    S.results.push(rec);
+    fbSlot.replaceWith(feedback(r, it, rec));
+    actions.innerHTML = "";
+    actions.append(h("button", {class: "btn", type: "button", onclick: next, id: "nextBtn"}, S.i + 1 < S.items.length ? "Weiter" : "Ergebnis"), h("span", {class: "keyhint"}, "Enter to continue"));
+    const nb = document.getElementById("nextBtn"); if (nb) nb.focus({preventScroll: true});
+  };
+
+  const body = ({flash: bodyFlash, mc: bodyMC, match: bodyMatch, gap: bodyGap, build: bodyBuild, fix: bodyFix, caps: bodyCaps, write: bodyWrite, open: bodyOpen})[it.t](it, checkBtn, finish, actions);
+  card.append(body.el, actions, fbSlot);
+  stage.append(card);
+
+  if (body.custom){ checkBtn.remove(); hint.textContent = body.hint || ""; }
+  currentCheck = () => {
+    if (S.answered) return;
+    if (body.custom){ if (body.onEnter) body.onEnter(); return; }
+    if (checkBtn.disabled) return;
+    const r = body.check();
+    if (r) finish(r);
+  };
+  checkBtn.addEventListener("click", currentCheck);
+  if (body.focus) body.focus();
+}
+
+function setOrder(o){ order = o; saveStore({order}); if (S.kind === "cards") return; start(S.kind, S.idx); }
+
+function feedback(r, it, rec){
+  const fb = h("div", {class: "fb " + (r.ok ? "ok" : "bad")});
+  const title = h("strong", {}, r.title || (r.ok ? "Richtig!" : "Nicht ganz."));
+  fb.append(title);
+  if (r.answerHtml) fb.append(h("div", {class: "ans", html: r.answerHtml}));
+  if (r.modelText) fb.append(h("div", {class: "model"}, r.modelText));
+  if (r.note) fb.append(h("div", {class: "why"}, r.note));
+  if (it.why) fb.append(h("div", {class: "why"}, it.why));
+  if (!r.ok && r.canOverride){
+    const b = h("button", {class: "override", type: "button", onclick: () => { rec.ok = true; fb.className = "fb ok"; title.textContent = "Counted as correct."; b.remove(); }}, "Mine means the same. Count it as correct.");
+    fb.append(b);
+  }
+  return fb;
+}
+
+function next(){ S.i++; renderItem(); const st = document.getElementById("stage"); if (st.getBoundingClientRect().top < 0) window.scrollTo({top: st.offsetTop - 12, behavior: "smooth"}); }
+
+/* ---------- flashcard: flip, then grade yourself ---------- */
+function bodyFlash(it, checkBtn, finish, actions){
+  const el = h("div", {style: "display:grid;gap:14px"});
+  let flipped = false;
+  const card = h("div", {class: "flash", role: "button", tabindex: "0", "aria-label": "Flip the card"});
+  const inner = h("div", {},
+    h("div", {class: "dir"}, it.rev ? "English → Deutsch" : "Deutsch → English"),
+    h("div", {class: "front"}, it.front),
+    h("div", {class: "tap"}, "Say the answer out loud, then tap to flip"));
+  card.append(inner);
+  const grade = h("div", {class: "actions", hidden: true},
+    h("button", {class: "btn good", type: "button", onclick: () => done(true)}, "1 · Knew it"),
+    h("button", {class: "btn redo", type: "button", onclick: () => done(false)}, "2 · Not yet"));
+  function flip(){
+    if (flipped) return;
+    flipped = true;
+    inner.querySelector(".tap").remove();
+    inner.append(h("div", {class: "back"}, it.back));
+    if (it.ex) inner.append(h("div", {class: "ex"}, it.ex));
+    grade.hidden = false;
+    flashKeys = k => { if (k === "1") done(true); if (k === "2") done(false); };
+  }
+  function done(ok){ flashKeys = null; grade.remove(); finish({ok, answer: it.back, title: ok ? "Gut!" : "Keep it in the pile.", answerHtml: null}); }
+  card.addEventListener("click", flip);
+  el.append(card, grade);
+  return {el, custom: true, hint: "Enter or tap to flip · 1 knew it · 2 not yet", onEnter: flip, focus(){ card.focus({preventScroll: true}); }};
+}
+
+/* ---------- multiple choice ---------- */
+function bodyMC(it){
+  const el = h("div", {style: "display:grid;gap:14px"});
+  el.append(h("p", {class: "q"}, it.q, it.hint ? h("span", {class: "hint"}, " " + it.hint) : null));
+  if (it.reply) el.append(h("div", {class: "reply", "data-l": "Antwort"}, it.reply));
+  const order = shuffle(it.opts.map((o, i) => i));
+  let sel = null;
+  const btns = [];
+  const opts = h("div", {class: "opts"});
+  order.forEach((oi, n) => {
+    const b = h("button", {class: "opt", type: "button", onclick: () => { sel = oi; btns.forEach(x => x.classList.toggle("sel", x === b)); }},
+      h("span", {class: "k"}, String(n + 1)), it.opts[oi]);
+    b.dataset.oi = oi; btns.push(b); opts.append(b);
+  });
+  el.append(opts);
+  mcKeys = k => { const n = parseInt(k, 10); if (n >= 1 && n <= btns.length) btns[n - 1].click(); };
+  return {el, check(){
+    if (sel === null) return null;
+    btns.forEach(b => { b.disabled = true; const oi = +b.dataset.oi; if (oi === it.a) b.classList.add("ok"); else if (oi === sel) b.classList.add("bad"); });
+    mcKeys = null;
+    return {ok: sel === it.a, answer: it.opts[it.a], answerHtml: sel === it.a ? null : `Answer: ${esc(it.opts[it.a])}`};
+  }};
+}
+
+/* ---------- gap fill, one or more blanks ---------- */
+function bodyGap(it){
+  const el = h("div", {style: "display:grid;gap:14px"});
+  const parts = it.q.split("___");
+  const inputs = [];
+  const q = h("p", {class: "q"});
+  parts.forEach((p, n) => {
+    q.append(p);
+    if (n < parts.length - 1){
+      const inp = h("input", {class: "blank", type: "text", id: `gap-${S.i}-${n}`, autocomplete: "off", autocapitalize: "off", spellcheck: "false", "aria-label": `Blank ${n + 1}` + (it.hints && it.hints[n] ? `: ${it.hints[n]}` : "")});
+      inp.addEventListener("focus", () => lastInput = inp);
+      inputs.push(inp);
+      q.append(inp);
+      if (it.hints && it.hints[n]) q.append(h("span", {class: "hint"}, ` (${it.hints[n]})`));
+    }
+  });
+  lastInput = inputs[0];
+  el.append(q);
+  if (it.reply) el.append(h("div", {class: "reply", "data-l": "Antwort"}, it.reply));
+  el.append(umlautBar());
+  return {el, focus(){ inputs[0].focus({preventScroll: true}); }, check(){
+    if (inputs.some(i => !i.value.trim())) return null;
+    let ok = true, capNote = null;
+    inputs.forEach((inp, n) => {
+      const acc = it.a[n];
+      const exact = acc.find(x => norm(x) === norm(inp.value));
+      const lo = acc.find(x => norm(x).toLowerCase() === norm(inp.value).toLowerCase());
+      const good = !!(exact || lo);
+      if (!exact && lo) capNote = `Watch the capital letter: ${lo}.`;
+      if (!good) ok = false;
+      inp.disabled = true;
+      inp.classList.add(good ? "ok" : "bad");
+    });
+    let full = ""; parts.forEach((p, n) => { full += esc(p); if (n < parts.length - 1) full += `<mark class="fix">${esc(it.a[n][0])}</mark>`; });
+    return {ok, answer: it.a.map(a => a[0]).join(" · "), note: capNote, answerHtml: ok ? null : `Answer: ${full}`};
+  }};
+}
+function umlautBar(){
+  return h("div", {class: "umlauts"}, ["ä", "ö", "ü", "Ä", "Ö", "Ü"].map(c => h("button", {type: "button", onmousedown: e => e.preventDefault(), onclick: () => insertChar(c)}, c)));
+}
+function insertChar(c){
+  const inp = lastInput;
+  if (!inp || inp.disabled) return;
+  const s = inp.selectionStart ?? inp.value.length, e = inp.selectionEnd ?? inp.value.length;
+  inp.value = inp.value.slice(0, s) + c + inp.value.slice(e);
+  inp.focus(); inp.setSelectionRange(s + 1, s + 1);
+}
+
+/* ---------- word order builder ---------- */
+function bodyBuild(it, checkBtn){
+  const el = h("div", {style: "display:grid;gap:14px"});
+  el.append(h("p", {class: "q"}, it.q));
+  const slots = h("div", {class: "slots empty"});
+  const pool = h("div", {class: "pool"});
+  const picked = [];
+  let tiles = shuffle(it.tiles.map((t, i) => i));
+  if (it.a.some(a => norm(cap(tiles.map(i => it.tiles[i]).join(" ")) + it.end) === norm(a))) tiles = tiles.slice(1).concat(tiles[0]);
+  const poolBtns = {};
+  function redraw(){
+    slots.innerHTML = "";
+    slots.classList.toggle("empty", picked.length === 0);
+    picked.forEach((ti, n) => {
+      slots.append(h("button", {class: "tile", type: "button", onclick: () => { if (S.answered) return; picked.splice(n, 1); poolBtns[ti].classList.remove("used"); redraw(); }},
+        h("span", {class: "pos"}, "Pos. " + (n + 1)), n === 0 ? cap(it.tiles[ti]) : it.tiles[ti]));
+    });
+    if (picked.length) slots.append(h("span", {style: "font-weight:700;font-size:18px"}, it.end));
+    checkBtn.disabled = picked.length !== it.tiles.length;
+  }
+  tiles.forEach(ti => {
+    const b = h("button", {class: "tile", type: "button", onclick: () => { if (S.answered || b.classList.contains("used")) return; picked.push(ti); b.classList.add("used"); redraw(); }}, it.tiles[ti]);
+    poolBtns[ti] = b; pool.append(b);
+  });
+  el.append(slots, pool);
+  checkBtn.disabled = true;
+  return {el, check(){
+    const built = cap(picked.map(i => it.tiles[i]).join(" ")) + it.end;
+    const hit = it.a.find(a => norm(a) === norm(built));
+    const show = hit || it.a[0];
+    let html = (hit ? "" : "Answer: ") + markVerb(show, it.verb);
+    const others = it.a.filter(a => a !== show);
+    if (others.length) html += `<div class="why" style="font-weight:400">Also correct: ${others.map(o => markVerb(o, it.verb)).join(" · ")}</div>`;
+    return {ok: !!hit, answer: it.a[0], answerHtml: html};
+  }};
+}
+
+/* ---------- matching pairs ---------- */
+function bodyMatch(it, checkBtn){
+  const el = h("div", {style: "display:grid;gap:14px"});
+  el.append(h("p", {class: "q"}, it.q));
+  const L = h("div", {class: "col"}), R = h("div", {class: "col"});
+  let selL = null, selR = null, mistakes = 0, matched = 0;
+  const lb = shuffle(it.pairs.map((p, i) => i)).map(i => { const b = h("button", {class: "mi", type: "button", onclick: () => pick("L", i, b)}, it.pairs[i][0]); b.dataset.i = i; L.append(b); return b; });
+  const rb = shuffle(it.pairs.map((p, i) => i)).map(i => { const b = h("button", {class: "mi", type: "button", onclick: () => pick("R", i, b)}, it.pairs[i][1]); b.dataset.i = i; R.append(b); return b; });
+  let bl = null, br = null;
+  function pick(side, i, btn){
+    if (btn.classList.contains("done")) return;
+    if (side === "L"){ selL = i; bl = btn; lb.forEach(b => b.classList.toggle("sel", b === btn)); }
+    else { selR = i; br = btn; rb.forEach(b => b.classList.toggle("sel", b === btn)); }
+    if (selL !== null && selR !== null){
+      if (selL === selR){
+        [bl, br].forEach(x => { x.classList.remove("sel"); x.classList.add("done"); });
+        matched++;
+      } else {
+        mistakes++;
+        [bl, br].forEach(x => { x.classList.remove("sel", "wrong"); void x.offsetWidth; x.classList.add("wrong"); });
+      }
+      selL = selR = null;
+      if (matched === it.pairs.length){ checkBtn.disabled = false; currentCheck(); }
+    }
+  }
+  el.append(h("div", {class: "match"}, L, R));
+  checkBtn.disabled = true;
+  return {el, check(){
+    const ok = mistakes === 0;
+    return {ok, answer: "all pairs", answerHtml: ok ? "All pairs on the first try." : `All matched, with ${mistakes} wrong ${mistakes === 1 ? "try" : "tries"} on the way.`};
+  }};
+}
+
+/* ---------- error hunt ---------- */
+function bodyFix(it, checkBtn){
+  const el = h("div", {style: "display:grid;gap:14px"});
+  el.append(h("p", {class: "q"}, it.q));
+  const words = it.text.split(" ");
+  const flagged = new Set();
+  const box = h("div", {class: "caps"});
+  const btns = words.map((w, i) => {
+    const b = h("button", {class: "cw", type: "button", "aria-pressed": "false", onclick: () => {
+      if (S.answered) return;
+      if (flagged.has(i)) flagged.delete(i); else flagged.add(i);
+      b.classList.toggle("flag", flagged.has(i)); b.setAttribute("aria-pressed", String(flagged.has(i)));
+      checkBtn.disabled = flagged.size === 0;
+    }}, w);
+    box.append(b); return b;
+  });
+  el.append(box);
+  checkBtn.disabled = true;
+  return {el, check(){
+    const want = new Set(it.wrong);
+    let ok = flagged.size === want.size && [...flagged].every(i => want.has(i));
+    btns.forEach((b, i) => {
+      b.classList.remove("flag");
+      if (want.has(i) && flagged.has(i)) b.classList.add("ok");
+      else if (flagged.has(i)) b.classList.add("bad");
+      else if (want.has(i)) b.classList.add("miss");
+    });
+    const fixedWords = it.fixed.split(" ");
+    const html = fixedWords.map((w, i) => want.has(i) ? `<mark class="fix">${esc(w)}</mark>` : esc(w)).join(" ");
+    return {ok, answer: it.fixed, answerHtml: (ok ? "" : "Corrected: ") + html};
+  }};
+}
+
+/* ---------- capital letters ---------- */
+function bodyCaps(it){
+  const el = h("div", {style: "display:grid;gap:14px"});
+  el.append(h("p", {class: "q"}, it.q));
+  const words = it.text.split(" ");
+  const target = it.a.split(" ");
+  const state = words.slice();
+  const box = h("div", {class: "caps"});
+  const btns = words.map((w, i) => {
+    const b = h("button", {class: "cw", type: "button", onclick: () => {
+      if (S.answered) return;
+      const m = state[i].search(/\p{L}/u);
+      const ch = state[i][m];
+      const up = ch === ch.toLowerCase();
+      state[i] = state[i].slice(0, m) + (up ? ch.toUpperCase() : ch.toLowerCase()) + state[i].slice(m + 1);
+      b.textContent = state[i]; b.classList.toggle("up", up);
+    }}, w);
+    box.append(b); return b;
+  });
+  el.append(box);
+  return {el, check(){
+    let ok = true;
+    btns.forEach((b, i) => {
+      b.classList.remove("up");
+      if (state[i] !== target[i]){ ok = false; b.classList.add("bad"); }
+      else if (state[i] !== words[i]) b.classList.add("ok");
+    });
+    return {ok, answer: it.a, answerHtml: ok ? null : `Answer: ${esc(it.a)}`};
+  }};
+}
+
+/* ---------- write a full sentence (checked, with override) ---------- */
+function bodyWrite(it){
+  const el = h("div", {style: "display:grid;gap:14px"});
+  el.append(h("p", {class: "q"}, it.q));
+  if (it.prompt) el.append(h("div", {class: "reply", "data-l": "Prompt"}, it.prompt));
+  const inp = h("input", {class: "free", type: "text", id: "write-" + S.i, autocomplete: "off", autocapitalize: "sentences", spellcheck: "false", "aria-label": "Your sentence"});
+  inp.addEventListener("focus", () => lastInput = inp);
+  lastInput = inp;
+  el.append(inp, umlautBar());
+  return {el, focus(){ inp.focus({preventScroll: true}); }, check(){
+    const v = inp.value;
+    if (!v.trim()) return null;
+    inp.disabled = true;
+    const hit = it.a.find(a => loose(a) === loose(v));
+    const exactCase = hit && it.a.some(a => norm(a).replace(/[,]/g, "") === norm(v).replace(/[,]/g, ""));
+    const others = it.a.filter(a => a !== (hit || it.a[0]));
+    let html = hit ? null : `Model answer: ${esc(it.a[0])}`;
+    if (others.length) html = (html ? html + "<br>" : "") + `<span style="font-weight:400">Also correct: ${others.map(esc).join(" · ")}</span>`;
+    return {ok: !!hit, answer: it.a[0], canOverride: true, answerHtml: html,
+      note: hit && !exactCase ? `Check your capitals and umlauts against: ${hit}` : null};
+  }};
+}
+
+/* ---------- open writing: compare with a model, grade yourself ---------- */
+function bodyOpen(it, checkBtn, finish, actions){
+  const el = h("div", {style: "display:grid;gap:14px"});
+  el.append(h("p", {class: "q"}, it.q));
+  const ta = h("textarea", {class: "free", id: "open-" + S.i, rows: "4", spellcheck: "false", "aria-label": "Your text"});
+  ta.addEventListener("focus", () => lastInput = ta);
+  lastInput = ta;
+  const compare = h("button", {class: "btn", type: "button"}, "Compare with a model");
+  const area = h("div", {style: "display:grid;gap:10px"});
+  compare.addEventListener("click", () => {
+    if (!ta.value.trim()){ ta.focus(); return; }
+    ta.readOnly = true; compare.remove();
+    area.append(
+      h("div", {class: "fb ok", style: "background:var(--accent-soft)"}, h("strong", {style: "color:var(--accent)"}, "One possible answer"), h("div", {class: "model"}, it.model),
+        h("div", {class: "why"}, "Check: verb on position 2? Right endings? Nouns with capitals?")),
+      h("div", {class: "actions"},
+        h("button", {class: "btn good", type: "button", onclick: () => finish({ok: true, answer: it.model, title: "Gut gemacht!"})}, "Mine works"),
+        h("button", {class: "btn redo", type: "button", onclick: () => finish({ok: false, answer: "compare with the model again", title: "Noted. Try this one again next round."})}, "I need more practice")));
+  });
+  el.append(ta, umlautBar(), h("div", {class: "actions"}, compare), area);
+  return {el, custom: true, hint: "No single right answer. Write, then compare.", focus(){ ta.focus({preventScroll: true}); }};
+}
+
+/* =====================================================================
+   END OF A SESSION
+   ===================================================================== */
+function renderEnd(){
+  const res = S.results;
+  const got = res.filter(r => r.ok).length;
+  if (!S.sec.cards && !S.redo) saveBest(S.sec.id, got, res.length);
+  renderStops();
+  const g = res.filter(r => r.it.k.includes("g")), v = res.filter(r => r.it.k.includes("v"));
+  const card = h("div", {class: "card"});
+  card.append(
+    h("div", {class: "cardtop"}, h("span", {class: "count"}, "Ergebnis"), h("span", {class: "count"}, S.sec.stop)),
+    h("div", {class: "score"}, `${got}/${res.length}`),
+    h("div", {class: "split"},
+      h("div", {}, h("small", {}, "Grammatik"), h("b", {}, `${g.filter(r => r.ok).length}/${g.length}`)),
+      h("div", {}, h("small", {}, "Wortschatz"), h("b", {}, `${v.filter(r => r.ok).length}/${v.length}`))));
+  const lv = h("div", {class: "lvls"});
+  for (let n = 1; n <= 5; n++){
+    const rs = res.filter(r => r.it.lv === n);
+    if (!rs.length) continue;
+    const k = rs.filter(r => r.ok).length;
+    lv.append(h("div", {class: "lvrow"}, h("span", {style: `color:var(--l${n});font-weight:700`}, `${n} · ${LEVELS[n][0]}`),
+      h("span", {class: "track"}, h("i", {style: `width:${k / rs.length * 100}%;background:var(--l${n})`})), h("span", {}, `${k}/${rs.length}`)));
+  }
+  card.append(h("p", {class: "ctx"}, "By level:"), lv);
+  const missed = res.filter(r => !r.ok);
+  if (missed.length){
+    card.append(h("p", {class: "ctx"}, "To review:"));
+    card.append(h("ul", {class: "missed"}, missed.map(r => h("li", {}, (r.it.q || r.it.front || "").replace(/___/g, "…") + (r.it.prompt ? " " + r.it.prompt : "") + " ",
+      h("span", {}, "→ " + (r.it.t === "match" ? "match the pairs again" : r.shown))))));
+  } else {
+    card.append(h("p", {}, "Alles richtig. Try the next stop or the mix."));
+  }
+  const acts = h("div", {class: "actions"});
+  if (missed.length) acts.append(h("button", {class: "btn", type: "button", onclick: () => {
+    S = Object.assign({}, S, {items: arrange(missed.map(r => r.it)), i: 0, answered: false, results: [], redo: true});
+    renderItem();
+  }}, `Redo the ${missed.length} missed`));
+  if (S.kind === "stop"){
+    const stops = stopsOf(weekIdx);
+    const ni = (S.idx + 1) % stops.length;
+    acts.append(h("button", {class: missed.length ? "btn ghost" : "btn", type: "button", onclick: () => start("stop", ni)}, "Next stop: " + stops[ni].stop));
+  }
+  acts.append(h("button", {class: "btn ghost", type: "button", onclick: () => start(S.kind === "cards" ? "cards" : S.kind, S.idx)}, "Again, reshuffled"));
+  card.append(acts);
+  return card;
+}
+
+/* =====================================================================
+   KEYBOARD
+   ===================================================================== */
+document.addEventListener("keydown", e => {
+  const tag = document.activeElement ? document.activeElement.tagName : "";
+  if (e.key === "Enter"){
+    if (tag === "TEXTAREA") return;
+    if (S && S.answered){
+      const nb = document.getElementById("nextBtn");
+      if (nb && document.activeElement !== nb){ e.preventDefault(); nb.click(); }
+      return;
+    }
+    if (tag === "BUTTON"){
+      if (document.activeElement.classList.contains("opt") && currentCheck){ e.preventDefault(); currentCheck(); }
+      return;
+    }
+    if (currentCheck){ e.preventDefault(); currentCheck(); }
+  } else if (/^[1-9]$/.test(e.key) && tag !== "INPUT" && tag !== "TEXTAREA" && S && !S.answered){
+    if (flashKeys) flashKeys(e.key);
+    else if (mcKeys) mcKeys(e.key);
+  }
+});
+
+/* =====================================================================
+   BOOT: #w1 or #w2 in the link opens that week
+   ===================================================================== */
+(function boot(){
+  const hash = (location.hash || "").replace("#", "");
+  const fromHash = WEEKS.findIndex(w => w.id === hash);
+  const saved = loadStore().week;
+  weekIdx = fromHash >= 0 ? fromHash : (typeof saved === "number" && WEEKS[saved] ? saved : WEEKS.length - 1);
+  start("stop", 0);
+})();
+</script>
+
+</body>
+</html>
