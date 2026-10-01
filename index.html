@@ -968,8 +968,9 @@ WEEKS.forEach(w => {
     id: w.id + "-vokabeln", stop: "Vokabeln", title: w.label + ": die Wörter aus den Quizlet-Sets",
     grammar: "keine heute, nur Wörter", vocab: "die Quizlet-Sets der Woche",
     cheat: `<h3>Quizlet sets this week</h3><ul>${QUIZLET_SETS[w.id].map(s => "<li>" + s + "</li>").join("")}</ul>
-      <p>The links to the sets are on Moodle, in this week's section. The word table below collects every word of the week in one place. Reload the page and this station deals a new hand from it.</p>`,
+      <p>The links to the sets are on Moodle, in this week's section. The word table below collects every word of the week in one place. Every run of this station deals a new hand from it.</p>`,
     words: bank,
+    bank: bank,
     items: vocabItems(bank)
   });
 });
@@ -1021,7 +1022,8 @@ function start(kind, idx){
       WEEKS[weekIdx].stops.forEach(s => s.items.forEach(it => pool.push(Object.assign({src: s.stop}, it))));
       items = arrange(sampleByLevel(pool, 3));
     } else {
-      items = arrange(sec.items);
+      /* A vocab station deals a fresh hand from its bank on every run. */
+      items = arrange(sec.bank ? vocabItems(sec.bank) : sec.items);
     }
   }
   S = {kind, idx, sec, items, i: 0, answered: false, results: []};
