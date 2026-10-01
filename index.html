@@ -231,7 +231,7 @@ details summary{cursor:pointer;font-weight:600}
     <div>
       <p class="eyebrow">Hispeed A1 · HS 26</p>
       <h1 id="h1">Woche <span class="num">1</span></h1>
-      <p class="sub">Every stop climbs from flashcards to writing your own sentences. Most questions train a grammar rule and its vocabulary together.</p>
+      <p class="sub">Every stop climbs from flashcards to writing your own sentences. Most questions train a grammar rule and its vocabulary together. The Vokabeln stop at the end of each line drills the week's Quizlet words.</p>
     </div>
     <div class="weeks" id="weeks"></div>
   </header>
@@ -275,7 +275,7 @@ const WEEKS = [
       <li>Stem ends in <b>-t, -d</b> or consonant + <b>n</b>: add <b>-e-</b> for du, er, ihr. du arbeitest, er findet, ihr öffnet, es regnet.</li>
       <li>Stem ends in <b>-s, -ss, -z</b>: du only adds <b>-t</b>. du heisst, du löst, du ergänzt.</li>
     </ul>`,
-  words:[["lernen","learn"],["verstehen","understand"],["fragen","ask"],["antworten","answer"],["schreiben","write"],["wiederholen","repeat"],["üben","practise"],["notieren","note down"],["suchen","search"],["finden","find"],["öffnen","open"],["warten","wait"],["rechnen","calculate"],["zeichnen","draw"],["bezahlen","pay"],["kaufen","buy"],["brauchen","need"],["bleiben","stay"],["wohnen","live (where my flat is)"],["leben","live/ be alive"],["geniessen","enjoy"],["lösen","solve"],["ergänzen","complete, fill in"]],
+  words:[["lernen","learn"],["verstehen","understand"],["fragen","ask"],["antworten","answer"],["schreiben","write"],["wiederholen","repeat"],["üben","practise"],["notieren","note down"],["suchen","search"],["finden","find"],["öffnen","open"],["warten","wait"],["rechnen","calculate"],["zeichnen","draw"],["bezahlen","pay"],["kaufen","buy"],["brauchen","need"],["bleiben","stay"],["wohnen","live (where my flat is)"],["leben","live/ be alive"],["geniessen","enjoy"],["lösen","solve"],["ergänzen","complete, fill in"],["analysieren","analyze"],["beginnen","begin"],["diskutieren","discuss"],["machen","make, do"],["markieren","highlight"],["studieren","study"],["unterstreichen","underline"],["gehen","go"],["heissen","be called"],["kommen","come"],["lieben","love"],["sagen","say"],["scheinen","shine"],["spielen","play"],["beenden","finish, complete"],["kosten","cost"],["reden","talk"],["regnen","rain"],["ordnen","arrange"],["arbeiten","work"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"verstehen",back:"understand",ex:"Ich verstehe das nicht."},
     {t:"flash",lv:1,d:1,k:"v",front:"wiederholen",back:"repeat",ex:"Können Sie das bitte wiederholen?"},
@@ -288,6 +288,8 @@ const WEEKS = [
     {t:"gap",lv:3,d:2,k:"gv",q:"Du ___ die Tür und ___ auf Anna.",hints:["öffnen","warten"],a:[["öffnest"],["wartest"]],why:"Both stems need the extra -e-: öffn-e-st, wart-e-st."},
     {t:"sort",lv:2,d:2,k:"g",q:"Sort the verbs. Which ones need an extra -e- with du?",groups:["du + -est (like du redest)","du + -st (like du machst)"],items:[["arbeiten",0],["finden",0],["öffnen",0],["warten",0],["rechnen",0],["lernen",1],["wohnen",1],["spielen",1],["fragen",1],["kaufen",1]],why:"From the verb list: stems ending in -t, -d or consonant + n (finden, öffnen, warten, rechnen) take du + -est and er, sie, es, man + -et."},
     {t:"gap",lv:3,d:3,k:"gv",q:"Er ___ die Übung und ___ die Antwort.",hints:["lösen","notieren"],a:[["löst"],["notiert"]],why:"er takes -t: er löst, er notiert."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"underline",back:"unterstreichen",ex:"Ich unterstreiche die Verben im Text."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Zuerst ___ ich das Problem, dann ___ wir die Lösung.",hints:["analysieren","diskutieren"],a:[["analysiere"],["diskutieren"]],why:"ich takes -e, wir takes -en. Both verbs are on the course list of regular verbs."},
     {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Du arbeitst am Computer.",wrong:[1],fixed:"Du arbeitest am Computer.",why:"arbeit- ends in -t, so du needs -est."},
     {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Er heisst Tom und er findt das Buch.",wrong:[5],fixed:"Er heisst Tom und er findet das Buch.",why:"find- ends in -d, so er needs -et."},
     {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Du heissst Maria und ihr wohnen in Bern.",wrong:[1,5],fixed:"Du heisst Maria und ihr wohnt in Bern.",why:"du heisst has only one -t ending. ihr takes -t: ihr wohnt."},
@@ -312,7 +314,7 @@ const WEEKS = [
       <li>Negative question (nicht, kein) and your answer is positive: <b>Doch</b>.</li>
       <li>Name, number, address: ask with <b>wie</b>, not was.</li>
     </ul>`,
-  words:[["wer","who"],["was","what"],["wie","how"],["wie lange","how long"],["seit wann","since when"],["wann","when"],["wie viel","how much"],["wie viele","how many"],["woher","where … from"],["wo","where"],["wohin","where … to"],["welche","which"],["doch","yes (to a negative question)"]],
+  words:[["wer","who"],["was","what"],["wie","how"],["wie lange","how long"],["seit wann","since when"],["wann","when"],["wie viel","how much"],["wie viele","how many"],["woher","where … from"],["wo","where"],["wohin","where … to"],["welche","which"],["doch","yes (to a negative question)"],["bedeuten","to mean"],["übersetzen","translate"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"seit wann",back:"since when",ex:"Seit wann wohnst du in Zürich?"},
     {t:"flash",lv:1,d:1,k:"v",front:"wie viele",back:"how many",ex:"Wie viele Kurse hast du?"},
@@ -331,6 +333,7 @@ const WEEKS = [
     {t:"fix",lv:4,d:1,k:"g",q:"Tap the wrong word.",text:"Woher kommt du?",wrong:[1],fixed:"Woher kommst du?",why:"du takes -st: kommst."},
     {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Sie kommt aus Berlin.",a:["Woher kommt sie?"],why:"The answer is about sie, so ask about sie: kommt sie."},
     {t:"write",lv:5,d:3,k:"gv",q:"Write the question for this answer.",prompt:"Ich bin seit drei Monaten in der Schweiz.",a:["Seit wann bist du in der Schweiz?","Seit wann sind Sie in der Schweiz?","Wie lange bist du schon in der Schweiz?"],why:"seit in the answer means the question is seit wann."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Es bedeutet „to repeat“.",a:["Was bedeutet wiederholen?","Was bedeutet „wiederholen“?"],why:"Ask what a word means with Was bedeutet …? The course answer pattern is Es bedeutet …"},
     {t:"open",lv:5,d:3,k:"g",q:"Your turn. Write a negative question that a classmate will answer with Doch. Then write the answer.",model:"Trinkst du keinen Kaffee?\nDoch, jeden Morgen!",checks:[{"need": "\\?", "label": "A question with a question mark"}, {"need": "\\b(nicht|kein|keine|keinen)\\b", "label": "The question is negative: nicht or kein"}, {"need": "\\bdoch\\b", "label": "The answer starts with Doch"}]}
   ]
 },
@@ -426,7 +429,7 @@ const WEEKS = [
       <li>Formal <b>Sie</b> uses the same verb form as <b>wir</b>.</li>
       <li>Formal pronouns always take a capital: <b>Sie, Ihr, Ihnen</b>.</li>
     </ul>`,
-  words:[["das Kreisbüro","district registration office"],["sich anmelden","to register"],["der Vorname","first name"],["der Familienname","surname"],["die Strasse","street"],["die Hausnummer","house number"],["die Postleitzahl (PLZ)","postal code"],["der Ort","town"],["der Beruf","job"],["das Alter","age"],["der Zivilstand","marital status"],["ledig","unmarried, single"],["verheiratet","married"],["geschieden","divorced"],["verwitwet","widowed"],["der Ausweis","ID card, pass"],["die Aufenthaltsbewilligung","residence permit"],["die Unterschrift","signature"]],
+  words:[["das Kreisbüro","district registration office"],["sich anmelden","to register"],["der Vorname","first name"],["der Familienname","surname"],["die Strasse","street"],["die Hausnummer","house number"],["die Postleitzahl (PLZ)","postal code"],["der Ort","town"],["der Beruf","job"],["das Alter","age"],["der Zivilstand","marital status"],["ledig","unmarried, single"],["verheiratet","married"],["geschieden","divorced"],["verwitwet","widowed"],["der Ausweis","ID card, pass"],["die Aufenthaltsbewilligung","residence permit"],["die Unterschrift","signature"],["die Nationalität","nationality"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"die Aufenthaltsbewilligung",back:"residence permit",ex:"Welche Aufenthaltsbewilligung haben Sie?"},
     {t:"flash",lv:1,d:1,k:"v",front:"ledig",back:"unmarried, single",ex:"Zivilstand: ledig, verheiratet, geschieden oder verwitwet"},
@@ -507,7 +510,7 @@ const WEEKS = [
       <li>Ja, and you too: <b>Ich auch.</b> Ja, but not you: <b>Ich nicht.</b></li>
       <li>Nein, and not you either: <b>Ich auch nicht.</b> Nein, but you are: <b>Ich schon.</b></li>
     </ul>`,
-  words:[["müde >< fit","tired >< fit"],["traurig >< glücklich","sad >< happy"],["krank >< gesund","sick >< well"],["nervös >< ruhig","nervous >< calm"],["satt >< hungrig","full >< hungry"],["sauer >< nicht sauer","angry >< not angry"],["blau >< nüchtern","drunk >< sober"],["verheiratet >< ledig","married >< not married"],["pleite >< reich","broke >< rich"],["pünktlich >< unpünktlich","punctual/unpunctual"],["heute Abend zu Hause","this evening at home"],["viel Arbeit","a lot of work"],["viel Stress","a lot of stress"],["einen Abgabetermin","a deadline"],["keine Zeit für nichts","no time for nothing"],["der Durst / durstig","thirst / thirsty"]],
+  words:[["müde >< fit","tired >< fit"],["traurig >< glücklich","sad >< happy"],["krank >< gesund","sick >< well"],["nervös >< ruhig","nervous >< calm"],["satt >< hungrig","full >< hungry"],["sauer >< nicht sauer","angry >< not angry"],["blau >< nüchtern","drunk >< sober"],["verheiratet >< ledig","married >< not married"],["pleite >< reich","broke >< rich"],["pünktlich >< unpünktlich","punctual/unpunctual"],["heute Abend zu Hause","this evening at home"],["viel Arbeit","a lot of work"],["viel Stress","a lot of stress"],["einen Abgabetermin","a deadline"],["keine Zeit für nichts","no time for nothing"],["der Durst / durstig","thirst / thirsty"],["das Velo, -s","bicycle"],["das Haus, Häuser","house"],["der Chemiker, -","chemist"],["der Engländer / die Engländerin","Englishman / Englishwoman"],["gestresst","stressed out"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"pleite",back:"broke (no money)",ex:"Am Monatsende bin ich oft pleite."},
     {t:"flash",lv:1,d:1,k:"v",front:"der Abgabetermin",back:"a deadline",ex:"Ich habe morgen einen Abgabetermin."},
@@ -519,6 +522,7 @@ const WEEKS = [
     {t:"mc",lv:2,d:2,k:"gv",ctx:"Your friend says this. You are not tired either.",q:"„Ich bin nicht müde. Und du?“",opts:["Ich auch nicht.","Ich auch.","Ich nicht.","Ich schon."],a:0,why:"Ich auch nicht = me neither."},
     {t:"mc",lv:2,d:3,k:"gv",ctx:"Your friend says this. You are not tired.",q:"„Ich bin müde. Und du?“",opts:["Ich nicht.","Ich auch nicht.","Ich auch.","Ich schon."],a:0,why:"Ich nicht = I'm not. Use it when your friend's statement is not true for you."},
     {t:"sort",lv:2,d:1,k:"gv",q:"haben or sein?",groups:["Ich habe …","Ich bin …"],items:[["Hunger",0],["Durst",0],["viel Arbeit",0],["ein Problem",0],["müde",1],["hungrig",1],["pleite",1],["heute Abend zu Hause",1]],why:"Nouns like Hunger, Durst and Arbeit go with haben. Adjectives like müde, hungrig and pleite go with sein."},
+    {t:"sort",lv:3,d:3,k:"gv",q:"haben or sein? The tricky ones from the course exercise.",groups:["Ich habe …","Ich bin …"],items:[["ein Velo",0],["einen Job",0],["ein Haus",0],["Chemiker",1],["Engländerin",1],["gestresst",1],["satt",1]],why:"Things you own take haben: ein Velo, einen Job, ein Haus. A job or a nationality takes sein without an article: Ich bin Chemiker. Adjectives like gestresst and satt take sein."},
     {t:"gap",lv:3,d:2,k:"gv",q:"___ du müde? Nein, aber ich ___ Hunger.",hints:["sein","haben"],a:[["Bist"],["habe"]],why:"müde is an adjective, so sein. Hunger is a noun, so haben."},
     {t:"gap",lv:3,d:2,k:"gv",q:"Ihr ___ gestresst, denn ihr ___ viel Arbeit.",hints:["sein","haben"],a:[["seid"],["habt"]],why:"ihr seid, ihr habt."},
     {t:"write",lv:3,d:2,k:"gv",q:"Rewrite the sentence with wir instead of er.",prompt:"Er ist pleite und hat keine Zeit für nichts.",a:["Wir sind pleite und haben keine Zeit für nichts."],why:"wir sind, wir haben."},
@@ -585,11 +589,12 @@ const WEEKS = [
     </table></div>
     <h3>From best to worst</h3>
     <p>ausgezeichnet · sehr gut · gut · ziemlich gut · ganz gut · es geht so · nicht so gut · ziemlich schlecht · schlecht · sehr schlecht · furchtbar</p>`,
-  words:[["Grüezi","Good day / how do you do / hello (CH)"],["Hoi","Hi / hello (CH)"],["Uf Wiederluege","goodbye, formal (CH)"],["Tschüss","Bye"],["Entschuldigung","excuse me / sorry"],["Kein Problem","no problem"],["Danke, gleichfalls.","Thank you, same to you."],["Mach's gut!","Take care!"],["Gesundheit!","bless you"],["Gute Besserung!","get well soon"],["Prost!","cheers"],["Schade","what a pity"],["Was bedeutet ...?","what does ... mean?"],["Ich habe eine Frage.","I have a question"],["Ich verstehe das nicht.","I don't understand that"],["Bitte noch einmal.","once more, please"],["Ich weiss es nicht.","I don't know"],["Ich passe.","I pass"],["Frag nicht!","don't ask"]],
+  words:[["Grüezi","Good day / how do you do / hello (CH)"],["Hoi","Hi / hello (CH)"],["Uf Wiederluege","goodbye, formal (CH)"],["Tschüss","Bye"],["Entschuldigung","excuse me / sorry"],["Kein Problem","no problem"],["Danke, gleichfalls.","Thank you, same to you."],["Mach's gut!","Take care!"],["Gesundheit!","bless you"],["Gute Besserung!","get well soon"],["Prost!","cheers"],["Schade","what a pity"],["Was bedeutet ...?","what does ... mean?"],["Ich habe eine Frage.","I have a question"],["Ich verstehe das nicht.","I don't understand that"],["Bitte noch einmal.","once more, please"],["Ich weiss es nicht.","I don't know"],["Ich passe.","I pass"],["Frag nicht!","don't ask"],["ausgezeichnet","amazing"],["ziemlich gut","pretty good"],["ganz gut","quite well"],["Naja, es geht so.","well, so-so"],["Es könnte besser sein.","It could be better."],["nicht so gut","not so good"],["ziemlich schlecht","pretty bad"],["sehr schlecht","very bad"],["furchtbar","awful"],["beschissen","crappy, shitty"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"Gute Besserung!",back:"Get well soon!",ex:"Du bist krank? Gute Besserung!"},
     {t:"flash",lv:1,d:1,k:"v",front:"Ich passe.",back:"I pass.",ex:"Weisst du die Antwort? Nein, ich passe."},
     {t:"flash",lv:1,d:1,k:"v",rev:true,front:"Thank you, same to you.",back:"Danke, gleichfalls."},
+    {t:"flash",lv:1,d:2,k:"v",front:"beschissen",back:"crappy, shitty",ex:"Wie geht es dir? Beschissen. Frag nicht!"},
     {t:"flash",lv:1,d:1,k:"v",front:"Grüezi",back:"Good day / how do you do / hello (Swiss German, formal)",ex:"Grüezi, Frau Keller!"},
     {t:"match",lv:1,d:1,k:"v",q:"Match each greeting with what it means.",pairs:[["Grüezi","hello (formal, CH)"],["Hoi","Hi / hello (CH)"],["Uf Wiederluege","goodbye (formal, CH)"],["Tschüss","Bye"],["Guten Abend","good evening"]]},
     {t:"match",lv:1,d:1,k:"v",q:"Match the phrases.",pairs:[["Gesundheit!","bless you"],["Prost!","cheers"],["Schade!","what a pity"],["Mach's gut!","Take care!"],["Frag nicht!","don't ask"]]},
@@ -665,7 +670,7 @@ const WEEKS = [
       <li><b>e → ie</b>: sehen, stehlen, befehlen, empfehlen</li>
       <li>Achtung: nehmen (du nimmst, er/sie/es/man nimmt), treten (du trittst, er/sie/es/man tritt)</li>
     </ul>`,
-  words:[["sein · du bist · er ist","to be"],["haben · du hast · er hat","to have"],["sprechen · du sprichst · er spricht","to speak"],["wissen · du weisst · er weiss","to know"],["vergessen · du vergisst · er vergisst","to forget"],["sehen · du siehst · er sieht","to see"],["fahren · du fährst · er fährt","to drive"],["lesen · du liest · er liest","to read"],["nehmen · du nimmst · er nimmt","to take"],["laufen · du läufst · er läuft","to walk, to run"],["gefallen · du gefällst mir · er gefällt mir","to like"],["fallen · du fällst · er fällt","to fall"],["halten · du hältst · er hält","to hold, to stop"],["fangen · du fängst · er fängt","to catch"],["helfen · du hilfst · er hilft","to help"],["geben · du gibst · er gibt","to give"],["essen · du isst · er isst","to eat"],["werfen · du wirfst · er wirft","to throw"],["sterben · du stirbst · er stirbt","to die"],["empfehlen · du empfiehlst · er empfiehlt","to recommend"],["stehlen · du stiehlst · er stiehlt","to steal"],["treffen · du triffst · er trifft","to meet"],["schlafen · du schläfst · er schläft","to sleep"],["messen · du misst · er misst","measure"],["tragen · du trägst · er trägt","to wear, to carry"],["unterbrechen · du unterbrichst · er unterbricht","to interrupt"]],
+  words:[["sein · du bist · er ist","to be"],["haben · du hast · er hat","to have"],["sprechen · du sprichst · er spricht","to speak"],["wissen · du weisst · er weiss","to know"],["vergessen · du vergisst · er vergisst","to forget"],["sehen · du siehst · er sieht","to see"],["fahren · du fährst · er fährt","to drive"],["lesen · du liest · er liest","to read"],["nehmen · du nimmst · er nimmt","to take"],["laufen · du läufst · er läuft","to walk, to run"],["gefallen · du gefällst mir · er gefällt mir","to like"],["fallen · du fällst · er fällt","to fall"],["halten · du hältst · er hält","to hold, to stop"],["fangen · du fängst · er fängt","to catch"],["helfen · du hilfst · er hilft","to help"],["geben · du gibst · er gibt","to give"],["essen · du isst · er isst","to eat"],["werfen · du wirfst · er wirft","to throw"],["sterben · du stirbst · er stirbt","to die"],["empfehlen · du empfiehlst · er empfiehlt","to recommend"],["stehlen · du stiehlst · er stiehlt","to steal"],["treffen · du triffst · er trifft","to meet"],["schlafen · du schläfst · er schläft","to sleep"],["messen · du misst · er misst","measure"],["tragen · du trägst · er trägt","to wear, to carry"],["unterbrechen · du unterbrichst · er unterbricht","to interrupt"],["widersprechen · du widersprichst · er widerspricht","to contradict"],["treten · du trittst · er tritt","to step, to kick"],["mögen · du magst · er mag","to like"],["möchten · du möchtest · er möchte","would like"],["wollen · du willst · er will","to want"]],
   items:[
     {t:"flash",lv:1,d:1,k:"gv",front:"treffen",back:"to meet · du triffst, er trifft",ex:"Ich treffe meine Freunde in der Mensa."},
     {t:"flash",lv:1,d:1,k:"gv",front:"vergessen",back:"to forget · du vergisst, er vergisst",ex:"Hoffentlich vergisst er nichts."},
@@ -746,7 +751,7 @@ const WEEKS = [
       <tr><td>laufen</td><td>er läuft</td></tr>
     </table></div>
     <p>wissen is special: ich weiss, du weisst, <b>er weiss</b> (no -t).</p>`,
-  words:[["steht … auf","stands up"],["das Frühstück","breakfast"],["um acht Uhr","at 8 o'clock"],["im Büro","in the office"],["schwer","difficult"],["die Notizen","notes"],["hoffentlich","hopefully"],["nichts","nothing"],["in der Pause","during the break"],["zusammen","together"],["heute","today"],["die Suppe","soup"],["der Salat","salad"],["am Nachmittag","in the afternoon"],["die Flüssigkeit","liquid"],["die Tipps","hint"],["einmal","once, one time"],["das Glas","glass"],["runter","down"],["schnell","quickly"],["zum Glück","luckily"],["kaputt","broken"],["nach der Arbeit","after work"],["eine schwere Tasche","a heavy bag"],["andere","other"]],
+  words:[["steht … auf","stands up"],["das Frühstück","breakfast"],["um acht Uhr","at 8 o'clock"],["im Büro","in the office"],["schwer","difficult"],["die Notizen","notes"],["hoffentlich","hopefully"],["nichts","nothing"],["in der Pause","during the break"],["zusammen","together"],["heute","today"],["die Suppe","soup"],["der Salat","salad"],["am Nachmittag","in the afternoon"],["die Flüssigkeit","liquid"],["die Tipps","hint"],["einmal","once, one time"],["das Glas","glass"],["runter","down"],["schnell","quickly"],["zum Glück","luckily"],["kaputt","broken"],["nach der Arbeit","after work"],["eine schwere Tasche","a heavy bag"],["andere","other"],["das Handy","smart phone"],["die Nachrichten","news"],["die Blumen","flowers"],["die Wiese","meadow"],["müde","tired"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"hoffentlich",back:"hopefully",ex:"Hoffentlich vergisst er nichts."},
     {t:"flash",lv:1,d:1,k:"v",front:"die Flüssigkeit",back:"liquid",ex:"Er misst eine Flüssigkeit."},
@@ -788,6 +793,7 @@ const WEEKS = [
     {t:"flash",lv:1,d:1,k:"v",rev:true,front:"fridge",back:"der Kühlschrank",ex:"Der Kühlschrank ist neu."},
     {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"der Tisch, die Lampe, das Bett: which pronoun replaces each?",back:"er · sie · es",ex:"Die Wohnung ist nicht sehr gross. Sie hat zweieinhalb Zimmer."},
     {t:"match",lv:1,d:1,k:"v",q:"Match the rooms.",pairs:[["das Schlafzimmer","bedroom"],["die Küche","kitchen"],["die Waschküche","laundry room"],["der Gang (CH)","hallway"],["das Wohnzimmer","living room"],["der Keller","basement"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the furniture.",pairs:[["der Nachttisch","bedside table"],["der Duschvorhang","shower curtain"],["der Abfalleimer","bin"],["die Waschmaschine","washing machine"],["der Spiegel","mirror"],["die Kommode","chest of drawers"]]},
     {t:"sort",lv:2,d:2,k:"gv",q:"der, die oder das?",groups:["der","die","das"],items:[["Stuhl",0],["Sessel",0],["Teppich",0],["Schrank",0],["Lampe",1],["Dusche",1],["Tür",1],["Heizung",1],["Sofa",2],["Bett",2],["Bild",2],["Fenster",2]],why:"There are no safe rules. Learn every noun with its article: der Stuhl, die Lampe, das Sofa."},
     {t:"sort",lv:2,d:2,k:"v",q:"In which room do you usually find it?",groups:["die Küche","das Badezimmer","das Schlafzimmer"],items:[["der Herd",0],["der Kühlschrank",0],["der Hocker",0],["die Dusche",1],["der Spiegel",1],["die Badewanne",1],["das Bett",2],["der Nachttisch",2],["die Kommode",2]],why:"The same groups as the pictures in the script."},
     {t:"mc",lv:2,d:1,k:"v",q:"What is „die Waschküche“?",opts:["laundry room","dining room","children's room"],a:0,why:"waschen = to wash, die Küche = kitchen. In many Swiss houses the washing machine is in the Waschküche."},
@@ -818,7 +824,7 @@ const WEEKS = [
     <p>gross >< klein · hell >< dunkel · alt >< modern, neu · ruhig >< laut · praktisch >< unpraktisch · schön >< hässlich · günstig >< teuer</p>
     <h3>Die Stadtkreise (Auswahl)</h3>
     <p>Kreis 1 Altstadt · Kreis 5 Industrie Quartier · Kreis 6 Unterstrass/Oberstrass · Kreis 9 Altstetten/Albisrieden · Kreis 10 Höngg · Kreis 11 Oerlikon/Seebach/Affoltern</p>`,
-  words:[["die Miete","rent"],["günstig","low priced, cheap"],["teuer","expensive"],["liegen","to be located (to lie)"],["der Vorteil, -e","advantage"],["der Nachteil, -e","disadvantage"],["in der Nähe von …","near by, close to …"],["Das gefällt mir.","I like that."],["Ich wohne im ersten Stock.","on the first floor"],["im Erdgeschoss","on the ground floor"],["die Lage","location"],["gemütlich","cozy"],["das macht nichts","that doesn't matter"],["genug","enough"],["der Platz, die Plätze","space, room"],["hell >< dunkel","bright, sunny >< dark"],["gross >< klein","big, tall >< small"],["alt >< modern, neu","old >< modern, new"],["ruhig >< laut","quiet >< loud, noisy"],["praktisch >< unpraktisch","useful, practical >< unhandy"],["schön >< hässlich","pretty, beautiful >< ugly"],["die WG (Wohngemeinschaft)","shared flat"],["der Mitbewohner, -","flatmate (male)"],["die Mitbewohnerin, -nen","flatmate (female)"],["ziemlich","quite, rather"],["der Kreis, die Kreise","district"],["das Quartier, die Quartiere","district/neighbourhood"],["die Nebenkosten","additional costs"],["die Wohnungsbesichtigung","apartment viewing"],["die Verkehrsanbindungen","transport connections"]],
+  words:[["die Miete","rent"],["günstig","low priced, cheap"],["teuer","expensive"],["liegen","to be located (to lie)"],["der Vorteil, -e","advantage"],["der Nachteil, -e","disadvantage"],["in der Nähe von …","near by, close to …"],["Das gefällt mir.","I like that."],["Ich wohne im ersten Stock.","on the first floor"],["im Erdgeschoss","on the ground floor"],["die Lage","location"],["gemütlich","cozy"],["das macht nichts","that doesn't matter"],["genug","enough"],["der Platz, die Plätze","space, room"],["hell >< dunkel","bright, sunny >< dark"],["gross >< klein","big, tall >< small"],["alt >< modern, neu","old >< modern, new"],["ruhig >< laut","quiet >< loud, noisy"],["praktisch >< unpraktisch","useful, practical >< unhandy"],["schön >< hässlich","pretty, beautiful >< ugly"],["die WG (Wohngemeinschaft)","shared flat"],["der Mitbewohner, -","flatmate (male)"],["die Mitbewohnerin, -nen","flatmate (female)"],["ziemlich","quite, rather"],["der Kreis, die Kreise","district"],["das Quartier, die Quartiere","district/neighbourhood"],["die Nebenkosten","additional costs"],["die Wohnungsbesichtigung","apartment viewing"],["die Verkehrsanbindungen","transport connections"],["der Raum, die Räume","room"],["das Stockwerk, -e","floor (of a building)"],["der Nachbar, -n","neighbor"],["umziehen (ich ziehe um)","to move (house)"],["teilen","share"],["billig","cheap"],["auf dem Land","in the countryside"],["der Bahnhof","train station"],["Was ein Zufall!","What a coincidence!"],["der Kanton, die Kantone","canton"],["die Stadt, die Städte","city"],["der Fluss, die Flüsse","river"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"die Nebenkosten",back:"additional costs",ex:"Wie teuer sind die Nebenkosten von deiner Wohnung?"},
     {t:"flash",lv:1,d:1,k:"v",front:"das macht nichts",back:"that doesn't matter",ex:"Auch die Küche ist relativ klein. Aber das macht nichts."},
@@ -835,6 +841,8 @@ const WEEKS = [
     {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Meine Wohnung ist gemütlich, aber er ist sehr alt.",wrong:[5],fixed:"Meine Wohnung ist gemütlich, aber sie ist sehr alt.",why:"die Wohnung is feminine, so sie."},
     {t:"fix",lv:4,d:3,k:"gv",q:"Tap the wrong word.",text:"Die Wohnung liegt zentral. Das gefällt ich.",wrong:[6],fixed:"Die Wohnung liegt zentral. Das gefällt mir.",why:"The fixed phrase is Das gefällt mir. = I like that."},
     {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: I get there in 15 minutes by bike.",tiles:["ich","bin","in 15 Minuten","mit dem Velo","dort"],end:".",a:["Ich bin in 15 Minuten mit dem Velo dort.","In 15 Minuten bin ich mit dem Velo dort."],verb:"bin",why:"Sample answer in the script: Ich bin in 15 Minuten mit dem Velo dort."},
+    {t:"gap",lv:3,d:3,k:"gv",ctx:"From the Wohnsituation dialogue.",q:"Bald ziehe ich in eine neue Wohnung ___. Die ___ ist besser.",hints:["umziehen","location"],a:[["um"],["Lage"]],why:"umziehen is separable: ich ziehe … um. die Lage = location."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"My flat is close to the train station.",a:["Meine Wohnung ist in der Nähe vom Bahnhof."],why:"From the Wohnsituation exercises. in der Nähe von + dem = vom."},
     {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"My flat is not very big.",a:["Meine Wohnung ist nicht sehr gross."],why:"From Cleo's text."},
     {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"I can get to the city centre quickly.",a:["Ich bin schnell im Stadtzentrum."],why:"From Cleo's text: Ich bin schnell im Stadtzentrum."},
     {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I like living here.",a:["Ich wohne gern hier."],why:"From Cleo's text: Ich wohne gern hier."},
@@ -896,6 +904,75 @@ function saveBest(id, got, total){
   if (!best[id] || got / total >= best[id].got / best[id].total) best[id] = {got, total};
   saveStore({best});
 }
+
+/* =====================================================================
+   VOCAB STATIONS
+   One extra stop per week that drills the week's Quizlet sets from
+   Moodle. Its word bank is every stop's word table plus the set words
+   below that have no stop of their own. Each page load deals a fresh
+   sample: flashcards and matching at level 1, recognition at level 2,
+   typed German at level 3. The four samples share no words, so no
+   early card gives away a later typed answer.
+   ===================================================================== */
+const QUIZLET_SETS = {
+  w1: ["«erster Kontakt / first contact»", "«Für den Unterricht»", "«regelmässige Verben»", "«Fragewörter»", "«wo-woher-wohin»"],
+  w2: ["«Personalien»", "«Deutsch im Alltag»", "«how are you feeling»", "«Bist du …?»", "«haben-sein im Präsens»"],
+  w3: ["«Wohnsituation»", "«unregelmässige Verben»", "«regelmässige und unregelmässige Verben»"]
+};
+/* Set words that no stop lists yet, with the course glosses. */
+const QUIZLET_EXTRA = {
+  w1: [["Was bedeutet …?","What's the meaning of …?"],["Wie sagt man das auf Deutsch?","How do you say that in German?"],["Wie schreibt man das?","How do you write that?"],["die Übung, -en","the exercise"],["die Hausaufgabe, -n","the homework"],["Ich hatte keine Zeit.","I didn't have time."],["Ich habe die Hausaufgabe vergessen.","I have forgotten the homework."],["Warum?","why?"],["Langsamer, bitte.","Slowly, please."],["Keine Ahnung.","no idea"],["Schöne Woche!","Have a nice week!"],["der Kaffee, -s","coffee"],["das Jahr, -e","year"],["der Professor, -en","professor"],["im Büro","in the office"],["Und dir?","And you?"]],
+  w2: [["Gut, danke. Und dir?","Good, thank you. And you?"],["Bis bald! / Bis morgen!","See you soon / see you tomorrow"]],
+  w3: [["das Dach","roof"],["der Korridor","corridor"]]
+};
+/* A word works as a typed answer when it is short and has one clean German form. */
+function typable(de){ return de.length <= 24 && !/[()·><…?!/]/.test(de); }
+function vocabItems(bank){
+  const pool = shuffle(bank);
+  const typed = [];
+  for (let i = pool.length - 1; i >= 0 && typed.length < 7; i--){
+    if (typable(pool[i][0])) typed.push(pool.splice(i, 1)[0]);
+  }
+  const flash = pool.splice(0, 6);
+  const pairs = [];
+  for (let i = pool.length - 1; i >= 0 && pairs.length < 10; i--){
+    if (pool[i][0].length <= 28 && pool[i][1].length <= 28) pairs.push(pool.splice(i, 1)[0]);
+  }
+  const mcs = pool.splice(0, 5);
+  const items = [];
+  flash.forEach(([de, en]) => items.push(Math.random() < 0.5
+    ? {t: "flash", lv: 1, d: 1, k: "v", front: de, back: en}
+    : {t: "flash", lv: 1, d: 1, k: "v", rev: true, front: en, back: de}));
+  for (let i = 0; i + 5 <= pairs.length; i += 5) items.push({t: "match", lv: 1, d: 1, k: "v", q: "Match the words.", pairs: pairs.slice(i, i + 5)});
+  mcs.forEach(([de, en]) => {
+    const wrong = shuffle((pool.length >= 2 ? pool : flash.concat(pairs)).filter(p => p[1] !== en)).slice(0, 2).map(p => p[0]);
+    if (wrong.length < 2) return;
+    items.push({t: "mc", lv: 2, d: 1, k: "v", q: `Wie heisst „${en}“ auf Deutsch?`, opts: [de, ...wrong], a: 0, why: `${de} = ${en}.`});
+  });
+  typed.forEach(([de, en]) => {
+    const parts = de.split(",").map(s => s.trim());
+    const listEntry = parts.length > 1 && parts.slice(1).every(s => s.startsWith("-") || /^(der|die|das) /.test(s));
+    const a = listEntry ? parts.filter(s => !s.startsWith("-")) : [de];
+    const noun = /^(der|die|das) /.test(de);
+    items.push({t: "write", lv: 3, d: 2, k: "v", q: noun ? "Schreib es auf Deutsch, mit Artikel." : "Schreib es auf Deutsch.", prompt: en, a});
+  });
+  return items;
+}
+WEEKS.forEach(w => {
+  const seen = new Set(), bank = [];
+  w.stops.filter(s => !s.wordsHead).flatMap(s => s.words).concat(QUIZLET_EXTRA[w.id]).forEach(p => {
+    const key = p[0].split(",")[0].trim().toLowerCase();
+    if (!seen.has(key)){ seen.add(key); bank.push(p); }
+  });
+  w.stops.push({
+    id: w.id + "-vokabeln", stop: "Vokabeln", title: w.label + ": die Wörter aus den Quizlet-Sets",
+    grammar: "keine heute, nur Wörter", vocab: "die Quizlet-Sets der Woche",
+    cheat: `<h3>Quizlet sets this week</h3><ul>${QUIZLET_SETS[w.id].map(s => "<li>" + s + "</li>").join("")}</ul>
+      <p>The links to the sets are on Moodle, in this week's section. The word table below collects every word of the week in one place. Reload the page and this station deals a new hand from it.</p>`,
+    words: bank,
+    items: vocabItems(bank)
+  });
+});
 
 /* =====================================================================
    SESSION STATE
