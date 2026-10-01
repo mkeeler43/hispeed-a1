@@ -78,6 +78,7 @@ li.active .lbl{color:var(--accent)}
 .order{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted);flex-wrap:wrap}
 .order button{font:inherit;font-size:13px;padding:4px 10px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
 .order button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);font-weight:700}
+.order button:disabled{opacity:.4;cursor:not-allowed}
 
 .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:16px}
 @media (max-width:480px){.card{padding:16px}}
@@ -275,7 +276,7 @@ const WEEKS = [
       <li>Stem ends in <b>-t, -d</b> or consonant + <b>n</b>: add <b>-e-</b> for du, er, ihr. du arbeitest, er findet, ihr öffnet, es regnet.</li>
       <li>Stem ends in <b>-s, -ss, -z</b>: du only adds <b>-t</b>. du heisst, du löst, du ergänzt.</li>
     </ul>`,
-  words:[["lernen","learn"],["verstehen","understand"],["fragen","ask"],["antworten","answer"],["schreiben","write"],["wiederholen","repeat"],["üben","practise"],["notieren","note down"],["suchen","search"],["finden","find"],["öffnen","open"],["warten","wait"],["rechnen","calculate"],["zeichnen","draw"],["bezahlen","pay"],["kaufen","buy"],["brauchen","need"],["bleiben","stay"],["wohnen","live (where my flat is)"],["leben","live/ be alive"],["geniessen","enjoy"],["lösen","solve"],["ergänzen","complete, fill in"],["analysieren","analyze"],["beginnen","begin"],["diskutieren","discuss"],["machen","make, do"],["markieren","highlight"],["studieren","study"],["unterstreichen","underline"],["gehen","go"],["heissen","be called"],["kommen","come"],["lieben","love"],["sagen","say"],["scheinen","shine"],["spielen","play"],["beenden","finish, complete"],["kosten","cost"],["reden","talk"],["regnen","rain"],["ordnen","arrange"],["arbeiten","work"]],
+  words:[["lernen · du lernst · er lernt","learn"],["verstehen · du verstehst · er versteht","understand"],["fragen · du fragst · er fragt","ask"],["antworten · du antwortest · er antwortet","answer"],["schreiben · du schreibst · er schreibt","write"],["wiederholen · du wiederholst · er wiederholt","repeat"],["üben · du übst · er übt","practise"],["notieren · du notierst · er notiert","note down"],["suchen · du suchst · er sucht","search"],["finden · du findest · er findet","find"],["öffnen · du öffnest · er öffnet","open"],["warten · du wartest · er wartet","wait"],["rechnen · du rechnest · er rechnet","calculate"],["zeichnen · du zeichnest · er zeichnet","draw"],["bezahlen · du bezahlst · er bezahlt","pay"],["kaufen · du kaufst · er kauft","buy"],["brauchen · du brauchst · er braucht","need"],["bleiben · du bleibst · er bleibt","stay"],["wohnen · du wohnst · er wohnt","live (where my flat is)"],["leben · du lebst · er lebt","live/ be alive"],["geniessen · du geniesst · er geniesst","enjoy"],["lösen · du löst · er löst","solve"],["ergänzen · du ergänzt · er ergänzt","complete, fill in"],["analysieren · du analysierst · er analysiert","analyze"],["beginnen · du beginnst · er beginnt","begin"],["diskutieren · du diskutierst · er diskutiert","discuss"],["machen · du machst · er macht","make, do"],["markieren · du markierst · er markiert","highlight"],["studieren · du studierst · er studiert","study"],["unterstreichen · du unterstreichst · er unterstreicht","underline"],["gehen · du gehst · er geht","go"],["heissen · du heisst · er heisst","be called"],["kommen · du kommst · er kommt","come"],["lieben · du liebst · er liebt","love"],["sagen · du sagst · er sagt","say"],["scheinen · du scheinst · er scheint","shine"],["spielen · du spielst · er spielt","play"],["beenden · du beendest · er beendet","finish, complete"],["kosten · es kostet","cost"],["reden · du redest · er redet","talk"],["regnen · es regnet","rain"],["ordnen · du ordnest · er ordnet","arrange"],["arbeiten · du arbeitest · er arbeitet","work"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"verstehen",back:"understand",ex:"Ich verstehe das nicht."},
     {t:"flash",lv:1,d:1,k:"v",front:"wiederholen",back:"repeat",ex:"Können Sie das bitte wiederholen?"},
@@ -549,7 +550,7 @@ const WEEKS = [
       <li><b>und, aber, oder, denn</b> sit on position 0. They do not move the verb: ..., denn ich arbeite viel.</li>
       <li>Time before place: Roberto wohnt <b>seit 2 Wochen</b> <b>in Altstetten</b>.</li>
     </ul>`,
-  words:[["jetzt","now"],["manchmal","sometimes"],["oft","often"],["dort","there"],["ungefähr","around"],["schnell","quickly"],["am Morgen / Mittag / Abend","in the morning / at noon / in the evening"],["die WG","shared flat"],["ruhig","quiet"],["das Fenster","window"],["der See","lake"],["mit dem Tram","by tram"],["die Mensa","cafeteria"],["kein Problem","no problem"],["denn","because"]],
+  words:[["jetzt","now"],["manchmal","sometimes"],["oft","often"],["dort","there"],["ungefähr","around"],["schnell","quickly"],["am Morgen / Mittag / Abend","in the morning / at noon / in the evening"],["die WG","shared flat"],["ruhig","quiet"],["das Fenster","window"],["der See","lake"],["mit dem Tram","by tram"],["die Mensa","cafeteria"],["kein Problem","no problem"],["denn","because"],["stehen · du stehst · er steht","stand"],["arbeiten · du arbeitest · er arbeitet","work"],["bleiben · du bleibst · er bleibt","stay"],["brauchen · du brauchst · er braucht","need"],["bezahlen · du bezahlst · er bezahlt","pay"],["buchstabieren · du buchstabierst · er buchstabiert","spell"],["ergänzen · du ergänzt · er ergänzt","complete, fill in"],["finden · du findest · er findet","find"],["gehen · du gehst · er geht","go"],["heissen · du heisst · er heisst","be called"],["kaufen · du kaufst · er kauft","buy"],["kommen · du kommst · er kommt","come"],["kosten · es kostet","cost"],["leben · du lebst · er lebt","live/ be alive"],["lieben · du liebst · er liebt","love"],["öffnen · du öffnest · er öffnet","open"],["sagen · du sagst · er sagt","say"],["scheinen · du scheinst · er scheint","shine"],["spielen · du spielst · er spielt","play"],["reden · du redest · er redet","talk"],["regnen · es regnet","rain"],["warten · du wartest · er wartet","wait"],["wohnen · du wohnst · er wohnt","live (where my flat is)"],["geniessen · du geniesst · er geniesst","enjoy"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"manchmal",back:"sometimes",ex:"Manchmal regnet es."},
     {t:"flash",lv:1,d:1,k:"v",front:"ungefähr",back:"around",ex:"Das Essen kostet ungefähr zehn Franken."},
@@ -708,7 +709,7 @@ const WEEKS = [
       <li>The conjugated verb must stand on position 2.</li>
       <li>After the verb, put time expressions before place expressions: <b>seit 2 Wochen</b> before <b>in Altstetten</b>.</li>
     </ul>`,
-  words:[["das Semester","semester"],["hat … begonnen","has … started"],["der See, -n","lake"],["der Berg, -e","mountain"],["der Zug, Züge","train"],["toll","great"],["die Aussicht, -en","view"],["gemütlich","cozy"],["jeden","every"],["mit dem Velo","by bicycle"],["riesig","huge"],["das Gebäude, -","building"],["am Anfang","at the beginning"],["manchmal","sometimes"],["der Kursraum, Kursräume","course room"],["der Hörsaal, Hörsäle","lecture hall"],["wissen, ich weiss","to know, I know"],["die Vorlesung, -en","lecture"],["fast alle","almost all"],["darum","therefore, that's why"],["zum Glück","luckily, fortunately"],["langsam","slowly"],["meistens","mostly"],["beim Essen","while eating"],["schwierig","difficult"],["versuchen","try"],["Ich hoffe","I hope"],["bald","soon"],["Liebe Grüsse","best regards"]],
+  words:[["das Semester","semester"],["hat … begonnen","has … started"],["der See, -n","lake"],["der Berg, -e","mountain"],["der Zug, Züge","train"],["toll","great"],["die Aussicht, -en","view"],["gemütlich","cozy"],["jeden","every"],["mit dem Velo","by bicycle"],["riesig","huge"],["das Gebäude, -","building"],["am Anfang","at the beginning"],["manchmal","sometimes"],["der Kursraum, Kursräume","course room"],["der Hörsaal, Hörsäle","lecture hall"],["wissen, ich weiss","to know, I know"],["die Vorlesung, -en","lecture"],["fast alle","almost all"],["darum","therefore, that's why"],["zum Glück","luckily, fortunately"],["langsam","slowly"],["meistens","mostly"],["beim Essen","while eating"],["schwierig","difficult"],["versuchen · du versuchst · er versucht","try"],["Ich hoffe","I hope"],["bald","soon"],["Liebe Grüsse","best regards"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"riesig",back:"huge",ex:"Der Campus ist riesig und es gibt viele Gebäude."},
     {t:"flash",lv:1,d:2,k:"v",front:"darum",back:"therefore, that's why",ex:"Fast alle Kurse sind auf Englisch, darum besuche ich auch noch einen Deutschkurs."},
@@ -824,7 +825,7 @@ const WEEKS = [
     <p>gross >< klein · hell >< dunkel · alt >< modern, neu · ruhig >< laut · praktisch >< unpraktisch · schön >< hässlich · günstig >< teuer</p>
     <h3>Die Stadtkreise (Auswahl)</h3>
     <p>Kreis 1 Altstadt · Kreis 5 Industrie Quartier · Kreis 6 Unterstrass/Oberstrass · Kreis 9 Altstetten/Albisrieden · Kreis 10 Höngg · Kreis 11 Oerlikon/Seebach/Affoltern</p>`,
-  words:[["die Miete","rent"],["günstig","low priced, cheap"],["teuer","expensive"],["liegen","to be located (to lie)"],["der Vorteil, -e","advantage"],["der Nachteil, -e","disadvantage"],["in der Nähe von …","near by, close to …"],["Das gefällt mir.","I like that."],["Ich wohne im ersten Stock.","on the first floor"],["im Erdgeschoss","on the ground floor"],["die Lage","location"],["gemütlich","cozy"],["das macht nichts","that doesn't matter"],["genug","enough"],["der Platz, die Plätze","space, room"],["hell >< dunkel","bright, sunny >< dark"],["gross >< klein","big, tall >< small"],["alt >< modern, neu","old >< modern, new"],["ruhig >< laut","quiet >< loud, noisy"],["praktisch >< unpraktisch","useful, practical >< unhandy"],["schön >< hässlich","pretty, beautiful >< ugly"],["die WG (Wohngemeinschaft)","shared flat"],["der Mitbewohner, -","flatmate (male)"],["die Mitbewohnerin, -nen","flatmate (female)"],["ziemlich","quite, rather"],["der Kreis, die Kreise","district"],["das Quartier, die Quartiere","district/neighbourhood"],["die Nebenkosten","additional costs"],["die Wohnungsbesichtigung","apartment viewing"],["die Verkehrsanbindungen","transport connections"],["der Raum, die Räume","room"],["das Stockwerk, -e","floor (of a building)"],["der Nachbar, -n","neighbor"],["umziehen (ich ziehe um)","to move (house)"],["teilen","share"],["billig","cheap"],["auf dem Land","in the countryside"],["der Bahnhof","train station"],["Was ein Zufall!","What a coincidence!"],["der Kanton, die Kantone","canton"],["die Stadt, die Städte","city"],["der Fluss, die Flüsse","river"]],
+  words:[["die Miete","rent"],["günstig","low priced, cheap"],["teuer","expensive"],["liegen · du liegst · er liegt","to be located (to lie)"],["der Vorteil, -e","advantage"],["der Nachteil, -e","disadvantage"],["in der Nähe von …","near by, close to …"],["Das gefällt mir.","I like that."],["Ich wohne im ersten Stock.","on the first floor"],["im Erdgeschoss","on the ground floor"],["die Lage","location"],["gemütlich","cozy"],["das macht nichts","that doesn't matter"],["genug","enough"],["der Platz, die Plätze","space, room"],["hell >< dunkel","bright, sunny >< dark"],["gross >< klein","big, tall >< small"],["alt >< modern, neu","old >< modern, new"],["ruhig >< laut","quiet >< loud, noisy"],["praktisch >< unpraktisch","useful, practical >< unhandy"],["schön >< hässlich","pretty, beautiful >< ugly"],["die WG (Wohngemeinschaft)","shared flat"],["der Mitbewohner, -","flatmate (male)"],["die Mitbewohnerin, -nen","flatmate (female)"],["ziemlich","quite, rather"],["der Kreis, die Kreise","district"],["das Quartier, die Quartiere","district/neighbourhood"],["die Nebenkosten","additional costs"],["die Wohnungsbesichtigung","apartment viewing"],["die Verkehrsanbindungen","transport connections"],["der Raum, die Räume","room"],["das Stockwerk, -e","floor (of a building)"],["der Nachbar, -n","neighbor"],["umziehen (ich ziehe um)","to move (house)"],["teilen · du teilst · er teilt","share"],["billig","cheap"],["auf dem Land","in the countryside"],["der Bahnhof","train station"],["Was ein Zufall!","What a coincidence!"],["der Kanton, die Kantone","canton"],["die Stadt, die Städte","city"],["der Fluss, die Flüsse","river"]],
   items:[
     {t:"flash",lv:1,d:1,k:"v",front:"die Nebenkosten",back:"additional costs",ex:"Wie teuer sind die Nebenkosten von deiner Wohnung?"},
     {t:"flash",lv:1,d:1,k:"v",front:"das macht nichts",back:"that doesn't matter",ex:"Auch die Küche ist relativ klein. Aber das macht nichts."},
@@ -922,37 +923,64 @@ const QUIZLET_SETS = {
 /* Set words that no stop lists yet, with the course glosses. */
 const QUIZLET_EXTRA = {
   w1: [["Was bedeutet …?","What's the meaning of …?"],["Wie sagt man das auf Deutsch?","How do you say that in German?"],["Wie schreibt man das?","How do you write that?"],["die Übung, -en","the exercise"],["die Hausaufgabe, -n","the homework"],["Ich hatte keine Zeit.","I didn't have time."],["Ich habe die Hausaufgabe vergessen.","I have forgotten the homework."],["Warum?","why?"],["Langsamer, bitte.","Slowly, please."],["Keine Ahnung.","no idea"],["Schöne Woche!","Have a nice week!"],["der Kaffee, -s","coffee"],["das Jahr, -e","year"],["der Professor, -en","professor"],["im Büro","in the office"],["Und dir?","And you?"]],
-  w2: [["Gut, danke. Und dir?","Good, thank you. And you?"],["Bis bald! / Bis morgen!","See you soon / see you tomorrow"]],
+  w2: [["Gut, danke. Und dir?","Good, thank you. And you?"],["Bis bald! / Bis morgen!","See you soon / see you tomorrow"],["sein · du bist · er ist","to be"],["haben · du hast · er hat","to have"],["sprechen · du sprichst · er spricht","to speak"],["unterschreiben · du unterschreibst · er unterschreibt","to sign"]],
   w3: [["das Dach","roof"],["der Korridor","corridor"]]
 };
+/* Base form of an entry: the word before its du/er forms or plural suffix. */
+function baseDe(de){ return de.split("·")[0].split(",")[0].trim(); }
 /* A word works as a typed answer when it is short and has one clean German form. */
 function typable(de){ return de.length <= 24 && !/[()·><…?!/]/.test(de); }
+/* The slice of a bank that one focus drills. */
+function vocabSlice(bank, focus){
+  if (focus === "verben") return bank.filter(p => p[0].includes("·"));
+  if (focus === "nomen") return bank.filter(p => /^(der|die|das) /.test(p[0]));
+  return bank;
+}
 function vocabItems(bank){
   const pool = shuffle(bank);
-  const typed = [];
-  for (let i = pool.length - 1; i >= 0 && typed.length < 7; i--){
-    if (typable(pool[i][0])) typed.push(pool.splice(i, 1)[0]);
-  }
-  const flash = pool.splice(0, 6);
-  const pairs = [];
-  for (let i = pool.length - 1; i >= 0 && pairs.length < 10; i--){
-    if (pool[i][0].length <= 28 && pool[i][1].length <= 28) pairs.push(pool.splice(i, 1)[0]);
-  }
-  const mcs = pool.splice(0, 5);
+  const take = (n, test) => {
+    const out = [];
+    for (let i = pool.length - 1; i >= 0 && out.length < n; i--){
+      if (test(pool[i])) out.push(pool.splice(i, 1)[0]);
+    }
+    return out;
+  };
   const items = [];
+
+  /* conjugation: three verbs that store their du and er forms */
+  take(3, p => /^.+ · du \S+ · er \S+$/.test(p[0])).forEach(([de, en]) => {
+    const [inf, du, er] = de.split("·").map(s => s.trim());
+    items.push({t: "gap", lv: 3, d: 2, k: "gv", q: `${inf} (${en}): du ___, er ___`, a: [[du.slice(3)], [er.slice(3)]], why: de + "."});
+  });
+
+  /* articles: one der/die/das sort over nine nouns, kept out of small hands */
+  const nouns = pool.length >= 18 ? take(9, p => /^(der|die|das) \S+$/.test(baseDe(p[0]))) : [];
+  if (nouns.length === 9){
+    items.push({t: "sort", lv: 2, d: 2, k: "v", q: "der, die oder das?", groups: ["der", "die", "das"],
+      items: nouns.map(([de]) => { const b = baseDe(de); return [b.slice(4), ["der", "die", "das"].indexOf(b.slice(0, 3))]; }),
+      why: "Learn every noun with its article."});
+  } else pool.push(...nouns);
+
+  /* the rest shrinks with the pool, so a small focused slice still deals a fair hand */
+  const f = Math.min(1, pool.length / 28);
+  const typed = take(Math.round(7 * f), p => typable(baseDe(p[0])));
+  const flash = pool.splice(0, Math.round(6 * f));
+  const pairs = take(Math.floor(Math.round(10 * f) / 5) * 5, p => baseDe(p[0]).length <= 28 && p[1].length <= 28);
+  const mcs = pool.splice(0, Math.round(5 * f));
+
   flash.forEach(([de, en]) => items.push(Math.random() < 0.5
     ? {t: "flash", lv: 1, d: 1, k: "v", front: de, back: en}
     : {t: "flash", lv: 1, d: 1, k: "v", rev: true, front: en, back: de}));
-  for (let i = 0; i + 5 <= pairs.length; i += 5) items.push({t: "match", lv: 1, d: 1, k: "v", q: "Match the words.", pairs: pairs.slice(i, i + 5)});
+  for (let i = 0; i + 5 <= pairs.length; i += 5) items.push({t: "match", lv: 1, d: 1, k: "v", q: "Match the words.", pairs: pairs.slice(i, i + 5).map(([de, en]) => [baseDe(de), en])});
   mcs.forEach(([de, en]) => {
-    const wrong = shuffle((pool.length >= 2 ? pool : flash.concat(pairs)).filter(p => p[1] !== en)).slice(0, 2).map(p => p[0]);
+    const wrong = shuffle((pool.length >= 2 ? pool : flash.concat(pairs)).filter(p => p[1] !== en)).slice(0, 2).map(p => baseDe(p[0]));
     if (wrong.length < 2) return;
-    items.push({t: "mc", lv: 2, d: 1, k: "v", q: `Wie heisst „${en}“ auf Deutsch?`, opts: [de, ...wrong], a: 0, why: `${de} = ${en}.`});
+    items.push({t: "mc", lv: 2, d: 1, k: "v", q: `Wie heisst „${en}“ auf Deutsch?`, opts: [baseDe(de), ...wrong], a: 0, why: `${baseDe(de)} = ${en}.`});
   });
   typed.forEach(([de, en]) => {
     const parts = de.split(",").map(s => s.trim());
     const listEntry = parts.length > 1 && parts.slice(1).every(s => s.startsWith("-") || /^(der|die|das) /.test(s));
-    const a = listEntry ? parts.filter(s => !s.startsWith("-")) : [de];
+    const a = de.includes("·") ? [baseDe(de)] : listEntry ? parts.filter(s => !s.startsWith("-")) : [de];
     const noun = /^(der|die|das) /.test(de);
     items.push({t: "write", lv: 3, d: 2, k: "v", q: noun ? "Schreib es auf Deutsch, mit Artikel." : "Schreib es auf Deutsch.", prompt: en, a});
   });
@@ -961,14 +989,15 @@ function vocabItems(bank){
 WEEKS.forEach(w => {
   const seen = new Set(), bank = [];
   w.stops.filter(s => !s.wordsHead).flatMap(s => s.words).concat(QUIZLET_EXTRA[w.id]).forEach(p => {
-    const key = p[0].split(",")[0].trim().toLowerCase();
+    const key = baseDe(p[0]).toLowerCase();
     if (!seen.has(key)){ seen.add(key); bank.push(p); }
   });
   w.stops.push({
     id: w.id + "-vokabeln", stop: "Vokabeln", title: w.label + ": die Wörter aus den Quizlet-Sets",
-    grammar: "keine heute, nur Wörter", vocab: "die Quizlet-Sets der Woche",
+    grammar: "nebenbei: Artikel und du/er-Formen", vocab: "die Quizlet-Sets der Woche",
     cheat: `<h3>Quizlet sets this week</h3><ul>${QUIZLET_SETS[w.id].map(s => "<li>" + s + "</li>").join("")}</ul>
-      <p>The links to the sets are on Moodle, in this week's section. The word table below collects every word of the week in one place. Every run of this station deals a new hand from it.</p>`,
+      <p>The links to the sets are on Moodle, in this week's section. The word table below collects every word of the week in one place. Every run of this station deals a new hand from it.</p>
+      <p>Üben switches the deck: Verben drills meaning plus the du/er forms, Nomen drills meaning plus the article.</p>`,
     words: bank,
     bank: bank,
     items: vocabItems(bank)
@@ -980,6 +1009,7 @@ WEEKS.forEach(w => {
    ===================================================================== */
 let weekIdx = 0;
 let order = loadStore().order || "ramp";
+let vocabFocus = loadStore().vocabFocus || "alles";
 let S = null;
 let currentCheck = null;
 let lastInput = null;
@@ -1021,9 +1051,13 @@ function start(kind, idx){
       const pool = [];
       WEEKS[weekIdx].stops.forEach(s => s.items.forEach(it => pool.push(Object.assign({src: s.stop}, it))));
       items = arrange(sampleByLevel(pool, 3));
+    } else if (sec.bank){
+      /* A vocab station deals a fresh hand on every run, from the focused slice. */
+      let slice = vocabSlice(sec.bank, vocabFocus);
+      if (slice.length < 4) slice = sec.bank;
+      items = arrange(vocabItems(slice));
     } else {
-      /* A vocab station deals a fresh hand from its bank on every run. */
-      items = arrange(sec.bank ? vocabItems(sec.bank) : sec.items);
+      items = arrange(sec.items);
     }
   }
   S = {kind, idx, sec, items, i: 0, answered: false, results: []};
@@ -1105,6 +1139,11 @@ function renderItem(){
       h("button", {type: "button", "aria-pressed": String(order === "ramp"), onclick: () => setOrder("ramp")}, "Level by level"),
       h("button", {type: "button", "aria-pressed": String(order === "mixed"), onclick: () => setOrder("mixed")}, "Shuffled")));
   }
+  if (S.sec.bank){
+    head.append(h("div", {class: "order"}, "Üben:",
+      [["alles", "Alles"], ["verben", "Verben"], ["nomen", "Nomen"]].map(([fo, label]) =>
+        h("button", {type: "button", "aria-pressed": String(vocabFocus === fo), disabled: vocabSlice(S.sec.bank, fo).length < 4, onclick: () => setVocabFocus(fo)}, label))));
+  }
   stage.append(head);
 
   if (S.i >= S.items.length){ stage.append(renderEnd()); currentCheck = null; return; }
@@ -1151,6 +1190,7 @@ function renderItem(){
 }
 
 function setOrder(o){ order = o; saveStore({order}); if (S.kind === "cards") return; start(S.kind, S.idx); }
+function setVocabFocus(fo){ vocabFocus = fo; saveStore({vocabFocus: fo}); start(S.kind, S.idx); }
 
 function feedback(r, it, rec){
   const fb = h("div", {class: "fb " + (r.ok ? "ok" : "bad")});
