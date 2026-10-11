@@ -793,7 +793,7 @@ const WEEKS = [
     {t:"flash",lv:1,d:1,k:"v",front:"das Lavabo (CH)",back:"sink",ex:"Das Lavabo ist im Badezimmer."},
     {t:"flash",lv:1,d:1,k:"v",rev:true,front:"fridge",back:"der Kühlschrank",ex:"Der Kühlschrank ist neu."},
     {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"der Tisch, die Lampe, das Bett: which pronoun replaces each?",back:"er · sie · es",ex:"Die Wohnung ist nicht sehr gross. Sie hat zweieinhalb Zimmer."},
-    {t:"match",lv:1,d:1,k:"v",q:"Match the rooms.",pairs:[["das Schlafzimmer","bedroom"],["die Küche","kitchen"],["die Waschküche","laundry room"],["der Gang (CH)","hallway"],["das Wohnzimmer","living room"],["der Keller","basement"]]},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the rooms.",pairs:[["das Schlafzimmer","bedroom"],["die Küche","kitchen"],["das Esszimmer","dining room"],["der Gang (CH)","hallway"],["das Wohnzimmer","living room"],["der Keller","basement"]]},
     {t:"match",lv:1,d:2,k:"v",q:"Match the furniture.",pairs:[["der Nachttisch","bedside table"],["der Duschvorhang","shower curtain"],["der Abfalleimer","bin"],["die Waschmaschine","washing machine"],["der Spiegel","mirror"],["die Kommode","chest of drawers"]]},
     {t:"sort",lv:2,d:2,k:"gv",q:"der, die oder das?",groups:["der","die","das"],items:[["Stuhl",0],["Sessel",0],["Teppich",0],["Schrank",0],["Lampe",1],["Dusche",1],["Tür",1],["Heizung",1],["Sofa",2],["Bett",2],["Bild",2],["Fenster",2]],why:"There are no safe rules. Learn every noun with its article: der Stuhl, die Lampe, das Sofa."},
     {t:"sort",lv:2,d:2,k:"v",q:"In which room do you usually find it?",groups:["die Küche","das Badezimmer","das Schlafzimmer"],items:[["der Herd",0],["der Kühlschrank",0],["der Hocker",0],["die Dusche",1],["der Spiegel",1],["die Badewanne",1],["das Bett",2],["der Nachttisch",2],["die Kommode",2]],why:"The same groups as the pictures in the script."},
@@ -848,6 +848,307 @@ const WEEKS = [
     {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"I can get to the city centre quickly.",a:["Ich bin schnell im Stadtzentrum."],why:"From Cleo's text: Ich bin schnell im Stadtzentrum."},
     {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I like living here.",a:["Ich wohne gern hier."],why:"From Cleo's text: Ich wohne gern hier."},
     {t:"open",lv:5,d:3,k:"gv",q:"Your turn. How do you live? Write three or four sentences: where you live (Kreis or Quartier), how big your flat is, one Vorteil and one Nachteil.",model:"Ich wohne in Oerlikon, im Kreis 11.\nMeine Wohnung hat zwei Zimmer und einen Balkon.\nDie Lage ist ein Vorteil, ich bin in 10 Minuten an der ETH.\nDie kleine Küche ist ein Nachteil, aber das macht nichts.",checks:[{"need":"\\bich wohne\\b","label":"Where you live: ich wohne in …"},{"need":"\\b(zimmer|gross|klein)\\b","label":"How big: … Zimmer, gross or klein"},{"need":"\\bvorteil(e)?\\b","label":"One Vorteil"},{"need":"\\bnachteil(e)?\\b","label":"One Nachteil"},{"avoid":"\\bdas gefaellt ich\\b","label":"Das gefällt mir, not ich"},{"avoid":"\\b(meine )?wohnung\\b[^.!?]*\\b, (er|es) (ist|hat|liegt)\\b","label":"die Wohnung is sie"}]}
+  ]
+}
+]},
+{ id:"w4", n:4, label:"Woche 4", stops:[
+{
+  id:"w4-leben", stop:"Leben in der Schweiz", title:"Leben in der Schweiz: Ioanna, Ronaldinho und Tuomas",
+  grammar:"seit + Zeit, gern + Verb, Verb auf Position 2", vocab:"Vokabular: Leben in der Schweiz",
+  cheat:`
+    <h3>seit = since, for</h3>
+    <ul>
+      <li>Er ist <b>seit 2 Jahren</b> hier. = He has been here for 2 years.</li>
+      <li>Er ist <b>seit August</b> hier. = He's here since August.</li>
+      <li>The verb stays in the present: er <b>ist</b> seit 2 Jahren hier.</li>
+    </ul>
+    <h3>gern + Verb = gladly, like to …</h3>
+    <div class="tbl"><table class="pos2"><tr><th>Pos. 1</th><th>Verb</th><th>Rest</th></tr>
+      <tr><td>Im Sommer</td><td>geht</td><td>er <b>gern</b> an den See.</td></tr>
+      <tr><td>Er</td><td>geht</td><td>im Sommer <b>gern</b> an den See.</td></tr>
+      <tr><td>Im Winter</td><td>fährt</td><td>er <b>gern</b> in die Berge zum Skifahren.</td></tr>
+    </table></div>
+    <p>gern comes after the verb and the subject. The verb itself stays on position 2.</p>
+    <h3>Die drei Personen</h3>
+    <ul>
+      <li><b>Ioanna Montascu</b>, 23, aus Rumänien. Austauschjahr in Zürich, studiert Biochemie. Spricht Rumänisch, Englisch, Italienisch, lernt Deutsch. Wohnt in Oerlikon in einem Studentenhaus.</li>
+      <li><b>Ronaldinho</b>, 26, aus Brasilien. Seit 2 Jahren in der Schweiz, zuerst in Basel, jetzt in Zürich. Doktorarbeit in Soziologie an der Uni Zürich. Im Winter fährt er gern in die Berge, im Sommer geht er gern an den See. In zwei Jahren geht er zurück.</li>
+      <li><b>Tuomas Kaskitalo</b>, 29, aus Finnland. Assistent an der Fakultät für Wirtschaftswissenschaften, forscht und unterrichtet zwei Kurse. Spricht Finnisch, Schwedisch, Englisch, versteht ein bisschen Deutsch. Fährt jeden Tag mit dem Velo ins Büro.</li>
+    </ul>`,
+  words:[["studieren · du studierst · er studiert","to study"],["an der Universität / an der ETH","at university / at ETH"],["das Jahr, -e","year"],["dieses Jahr","this year"],["der Student, -en","student (male)"],["die Studentin, -nen","student (female)"],["andere Studenten","other students"],["die Welt, -en","world"],["aus der ganzen Welt","from all over the world"],["seit","since, for"],["Er ist seit 2 Jahren hier.","He has been here for 2 years."],["Er ist seit August hier.","He's here since August."],["gern (adv) + Verb","gladly, like to …"],["Im Sommer geht er gern an den See.","In summer, he likes to go to the lakeside."],["die Wissenschaft, -en","science"],["die Wirtschaftswissenschaft, -en","economic science"],["forschen · du forschst · er forscht","to do research"],["die Forschung","research"],["unterrichten · du unterrichtest · er unterrichtet","to teach"],["der Unterricht","class"],["das Austauschjahr, -e","exchange year"],["zuerst","first"],["die Doktorarbeit, -en","doctoral thesis"],["zurück","back"],["ein bisschen","a bit"],["der Assistent, -en","assistant (male)"],["die Fakultät, -en","faculty"],["besuchen · du besuchst · er besucht","to visit, to attend (a course)"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"gv",front:"seit",back:"since, for",ex:"Er ist seit 2 Jahren hier. Er ist seit August hier."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"from all over the world",back:"aus der ganzen Welt",ex:"Sie wohnt mit 23 anderen Studenten aus der ganzen Welt."},
+    {t:"flash",lv:1,d:2,k:"gv",front:"forschen",back:"to do research · du forschst, er forscht · die Forschung = research",ex:"Tuomas forscht und unterrichtet zwei Kurse."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"gern + Verb: where does gern go?",back:"after the verb and the subject; the verb stays on position 2",ex:"Ich trinke gern Kaffee. Er fährt gern mit dem Velo ins Büro."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the words.",pairs:[["die Wissenschaft","science"],["unterrichten","to teach"],["der Unterricht","class"],["dieses Jahr","this year"],["die Welt","world"],["zuerst","first"]]},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From the text: „Ioanna spricht Rumänisch, Englisch, Italienisch und lernt hier Deutsch.“",q:"Welche Sprachen spricht Ioanna?",opts:["Rumänisch, Englisch und Italienisch","Rumänisch, Englisch und Deutsch","Rumänisch, Spanisch und Italienisch"],a:0,why:"She speaks three languages and is learning (lernt) German."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"From the text: „Er wohnt seit 2 Jahren in der Schweiz, zuerst in Basel, jetzt in Zürich.“",q:"Wo hat Ronaldinho zuerst gearbeitet?",opts:["in Basel","in Zürich","in Brasilien"],a:0,why:"zuerst = first. Course answer: In Basel."},
+    {t:"mc",lv:2,d:2,k:"v",q:"Wann geht Ronaldinho nach Brasilien zurück?",opts:["in zwei Jahren","seit zwei Jahren","in zwei Wochen"],a:0,why:"in zwei Jahren = in two years (future). seit zwei Jahren = for two years (until now)."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From the text: „Er fährt jeden Tag mit dem Velo in sein Büro.“",q:"How does Tuomas get to work?",opts:["by bicycle","by tram","on foot"],a:0,why:"mit dem Velo = by bicycle."},
+    {t:"sort",lv:2,d:2,k:"v",q:"Wer ist das? Sort the facts.",groups:["Ioanna","Ronaldinho","Tuomas"],items:[["studiert dieses Jahr Biochemie in Zürich",0],["wohnt in einem Studentenhaus in Oerlikon",0],["macht eine Doktorarbeit in Soziologie",1],["geht im Sommer gern an den See",1],["unterrichtet zwei Kurse für Masterstudenten",2],["kommt aus Finnland",2]],why:"Ioanna: Austauschjahr, Biochemie, Oerlikon. Ronaldinho: Doktorarbeit, Berge und See. Tuomas: Assistent, forscht und unterrichtet."},
+    {t:"gap",lv:3,d:1,k:"gv",q:"Ronaldinho wohnt ___ 2 Jahren in der Schweiz.",hints:["since, for"],a:[["seit"]],why:"seit + time: seit 2 Jahren, seit August."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Ronaldinho ___ gern in die Berge und Ioanna ___ gern andere Studenten.",hints:["fahren","treffen"],a:[["fährt"],["trifft"]],why:"fahren: er fährt (a → ä). treffen: sie trifft (e → i). gern comes after the subject."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Tuomas ___ und ___ zwei Kurse für Masterstudenten.",hints:["to do research","to teach"],a:[["forscht"],["unterrichtet"]],why:"forschen: er forscht. unterrichten: er unterrichtet, with an extra e before the t."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Answer in a full sentence.",prompt:"Wo und was studiert Ioanna? (Zürich, Biochemie)",a:["Sie studiert in Zürich Biochemie.","Sie studiert Biochemie in Zürich.","Ioanna studiert in Zürich Biochemie.","Ioanna studiert Biochemie in Zürich."],why:"studieren is regular: sie studiert."},
+    {t:"write",lv:3,d:1,k:"g",q:"Rewrite the sentence with ich instead of er.",prompt:"Er ist seit 2 Jahren hier.",a:["Ich bin seit 2 Jahren hier.","Ich bin seit zwei Jahren hier."],why:"sein: ich bin. seit 2 Jahren does not change."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Rewrite the sentence with sie (she) instead of ich.",prompt:"Ich besuche am Dienstagabend einen Deutschkurs.",a:["Sie besucht am Dienstagabend einen Deutschkurs."],why:"besuchen is regular: sie besucht. Here besuchen means to attend a course."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: In winter he likes to go to the mountains.",tiles:["im Winter","fährt","er","gern","in die Berge"],end:".",a:["Im Winter fährt er gern in die Berge.","Er fährt im Winter gern in die Berge."],verb:"fährt",why:"Verb on position 2, gern after the subject."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence. Start with the time.",tiles:["seit August","ist","er","hier"],end:".",a:["Seit August ist er hier."],verb:"ist",why:"Seit August on position 1 pushes er behind the verb."},
+    {t:"fix",lv:4,d:2,k:"g",q:"There are two mistakes. Tap both.",text:"Ioanna studieren Biochemie und wohnen in Oerlikon.",wrong:[1,4],fixed:"Ioanna studiert Biochemie und wohnt in Oerlikon.",why:"One person: sie studiert, sie wohnt."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Er ist seit 2 Jahre in der Schweiz.",wrong:[4],fixed:"Er ist seit 2 Jahren in der Schweiz.",why:"After seit the plural gets an -n: seit 2 Jahren, as in the course sheet."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence puts gern in the right place?",opts:["Im Winter fährt er gern Ski.","Im Winter gern fährt er Ski.","Gern im Winter fährt er Ski."],a:0,why:"Verb on position 2 (geht), then the subject (er), then gern."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"Tuomas has been in Zürich since August.",a:["Tuomas ist seit August in Zürich."],why:"Course pattern: Er ist seit August hier. Present tense with seit."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German. Start with Im Sommer.",prompt:"In summer, he likes to go to the lakeside.",a:["Im Sommer geht er gern an den See."],why:"Course sheet: Im Sommer geht er gern an den See."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Sie wohnt in Oerlikon.",a:["Wo wohnt sie?","Wo wohnt Ioanna?"],why:"Course question: Wo wohnt sie?"},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Introduce yourself like the three persons, in four or five sentences: name and age, where you come from, what you do at ETH, since when you are in Zürich (seit), and one thing you like doing (gern).",model:"Ich heisse Sara und bin 27 Jahre alt.\nIch komme aus Italien und mache meine Doktorarbeit an der ETH.\nIch bin seit einem Jahr in Zürich.\nIm Winter fahre ich gern in die Berge.",checks:[{"need":"\\bich (heisse|bin|komme)\\b","label":"Name, age or origin: ich heisse …, ich bin …, ich komme aus …"},{"need":"\\b(studiere|forsche|arbeite|mache|unterrichte|schreibe)\\b","label":"What you do: ich studiere / forsche / arbeite / mache …"},{"need":"\\bseit\\b","label":"Since when: seit …"},{"need":"\\bgern\\b","label":"Something you like doing: … gern …"},{"avoid":"\\bich (studiert|arbeitet|kommt|wohnt|forscht|macht)\\b","label":"ich takes -e: ich studiere, ich wohne"}]}
+  ]
+},
+{
+  id:"w4-leute", stop:"8 Personen", title:"Wir leben hier: 8 Personen erzählen",
+  grammar:"wohnen in, arbeiten als, kommen aus, fahren nach", vocab:"Vokabular zu den Hörtexten",
+  cheat:`
+    <h3>Verb + Präposition</h3>
+    <ul>
+      <li><b>wohnen in</b>: Hui-Zhu wohnt in Luzern.</li>
+      <li><b>arbeiten als</b>: Sie arbeitet als Gymnastiklehrerin.</li>
+      <li><b>kommen aus</b>: Sellathurai kommt aus Sri Lanka.</li>
+      <li><b>fahren nach</b>: Ich fahre jeden Tag mit dem Postauto nach Chur.</li>
+      <li><b>sprechen / verstehen / lernen</b>: Sie spricht Deutsch, versteht Schweizerdeutsch und lernt jetzt Arabisch.</li>
+    </ul>
+    <h3>Die acht Personen</h3>
+    <ul>
+      <li><b>Hui-Zhu Hu</b> (38), Luzern, Gymnastiklehrerin. Muttersprache Chinesisch. Spricht Englisch und Deutsch, versteht Schweizerdeutsch.</li>
+      <li><b>Astrid Koch</b> (35) aus Einsiedeln, wohnt in Genf, Übersetzerin. Deutsch, Italienisch, Französisch, Portugiesisch, Englisch, lernt Arabisch. «Ich fahre oft nach Paris. Das ist nicht weit und die Stadt ist sehr schön.»</li>
+      <li><b>Sellathurai Ranganathan</b> (30) aus Sri Lanka, wohnt in Kloten im Kanton Zürich, Küchenhilfe. Tamilisch, Englisch, Deutsch, versteht Zürichdeutsch.</li>
+      <li><b>Illario Pifferini</b> (26) aus dem Tessin, wohnt in Basel. Muttersprache Italienisch, versteht Baseldeutsch, spricht Deutsch und Französisch. Sucht Arbeit als Automechaniker oder Chauffeur.</li>
+      <li><b>Neina Cathomen</b> (18), Falera, fährt jeden Tag mit dem Postauto nach Chur in eine Schule für Physiotherapie. Zweisprachig: Rätoromanisch und Bündnerdeutsch.</li>
+      <li><b>Ana Carina</b> (22) aus Guatemala, wohnt in Zürich, Pflegehelferin im Kantonsspital. Spanisch und Hochdeutsch, versteht Italienisch, Portugiesisch, Schweizerdeutsch.</li>
+      <li><b>Luca und Rico</b> (11): Fussball im Junioren-Club, fünfte Klasse. Hochdeutsch im Unterricht, lernen Französisch, in der Pause Dialekt.</li>
+      <li><b>Jean-Nicolas</b> (31) aus dem Kanton Waadt, Ingenieur in einer internationalen Firma. Die Kunden sprechen meistens Englisch oder Französisch, manchmal auch Deutsch.</li>
+    </ul>`,
+  words:[["wohnen in · du wohnst · er wohnt","to live in"],["arbeiten als · du arbeitest · er arbeitet","to work as"],["die Muttersprache, -n","mother tongue"],["verstehen · du verstehst · er versteht","to understand"],["die Übersetzerin, -nen","translator (female)"],["der Kanton, -e","canton"],["sagen · du sagst · er sagt","to say"],["fahren nach · du fährst · er fährt","to drive / go to"],["nicht","not"],["weit","far"],["sehr","very"],["kommen aus · du kommst · er kommt","to come from"],["aber","but"],["auch","also, too"],["suchen · du suchst · er sucht","to look for, to search"],["da","here, there"],["jeden Tag","every day"],["gehen · du gehst · er geht","to go"],["zweisprachig","bilingual"],["hören · du hörst · er hört","to hear"],["viel / viele","much / many"],["langweilig","boring"],["gern / nicht gern","gladly / not gladly"],["warten · du wartest · er wartet","to wait"],["schlafen · du schläfst · er schläft","to sleep"],["am Tag","during the day, on the day"],["die Gymnastiklehrerin, -nen","gym teacher (female)"],["die Küchenhilfe, -n","kitchen help"],["der Automechaniker, -","car mechanic"],["der Chauffeur, -e","driver"],["die Pflegehelferin, -nen","nursing assistant (female)"],["der Ingenieur, -e","engineer"],["das Kantonsspital","cantonal hospital"],["die Firma, die Firmen","company"],["der Kunde, -n","customer"],["die Pause, -n","break"],["der Dialekt, -e","dialect"],["das Postauto, -s","postbus"],["die Schule, -n","school"],["die Arbeit","work"],["die Westschweiz (die Romandie)","the French-speaking part of Switzerland"],["oft","often"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"die Muttersprache",back:"mother tongue",ex:"Ihre Muttersprache ist Chinesisch."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"bilingual",back:"zweisprachig",ex:"Ich bin zweisprachig. Ich spreche zu Hause Rätoromanisch und Bündnerdeutsch."},
+    {t:"flash",lv:1,d:1,k:"gv",front:"verstehen",back:"to understand · du verstehst, er versteht",ex:"Sie versteht Italienisch, Portugiesisch und auch Schweizerdeutsch."},
+    {t:"flash",lv:1,d:2,k:"v",front:"das Postauto",back:"postbus",ex:"Das Postauto fährt nach Falera."},
+    {t:"match",lv:1,d:1,k:"gv",q:"Match the verbs with their prepositions.",pairs:[["wohnen in","to live in"],["arbeiten als","to work as"],["kommen aus","to come from"],["fahren nach","to drive / go to"],["suchen","to look for"],["warten","to wait"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the jobs.",pairs:[["die Übersetzerin","translator"],["die Gymnastiklehrerin","gym teacher"],["die Küchenhilfe","kitchen help"],["die Pflegehelferin","nursing assistant"],["der Ingenieur","engineer"],["der Automechaniker","car mechanic"]]},
+    {t:"sort",lv:2,d:1,k:"v",q:"Richtig oder falsch? Texte 1 und 2.",ctx:"Text 1: Hui-Zhu Hu (38) wohnt in Luzern. Sie arbeitet als Gymnastiklehrerin. Ihre Muttersprache ist Chinesisch. Sie spricht Englisch und Deutsch und versteht Schweizerdeutsch. Text 2: Astrid Koch (35) aus Einsiedeln im Kanton Schwyz. Sie wohnt in Genf und arbeitet da als Übersetzerin. Sie spricht Deutsch, Italienisch, Französisch, Portugiesisch und Englisch und lernt jetzt Arabisch. Sie sagt: «Ich fahre oft nach Paris. Das ist nicht weit und die Stadt ist sehr schön.»",groups:["richtig","falsch"],items:[["Hui-Zhu arbeitet als Gymnastiklehrerin.",0],["Sie spricht Schweizerdeutsch.",1],["Astrid Koch wohnt in Bern.",1],["Sie lernt jetzt Französisch.",1],["Sie sagt: «Paris ist sehr schön.»",0]],why:"Hui-Zhu only understands (versteht) Swiss German. Astrid lives in Genf and is learning Arabisch."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From text 6: „Ana Carina Hernández Castillo (22) aus Guatemala wohnt in Zürich und arbeitet als Pflegehelferin im Kantonsspital.“",q:"What is Ana Carina's job?",opts:["nursing assistant in a hospital","kitchen help in a restaurant","translator in an office"],a:0,why:"die Pflegehelferin = nursing assistant. im Kantonsspital = in the cantonal hospital."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"From text 7: „Wir sprechen Hochdeutsch im Unterricht und wir lernen Französisch. In der Pause sprechen wir Dialekt.“",q:"Was sprechen Luca und Rico in der Pause?",opts:["Dialekt","Hochdeutsch","Französisch"],a:0,why:"in der Pause = during the break. Dialekt = Swiss German dialect."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"From text 8: „Die Kunden kommen aus der ganzen Welt. Sie sprechen meistens Englisch oder Französisch, manchmal auch Deutsch.“",q:"How often do the customers speak German?",opts:["sometimes","mostly","never"],a:0,why:"meistens = mostly. manchmal = sometimes."},
+    {t:"sort",lv:2,d:2,k:"v",q:"Wer ist das?",groups:["Astrid","Illario","Jean-Nicolas"],items:[["arbeitet als Übersetzerin in Genf",0],["lernt jetzt Arabisch",0],["kommt aus dem Tessin",1],["sucht Arbeit als Automechaniker oder Chauffeur",1],["arbeitet als Ingenieur",2],["kommt aus dem Kanton Waadt",2]],why:"Astrid: Genf, Übersetzerin, Arabisch. Illario: Tessin, Basel, sucht Arbeit. Jean-Nicolas: Waadt, Ingenieur."},
+    {t:"gap",lv:3,d:2,k:"gv",ctx:"Text 3, as in the listening exercise.",q:"Sellathurai Ranganathan wohnt in Kloten im ___ Zürich. Er ___ Tamilisch, Englisch und Deutsch. Er ___ auch Zürichdeutsch.",hints:["canton","sprechen","verstehen"],a:[["Kanton"],["spricht"],["versteht"]],why:"der Kanton. sprechen: er spricht (e → i). verstehen: er versteht."},
+    {t:"gap",lv:3,d:2,k:"gv",ctx:"Text 4, Illario speaks.",q:"Meine ___ ist Italienisch. Ich ___ Baseldeutsch. Ich suche ___ als Automechaniker oder Chauffeur.",hints:["mother tongue","verstehen","work"],a:[["Muttersprache"],["verstehe"],["Arbeit"]],why:"die Muttersprache. ich verstehe. Arbeit suchen = to look for work."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Neina ___ jeden Tag mit dem Postauto ___ Chur.",hints:["fahren","to (a city)"],a:[["fährt"],["nach"]],why:"fahren: sie fährt. fahren nach + city."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Answer in a full sentence.",prompt:"Woher kommt Ana Carina und wo wohnt sie?",a:["Sie kommt aus Guatemala und wohnt in Zürich.","Ana Carina kommt aus Guatemala und wohnt in Zürich.","Sie kommt aus Guatemala und sie wohnt in Zürich."],why:"kommen aus + country, wohnen in + city."},
+    {t:"write",lv:3,d:1,k:"gv",q:"Answer in a full sentence.",prompt:"Wie alt sind Luca und Rico? (11)",a:["Sie sind 11 Jahre alt.","Sie sind elf Jahre alt.","Luca und Rico sind 11 Jahre alt.","Luca und Rico sind elf Jahre alt."],why:"Two people: sie sind."},
+    {t:"write",lv:3,d:2,k:"g",q:"Rewrite the sentence with ich instead of sie.",prompt:"Sie fährt jeden Tag mit dem Postauto nach Chur.",a:["Ich fahre jeden Tag mit dem Postauto nach Chur."],why:"The vowel change is only for du and er/sie: ich fahre."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Hui-Zhu arbeitet wie Gymnastiklehrerin in Luzern.",wrong:[2],fixed:"Hui-Zhu arbeitet als Gymnastiklehrerin in Luzern.",why:"arbeiten als = to work as."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"There are two mistakes. Tap both.",text:"Er kommt von dem Tessin und wohnt im Basel.",wrong:[2,7],fixed:"Er kommt aus dem Tessin und wohnt in Basel.",why:"kommen aus + country or region. wohnen in + city, with no article."},
+    {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Er sprecht Tamilisch und verstehen auch Zürichdeutsch.",wrong:[1,4],fixed:"Er spricht Tamilisch und versteht auch Zürichdeutsch.",why:"sprechen: er spricht. verstehen: er versteht."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: Every Saturday we play against another team.",tiles:["immer am Samstag","spielen","wir","gegen eine andere Mannschaft"],end:".",a:["Immer am Samstag spielen wir gegen eine andere Mannschaft.","Wir spielen immer am Samstag gegen eine andere Mannschaft."],verb:"spielen",why:"From text 7. Verb on position 2."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: In the hospital she hears many languages.",tiles:["im Spital","hört","sie","viele Sprachen"],end:".",a:["Im Spital hört sie viele Sprachen.","Sie hört im Spital viele Sprachen."],verb:"hört",why:"From text 6. hören: sie hört."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Sie arbeitet als Übersetzerin.","Sie arbeitet wie Übersetzerin.","Sie arbeitet für Übersetzerin."],a:0,why:"The job always comes with als: arbeiten als."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"Paris is not far and the city is very beautiful.",a:["Paris ist nicht weit und die Stadt ist sehr schön."],why:"Astrid's words in text 2."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Er arbeitet als Ingenieur.",a:["Was arbeitet Jean-Nicolas?","Was arbeitet er?","Als was arbeitet er?","Als was arbeitet Jean-Nicolas?"],why:"Course question: Was arbeitet Jean-Nicolas?"},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"I come from Ticino and now live in Basel.",a:["Ich komme aus dem Tessin und wohne jetzt in Basel."],why:"Illario's words: aus dem Tessin (das Tessin takes an article, like die Schweiz)."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write a short text like the eight people, about yourself or a friend: where the person comes from, where they live, what they work as or study, and which languages they speak and understand.",model:"Sara (27) kommt aus Italien und wohnt in Zürich.\nSie arbeitet als Ingenieurin in einer internationalen Firma.\nSie spricht Italienisch und Englisch und versteht ein bisschen Schweizerdeutsch.",checks:[{"need":"\\b(komme|kommt) aus\\b","label":"Origin: kommt aus …"},{"need":"\\b(wohne|wohnt) in\\b","label":"Home: wohnt in …"},{"need":"\\b(arbeite|arbeitet) als\\b|\\b(studiere|studiert)\\b","label":"Job or studies: arbeitet als … / studiert …"},{"need":"\\b(spreche|spricht|verstehe|versteht)\\b","label":"Languages: spricht …, versteht …"},{"avoid":"\\b(er|sie) (sprecht|fahrt|verstehe|komme|wohne)\\b","label":"er/sie forms: er spricht, sie fährt, sie versteht"}]}
+  ]
+},
+{
+  id:"w4-gern", stop:"gern & mögen", title:"mögen, gefallen, Verb + gern: so sagst du, was du magst",
+  grammar:"mögen + Nomen, Verb + gern, es gefällt mir", vocab:"Freizeit, Essen, Wohnen",
+  cheat:`
+    <h3>Three ways to say you like something</h3>
+    <div class="tbl"><table><tr><th>Pattern</th><th>Beispiel</th><th>English</th></tr>
+      <tr><td><b>mögen</b> + Nomen</td><td>Ich mag Kaffee.</td><td>I like coffee.</td></tr>
+      <tr><td>Verb + <b>gern</b></td><td>Ich trinke gern Kaffee.</td><td>I like drinking coffee.</td></tr>
+      <tr><td>… <b>gefällt mir</b></td><td>Zürich gefällt mir.</td><td>I like Zürich.</td></tr>
+    </table></div>
+    <h3>mögen</h3>
+    <p>ich mag · du magst · er/sie/es/man mag · wir mögen · ihr mögt · sie/Sie mögen. No -t with er: er <b>mag</b>, like er weiss.</p>
+    <h3>gefallen</h3>
+    <p>The thing you like is the subject. You are <b>mir</b>: Das gefällt mir. Die Mensa gefällt ihm. Gefällt dir Zürich?</p>
+    <p>mir = to me · dir = to you · ihm = to him · ihr = to her · Ihnen = to you (formell)</p>
+    <h3>gern / nicht gern</h3>
+    <p>Ich wohne gern hier. Im Winter fährt er gern in die Berge. Ich warte nicht gern.</p>`,
+  words:[["mögen · du magst · er mag","to like"],["gefallen · du gefällst mir · er gefällt mir","to like"],["Das gefällt mir.","I like that."],["gern / nicht gern","gladly / not gladly"],["gern (adv) + Verb","gladly, like to …"],["Ich wohne gern hier.","I like living here."],["Zürich gefällt mir!","I like Zürich!"],["Die Mensa gefällt ihm.","He likes the Mensa."],["mir","to me"],["dir","to you"],["ihm","to him"],["ihr","to her"],["Ihnen","to you (formell)"],["der Kaffee, -s","coffee"],["der Tee, -s","tea"],["die Schokolade","chocolate"],["Freunde treffen","to meet friends"],["Tennis spielen","to play tennis"],["Ski fahren","to ski"],["schwimmen · du schwimmst · er schwimmt","to swim"],["der See, -n","lake"],["das Essen","food"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"gv",front:"mögen",back:"to like · du magst, er mag",ex:"Magst du Kaffee? Ja, ich mag Kaffee."},
+    {t:"flash",lv:1,d:1,k:"gv",rev:true,front:"I like that.",back:"Das gefällt mir.",ex:"Es gibt viele Restaurants und Cafés in meinem Quartier. Das gefällt mir."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Three ways to say you like something",back:"mögen + Nomen · Verb + gern · … gefällt mir",ex:"Ich mag Tee. Ich trinke gern Tee. Zürich gefällt mir."},
+    {t:"flash",lv:1,d:1,k:"gv",front:"nicht gern",back:"not gladly",ex:"Ich warte nicht gern."},
+    {t:"match",lv:1,d:2,k:"gv",q:"Match the sentences.",pairs:[["Ich mag Tee.","I like tea."],["Ich trinke gern Tee.","I like drinking tea."],["Zürich gefällt mir.","I like Zürich."],["Ich schwimme gern im See.","I like swimming in the lake."],["Magst du Fussball?","Do you like football?"],["Ich fahre gern Ski.","I like skiing."]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Which pattern fits the gap?",groups:["mögen","gern","gefällt"],items:[["Ich ___ Schokolade.",0],["Er ___ keine Suppe.",0],["Ich schwimme ___ im See.",1],["Sie fährt ___ Ski.",1],["Die Wohnung ___ mir.",2],["Das Zimmer ___ ihm.",2],["Wir ___ die Mensa.",0],["Ich treffe ___ Freunde.",1]],why:"A noun after the gap: mögen. A verb before the gap: gern. mir or ihm after the gap: gefällt."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Which form is correct?",opts:["Er mag Tee.","Er magt Tee.","Er mögt Tee."],a:0,why:"mögen: er mag, with no -t. Like wissen: er weiss."},
+    {t:"mc",lv:2,d:2,k:"gv",q:"Which sentence means „I like living here“?",opts:["Ich wohne gern hier.","Ich mag wohnen hier.","Ich wohne gefällt hier."],a:0,why:"For an activity, use the verb + gern."},
+    {t:"mc",lv:2,d:2,k:"g",ctx:"„Die Mensa gefällt ihm.“ (from the Elias text)",q:"Who likes the Mensa?",opts:["he does","she does","I do"],a:0,why:"ihm = to him. gefällt ihm = he likes it. gefällt ihr = she likes it."},
+    {t:"gap",lv:3,d:1,k:"g",q:"___ du Kaffee? Ja, ich ___ Kaffee.",hints:["mögen","mögen"],a:[["Magst"],["mag"]],why:"du magst, ich mag."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Zürich ___ mir. Ich wohne ___ hier.",hints:["gefallen","gladly"],a:[["gefällt"],["gern"]],why:"gefallen: es gefällt (a → ä). gern after the verb."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Im Winter ___ er gern Ski und im Sommer ___ er gern im See.",hints:["fahren","schwimmen"],a:[["fährt"],["schwimmt"]],why:"fahren: er fährt. schwimmen is regular: er schwimmt."},
+    {t:"write",lv:3,d:2,k:"g",q:"Say the same with gern.",prompt:"Ich mag Tennis. (spielen)",a:["Ich spiele gern Tennis."],why:"mögen + noun becomes verb + gern + noun."},
+    {t:"write",lv:3,d:2,k:"g",q:"Rewrite the sentence with er instead of ich.",prompt:"Ich mag Kaffee und trinke gern Tee.",a:["Er mag Kaffee und trinkt gern Tee."],why:"er mag (no -t), er trinkt."},
+    {t:"write",lv:3,d:3,k:"g",q:"Answer with Ja, in a full sentence.",prompt:"Gefällt dir Zürich?",a:["Ja, Zürich gefällt mir.","Ja, es gefällt mir.","Ja, Zürich gefällt mir sehr."],why:"dir in the question becomes mir in the answer."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Du magst Tee und er magt Kaffee.",wrong:[5],fixed:"Du magst Tee und er mag Kaffee.",why:"er mag, with no -t."},
+    {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Er fahrt gern Ski und ich schwimmen gern im See.",wrong:[1,6],fixed:"Er fährt gern Ski und ich schwimme gern im See.",why:"er fährt (a → ä), ich schwimme."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Der Balkon gefällt mir.","Ich gefalle den Balkon.","Ich gefällt der Balkon."],a:0,why:"With gefallen, the thing you like is the subject and you are mir."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: In summer he likes to go to the lakeside.",tiles:["im Sommer","geht","er","gern","an den See"],end:".",a:["Im Sommer geht er gern an den See.","Er geht im Sommer gern an den See."],verb:"geht",why:"gern after the subject, verb on position 2."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence: I like the living room.",tiles:["das Wohnzimmer","gefällt","mir"],end:".",a:["Das Wohnzimmer gefällt mir.","Mir gefällt das Wohnzimmer."],verb:"gefällt",why:"The room is the subject, I am mir. Both orders keep the verb on position 2."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I like meeting friends.",a:["Ich treffe gern Freunde.","Ich treffe gern meine Freunde."],why:"From the Moodle video: Ich treffe gern Freunde."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Use du.",prompt:"Do you like tea?",a:["Magst du Tee?","Trinkst du gern Tee?"],why:"mögen + noun, or trinken + gern."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"He likes the Mensa, the food doesn't cost much.",a:["Die Mensa gefällt ihm, das Essen kostet nicht viel."],why:"From the Elias text. he likes = gefällt ihm."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write four sentences about what you like and don't like: one with mögen, one with a verb + gern, one with nicht gern, and one with gefällt mir.",model:"Ich mag Schokolade.\nIch fahre gern mit dem Velo zur ETH.\nIch warte nicht gern.\nMeine Wohnung gefällt mir.",checks:[{"need":"\\b(mag|magst)\\b","label":"One sentence with mögen: ich mag …"},{"need":"\\b\\w+ gern\\b","label":"One with a verb + gern"},{"need":"\\bnicht gern\\b","label":"One with nicht gern"},{"need":"\\bgefaellt (mir|ihm|ihr|dir)\\b","label":"One with gefällt mir"},{"avoid":"\\bich gefalle\\b","label":"The thing is the subject: … gefällt mir, not ich gefalle"},{"avoid":"\\b(er|sie|es) magt\\b|\\bich mage\\b","label":"ich mag, er mag: no ending"}]}
+  ]
+},
+{
+  id:"w4-pronomen", stop:"er, sie, es", title:"Personalpronomen im Nominativ und: Wo ist …?",
+  grammar:"der → er, die → sie, das → es; bei, auf, unter, hinter, vor, neben + Dativ", vocab:"Im Labor und an der Uni",
+  cheat:`
+    <h3>Personalpronomen replace nouns</h3>
+    <div class="tbl"><table><tr><th>Artikel und Nomen</th><th>Personalpronomen</th></tr>
+      <tr><td>der / ein Computer</td><td>er</td></tr>
+      <tr><td>die / eine Universität</td><td>sie</td></tr>
+      <tr><td>das / ein Labor</td><td>es</td></tr>
+      <tr><td>die Experimente (Plural)</td><td>sie</td></tr>
+    </table></div>
+    <ul>
+      <li>Der Computer ist teuer. <b>Er</b> kostet CHF 4000.</li>
+      <li>Die Universität hat viel Geld. <b>Sie</b> kauft den Computer.</li>
+      <li>Das Labor ist neu. <b>Es</b> ist im vierten Stock.</li>
+      <li>Die Experimente sind kompliziert. <b>Sie</b> brauchen viel Zeit.</li>
+    </ul>
+    <p>To use the correct personal pronoun it is essential to know the article of every noun.</p>
+    <h3>Wo ist …? Some prepositions in dative case</h3>
+    <div class="tbl"><table><tr><th></th><th>der / das → dem</th><th>die → der</th><th>Plural → den</th></tr>
+      <tr><td>bei (next to / near by)</td><td>bei dem Bahnhof</td><td>bei der Uni</td><td>bei den Bäumen</td></tr>
+      <tr><td>auf (on)</td><td>auf dem Stuhl</td><td>auf der Flasche</td><td>auf den Bäumen</td></tr>
+      <tr><td>unter (under)</td><td>unter dem Stuhl</td><td>unter der Flasche</td><td>unter den Bäumen</td></tr>
+      <tr><td>hinter (behind)</td><td>hinter dem Stuhl</td><td>hinter der Flasche</td><td>hinter den Bäumen</td></tr>
+      <tr><td>vor (in front of)</td><td>vor dem Stuhl</td><td>vor der Flasche</td><td>vor den Bäumen</td></tr>
+      <tr><td>neben (beside / next to)</td><td>neben dem Stuhl</td><td>neben der Flasche</td><td>neben den Bäumen</td></tr>
+    </table></div>`,
+  words:[["der Computer, -","computer"],["die Universität, -en","university"],["das Labor, -s","lab"],["das Experiment, -e","experiment"],["kosten · es kostet · sie kosten","to cost"],["kaufen · du kaufst · er kauft","to buy"],["brauchen · du brauchst · er braucht","to need"],["kompliziert","complicated"],["die Zeit","time"],["das Geld","money"],["wichtig","important"],["kennen · du kennst · er kennt","to know (a person or thing)"],["die Mensa","Mensa, student restaurant"],["das Maschinenlabor, -s","machine lab"],["der Stift, -e","pen"],["der Rucksack, Rucksäcke","backpack"],["die Legi","student ID card (CH)"],["das Blatt, Blätter","sheet of paper"],["die Flasche, -n","bottle"],["der Baum, Bäume","tree"],["der Bahnhof, Bahnhöfe","train station"],["Weisst du, wo … ist?","Do you know where … is?"],["Entschuldigung, wo ist …?","Excuse me, where is …?"],["Keine Ahnung.","no idea"],["bei (+ Dativ)","next to / near by"],["auf (+ Dativ)","on"],["unter (+ Dativ)","under"],["hinter (+ Dativ)","behind"],["vor (+ Dativ)","in front of"],["neben (+ Dativ)","beside / next to"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"der Computer · die Universität · das Labor · die Experimente: which pronoun replaces each?",back:"er · sie · es · sie (Plural)",ex:"Der Stift ist neu. Er ist rot."},
+    {t:"flash",lv:1,d:1,k:"v",front:"die Legi",back:"student ID card (CH)",ex:"Weisst du, wo die Legi ist?"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"backpack",back:"der Rucksack",ex:"Der Rucksack ist schwer."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Why learn every noun with its article?",back:"Only then can you pick the right pronoun: der → er, die → sie, das → es",ex:"der Stift → er · die Legi → sie · das Blatt → es"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the prepositions.",pairs:[["auf","on"],["unter","under"],["hinter","behind"],["vor","in front of"],["neben","beside / next to"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"er, sie oder es?",groups:["er","sie","es"],items:[["Computer",0],["Stift",0],["Rucksack",0],["Universität",1],["Mensa",1],["Legi",1],["Labor",2],["Maschinenlabor",2],["Blatt",2]],why:"der Computer, der Stift, der Rucksack → er. die Universität, die Mensa, die Legi → sie. das Labor, das Blatt → es."},
+    {t:"sort",lv:2,d:2,k:"g",q:"dem, der oder den? Pick the dative article after the preposition.",groups:["dem","der","den"],items:[["auf ___ Stuhl",0],["unter ___ Blatt",0],["vor ___ Bahnhof",0],["bei ___ Uni",1],["neben ___ ETH",1],["hinter ___ Flasche",1],["unter ___ Bäumen",2],["bei ___ Bäumen",2]],why:"der Stuhl, das Blatt, der Bahnhof → dem. die Uni, die ETH, die Flasche → der. Plural → den."},
+    {t:"mc",lv:2,d:1,k:"g",ctx:"„Der Computer ist teuer.“",q:"Which sentence continues correctly?",opts:["Er kostet CHF 4000.","Sie kostet CHF 4000.","Es kostet CHF 4000."],a:0,why:"der Computer is masculine, so er."},
+    {t:"mc",lv:2,d:2,k:"g",ctx:"„Die Bücher sind alt.“",q:"Which sentence continues correctly?",opts:["Sie kosten nicht viel.","Sie kostet nicht viel.","Es kostet nicht viel."],a:0,why:"Plural: sie with the -en form, sie kosten."},
+    {t:"gap",lv:3,d:1,k:"g",ctx:"Course exercise: complete the dialogues with the pronoun.",q:"„Weisst du, wo die Mensa ist?“ „Natürlich, ___ ist bei der Uni.“ „Entschuldigung, wo ist das Maschinenlabor?“ „___ ist neben der ETH.“",hints:["pronoun","pronoun"],a:[["sie"],["Es"]],why:"die Mensa → sie. das Maschinenlabor → es, capitalized at the start of the sentence."},
+    {t:"gap",lv:3,d:2,k:"g",q:"„Wo ist der Stift?“ „Keine Ahnung, ___ ist nicht hier.“ „Weisst du, wo die Legi ist?“ „Hier, ___ ist unter dem Blatt.“",hints:["pronoun","pronoun"],a:[["er"],["sie"]],why:"der Stift → er. die Legi → sie."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Der Rucksack ist ___ ___ Stuhl.",hints:["on","article"],a:[["auf"],["dem"]],why:"auf + Dativ. der Stuhl → dem Stuhl."},
+    {t:"gap",lv:3,d:3,k:"gv",q:"Die Mensa ist ___ ___ Uni und das Labor ist ___ ___ ETH.",hints:["next to / near by","article","beside","article"],a:[["bei"],["der"],["neben"],["der"]],why:"die Uni → bei der Uni. die ETH → neben der ETH."},
+    {t:"write",lv:3,d:2,k:"g",q:"Rewrite the second sentence with a pronoun.",prompt:"Das Labor ist neu. Das Labor ist im vierten Stock.",a:["Das Labor ist neu. Es ist im vierten Stock."],why:"das Labor → es."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Answer in a full sentence with a pronoun.",prompt:"Wo ist die Flasche? (auf dem Tisch)",a:["Sie ist auf dem Tisch."],why:"die Flasche → sie."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Die Mensa ist gut. Er ist bei der Uni.",wrong:[4],fixed:"Die Mensa ist gut. Sie ist bei der Uni.",why:"die Mensa → sie."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Die Flasche ist hinter die Tür.",wrong:[4],fixed:"Die Flasche ist hinter der Tür.",why:"Location with hinter takes the dative: die Tür → hinter der Tür."},
+    {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Das Labor ist neu. Sie ist im vierten Stock. Die Stifte sind billig. Es kosten nicht viel.",wrong:[4,13],fixed:"Das Labor ist neu. Es ist im vierten Stock. Die Stifte sind billig. Sie kosten nicht viel.",why:"das Labor → es. die Stifte (Plural) → sie."},
+    {t:"build",lv:4,d:2,k:"g",ctx:"„Wo ist der Stift?“",q:"Build the answer with a pronoun.",tiles:["er","ist","hinter dem Computer"],end:".",a:["Er ist hinter dem Computer."],verb:"ist",why:"der Stift → er, then the verb on position 2. hinter + Dativ: hinter dem Computer."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: The train station is next to the university.",tiles:["der Bahnhof","ist","bei der Uni"],end:".",a:["Der Bahnhof ist bei der Uni.","Bei der Uni ist der Bahnhof."],verb:"ist",why:"bei + Dativ: die Uni → bei der Uni."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Two sentences, the second with a pronoun.",prompt:"The university has a lot of money. It buys the computer.",a:["Die Universität hat viel Geld. Sie kauft den Computer."],why:"Course example. die Universität → sie."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Er ist auf dem Stuhl. (der Rucksack)",a:["Wo ist der Rucksack?"],why:"A place answer, so the question is wo."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German. Two sentences, the second with a pronoun.",prompt:"The experiments are complicated. They need a lot of time.",a:["Die Experimente sind kompliziert. Sie brauchen viel Zeit."],why:"Course example. die Experimente (Plural) → sie brauchen."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Where are three things in your room or office right now? For each, name the thing with its article, then say where it is in a second sentence with a pronoun and a preposition (auf, unter, neben, vor, hinter, bei).",model:"Der Rucksack ist hier. Er ist neben dem Stuhl.\nDie Flasche ist auch da. Sie ist auf dem Tisch.\nDas Handy ist nicht hier. Es ist unter dem Blatt.",checks:[{"need":"\\b(der|die|das) \\w+ (ist|liegt|steht)\\b","min":3,"label":"Three things with their article: der Rucksack ist …, die Flasche …"},{"need":"\\b(er|sie|es) (ist|liegt|steht)\\b","min":3,"label":"Three pronouns: er ist …, sie ist …, es ist …"},{"need":"\\b(auf|unter|neben|vor|hinter|bei) (dem|der|den)\\b","min":3,"label":"Three places with a dative article: auf dem Tisch, bei der Uni …"},{"avoid":"\\b(auf|unter|neben|vor|hinter|bei) (das|die|ein|eine|einen)\\b","label":"Location takes the dative: auf dem Stuhl, not auf das Stuhl"}]}
+  ]
+},
+{
+  id:"w4-zahlen", stop:"Zahlen", title:"Die Zahlen: von eins bis drei Milliarden",
+  grammar:"Zahlen bilden: fünf und sechzig = 65", vocab:"am Uni-Kiosk",
+  wordsHead:["Zahl","Deutsch"],
+  cheat:`
+    <h3>Am Uni-Kiosk</h3>
+    <ul>
+      <li>Ich möchte einen Milchkaffee und ein Gipfeli, bitte.</li>
+      <li>Gern, einen Moment! Zum Mitnehmen oder für da? (= as take away or for here)</li>
+      <li>Zum Mitnehmen, bitte.</li>
+      <li>Hier bitte, das macht fünf fünfundneunzig.</li>
+    </ul>
+    <h3>65 = fünf <b>und</b> sechzig</h3>
+    <p>Ones first, then und, then the tens. One word: fünfundsechzig.</p>
+    <div class="tbl"><table><tr><th>1 bis 9</th><th>11 bis 19</th><th>Zehner</th></tr>
+      <tr><td>eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun</td><td>elf, zwölf, dreizehn, vierzehn, fünfzehn, <b>sechzehn</b>, <b>siebzehn</b>, achtzehn, neunzehn</td><td>zwanzig, <b>dreissig</b>, vierzig, fünfzig, <b>sechzig</b>, <b>siebzig</b>, achtzig, neunzig</td></tr>
+    </table></div>
+    <ul>
+      <li>sechs → sech<b>zehn</b>, sech<b>zig</b> (the s drops). sieben → sieb<b>zehn</b>, sieb<b>zig</b> (the en drops).</li>
+      <li>dreissig has -ssig, not -zig. Swiss spelling: ss.</li>
+      <li>100 (ein)hundert · 200 zweihundert · 1000 (ein)tausend · 2000 zweitausend · 40'000 vierzigtausend · 500'000 fünfhunderttausend</li>
+      <li>1'000'000 eine Million · 2'000'000 zwei Millionen · 1'000'000'000 eine Milliarde · 3'000'000'000 drei Milliarden</li>
+      <li>Prices: das macht fünf fünfundneunzig = CHF 5.95.</li>
+    </ul>`,
+  words:[["1","eins"],["2","zwei"],["3","drei"],["4","vier"],["5","fünf"],["6","sechs"],["7","sieben"],["8","acht"],["9","neun"],["10","zehn"],["11","elf"],["12","zwölf"],["13","dreizehn"],["14","vierzehn"],["15","fünfzehn"],["16","sechzehn"],["17","siebzehn"],["18","achtzehn"],["19","neunzehn"],["20","zwanzig"],["30","dreissig"],["40","vierzig"],["50","fünfzig"],["60","sechzig"],["70","siebzig"],["80","achtzig"],["90","neunzig"],["65","fünfundsechzig"],["100","(ein)hundert"],["200","zweihundert"],["300","dreihundert"],["1000","(ein)tausend"],["2000","zweitausend"],["3000","dreitausend"],["40'000","vierzigtausend"],["500'000","fünfhunderttausend"],["1'000'000","eine Million"],["2'000'000","zwei Millionen"],["1'000'000'000","eine Milliarde"],["3'000'000'000","drei Milliarden"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Zahl → Deutsch",front:"65",back:"fünfundsechzig",ex:"fünf und sechzig: the ones come first, then und, then the tens."},
+    {t:"flash",lv:1,d:1,k:"v",dirLabel:"Zahl → Deutsch",front:"17",back:"siebzehn",ex:"sieben loses the -en: siebzehn, siebzig."},
+    {t:"flash",lv:1,d:1,k:"v",dirLabel:"Deutsch → Zahl",front:"dreissig",back:"30",ex:"Swiss spelling: dreissig. Not -zig like vierzig."},
+    {t:"flash",lv:1,d:2,k:"v",dirLabel:"Zahl → Deutsch",front:"2'000'000",back:"zwei Millionen",ex:"eine Million, zwei Millionen: the plural adds -en."},
+    {t:"flash",lv:1,d:2,k:"gv",dirLabel:"Am Uni-Kiosk",front:"„Das macht drei zwanzig.“ What do you pay?",back:"CHF 3.20: francs first, then the Rappen as a plain number"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the numbers. Listen for -zehn and -zig.",pairs:[["dreizehn","13"],["dreissig","30"],["fünfzehn","15"],["fünfzig","50"],["sechzehn","16"],["sechzig","60"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the numbers.",pairs:[["einundzwanzig","21"],["zwölf","12"],["vierundvierzig","44"],["siebenundneunzig","97"],["achthundert","800"],["zweitausend","2000"]]},
+    {t:"sort",lv:2,d:1,k:"v",q:"-zehn or -zig? The listening exercise asks 15 oder 50, 13 oder 30. Sort the written forms.",groups:["13 bis 19","30 bis 90"],items:[["vierzehn",0],["vierzig",1],["siebzehn",0],["siebzig",1],["achtzig",1],["achtzehn",0],["neunzig",1],["neunzehn",0]],why:"-zehn = teen, -zig = ty. The stress helps too: VIERzehn, VIERzig sound alike, so listen for the ending."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Wie heisst 72?",opts:["zweiundsiebzig","siebenundzwanzig","siebzigzwei"],a:0,why:"Ones first: zwei und siebzig. siebenundzwanzig is 27."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Which number is „siebenundachtzig“?",opts:["87","78","77"],a:0,why:"sieben (7) und achtzig (80)."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Which number is „zweitausendfünfhundert“?",opts:["2500","2050","20'500"],a:0,why:"zweitausend = 2000, fünfhundert = 500."},
+    {t:"mc",lv:2,d:2,k:"v",q:"Wie heisst 3'000'000'000?",opts:["drei Milliarden","drei Milliarde","drei Millionen"],a:0,why:"die Milliarde, Plural Milliarden. drei Millionen is 3'000'000."},
+    {t:"gap",lv:3,d:1,k:"g",q:"47 = ___",a:[["siebenundvierzig"]],why:"sieben und vierzig, one word."},
+    {t:"gap",lv:3,d:2,k:"g",q:"16 = ___ und 60 = ___",a:[["sechzehn"],["sechzig"]],why:"sechs loses its s: sechzehn, sechzig."},
+    {t:"gap",lv:3,d:2,k:"gv",ctx:"Am Uni-Kiosk. The price is CHF 5.95.",q:"Hier bitte, das macht ___ ___.",hints:["5","95"],a:[["fünf"],["fünfundneunzig"]],why:"Prices: francs, then the Rappen: fünf fünfundneunzig."},
+    {t:"gap",lv:3,d:3,k:"g",q:"365 = ___",a:[["dreihundertfünfundsechzig"]],why:"dreihundert + fünfundsechzig, one word."},
+    {t:"write",lv:3,d:2,k:"g",q:"Write the number in words.",prompt:"83",a:["dreiundachtzig"],why:"drei und achtzig."},
+    {t:"write",lv:3,d:3,k:"g",q:"Write the number in words.",prompt:"2026",a:["zweitausendsechsundzwanzig"],why:"zweitausend + sechsundzwanzig."},
+    {t:"write",lv:3,d:2,k:"g",q:"Write the number in words.",prompt:"1'250'000",a:["eine Million zweihundertfünfzigtausend"],why:"eine Million, then zweihundertfünfzigtausend as one word."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong number.",text:"einundzwanzig · zwölf · sechszehn · vierzig",wrong:[4],fixed:"einundzwanzig · zwölf · sechzehn · vierzig",why:"sechs loses its s: sechzehn."},
+    {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"siebenzehn · dreissig · zwanzigundeins · neunzig",wrong:[0,4],fixed:"siebzehn · dreissig · einundzwanzig · neunzig",why:"sieben loses the -en: siebzehn. Ones first: einundzwanzig."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the order at the kiosk: I would like a milk coffee and a croissant, please.",tiles:["ich","möchte","einen Milchkaffee","und ein Gipfeli"],end:", bitte.",a:["Ich möchte einen Milchkaffee und ein Gipfeli, bitte."],verb:"möchte",why:"From the course dialogue. möchte on position 2."},
+    {t:"mc",lv:4,d:2,k:"v",ctx:"Am Uni-Kiosk: „Zum Mitnehmen oder für da?“",q:"What is the question?",opts:["Take away or for here?","With milk or without?","Cash or card?"],a:0,why:"Course gloss: as take away or for here."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German, as the kiosk would say it.",prompt:"That's 12.50.",a:["Das macht zwölf fünfzig.","Das macht zwölf Franken fünfzig."],why:"das macht + francs + Rappen."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I would like a milk coffee, please.",a:["Ich möchte einen Milchkaffee, bitte."],why:"möchten + einen Milchkaffee (der Kaffee)."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write three sentences with numbers written as words: how old you are, since how many years you are in Zürich (seit), and your tram or bus number or your Kreis.",model:"Ich bin achtundzwanzig Jahre alt.\nIch bin seit zwei Jahren in Zürich.\nIch fahre mit dem Tram Nummer zehn zur ETH.",checks:[{"need":"\\b(null|eins?|zwei|drei|vier|fuenf|sechs|sieben|acht|neun|zehn|elf|zwoelf|\\w*(zehn|zig|ssig|hundert|tausend)|million(en)?)\\b","min":2,"label":"At least two numbers in words"},{"need":"\\bjahre? alt\\b","label":"Your age: … Jahre alt"},{"need":"\\bseit\\b","label":"Since when: seit … Jahren"},{"avoid":"[0-9]","label":"No digits, write the numbers as words"}]}
+  ]
+},
+{
+  id:"w4-muenchen", stop:"München", title:"München, die Landeshauptstadt Bayerns",
+  grammar:"Zahlen im Text, liegt im Süden von, er/sie/es", vocab:"Text: München",
+  cheat:`
+    <h3>Der Text (aus Begegnungen A1)</h3>
+    <p>In München wohnen ca. 1,26 Millionen Menschen. München liegt im Süden von Deutschland und ist die Landeshauptstadt von Bayern. München hat zwei Universitäten: die Ludwig-Maximilians-Universität und die Technische Universität. An der LMU studieren 47'000 Studenten.</p>
+    <p>München hat 71 Theater, drei grosse Orchester und 50 Museen und Sammlungen. Die Sammlung der Alten Pinakothek umfasst 9000 Bilder grosser europäischer Maler aus dem 15. bis 18. Jahrhundert. Die bekanntesten Bilder sind von den Malern Albrecht Dürer und Peter Paul Rubens. Die Pinakothek der Moderne zeigt moderne Kunst und Architektur. Sie ist ein international bedeutendes Museum für Kunst aus dem 20. Jahrhundert.</p>
+    <p>Aber München bietet noch viel mehr, zum Beispiel das berühmteste Wirtshaus der Welt, das Hofbräuhaus. Es ist 400 Jahre alt. Insgesamt trinken die Gäste im Hofbräuhaus täglich 1000 Liter Bier.</p>
+    <p>In München findet man auch viele grosse Firmen wie Siemens (Hersteller von Elektrogeräten, Telefonen und Computern), BMW (Hersteller von Autos), MAN (Hersteller von Lastkraftwagen) oder Rodenstock (Hersteller von Brillen).</p>
+    <p>Course notes: umfasst = hat. Wirtshaus = besonderes Restaurant.</p>
+    <h3>Wo liegt …?</h3>
+    <p>München liegt <b>im Süden von</b> Deutschland. Zürich liegt im Norden der Schweiz. im = in dem.</p>`,
+  words:[["die Landeshauptstadt, -städte","state capital"],["Bayern","Bavaria"],["der Mensch, -en","person, human being"],["ca. (circa)","about, approximately"],["liegen · es liegt · sie liegen","to be located (to lie)"],["im Süden von …","in the south of …"],["die Universität, -en","university"],["das Theater, -","theater"],["das Orchester, -","orchestra"],["das Museum, die Museen","museum"],["die Sammlung, -en","collection"],["umfassen (= haben)","to comprise (= to have)"],["das Bild, -er","picture, painting"],["der Maler, -","painter"],["das Jahrhundert, -e","century"],["bekannt, die bekanntesten","well-known, the best-known"],["zeigen · du zeigst · er zeigt","to show"],["die Kunst","art"],["die Architektur","architecture"],["bedeutend","important, significant"],["bieten · du bietest · er bietet","to offer"],["das Wirtshaus (= besonderes Restaurant)","inn, traditional restaurant"],["berühmt, das berühmteste","famous, the most famous"],["der Gast, die Gäste","guest"],["täglich","daily"],["der Liter, -","liter"],["das Bier, -e","beer"],["insgesamt","in total"],["finden · du findest · er findet","to find"],["die Firma, die Firmen","company"],["der Hersteller von …","manufacturer of …"],["das Elektrogerät, -e","electrical appliance"],["das Auto, -s","car"],["der Lastkraftwagen, - (LKW)","truck"],["die Brille, -n","glasses"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"die Landeshauptstadt",back:"state capital",ex:"München ist die Landeshauptstadt von Bayern."},
+    {t:"flash",lv:1,d:1,k:"v",front:"der Hersteller von …",back:"manufacturer of …",ex:"BMW ist Hersteller von Autos. Rodenstock ist Hersteller von Brillen."},
+    {t:"flash",lv:1,d:2,k:"v",rev:true,front:"century",back:"das Jahrhundert",ex:"Bilder aus dem 15. bis 18. Jahrhundert."},
+    {t:"flash",lv:1,d:2,k:"v",front:"umfassen",back:"= haben, to comprise",ex:"Die Sammlung der Alten Pinakothek umfasst 9000 Bilder."},
+    {t:"match",lv:1,d:2,k:"v",q:"Who makes what? Match, as in the text.",pairs:[["Siemens","Elektrogeräte, Telefone und Computer"],["BMW","Autos"],["MAN","Lastkraftwagen"],["Rodenstock","Brillen"],["das Hofbräuhaus","das berühmteste Wirtshaus der Welt"]]},
+    {t:"mc",lv:2,d:1,k:"gv",q:"Wie viele Menschen wohnen in München?",opts:["ca. 1,26 Millionen","ca. 12,6 Millionen","ca. 126'000"],a:0,why:"ca. = circa, about. 1,26 Millionen = 1'260'000."},
+    {t:"mc",lv:2,d:2,k:"gv",q:"Wie viele Studenten studieren an der LMU?",opts:["siebenundvierzigtausend","siebzehntausend","vierundsiebzigtausend"],a:0,why:"47'000 = siebenundvierzigtausend."},
+    {t:"mc",lv:2,d:2,k:"gv",q:"Wie alt ist das Hofbräuhaus?",opts:["vierhundert Jahre","vierzig Jahre","vierzehn Jahre"],a:0,why:"Es ist 400 Jahre alt."},
+    {t:"mc",lv:2,d:2,k:"gv",q:"Wie viel Bier trinken die Gäste im Hofbräuhaus täglich?",opts:["tausend Liter","hundert Liter","zehntausend Liter"],a:0,why:"täglich 1000 Liter Bier."},
+    {t:"sort",lv:2,d:2,k:"v",q:"Richtig oder falsch? Think about the München text.",groups:["richtig","falsch"],items:[["München liegt im Norden von Deutschland.",1],["München hat zwei Universitäten.",0],["München hat 17 Theater.",1],["Die Alte Pinakothek zeigt moderne Kunst.",1],["Das Hofbräuhaus ist 40 Jahre alt.",1],["Rodenstock ist Hersteller von Brillen.",0],["Die bekanntesten Bilder sind von Dürer und Rubens.",0]],why:"im Süden, not im Norden. 71 Theater, not 17. Moderne Kunst is in the Pinakothek der Moderne. The Hofbräuhaus is 400 years old."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"München ___ 71 Theater und die Alte Pinakothek ___ 9000 Bilder.",hints:["haben","umfassen"],a:[["hat"],["umfasst"]],why:"haben: es hat. umfassen: sie umfasst (= hat)."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"München hat ___ Theater und ___ Museen.",hints:["71","50"],a:[["einundsiebzig"],["fünfzig"]],why:"71 = ein und siebzig. 50 = fünfzig."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"In München ___ man auch viele grosse Firmen.",hints:["finden"],a:[["findet"]],why:"finden: man findet, with an extra e before the t."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Answer in a full sentence.",prompt:"Wo liegt München?",a:["München liegt im Süden von Deutschland.","Es liegt im Süden von Deutschland."],why:"liegt im Süden von + country."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Answer in a full sentence with a pronoun.",prompt:"Was zeigt die Pinakothek der Moderne?",a:["Sie zeigt moderne Kunst und Architektur."],why:"die Pinakothek → sie."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Die Alte Pinakothek haben 9000 Bilder.",wrong:[3],fixed:"Die Alte Pinakothek hat 9000 Bilder.",why:"One collection: sie hat. The text says umfasst, which means the same."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Insgesamt trinkt die Gäste täglich 1000 Liter Bier.",wrong:[1],fixed:"Insgesamt trinken die Gäste täglich 1000 Liter Bier.",why:"die Gäste is plural: sie trinken."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Die Pinakothek der Moderne zeigt moderne Kunst. Er ist ein bedeutendes Museum.",wrong:[7],fixed:"Die Pinakothek der Moderne zeigt moderne Kunst. Sie ist ein bedeutendes Museum.",why:"die Pinakothek → sie, even though das Museum follows."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence. Start with In München.",tiles:["in München","wohnen","ca. 1,26 Millionen Menschen"],end:".",a:["In München wohnen ca. 1,26 Millionen Menschen."],verb:"wohnen",why:"In München on position 1, the verb second, the subject after it."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: The Hofbräuhaus is 400 years old.",tiles:["das Hofbräuhaus","ist","400 Jahre","alt"],end:".",a:["Das Hofbräuhaus ist 400 Jahre alt."],verb:"ist",why:"Age: … ist 400 Jahre alt, like ich bin 28 Jahre alt."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German. Start with In Zürich.",prompt:"About 440'000 people live in Zürich.",a:["In Zürich wohnen ca. 440'000 Menschen.","In Zürich wohnen circa 440'000 Menschen.","In Zürich wohnen ca. vierhundertvierzigtausend Menschen."],why:"Same pattern as the first sentence of the text."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"Zürich lies in the north of Switzerland.",a:["Zürich liegt im Norden der Schweiz.","Zürich liegt im Norden von der Schweiz."],why:"die Schweiz keeps its article: der Schweiz / von der Schweiz."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write a short text like the München one about your home city, in four sentences: where it lies, how many people live there, what it has (universities, museums, theaters, companies), and one famous thing.",model:"Boston liegt im Nordosten der USA.\nIn Boston wohnen ca. 650'000 Menschen.\nDie Stadt hat viele Universitäten, zum Beispiel das MIT und Harvard.\nBerühmt ist der Marathon.",checks:[{"need":"\\bliegt im (norden|sueden|osten|westen|nordosten|nordwesten|suedosten|suedwesten|zentrum)\\b","label":"Where it lies: liegt im Süden von …"},{"need":"\\b(wohnen|hat|gibt)\\b","label":"People or things: … wohnen …, die Stadt hat …"},{"need":"[0-9]|\\b(million(en)?|tausend|hundert)\\b","label":"A number"},{"need":"\\b(universitaet(en)?|museum|museen|theater|firma|firmen|orchester|kirche|park|fluss|see|berg)\\b","label":"What it has: Universitäten, Museen, Theater, Firmen …"},{"need":"\\b(beruehmt\\w*|bekannt\\w*)\\b","label":"Something famous: berühmt, bekannt"},{"avoid":"\\bliegt in (der |dem )?(norden|sueden|osten|westen)\\b","label":"im Süden, im Norden (in + dem = im)"}]}
   ]
 }
 ]}
@@ -918,13 +1219,16 @@ function saveBest(id, got, total){
 const QUIZLET_SETS = {
   w1: ["«erster Kontakt / first contact»", "«Für den Unterricht»", "«regelmässige Verben»", "«Fragewörter»", "«wo-woher-wohin»"],
   w2: ["«Personalien»", "«Deutsch im Alltag»", "«how are you feeling»", "«Bist du …?»", "«haben-sein im Präsens»"],
-  w3: ["«Wohnsituation»", "«unregelmässige Verben»", "«regelmässige und unregelmässige Verben»"]
+  w3: ["«Wohnsituation»", "«unregelmässige Verben»", "«regelmässige und unregelmässige Verben»"],
+  w4: ["«unregelmässige Verben» (Anja und Petra)", "«regelmässige und unregelmässige Verben»"]
 };
 /* Set words that no stop lists yet, with the course glosses. */
 const QUIZLET_EXTRA = {
   w1: [["Was bedeutet …?","What's the meaning of …?"],["Wie sagt man das auf Deutsch?","How do you say that in German?"],["Wie schreibt man das?","How do you write that?"],["die Übung, -en","the exercise"],["die Hausaufgabe, -n","the homework"],["Ich hatte keine Zeit.","I didn't have time."],["Ich habe die Hausaufgabe vergessen.","I have forgotten the homework."],["Warum?","why?"],["Langsamer, bitte.","Slowly, please."],["Keine Ahnung.","no idea"],["Schöne Woche!","Have a nice week!"],["der Kaffee, -s","coffee"],["das Jahr, -e","year"],["der Professor, -en","professor"],["im Büro","in the office"],["Und dir?","And you?"]],
   w2: [["Gut, danke. Und dir?","Good, thank you. And you?"],["Bis bald! / Bis morgen!","See you soon / see you tomorrow"],["sein · du bist · er ist","to be"],["haben · du hast · er hat","to have"],["sprechen · du sprichst · er spricht","to speak"],["unterschreiben · du unterschreibst · er unterschreibt","to sign"]],
-  w3: [["das Dach","roof"],["der Korridor","corridor"]]
+  w3: [["das Dach","roof"],["der Korridor","corridor"]],
+  /* week 4 re-lists the irregular verb set for both teachers, so the whole list is the week's verb bank */
+  w4: [["sein · du bist · er ist","to be"],["haben · du hast · er hat","to have"],["sprechen · du sprichst · er spricht","to speak"],["wissen · du weisst · er weiss","to know"],["vergessen · du vergisst · er vergisst","to forget"],["sehen · du siehst · er sieht","to see"],["fahren · du fährst · er fährt","to drive"],["lesen · du liest · er liest","to read"],["nehmen · du nimmst · er nimmt","to take"],["laufen · du läufst · er läuft","to walk, to run"],["gefallen · du gefällst mir · er gefällt mir","to like"],["fallen · du fällst · er fällt","to fall"],["halten · du hältst · er hält","to hold, to stop"],["fangen · du fängst · er fängt","to catch"],["helfen · du hilfst · er hilft","to help"],["geben · du gibst · er gibt","to give"],["essen · du isst · er isst","to eat"],["werfen · du wirfst · er wirft","to throw"],["sterben · du stirbst · er stirbt","to die"],["empfehlen · du empfiehlst · er empfiehlt","to recommend"],["stehlen · du stiehlst · er stiehlt","to steal"],["treffen · du triffst · er trifft","to meet"],["schlafen · du schläfst · er schläft","to sleep"],["messen · du misst · er misst","to measure"],["tragen · du trägst · er trägt","to wear, to carry"],["unterbrechen · du unterbrichst · er unterbricht","to interrupt"],["widersprechen · du widersprichst · er widerspricht","to contradict"],["treten · du trittst · er tritt","to step, to kick"],["mögen · du magst · er mag","to like"],["möchten · du möchtest · er möchte","would like"],["wollen · du willst · er will","to want"]]
 };
 /* Base form of an entry: the word before its du/er forms or plural suffix. */
 function baseDe(de){ return de.split("·")[0].split(",")[0].trim(); }
