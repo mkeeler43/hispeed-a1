@@ -1,6 +1,6 @@
 # Hispeed A1 Trainer
 
-Practice page for the Hispeed A1 German course (HS 26). It covers weeks 1 to 4.
+Practice page for the Hispeed A1 German course (HS 26). It covers weeks 1 to 5.
 Each stop mixes grammar and vocabulary. The questions climb from flashcards to writing your own sentences.
 
 Open it here: https://mkeeler43.github.io/hispeed-a1/

@@ -1151,6 +1151,338 @@ const WEEKS = [
     {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write a short text like the München one about your home city, in four sentences: where it lies, how many people live there, what it has (universities, museums, theaters, companies), and one famous thing.",model:"Boston liegt im Nordosten der USA.\nIn Boston wohnen ca. 650'000 Menschen.\nDie Stadt hat viele Universitäten, zum Beispiel das MIT und Harvard.\nBerühmt ist der Marathon.",checks:[{"need":"\\bliegt im (norden|sueden|osten|westen|nordosten|nordwesten|suedosten|suedwesten|zentrum)\\b","label":"Where it lies: liegt im Süden von …"},{"need":"\\b(wohnen|hat|gibt)\\b","label":"People or things: … wohnen …, die Stadt hat …"},{"need":"[0-9]|\\b(million(en)?|tausend|hundert)\\b","label":"A number"},{"need":"\\b(universitaet(en)?|museum|museen|theater|firma|firmen|orchester|kirche|park|fluss|see|berg)\\b","label":"What it has: Universitäten, Museen, Theater, Firmen …"},{"need":"\\b(beruehmt\\w*|bekannt\\w*)\\b","label":"Something famous: berühmt, bekannt"},{"avoid":"\\bliegt in (der |dem )?(norden|sueden|osten|westen)\\b","label":"im Süden, im Norden (in + dem = im)"}]}
   ]
 }
+]},
+{ id:"w5", n:5, label:"Woche 5", stops:[
+{
+  id:"w5-telefon", stop:"Telefon & Distanzen", title:"Telefonnummern und Distanzen in der Schweiz",
+  grammar:"Zahlen in Gruppen lesen; Von … nach … sind es … Kilometer", vocab:"Telefonnummer, Distanzen",
+  cheat:`
+    <h3>How to say the phone number?</h3>
+    <p>Read the groups as they are printed. Each group is one number.</p>
+    <p><b>079 351 78 96</b> = null neunundsiebzig · dreihunderteinundfünfzig · achtundsiebzig · sechsundneunzig</p>
+    <ul>
+      <li>A 0 at the start of a group is <b>null</b>: 04 = nullvier, 031 = nulleinunddreissig.</li>
+      <li>A group of three digits is one number: 316 = dreihundertsechzehn.</li>
+      <li>Wie ist deine Telefonnummer? · Wie ist Ihre Telefonnummer? · Wer hat die Telefonnummer …?</li>
+    </ul>
+    <h3>Distanzen in der Schweiz</h3>
+    <ul>
+      <li>Die Schweiz ist klein. Die Distanzen sind kurz.</li>
+      <li>Von Bern <b>nach</b> Zürich <b>sind es</b> … Kilometer.</li>
+      <li>Von Zürich nach Schaffhausen sind es <b>nur</b> … Kilometer.</li>
+      <li>Man ist schnell in München, Mailand oder Paris.</li>
+    </ul>
+    <p>The distances from the listening are in the solutions on Moodle (Woche 5 Anja). The numbers in this stop are rounded road distances for practice.</p>`,
+  words:[["die Telefonnummer, -n","phone number"],["Wie ist deine Telefonnummer?","What's your phone number?"],["Wer hat die Telefonnummer …?","Who has the phone number …?"],["null","zero"],["die Distanz, -en","distance"],["der Kilometer, -","kilometer"],["Von Bern nach Zürich sind es … Kilometer.","From Bern to Zürich it is … kilometers."],["klein","small"],["kurz","short"],["schnell","fast, quickly"],["nur","only"],["Die Schweiz ist klein.","Switzerland is small."],["Genf","Geneva"],["Mailand","Milan"],["München","Munich"],["Luzern","Lucerne"],["Österreich","Austria"],["Frankreich","France"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"gv",dirLabel:"How to say it",front:"079 351 78 96",back:"null neunundsiebzig · dreihunderteinundfünfzig · achtundsiebzig · sechsundneunzig",ex:"Read the groups as printed. Each group is one number."},
+    {t:"flash",lv:1,d:2,k:"gv",dirLabel:"How to say it",front:"04 (a group in a phone number)",back:"nullvier",ex:"A 0 at the start of a group is read as null."},
+    {t:"flash",lv:1,d:1,k:"v",front:"kurz",back:"short",ex:"Die Distanz ist kurz."},
+    {t:"flash",lv:1,d:1,k:"v",front:"schnell",back:"fast, quickly",ex:"Man ist schnell in München."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the place names.",pairs:[["Genf","Geneva"],["Mailand","Milan"],["München","Munich"],["Luzern","Lucerne"],["Österreich","Austria"],["Frankreich","France"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the groups. Listen for the order of the digits.",pairs:[["sechsundneunzig","96"],["neunundsechzig","69"],["vierhundertfünfzig","450"],["vierhundertfünfzehn","415"],["dreizehn","13"],["dreissig","30"]]},
+    {t:"mc",lv:2,d:1,k:"g",ctx:"Wer hat die Telefonnummer …? „nulldreiundvierzig zweihunderteins elf einunddreissig“",q:"Which number is it?",opts:["043/201 11 31","043/211 01 31","034/201 11 13"],a:0,why:"null dreiundvierzig = 043, zweihunderteins = 201, elf = 11, einunddreissig = 31."},
+    {t:"mc",lv:2,d:2,k:"g",ctx:"Wer hat die Telefonnummer …? „nullneunundsiebzig achthundertachtzehn einundachtzig einundneunzig“",q:"Which number is it?",opts:["079/818 81 91","097/818 81 19","079/881 18 91"],a:0,why:"neun und siebzig = 79: the ones come first. achthundertachtzehn = 818."},
+    {t:"mc",lv:2,d:2,k:"g",ctx:"Wer hat die Telefonnummer …? „nulleinundzwanzig achthundertvierundsechzig neunundfünfzig zwölf“",q:"Which number is it?",opts:["021/864 59 12","012/846 95 21","021/846 59 12"],a:0,why:"einundzwanzig = 21. achthundert vier und sechzig = 864."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"From the listening: „Von Zürich nach Schaffhausen sind es nur … Kilometer.“",q:"What does nur tell you?",opts:["only, so it is close","already, so it is late","about, so it is a guess"],a:0,why:"nur = only. Die Schweiz ist klein, die Distanzen sind kurz."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Susanne Hugentobler: 056/316 35 17 = nullsechsundfünfzig ___ fünfunddreissig ___",hints:["316","17"],a:[["dreihundertsechzehn"],["siebzehn"]],why:"316 is one number: dreihundertsechzehn. sieben loses -en in siebzehn."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Von Zürich ___ Luzern ___ es ca. 50 Kilometer.",hints:["to (a city)","sein"],a:[["nach"],["sind"]],why:"Course pattern: Von Bern nach Zürich sind es … Kilometer. Kilometer is plural, so sind."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Write the number as you say it on the phone.",prompt:"Deborah Mötteli: 076/994 25 76",a:["nullsechsundsiebzig neunhundertvierundneunzig fünfundzwanzig sechsundsiebzig","null sechsundsiebzig neunhundertvierundneunzig fünfundzwanzig sechsundsiebzig"],why:"Four groups: 076, 994, 25, 76. The first group starts with null."},
+    {t:"write",lv:3,d:3,k:"gv",q:"Write the number as you say it on the phone.",prompt:"José Hernandez: 071/445 78 90",a:["nulleinundsiebzig vierhundertfünfundvierzig achtundsiebzig neunzig","null einundsiebzig vierhundertfünfundvierzig achtundsiebzig neunzig"],why:"071 = null einundsiebzig. 445 = vierhundert fünf und vierzig."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Write the sentence with the number in words.",prompt:"Von Zürich nach Basel: ca. 85 km",a:["Von Zürich nach Basel sind es ca. fünfundachtzig Kilometer.","Von Zürich nach Basel sind es circa fünfundachtzig Kilometer.","Von Zürich nach Basel sind es fünfundachtzig Kilometer."],why:"Von … nach … sind es … Kilometer. 85 = fünf und achtzig."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Von Lausanne zu Genf sind es ca. 60 Kilometer.",wrong:[2],fixed:"Von Lausanne nach Genf sind es ca. 60 Kilometer.",why:"To a city: nach. Von … nach …"},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong group.",text:"079 351 = null siebenundneunzig dreihunderteinundfünfzig",wrong:[4],fixed:"079 351 = null neunundsiebzig dreihunderteinundfünfzig",why:"79 is neun und siebzig. siebenundneunzig is 97."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Von Zürich nach Bern sind es ca. 120 Kilometern.",wrong:[8],fixed:"Von Zürich nach Bern sind es ca. 120 Kilometer.",why:"der Kilometer, plural die Kilometer: no ending."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: From Zürich to Munich it is about 300 kilometers.",tiles:["von Zürich nach München","sind","es","ca. 300 Kilometer"],end:".",a:["Von Zürich nach München sind es ca. 300 Kilometer."],verb:"sind",why:"Von … nach … on position 1, then sind, then es."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Von Zürich nach Genf sind es ca. 280 Kilometer.","Von Zürich zu Genf sind es ca. 280 Kilometer.","Von Zürich in Genf sind es ca. 280 Kilometer."],a:0,why:"Von … nach … for cities."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Use du.",prompt:"What's your phone number?",a:["Wie ist deine Telefonnummer?"],why:"Course question: Wie ist deine Telefonnummer? Formal: Wie ist Ihre Telefonnummer?"},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"Switzerland is small. The distances are short.",a:["Die Schweiz ist klein. Die Distanzen sind kurz."],why:"From the listening sheet. die Schweiz keeps its article."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German. Use man.",prompt:"You are quickly in Munich, Milan or Paris.",a:["Man ist schnell in München, Mailand oder Paris."],why:"From the listening sheet. man takes the er form: man ist."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write your phone number in words (or invent one). Then write two distances from your home city: Von … nach … sind es … Kilometer.",model:"Meine Telefonnummer ist null siebenundsiebzig vierhundertzwölf dreiundsechzig achtzehn.\nVon Boston nach New York sind es ca. 350 Kilometer.\nVon Boston nach Montreal sind es ca. 500 Kilometer.",checks:[{"need":"\\bnull\\b","label":"A phone number that starts with null"},{"need":"\\bvon [\\w-]+ nach\\b","min":2,"label":"Two distances: Von … nach …"},{"need":"\\bsind es\\b","label":"… sind es … Kilometer"},{"avoid":"\\bvon [\\w-]+ zu\\b","label":"To a city is nach, not zu"}]}
+  ]
+},
+{
+  id:"w5-sprachen", stop:"Sprachen & Geografie", title:"Sprachen in der Schweiz und ein bisschen Geografie",
+  grammar:"im Norden, nördlich von; Wo liegt …? … liegt im Südwesten", vocab:"Landessprachen, Himmelsrichtungen",
+  cheat:`
+    <h3>Sprachen in der Schweiz</h3>
+    <ul>
+      <li>Vier offizielle Landessprachen: Deutsch, Französisch, Italienisch und Rätoromanisch.</li>
+      <li>dreisprachig = trilingual · viersprachig / vielsprachig = quadrilingual / multilingual</li>
+    </ul>
+    <h3>Himmelsrichtungen</h3>
+    <div class="tbl"><table><tr><th>Nomen</th><th>wo?</th><th>Adjektiv</th></tr>
+      <tr><td>der Norden</td><td>im Norden</td><td>nördlich (von …)</td></tr>
+      <tr><td>der Osten</td><td>im Osten</td><td>östlich</td></tr>
+      <tr><td>der Süden</td><td>im Süden</td><td>südlich</td></tr>
+      <tr><td>der Westen</td><td>im Westen</td><td>westlich</td></tr>
+      <tr><td>der Nordosten</td><td>im Nordosten</td><td>nordöstlich</td></tr>
+      <tr><td>der Nordwesten</td><td>im Nordwesten</td><td>nordwestlich</td></tr>
+      <tr><td>der Südosten</td><td>im Südosten</td><td>südöstlich</td></tr>
+      <tr><td>der Südwesten</td><td>im Südwesten</td><td>südwestlich</td></tr>
+    </table></div>
+    <p>im = in dem. The directions are all der, so: im Norden, im Südwesten.</p>
+    <h3>Wo liegt …?</h3>
+    <ul>
+      <li>Wo liegt Genf? Genf liegt im Südwesten (der Schweiz).</li>
+      <li>Die Schweiz liegt in Europa. Im Norden ist Deutschland, im Osten sind Liechtenstein und Österreich, im Süden liegt Italien und im Westen Frankreich.</li>
+    </ul>`,
+  words:[["die Landessprache, -n","language of the country"],["der Kanton, -e","canton"],["zum Beispiel (z.B.)","for example"],["dreisprachig","trilingual"],["viersprachig / vielsprachig","quadrilingual / multilingual"],["eigentlich","actual, actually"],["in Realität","in reality"],["offiziell","official"],["die Himmelsrichtung, -en","cardinal direction"],["der Norden","the north"],["im Norden","in the north"],["der Osten","the east"],["der Süden","the south"],["der Westen","the west"],["der Nordosten","the northeast"],["der Nordwesten","the northwest"],["der Südosten","the southeast"],["der Südwesten","the southwest"],["nördlich (von …)","northern / north of …"],["östlich","eastern"],["südlich","southern"],["westlich","western"],["liegen · du liegst · er liegt","to lie, to be located"],["Wo liegt Genf?","Where is Geneva?"],["Europa","Europe"],["die Westschweiz","the French-speaking part of Switzerland"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"die Landessprache, -n",back:"language of the country",ex:"Deutsch ist eine Landessprache."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"trilingual",back:"dreisprachig",ex:"zweisprachig, dreisprachig, viersprachig, vielsprachig"},
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"der Norden: how do you say „in the north“?",back:"im Norden (im = in dem)",ex:"Im Norden ist Deutschland."},
+    {t:"flash",lv:1,d:2,k:"gv",front:"nördlich von",back:"north of",ex:"Deutschland liegt nördlich von der Schweiz."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the directions.",pairs:[["der Norden","the north"],["der Osten","the east"],["der Süden","the south"],["der Westen","the west"],["der Südosten","the southeast"],["der Nordwesten","the northwest"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the words.",pairs:[["dreisprachig","trilingual"],["viersprachig","quadrilingual"],["vielsprachig","multilingual"],["eigentlich","actually"],["in Realität","in reality"],["zum Beispiel","for example"]]},
+    {t:"sort",lv:2,d:2,k:"v",ctx:"Die Fakten: Die Schweiz hat vier offizielle Landessprachen: Deutsch, Französisch, Italienisch und Rätoromanisch. In 17 Kantonen sprechen die Leute Deutsch. In der Westschweiz sprechen die Leute Französisch, im Tessin Italienisch. Der Kanton Graubünden ist dreisprachig: Deutsch, Rätoromanisch und Italienisch. In Realität hört man in der Schweiz viele Sprachen.",q:"Richtig oder falsch? The sentences from the worksheet. Read the facts, then judge each sentence.",groups:["richtig","falsch"],items:[["Die Schweiz hat sieben Landessprachen.",1],["In 17 Kantonen sprechen die Leute Baseldeutsch.",1],["Man spricht in der Ostschweiz Französisch.",1],["Der Kanton Graubünden ist viersprachig.",1],["Im Kanton Tessin sprechen die Leute Italienisch.",0],["Die vier offiziellen Landessprachen sind Deutsch, Französisch, Italienisch und Englisch.",1],["Die Schweiz ist in Realität vielsprachig.",0]],why:"vier, not sieben. The 17 cantons speak Deutsch, Baseldeutsch is only the dialect of Basel. French is in the Westschweiz. Graubünden is dreisprachig. The fourth language is Rätoromanisch, not Englisch."},
+    {t:"mc",lv:2,d:1,k:"v",q:"„Der Kanton Graubünden ist dreisprachig.“ What does it mean?",opts:["People there speak three languages.","The canton has three big cities.","There are three cantons there."],a:0,why:"drei + sprachig: three languages. zweisprachig = bilingual."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From the listening sheet: „Die Schweiz liegt in Europa. Im Norden ist Deutschland, im Osten sind Liechtenstein und Österreich …“",q:"Which country is east of Switzerland?",opts:["Austria","France","Italy"],a:0,why:"im Osten = in the east. Österreich = Austria."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Which word means „southern“?",opts:["südlich","der Süden","im Süden"],a:0,why:"The adjective ends in -lich: südlich, nördlich, östlich, westlich."},
+    {t:"gap",lv:3,d:1,k:"gv",q:"Schaffhausen liegt im ___ und Lugano liegt im ___ der Schweiz.",hints:["north","south"],a:[["Norden"],["Süden"]],why:"der Norden → im Norden. der Süden → im Süden."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Neuchâtel liegt im ___ der Schweiz.",hints:["west"],a:[["Westen"]],why:"der Westen → im Westen."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Schaffhausen liegt ___ von Zürich.",hints:["north of (adjective)"],a:[["nördlich"]],why:"nördlich von = north of. With -lich there is no im."},
+    {t:"write",lv:3,d:2,k:"gv",ctx:"Look at the map on page 34: St. Gallen is in the northeast.",q:"Answer in a full sentence.",prompt:"Wo liegt St. Gallen?",a:["St. Gallen liegt im Nordosten der Schweiz.","St. Gallen liegt im Nordosten.","St. Gallen liegt im Nordosten von der Schweiz.","Es liegt im Nordosten."],why:"der Nordosten → im Nordosten."},
+    {t:"write",lv:3,d:2,k:"gv",ctx:"Look at the map on page 34: Davos is in the east.",q:"Answer in a full sentence.",prompt:"Wo liegt Davos?",a:["Davos liegt im Osten der Schweiz.","Davos liegt im Osten.","Davos liegt im Osten von der Schweiz.","Davos liegt im Südosten der Schweiz.","Davos liegt im Südosten.","Es liegt im Osten."],why:"der Osten → im Osten. Südosten is also fine for Davos."},
+    {t:"write",lv:3,d:3,k:"gv",ctx:"Look at the map on page 34: Luzern is in the middle of Switzerland.",q:"Answer in a full sentence.",prompt:"Wo liegt Luzern?",a:["Luzern liegt in der Mitte der Schweiz.","Luzern liegt in der Mitte von der Schweiz.","Luzern liegt in der Zentralschweiz.","Luzern liegt im Zentrum der Schweiz.","Es liegt in der Mitte der Schweiz."],why:"die Mitte → in der Mitte. The region is called die Zentralschweiz."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Basel liegt in Nordwesten der Schweiz.",wrong:[2],fixed:"Basel liegt im Nordwesten der Schweiz.",why:"der Nordwesten → im Nordwesten (in dem)."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"In Lugano spricht die Leute Italienisch.",wrong:[2],fixed:"In Lugano sprechen die Leute Italienisch.",why:"die Leute is plural: sie sprechen."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"In der Ostschweiz sprecht man Deutsch.",wrong:[3],fixed:"In der Ostschweiz spricht man Deutsch.",why:"man takes the er form: man spricht (e → i)."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence. Start with the region.",tiles:["in der Westschweiz","spricht","man","Französisch"],end:".",a:["In der Westschweiz spricht man Französisch."],verb:"spricht",why:"The region on position 1, the verb on position 2, then man."},
+    {t:"build",lv:4,d:1,k:"gv",q:"Build the answer: Geneva lies in the southwest of Switzerland.",tiles:["Genf","liegt","im Südwesten","der Schweiz"],end:".",a:["Genf liegt im Südwesten der Schweiz."],verb:"liegt",why:"Course answer: Genf liegt im Südwesten (der Schweiz)."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Österreich liegt östlich von der Schweiz.","Österreich liegt im östlich von der Schweiz.","Österreich liegt Osten von der Schweiz."],a:0,why:"Adjective: östlich von, with no im. Noun: im Osten."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"In Geneva the people speak French.",a:["In Genf sprechen die Leute Französisch.","In Genf spricht man Französisch."],why:"die Leute sprechen, or man spricht."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"Switzerland is actually multilingual.",a:["Die Schweiz ist eigentlich vielsprachig.","Eigentlich ist die Schweiz vielsprachig."],why:"eigentlich = actually. viel + sprachig."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Genf liegt im Südwesten der Schweiz.",a:["Wo liegt Genf?"],why:"Course question: Wo liegt Genf?"},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write three sentences about your home country: where your home city lies, which country is in the north or the south, and which languages people speak there.",model:"Lyon liegt im Südosten von Frankreich.\nIm Norden ist Belgien.\nIn Lyon sprechen die Leute Französisch.",checks:[{"need":"\\bliegt (im|in der)\\b","label":"Where it lies: … liegt im …"},{"need":"\\bim (norden|osten|sueden|westen|nordosten|nordwesten|suedosten|suedwesten)\\b","min":2,"label":"Two directions with im: im Norden, im Südosten"},{"need":"\\b(sprechen|spricht)\\b","label":"Languages: … sprechen die Leute … / spricht man …"},{"avoid":"\\bin (norden|osten|sueden|westen|nordosten|nordwesten|suedosten|suedwesten)\\b","label":"im Norden, not in Norden"}]}
+  ]
+},
+{
+  id:"w5-heimat", stop:"Heimatland", title:"Dein Heimatland: Zahlen und Fakten",
+  grammar:"es gibt; Wie viele …?; hoch, höher, der höchste; Länder ohne Artikel", vocab:"Einwohner, Fläche, Nachbarland; Grafik «Im Herzen Europas»",
+  cheat:`
+    <h3>Der kurze Text über die Schweiz</h3>
+    <p>Die Schweiz ist 41'285 km2 gross und hat 8.5 Millionen Einwohner. Es gibt 4 offizielle Landessprachen. Die Stadt Zürich hat circa 440'000 Einwohner. Der höchste Berg ist 4634 m ü. M. hoch (Dufourspitze).</p>
+    <h3>Die Fragen</h3>
+    <ul>
+      <li>Wo liegt deine Heimatstadt? (Die Stadt liegt im Süden / Westen von …)</li>
+      <li>Wie viele offizielle Sprachen gibt es in deinem Heimatland? (Es gibt … = there is / are …)</li>
+      <li>Wie viele Einwohner hat die Stadt? (Die Stadt hat …)</li>
+      <li>Wie viele Einwohner hat dein Heimatland?</li>
+      <li>Wie hoch ist der höchste Berg in deinem Land?</li>
+      <li>Wie heissen die Nachbarländer?</li>
+    </ul>
+    <h3>Länder und Artikel</h3>
+    <p>Most countries don't have an article: Italien hat circa 60 Millionen Einwohner. Exceptions: <b>die Schweiz, die Türkei, die Ukraine, der Iran</b> and <b>die USA</b> (plural).</p>
+    <h3>Grafik «Im Herzen Europas»</h3>
+    <ul>
+      <li>Mehr als 1500 Seen gibt es in der Schweiz.</li>
+      <li>60% der Gesamtfläche nehmen die Alpen ein, sie beherbergen aber nur gerade 11% der Gesamtbevölkerung.</li>
+      <li>Mehr als 2/3 der Gesamtbevölkerung lebt im Mittelland, das 30% der Landesfläche bedeckt.</li>
+      <li>Wasserschloss: Rhein, Rhone, Ticino (Po) und Inn (Donau) haben ihren Ursprung in der Schweiz.</li>
+      <li>5 Nachbarn: Die Schweiz teilt ihre Landesgrenzen mit Italien, Frankreich, Deutschland, Österreich und dem Fürstentum Liechtenstein.</li>
+    </ul>`,
+  words:[["der Einwohner, die Einwohner","inhabitant, inhabitants"],["der Quadratkilometer, - (km2)","square kilometre"],["die Fläche, -n","surface"],["das Heimatland, die Heimatländer","home country"],["die Heimatstadt, die Heimatstädte","home town"],["m ü. M. = Meter über Meer","metres above sea"],["der Meter, die Meter","metre, metres"],["das Nachbarland, die Nachbarländer","neighbouring countries"],["hoch, höher, der/die höchste","high, higher, the highest"],["der Berg, -e","mountain"],["es gibt","there is / there are"],["Wie viele …?","How many …?"],["circa (ca.)","about"],["das Herz, im Herzen …","the heart, in the heart of …"],["der See, -n","lake"],["die Gesamtfläche, -n","total surface"],["die Bevölkerung","population"],["beherbergen · du beherbergst · er beherbergt","to accommodate"],["das Wasserschloss","«water castle» literary for well, origin of a river"],["der Ursprung","origin, source"],["bedecken · du bedeckst · er bedeckt","to cover"],["der Nachbar, -n","neighbour"],["teilen · du teilst · er teilt","to share"],["die Landesgrenze, -n","frontier, border"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"der Einwohner",back:"inhabitant · die Einwohner = inhabitants",ex:"Die Stadt hat viele Einwohner."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"home country",back:"das Heimatland, die Heimatländer",ex:"Mein Heimatland ist Kanada."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Countries: with or without an article?",back:"Most have none: Italien, Frankreich. Exceptions: die Schweiz, die Türkei, die Ukraine, der Iran, die USA (plural).",ex:"Italien liegt im Süden von Europa."},
+    {t:"flash",lv:1,d:1,k:"v",front:"m ü. M.",back:"Meter über Meer = metres above sea",ex:"Der Üetliberg ist 870 m ü. M. hoch."},
+    {t:"flash",lv:1,d:2,k:"gv",front:"hoch",back:"high · höher = higher · der/die höchste = the highest",ex:"Der höchste Berg der Schweiz ist die Dufourspitze."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the words from the graphic «Im Herzen Europas».",pairs:[["der See","lake"],["die Bevölkerung","population"],["der Ursprung","origin, source"],["teilen","to share"],["bedecken","to cover"],["die Landesgrenze","frontier, border"]]},
+    {t:"match",lv:1,d:2,k:"gv",q:"Match each question with the start of its answer.",pairs:[["Wie viele Einwohner hat die Stadt?","Die Stadt hat …"],["Wo liegt deine Heimatstadt?","Die Stadt liegt im Süden von …"],["Wie viele offizielle Sprachen gibt es?","Es gibt …"],["Wie hoch ist der höchste Berg?","Der höchste Berg ist … m ü. M. hoch."],["Woher kommst du?","Ich komme aus …"]]},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From the text: „Die Schweiz ist 41'285 km2 gross und hat 8.5 Millionen Einwohner.“",q:"What does the sentence say?",opts:["8.5 million people live in Switzerland.","Switzerland is 8.5 million km2 big.","8.5 million people live in Zürich."],a:0,why:"Einwohner = inhabitants. km2 is the size: 41'285 km2."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"From the graphic: „60% der Gesamtfläche nehmen die Alpen ein, sie beherbergen aber nur gerade 11% der Gesamtbevölkerung.“",q:"What does it say about the Alps?",opts:["60% of the land, but only 11% of the people","11% of the land, but 60% of the people","60% of the land and 60% of the people"],a:0,why:"die Gesamtfläche = total surface. beherbergen = to accommodate. nur = only."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"From the graphic: „Mehr als 2/3 der Gesamtbevölkerung lebt im Mittelland, das 30% der Landesfläche bedeckt.“",q:"Where do most people in Switzerland live?",opts:["in the Mittelland, on 30% of the land","in the Alps, on 60% of the land","in the cities, on 2/3 of the land"],a:0,why:"die Bevölkerung = population. bedecken = to cover."},
+    {t:"mc",lv:2,d:1,k:"g",ctx:"From the graphic: „Mehr als 1500 Seen gibt es in der Schweiz.“",q:"What does gibt es mean here?",opts:["there are","it gives","it has"],a:0,why:"es gibt = there is / there are. Here the Seen come first, so gibt es."},
+    {t:"sort",lv:2,d:2,k:"g",q:"Does the country take an article?",groups:["ohne Artikel","mit Artikel"],items:[["Italien",0],["Frankreich",0],["Schweiz",1],["Türkei",1],["Ukraine",1],["Iran",1],["USA",1],["Österreich",0],["Deutschland",0]],why:"Most countries have no article. The exceptions from the script: die Schweiz, die Türkei, die Ukraine, der Iran, die USA."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Italien ___ circa 60 Millionen Einwohner.",hints:["haben"],a:[["hat"]],why:"One country: es hat. No article for Italien."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Wie ___ Seen gibt es in der Schweiz? Wie ___ ist die Dufourspitze?",hints:["how many","how high"],a:[["viele"],["hoch"]],why:"Wie viele + plural noun. Wie hoch …?"},
+    {t:"gap",lv:3,d:2,k:"g",q:"Ich komme aus ___ Türkei und mein Freund kommt aus ___ USA.",hints:["article","article"],a:[["der"],["den"]],why:"die Türkei → aus der Türkei. die USA (plural) → aus den USA."},
+    {t:"write",lv:3,d:2,k:"g",ctx:"From the text: „Die Stadt Zürich hat circa 440'000 Einwohner.“",q:"Answer in a full sentence with a pronoun (sie).",prompt:"Wie viele Einwohner hat die Stadt Zürich?",a:["Sie hat circa 440'000 Einwohner.","Sie hat ca. 440'000 Einwohner.","Sie hat 440'000 Einwohner."],why:"die Stadt → sie."},
+    {t:"write",lv:3,d:2,k:"gv",ctx:"From the text: „Der höchste Berg ist 4634 m ü. M. hoch (Dufourspitze).“",q:"Answer in a full sentence.",prompt:"Wie heisst der höchste Berg der Schweiz?",a:["Der höchste Berg heisst Dufourspitze.","Er heisst Dufourspitze.","Der höchste Berg der Schweiz heisst Dufourspitze.","Der höchste Berg ist die Dufourspitze.","Die Dufourspitze ist der höchste Berg."],why:"Wie heisst …? → … heisst …"},
+    {t:"write",lv:3,d:2,k:"g",q:"Say the same with es gibt.",prompt:"Die Schweiz hat 4 offizielle Landessprachen.",a:["Es gibt 4 offizielle Landessprachen.","Es gibt vier offizielle Landessprachen.","In der Schweiz gibt es 4 offizielle Landessprachen.","In der Schweiz gibt es vier offizielle Landessprachen."],why:"Course text: Es gibt 4 offizielle Landessprachen. After In der Schweiz, the verb comes second: gibt es."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wie viel Nachbarländer hat dein Heimatland?",wrong:[1],fixed:"Wie viele Nachbarländer hat dein Heimatland?",why:"Before a plural noun: wie viele."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Die USA hat circa 330 Millionen Einwohner.",wrong:[2],fixed:"Die USA haben circa 330 Millionen Einwohner.",why:"die USA is plural: sie haben."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Wie hoch ist der hohe Berg in deinem Land?",wrong:[4],fixed:"Wie hoch ist der höchste Berg in deinem Land?",why:"the highest = der höchste: hoch, höher, der höchste."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence. Start with In der Schweiz.",tiles:["in der Schweiz","gibt","es","mehr als 1500 Seen"],end:".",a:["In der Schweiz gibt es mehr als 1500 Seen."],verb:"gibt",why:"In der Schweiz on position 1, gibt on position 2, then es."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: My home town lies in the south of Italy.",tiles:["meine Heimatstadt","liegt","im Süden","von Italien"],end:".",a:["Meine Heimatstadt liegt im Süden von Italien."],verb:"liegt",why:"Course pattern: Die Stadt liegt im Süden von …"},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Die Schweiz teilt ihre Landesgrenzen mit fünf Nachbarn.","Die Schweiz teilen ihre Landesgrenzen mit fünf Nachbarn.","Schweiz teilt ihre Landesgrenzen mit fünf Nachbarn."],a:0,why:"die Schweiz keeps its article, and one country takes sie teilt."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"How many inhabitants does your home country have?",a:["Wie viele Einwohner hat dein Heimatland?"],why:"Course question. Wie viele + plural."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"The Alps cover 60% of the total surface.",a:["Die Alpen bedecken 60% der Gesamtfläche.","Die Alpen bedecken 60 Prozent der Gesamtfläche."],why:"die Alpen is plural: sie bedecken. die Gesamtfläche → der Gesamtfläche."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Die Nachbarländer heissen Italien, Frankreich, Deutschland, Österreich und Liechtenstein.",a:["Wie heissen die Nachbarländer?","Wie heissen die Nachbarländer der Schweiz?","Wie heissen die Nachbarländer von der Schweiz?"],why:"Course question: Wie heissen die Nachbarländer?"},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Answer the course questions about your home country and home town in full sentences: where the town lies, how many official languages there are, how many inhabitants the town and the country have, how high the highest mountain is, and the neighbouring countries.",model:"Meine Heimatstadt heisst Toronto. Die Stadt liegt im Süden von Kanada.\nIn Kanada gibt es zwei offizielle Sprachen.\nToronto hat circa 2,8 Millionen Einwohner.\nKanada hat circa 40 Millionen Einwohner.\nDer höchste Berg ist 5959 m ü. M. hoch.\nDas Nachbarland von Kanada sind die USA.",checks:[{"need":"\\bliegt im\\b","label":"Where: Die Stadt liegt im … von …"},{"need":"\\bes gibt\\b|\\bgibt es\\b","label":"Languages: Es gibt …"},{"need":"\\beinwohner\\b","min":2,"label":"Einwohner for the town and for the country"},{"need":"\\bhoechste\\b","label":"Der höchste Berg ist … m ü. M. hoch"},{"need":"\\bnachbarl(and|aender)\\b","label":"Das Nachbarland / die Nachbarländer"},{"avoid":"\\bdie (italien|frankreich|deutschland|kanada|spanien|china|indien|japan|brasilien|oesterreich|mexiko|griechenland|portugal)\\b","label":"No article for most countries: Italien, not die Italien"}]}
+  ]
+},
+{
+  id:"w5-datum", stop:"Datum", title:"Die Ordinalzahlen: Der Wievielte ist heute?",
+  grammar:"der erste, am ersten; der zwanzigste, am zwanzigsten", vocab:"Datum, Geburtstag, vorgestern bis übermorgen",
+  cheat:`
+    <h3>von 1. bis 19.: -te / -ten</h3>
+    <ul>
+      <li><b>der + -te</b>: Heute ist der erste Mai. Morgen ist der zweite Mai. In zwei Wochen ist der vierzehnte Mai.</li>
+      <li><b>am + -ten</b>: Wir treffen uns am vierzehnten Mai. Sein Geburtstag ist am zwölften Oktober.</li>
+      <li>Ausnahme: 1. der erste · 3. der dritte · 7. der siebte (am ersten / am dritten / am siebten)</li>
+    </ul>
+    <h3>ab 20.: -ste / -sten</h3>
+    <ul>
+      <li><b>der + -ste</b>: Morgen ist der zwanzigste Mai. Übermorgen ist der einundzwanzigste Mai.</li>
+      <li><b>am + -sten</b>: Ich habe am einunddreissigsten Juli Geburtstag. Wir feiern am fünfundzwanzigsten August.</li>
+    </ul>
+    <h3>Die Tage</h3>
+    <p>vorvorgestern · vorgestern · gestern · <b>heute</b> · morgen · übermorgen · überübermorgen</p>
+    <h3>Die Fragen</h3>
+    <ul>
+      <li>Der Wievielte ist heute? (²the how maniest² = What date is today?)</li>
+      <li>Welches Datum ist übermorgen? · Wann hast du Geburtstag?</li>
+      <li>Wann endet der Deutschkurs? · Wann beginnen die Weihnachtsferien?</li>
+    </ul>`,
+  words:[["Der Wievielte ist heute?","What date is today?"],["das Datum, die Daten","date"],["vorgestern","day before yesterday"],["gestern","yesterday"],["heute","today"],["morgen","tomorrow"],["übermorgen","day after tomorrow"],["der Geburtstag, -e","birthday"],["Wann hast du Geburtstag?","When is your birthday?"],["der Feiertag, -e","holiday"],["die Weihnachtsferien","Christmas holidays"],["wichtig","important"],["besonders","particularly"],["beginnen · du beginnst · er beginnt","to start, to begin"],["enden · du endest · er endet","to finish"],["feiern · du feierst · er feiert","to celebrate"],["der erste","the first"],["der dritte","the third"],["der siebte","the seventh"],["der zwanzigste","the twentieth"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"1. to 19.: which ending?",back:"der + -te · am + -ten",ex:"der zweite Mai · am zweiten Mai"},
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"from 20.: which ending?",back:"der + -ste · am + -sten",ex:"Heute ist der zwanzigste Mai."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Ausnahmen",front:"1. · 3. · 7.",back:"der erste · der dritte · der siebte",ex:"am ersten · am dritten · am siebten"},
+    {t:"flash",lv:1,d:1,k:"v",front:"übermorgen",back:"day after tomorrow",ex:"Welches Datum ist übermorgen?"},
+    {t:"flash",lv:1,d:1,k:"v",front:"der Feiertag, -e",back:"holiday",ex:"Am ersten August ist in der Schweiz ein Feiertag."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the days.",pairs:[["vorgestern","day before yesterday"],["gestern","yesterday"],["heute","today"],["morgen","tomorrow"],["übermorgen","day after tomorrow"],["der Geburtstag","birthday"]]},
+    {t:"match",lv:1,d:2,k:"g",q:"Match the ordinal numbers.",pairs:[["der erste","1."],["der dritte","3."],["der siebte","7."],["der zwölfte","12."],["der zwanzigste","20."],["der einunddreissigste","31."]]},
+    {t:"sort",lv:2,d:1,k:"g",q:"Which ending does the ordinal number take?",groups:["-te / -ten","-ste / -sten"],items:[["2.",0],["19.",0],["20.",1],["7.",0],["31.",1],["25.",1],["13.",0],["100.",1]],why:"Up to 19: -te. From 20: -ste. 100.: der hundertste."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Heute ist der 3. Mai. How do you say it?",opts:["der dritte Mai","der dreite Mai","der dreiste Mai"],a:0,why:"3. is an exception: der dritte."},
+    {t:"mc",lv:2,d:1,k:"v",q:"Heute ist Montag. Welcher Tag ist übermorgen?",opts:["Mittwoch","Dienstag","Samstag"],a:0,why:"übermorgen = day after tomorrow. Dienstag is morgen."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"Course question: „Welches Datum war vorvorgestern?“ Today is the 10th.",q:"Which date is the question about?",opts:["the 7th","the 8th","the 13th"],a:0,why:"gestern = 9th, vorgestern = 8th, vorvorgestern = 7th."},
+    {t:"gap",lv:3,d:1,k:"g",q:"In zwei Wochen ist der ___ Mai.",hints:["14."],a:[["vierzehnte"]],why:"der + -te: der vierzehnte."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Sein Geburtstag ist am ___ Oktober.",hints:["12."],a:[["zwölften"]],why:"am + -ten: am zwölften."},
+    {t:"gap",lv:3,d:3,k:"g",q:"Ich habe am ___ Juli Geburtstag.",hints:["31."],a:[["einunddreissigsten"]],why:"From 20: am + -sten. Swiss spelling: dreissig."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Heute ist der ___ Juni und morgen ist der ___ Juni.",hints:["7.","8."],a:[["siebte"],["achte"]],why:"7. is an exception: der siebte. 8.: der achte."},
+    {t:"write",lv:3,d:2,k:"g",q:"Write the date in words.",prompt:"Übermorgen ist der 21. Mai.",a:["Übermorgen ist der einundzwanzigste Mai."],why:"From 20: der + -ste."},
+    {t:"write",lv:3,d:2,k:"gv",ctx:"Your birthday is on 3 March.",q:"Answer in a full sentence.",prompt:"Wann hast du Geburtstag?",a:["Ich habe am dritten März Geburtstag.","Am dritten März habe ich Geburtstag.","Mein Geburtstag ist am dritten März.","Ich habe am 3. März Geburtstag."],why:"am + -ten, and 3. is an exception: am dritten."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wir feiern am fünfundzwanzigten August.",wrong:[3],fixed:"Wir feiern am fünfundzwanzigsten August.",why:"From 20: am + -sten."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Heute ist der dreite Mai und morgen der vierte Mai.",wrong:[3],fixed:"Heute ist der dritte Mai und morgen der vierte Mai.",why:"3. is an exception: der dritte."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Der Kurs endet am erste Dezember.",wrong:[4],fixed:"Der Kurs endet am ersten Dezember.",why:"After am: -ten. am ersten."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: My birthday is on the 12th of October.",tiles:["ich","habe","am zwölften Oktober","Geburtstag"],end:".",a:["Ich habe am zwölften Oktober Geburtstag.","Am zwölften Oktober habe ich Geburtstag."],verb:"habe",why:"Course pattern: Ich habe am … Geburtstag."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Am ersten Mai ist ein Feiertag.","Am erste Mai ist ein Feiertag.","Am einsten Mai ist ein Feiertag."],a:0,why:"1. is an exception: der erste, am ersten."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"When is your mother's birthday?",a:["Wann hat deine Mutter Geburtstag?"],why:"Course question: Wann hat deine Mutter Geburtstag?"},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"We meet on the fourteenth of May.",a:["Wir treffen uns am vierzehnten Mai.","Am vierzehnten Mai treffen wir uns."],why:"Course sentence. am + -ten."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer.",prompt:"Heute ist der zehnte Oktober.",a:["Der Wievielte ist heute?","Welches Datum ist heute?"],why:"Course question: Der Wievielte ist heute?"},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write three sentences with dates in words: when your birthday is, when an important holiday in your home country is, and what date it is today.",model:"Ich habe am dritten März Geburtstag.\nIn Italien ist am fünfundzwanzigsten April ein wichtiger Feiertag.\nHeute ist der zwanzigste Oktober.",checks:[{"need":"\\bam [a-z]+(ten|sten)\\b","label":"A date with am + -ten / -sten"},{"need":"\\bfeiertag\\b","label":"A Feiertag in your home country"},{"need":"\\bder [a-z]+(te|ste) (januar|februar|maerz|april|mai|juni|juli|august|september|oktober|november|dezember)\\b","label":"Today: Heute ist der … -te / -ste …"},{"avoid":"\\bam [a-z]+(te|ste) (januar|februar|maerz|april|mai|juni|juli|august|september|oktober|november|dezember)\\b","label":"After am the ending is -ten / -sten"},{"avoid":"\\b(dreite|dreiten|siebente|einste|einsten)\\b","label":"Exceptions: dritte, siebte, erste"}]}
+  ]
+},
+{
+  id:"w5-uhrzeit", stop:"Uhrzeit", title:"Die Uhrzeit: Wie spät ist es?",
+  grammar:"Viertel nach, halb, fünf vor halb; offiziell: 19.35 Uhr", vocab:"kurz vor, fast, erst, schon, noch nicht",
+  cheat:`
+    <h3>Die Uhr (inoffiziell)</h3>
+    <div class="tbl"><table><tr><th>Uhrzeit</th><th>Es ist …</th></tr>
+      <tr><td>11.05</td><td>fünf nach elf</td></tr>
+      <tr><td>11.10</td><td>zehn nach elf</td></tr>
+      <tr><td>11.15</td><td>Viertel nach elf</td></tr>
+      <tr><td>11.20</td><td>zwanzig nach elf</td></tr>
+      <tr><td>11.25</td><td>fünf vor halb zwölf</td></tr>
+      <tr><td>11.30</td><td><b>halb zwölf</b></td></tr>
+      <tr><td>11.35</td><td>fünf nach halb zwölf</td></tr>
+      <tr><td>11.40</td><td>zwanzig vor zwölf</td></tr>
+      <tr><td>11.45</td><td>Viertel vor zwölf</td></tr>
+      <tr><td>11.50</td><td>zehn vor zwölf</td></tr>
+      <tr><td>11.55</td><td>fünf vor zwölf</td></tr>
+    </table></div>
+    <p><b>halb</b> counts toward the next hour: halb zwölf = 11.30.</p>
+    <p>Offiziell (train, radio): 19.35 = neunzehn Uhr fünfunddreissig.</p>
+    <h3>Fragen und Antworten</h3>
+    <ul>
+      <li>Wie spät ist es? / Wie viel Uhr ist es? Es ist …</li>
+      <li>Punkt / Genau 2? Ja, punkt/genau 2. Nein, noch nicht 2.</li>
+      <li>Ist es schon 2? Ja, es ist schon 2. Wir sind zu spät. Nein, es ist erst 1.50. Wir haben noch Zeit.</li>
+      <li>13.58: Es ist fast zwei. Es ist kurz vor zwei. · 14.03: Es ist kurz nach zwei.</li>
+    </ul>
+    <h3>Repetition: Wortschatz Lösung</h3>
+    <ul>
+      <li>Was? Schon so spät? = What? That late? · Ich muss mich beeilen. = I have to hurry.</li>
+      <li>Wir haben keine Zeit mehr. = We are running out of time. · Wir haben noch genug Zeit. = We still have enough time.</li>
+      <li>Hast du um 3 Uhr Zeit? = Do you have time at 3 pm? · Bis gleich. = See you soon. · Bis später. = See you later.</li>
+    </ul>`,
+  words:[["Wie spät ist es, bitte?","What's the time, please?"],["Entschuldigung, wie viel Uhr ist es?","Excuse me, what's the time?"],["Viertel nach","quarter past"],["Viertel vor","quarter to"],["halb zwölf","11.30 (half till 12)"],["Es ist kurz nach 3 Uhr.","It's shortly after 3 pm."],["Es ist kurz vor 3 Uhr.","It's shortly before 3 o'clock."],["Es ist gleich / fast 3 Uhr.","It's almost 3 pm."],["Es ist erst 14.45 Uhr.","It's only 2.45 pm."],["Es ist genau / Punkt 3 Uhr.","It's 3 pm sharp."],["Ist es schon 3 Uhr?","Is it already 3 pm?"],["Nein, noch nicht.","No, not yet."],["Was? Schon so spät?","What? That late?"],["zu spät","too late"],["Ich muss mich beeilen.","I have to hurry."],["Wir haben keine Zeit mehr.","We are running out of time."],["Wir haben noch genug Zeit.","We still have enough time."],["Wann treffen wir uns?","At what time do we meet?"],["Hast du um 3 Uhr Zeit?","Do you have time at 3 pm?"],["Der Film beginnt erst um 8 Uhr.","The movie doesn't start until 8pm."],["Ich freue mich (darauf)!","I am looking forward (to it)!"],["Danke für Ihre / deine Hilfe.","Thanks for your help."],["Bis gleich.","See you soon."],["Bis später.","See you later."],["die Mitternacht","midnight"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",front:"halb zwölf",back:"11.30 · halb counts toward the next hour (half till 12)",ex:"halb drei = 2.30"},
+    {t:"flash",lv:1,d:1,k:"v",front:"Viertel nach elf",back:"11.15 · Viertel = quarter, nach = past",ex:"Viertel vor = quarter to"},
+    {t:"flash",lv:1,d:1,k:"v",front:"erst",back:"only (earlier than you think)",ex:"Es ist erst 14.45 Uhr. It's only 2.45 pm."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"offiziell",front:"19.35",back:"neunzehn Uhr fünfunddreissig",ex:"Informally: fünf nach halb acht."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"See you later.",back:"Bis später.",ex:"Bis gleich. = See you soon."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the words from the clock page.",pairs:[["noch nicht","not yet"],["schon","already"],["zu spät","too late"],["fast","almost"],["kurz nach","shortly after"],["kurz vor","shortly before"]]},
+    {t:"match",lv:1,d:2,k:"g",q:"Match the times.",pairs:[["Viertel nach vier","4.15"],["Viertel vor vier","3.45"],["halb vier","3.30"],["fünf vor halb vier","3.25"],["fünf nach halb vier","3.35"],["zehn vor vier","3.50"]]},
+    {t:"sort",lv:2,d:1,k:"g",q:"Informal time: nach or vor?",groups:["… nach …","… vor …"],items:[["7.10",0],["7.50",1],["7.20",0],["7.40",1],["7.05",0],["7.55",1]],why:"First half of the hour: nach the hour. Second half: vor the next hour. 7.40 = zwanzig vor acht."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Es ist halb sieben. Wie viel Uhr ist es?",opts:["6.30","7.30","6.50"],a:0,why:"halb counts toward the next hour: halb sieben = 6.30."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Es ist fünf vor halb neun. Wie viel Uhr ist es?",opts:["8.25","9.25","8.55"],a:0,why:"halb neun = 8.30, five minutes before that: 8.25."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"„Ist es schon 2?“ „Nein, es ist erst 1.50. Wir haben noch Zeit.“",q:"What does the answer mean?",opts:["No, it's only 1.50, we still have time.","Yes, it's already 2, we are too late.","No, it's almost 2, we have no time."],a:0,why:"erst = only. noch = still."},
+    {t:"gap",lv:3,d:1,k:"g",q:"9.45: Es ist ___ vor zehn.",a:[["Viertel"]],why:"Viertel vor = quarter to."},
+    {t:"gap",lv:3,d:2,k:"g",q:"8.30: Es ist ___ neun.",a:[["halb"]],why:"halb neun = 8.30."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"16.04: Es ist kurz ___ vier. 15.57: Es ist kurz ___ vier.",a:[["nach"],["vor"]],why:"kurz nach = shortly after, kurz vor = shortly before."},
+    {t:"write",lv:3,d:1,k:"g",q:"Say the time informally.",prompt:"10.15",a:["Es ist Viertel nach zehn.","Viertel nach zehn"],why:"Viertel nach zehn."},
+    {t:"write",lv:3,d:2,k:"g",q:"Say the time informally.",prompt:"7.30",a:["Es ist halb acht.","halb acht"],why:"halb counts toward the next hour: halb acht."},
+    {t:"write",lv:3,d:3,k:"g",q:"Say the time informally.",prompt:"5.35",a:["Es ist fünf nach halb sechs.","fünf nach halb sechs"],why:"halb sechs = 5.30, five minutes after: fünf nach halb sechs."},
+    {t:"write",lv:3,d:2,k:"g",q:"Say the official time in words, as on the radio.",prompt:"21.45",a:["Es ist einundzwanzig Uhr fünfundvierzig.","einundzwanzig Uhr fünfundvierzig"],why:"Official: hours, Uhr, minutes."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong time.",text:"Es ist halb sieben, also 7.30 Uhr.",wrong:[5],fixed:"Es ist halb sieben, also 6.30 Uhr.",why:"halb sieben = 6.30."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the word that does not fit.",text:"Nein, es ist schon 3.50. Wir haben noch Zeit.",wrong:[3],fixed:"Nein, es ist erst 3.50. Wir haben noch Zeit.",why:"There is still time, so it is only (erst) 1.50."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Es ist Viertel nach zwölf, also 11.45 Uhr.",wrong:[3],fixed:"Es ist Viertel vor zwölf, also 11.45 Uhr.",why:"11.45 is a quarter to twelve: Viertel vor zwölf."},
+    {t:"build",lv:4,d:1,k:"v",q:"Build the question: Excuse me, what's the time?",tiles:["Entschuldigung,","wie viel Uhr","ist","es"],end:"?",a:["Entschuldigung, wie viel Uhr ist es?"],verb:"ist",why:"Question word first, then the verb, then es."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: The movie doesn't start until 8 pm.",tiles:["der Film","beginnt","erst","um 8 Uhr"],end:".",a:["Der Film beginnt erst um 8 Uhr."],verb:"beginnt",why:"erst = not until. The time takes um."},
+    {t:"mc",lv:4,d:2,k:"v",ctx:"Your friend asks: „Hast du um 3 Uhr Zeit?“ You are busy.",q:"What do you answer?",opts:["Nein, tut mir Leid. Ich habe keine Zeit.","Nein, noch nicht. Es ist erst 3 Uhr.","Ja, ich habe Zeit. Ich freue mich!"],a:0,why:"keine Zeit = no time. noch nicht answers „Ist es schon …?“"},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"What? That late? I have to hurry.",a:["Was? Schon so spät? Ich muss mich beeilen."],why:"From the repetition sheet."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"We still have enough time.",a:["Wir haben noch genug Zeit."],why:"noch = still. genug = enough."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"It's almost 3 pm.",a:["Es ist fast 3 Uhr.","Es ist gleich 3 Uhr.","Es ist fast drei Uhr.","Es ist gleich drei Uhr.","Es ist fast drei.","Es ist fast 15 Uhr."],why:"fast or gleich = almost."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write a short dialog like the one on page 42: one person asks the time, the other answers informally, and then one reacts with schon, erst, noch or zu spät.",model:"Entschuldigung, wie spät ist es, bitte?\nEs ist Viertel vor acht.\nWas? Schon? Wir sind zu spät!",checks:[{"need":"\\b(wie spaet|wie viel uhr)\\b","label":"The question: Wie spät ist es? / Wie viel Uhr ist es?"},{"need":"\\b(viertel|halb|nach|vor)\\b","label":"An informal time: Viertel vor, halb, … nach …"},{"need":"\\b(schon|erst|noch|zu spaet)\\b","label":"A reaction with schon, erst, noch or zu spät"},{"avoid":"\\b(wie spaet|wie viel uhr) (bist|sind)\\b","label":"Wie spät ist es, not bist"}]}
+  ]
+},
+{
+  id:"w5-imamum", stop:"im, am, um", title:"im, am, um: Wann beginnt der Kurs?",
+  grammar:"im + Monat / Jahreszeit, am + Tag / Tageszeit, um + Uhrzeit", vocab:"Monate, Jahreszeiten, Wochentage",
+  cheat:`
+    <div class="tbl"><table><tr><th>im</th><th>am</th><th>um</th></tr>
+      <tr><td>Monate und Jahreszeiten</td><td>Tage und Tageszeiten</td><td>Uhrzeit</td></tr>
+      <tr><td>im Juli, im Winter</td><td>am Mittwoch, am Abend, am Wochenende, am 1. März</td><td>um halb sieben, um Mitternacht</td></tr>
+    </table></div>
+    <p>Wann beginnt der Kurs? <b>Im</b> September, <b>am</b> Dienstag <b>um</b> 12 Uhr.</p>
+    <ul>
+      <li>Months are masculine, but we use them with „im Juli“ (in July).</li>
+      <li>Days are masculine, but we mostly use them with „am Mittwoch“ (on Wednesday).</li>
+      <li>Ausnahme: <b>in der Nacht</b>, not am Nacht.</li>
+      <li>Every Monday: montags. Am Montag habe ich vier Vorlesungen. = Montags habe ich vier Vorlesungen.</li>
+      <li>am Morgen / morgens · am Vormittag / vormittags · am Mittag / mittags · am Abend / abends · in der Nacht / nachts</li>
+    </ul>
+    <h3>Die Jahreszeiten</h3>
+    <p>Der Winter ist kalt. Im Winter fahre ich gern Ski. Der Frühling ist warm. Der Sommer ist heiss. Der Herbst ist kühl. Im Herbst esse ich gern Marroni.</p>
+    <h3>Trennbare Verben (Moodle)</h3>
+    <p>aufstehen: Ich stehe um 7 Uhr auf. The verb stem is on position 2, the prefix goes to the very end.</p>`,
+  words:[["der Januar","January"],["der Februar","February"],["der März","March"],["der April","April"],["der Mai","May"],["der Juni","June"],["der Juli","July"],["der August","August"],["der September","September"],["der Oktober","October"],["der November","November"],["der Dezember","December"],["der Monat, -e","month"],["monatlich","monthly"],["die Jahreszeit, -en","season"],["der Frühling","spring"],["der Sommer","summer"],["der Herbst","autumn"],["der Winter","winter"],["der Montag","Monday"],["der Dienstag","Tuesday"],["der Mittwoch","Wednesday"],["der Donnerstag","Thursday"],["der Freitag","Friday"],["der Samstag","Saturday"],["der Sonntag","Sunday"],["montags","on mondays"],["die Woche, -n","week"],["wöchentlich","weekly"],["das Wochenende, -n","weekend"],["der Nachmittag","afternoon"],["in der Nacht","at night"],["die Vorlesung, -en","lecture"],["aufstehen · du stehst auf · er steht auf","to get up"],["duschen · du duschst · er duscht","to take a shower"],["frühstücken · du frühstückst · er frühstückt","to have breakfast"],["frei haben","to have free time, not working"],["zu Hause bleiben","to stay at home"],["der Abgabetermin, -e","submission date"],["grau","grey"],["nass","wet"],["kalt","cold"],["kühl","cool"],["heiss","hot"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"im, am or um: what goes with what?",back:"im + Monat, Jahreszeit · am + Tag, Tageszeit · um + Uhrzeit",ex:"im Juli · am Montag · um 8 Uhr"},
+    {t:"flash",lv:1,d:1,k:"gv",front:"montags",back:"on mondays (every Monday)",ex:"Dienstags habe ich Deutschkurs."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Ausnahme",front:"in der Nacht",back:"at night · not am Nacht",ex:"am Morgen, am Abend, but in der Nacht"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"autumn",back:"der Herbst",ex:"Der Herbst ist kühl."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the words.",pairs:[["der Frühling","spring"],["der Sommer","summer"],["der Winter","winter"],["der Monat","month"],["die Jahreszeit","season"],["das Wochenende","weekend"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the times of day.",pairs:[["am Morgen","in the morning"],["am Nachmittag","in the afternoon"],["am Abend","in the evening"],["in der Nacht","at night"],["um Mitternacht","at midnight"],["montags","on mondays"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Ordne die Ausdrücke nach im, am, um.",groups:["im","am","um"],items:[["Mittwochabend",1],["Frühling",0],["1. März",1],["halb sieben",2],["Winter",0],["Viertel nach vier",2],["März",0],["Wochenende",1],["zwölf Uhr",2],["Montag",1],["Mitternacht",2],["Mittag",1]],why:"Months and seasons: im. Days, times of day, the weekend and dates: am. Clock times and Mitternacht: um."},
+    {t:"mc",lv:2,d:1,k:"gv",ctx:"„Freitags arbeite ich zu Hause.“",q:"When does the person work at home?",opts:["every Friday","this Friday","last Friday"],a:0,why:"freitags with -s and a small f = every Friday."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Which time of day does not take am?",opts:["Nacht","Abend","Morgen"],a:0,why:"in der Nacht is the exception. am Morgen, am Abend."},
+    {t:"gap",lv:3,d:1,k:"g",q:"___ September beginnt mein zweites Jahr. Nur ___ Freitag arbeite ich zu Hause.",a:[["Im"],["am"]],why:"Month: im. Day: am."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Der Kurs ist ___ Montag. Er beginnt ___ 12 Uhr und endet ___ 14 Uhr.",a:[["am"],["um"],["um"]],why:"Day: am. Clock time: um."},
+    {t:"gap",lv:3,d:1,k:"g",q:"___ November ist es grau und nass und ich habe viel Stress mit einem Abgabetermin.",a:[["Im"]],why:"Month: im."},
+    {t:"gap",lv:3,d:2,k:"g",q:"___ Abend bleibe ich meistens zu Hause. ___ Mitternacht gehe ich schlafen.",a:[["Am"],["Um"]],why:"Time of day: am. Mitternacht is a clock time: um."},
+    {t:"write",lv:3,d:2,k:"g",q:"Answer with im, am and um.",prompt:"Wann beginnt der Kurs? (September · Dienstag · 12 Uhr)",a:["Im September, am Dienstag um 12 Uhr.","Der Kurs beginnt im September, am Dienstag um 12 Uhr.","Im September, am Dienstag, um 12 Uhr."],why:"Course answer: Im September, am Dienstag um 12 Uhr."},
+    {t:"write",lv:3,d:2,k:"g",q:"Say the same with montags.",prompt:"Am Montag habe ich vier Vorlesungen.",a:["Montags habe ich vier Vorlesungen.","Ich habe montags vier Vorlesungen."],why:"montags = every Monday, no am."},
+    {t:"write",lv:3,d:3,k:"g",q:"Write the sentence. aufstehen is separable: the prefix goes to the end.",prompt:"ich · aufstehen · um 7 Uhr",a:["Ich stehe um 7 Uhr auf.","Um 7 Uhr stehe ich auf.","Ich stehe um sieben Uhr auf.","Um sieben Uhr stehe ich auf."],why:"stehe on position 2, auf at the very end."},
+    {t:"fix",lv:4,d:1,k:"g",q:"Tap the wrong word.",text:"Am Winter fahre ich gern Ski.",wrong:[0],fixed:"Im Winter fahre ich gern Ski.",why:"Seasons take im."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Im Sonntag schlafe ich lange.",wrong:[0],fixed:"Am Sonntag schlafe ich lange.",why:"Days take am."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Am Nachmittag spiele ich am 15 Uhr Volleyball.",wrong:[4],fixed:"Am Nachmittag spiele ich um 15 Uhr Volleyball.",why:"Am Nachmittag is right, but a clock time takes um."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich habe am Juli Geburtstag.",wrong:[2],fixed:"Ich habe im Juli Geburtstag.",why:"A month alone takes im. With a date it is am: am 31. Juli."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence. Start with the season.",tiles:["im Sommer","schwimme","ich","gern","im See"],end:".",a:["Im Sommer schwimme ich gern im See."],verb:"schwimme",why:"Im Sommer on position 1, the verb second, then ich gern."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: On Saturday I go shopping.",tiles:["am Samstag","gehe","ich","einkaufen"],end:".",a:["Am Samstag gehe ich einkaufen.","Ich gehe am Samstag einkaufen."],verb:"gehe",why:"Day: am. einkaufen gehen: einkaufen goes to the end."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Im Frühling wandere ich gern in den Bergen.","Am Frühling wandere ich gern in den Bergen.","Um Frühling wandere ich gern in den Bergen."],a:0,why:"Seasons take im."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"At the weekend I have free time.",a:["Am Wochenende habe ich frei.","Ich habe am Wochenende frei."],why:"Course sentence. das Wochenende takes am."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I have breakfast at 7.30.",a:["Ich frühstücke um 7.30 Uhr.","Um 7.30 Uhr frühstücke ich.","Ich frühstücke um halb acht.","Um halb acht frühstücke ich.","Ich frühstücke um 7.30.","Um 7.30 frühstücke ich."],why:"frühstücken = to have breakfast. Clock time: um."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"In winter it is cold.",a:["Im Winter ist es kalt.","Der Winter ist kalt."],why:"Season: im. Course sentence: Der Winter ist kalt."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write a short text like the one on page 44 about your week: one sentence with im, two with am, two with um.",model:"Im Oktober habe ich viel Arbeit.\nAm Montag beginnt mein Deutschkurs um 12 Uhr.\nAm Wochenende treffe ich Freunde.\nIch stehe um 8 Uhr auf.",checks:[{"need":"\\bim (januar|februar|maerz|april|mai|juni|juli|august|september|oktober|november|dezember|fruehling|sommer|herbst|winter)\\b","label":"im + Monat or Jahreszeit"},{"need":"\\bam (montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|wochenende|morgen|vormittag|mittag|nachmittag|abend)\\b","min":2,"label":"am + Tag or Tageszeit, twice"},{"need":"\\bum (\\d|halb|viertel|mitternacht|eins|zwei|drei|vier|fuenf|sechs|sieben|acht|neun|zehn|elf|zwoelf)","min":2,"label":"um + Uhrzeit, twice"},{"avoid":"\\b(am|um) (januar|februar|maerz|april|mai|juni|juli|august|september|oktober|november|dezember|fruehling|sommer|herbst|winter)\\b","label":"Months and seasons take im"},{"avoid":"\\b(im|um) (montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|wochenende)\\b","label":"Days and the weekend take am"}]}
+  ]
+}
 ]}
 ];
 
@@ -1220,7 +1552,8 @@ const QUIZLET_SETS = {
   w1: ["«erster Kontakt / first contact»", "«Für den Unterricht»", "«regelmässige Verben»", "«Fragewörter»", "«wo-woher-wohin»"],
   w2: ["«Personalien»", "«Deutsch im Alltag»", "«how are you feeling»", "«Bist du …?»", "«haben-sein im Präsens»"],
   w3: ["«Wohnsituation»", "«unregelmässige Verben»", "«regelmässige und unregelmässige Verben»"],
-  w4: ["«unregelmässige Verben» (Anja und Petra)", "«regelmässige und unregelmässige Verben»"]
+  w4: ["«unregelmässige Verben» (Anja und Petra)", "«regelmässige und unregelmässige Verben»"],
+  w5: ["«Uhrzeiten, im-am-um» (Petra)"]
 };
 /* Set words that no stop lists yet, with the course glosses. */
 const QUIZLET_EXTRA = {
@@ -1228,7 +1561,8 @@ const QUIZLET_EXTRA = {
   w2: [["Gut, danke. Und dir?","Good, thank you. And you?"],["Bis bald! / Bis morgen!","See you soon / see you tomorrow"],["sein · du bist · er ist","to be"],["haben · du hast · er hat","to have"],["sprechen · du sprichst · er spricht","to speak"],["unterschreiben · du unterschreibst · er unterschreibt","to sign"]],
   w3: [["das Dach","roof"],["der Korridor","corridor"]],
   /* week 4 re-lists the irregular verb set for both teachers, so the whole list is the week's verb bank */
-  w4: [["sein · du bist · er ist","to be"],["haben · du hast · er hat","to have"],["sprechen · du sprichst · er spricht","to speak"],["wissen · du weisst · er weiss","to know"],["vergessen · du vergisst · er vergisst","to forget"],["sehen · du siehst · er sieht","to see"],["fahren · du fährst · er fährt","to drive"],["lesen · du liest · er liest","to read"],["nehmen · du nimmst · er nimmt","to take"],["laufen · du läufst · er läuft","to walk, to run"],["gefallen · du gefällst mir · er gefällt mir","to like"],["fallen · du fällst · er fällt","to fall"],["halten · du hältst · er hält","to hold, to stop"],["fangen · du fängst · er fängt","to catch"],["helfen · du hilfst · er hilft","to help"],["geben · du gibst · er gibt","to give"],["essen · du isst · er isst","to eat"],["werfen · du wirfst · er wirft","to throw"],["sterben · du stirbst · er stirbt","to die"],["empfehlen · du empfiehlst · er empfiehlt","to recommend"],["stehlen · du stiehlst · er stiehlt","to steal"],["treffen · du triffst · er trifft","to meet"],["schlafen · du schläfst · er schläft","to sleep"],["messen · du misst · er misst","to measure"],["tragen · du trägst · er trägt","to wear, to carry"],["unterbrechen · du unterbrichst · er unterbricht","to interrupt"],["widersprechen · du widersprichst · er widerspricht","to contradict"],["treten · du trittst · er tritt","to step, to kick"],["mögen · du magst · er mag","to like"],["möchten · du möchtest · er möchte","would like"],["wollen · du willst · er will","to want"]]
+  w4: [["sein · du bist · er ist","to be"],["haben · du hast · er hat","to have"],["sprechen · du sprichst · er spricht","to speak"],["wissen · du weisst · er weiss","to know"],["vergessen · du vergisst · er vergisst","to forget"],["sehen · du siehst · er sieht","to see"],["fahren · du fährst · er fährt","to drive"],["lesen · du liest · er liest","to read"],["nehmen · du nimmst · er nimmt","to take"],["laufen · du läufst · er läuft","to walk, to run"],["gefallen · du gefällst mir · er gefällt mir","to like"],["fallen · du fällst · er fällt","to fall"],["halten · du hältst · er hält","to hold, to stop"],["fangen · du fängst · er fängt","to catch"],["helfen · du hilfst · er hilft","to help"],["geben · du gibst · er gibt","to give"],["essen · du isst · er isst","to eat"],["werfen · du wirfst · er wirft","to throw"],["sterben · du stirbst · er stirbt","to die"],["empfehlen · du empfiehlst · er empfiehlt","to recommend"],["stehlen · du stiehlst · er stiehlt","to steal"],["treffen · du triffst · er trifft","to meet"],["schlafen · du schläfst · er schläft","to sleep"],["messen · du misst · er misst","to measure"],["tragen · du trägst · er trägt","to wear, to carry"],["unterbrechen · du unterbrichst · er unterbricht","to interrupt"],["widersprechen · du widersprichst · er widerspricht","to contradict"],["treten · du trittst · er tritt","to step, to kick"],["mögen · du magst · er mag","to like"],["möchten · du möchtest · er möchte","would like"],["wollen · du willst · er will","to want"]],
+  w5: []
 };
 /* Base form of an entry: the word before its du/er forms or plural suffix. */
 function baseDe(de){ return de.split("·")[0].split(",")[0].trim(); }
