@@ -1483,6 +1483,315 @@ const WEEKS = [
     {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write a short text like the one on page 44 about your week: one sentence with im, two with am, two with um.",model:"Im Oktober habe ich viel Arbeit.\nAm Montag beginnt mein Deutschkurs um 12 Uhr.\nAm Wochenende treffe ich Freunde.\nIch stehe um 8 Uhr auf.",checks:[{"need":"\\bim (januar|februar|maerz|april|mai|juni|juli|august|september|oktober|november|dezember|fruehling|sommer|herbst|winter)\\b","label":"im + Monat or Jahreszeit"},{"need":"\\bam (montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|wochenende|morgen|vormittag|mittag|nachmittag|abend)\\b","min":2,"label":"am + Tag or Tageszeit, twice"},{"need":"\\bum (\\d|halb|viertel|mitternacht|eins|zwei|drei|vier|fuenf|sechs|sieben|acht|neun|zehn|elf|zwoelf)","min":2,"label":"um + Uhrzeit, twice"},{"avoid":"\\b(am|um) (januar|februar|maerz|april|mai|juni|juli|august|september|oktober|november|dezember|fruehling|sommer|herbst|winter)\\b","label":"Months and seasons take im"},{"avoid":"\\b(im|um) (montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|wochenende)\\b","label":"Days and the weekend take am"}]}
   ]
 }
+]},
+{ id:"w6", n:6, label:"Woche 6", stops:[
+{
+  id:"w6-tageszeiten", stop:"Tageszeiten & Mahlzeiten", title:"Tageszeiten: frühstücken oder das Frühstück?",
+  grammar:"am Morgen / morgens; Nomen oder Verb: das Mittagessen, zu Mittag essen; zum + Mahlzeit", vocab:"Tageszeiten und Mahlzeiten",
+  cheat:`
+    <div class="tbl"><table><tr><th>Uhrzeit</th><th>Tageszeit</th><th>every …</th><th>Mahlzeit</th><th>Ausdruck mit Verb</th></tr>
+      <tr><td>6-9 Uhr</td><td>am Morgen</td><td>morgens</td><td>das Frühstück</td><td>frühstücken</td></tr>
+      <tr><td>9-12 Uhr</td><td>am Vormittag</td><td>vormittags</td><td>der Snack / das Znüni (CH)</td><td>einen Snack essen</td></tr>
+      <tr><td>12-14 Uhr</td><td>am Mittag</td><td>mittags</td><td>das Mittagessen</td><td>zu Mittag essen</td></tr>
+      <tr><td>14-18 Uhr</td><td>am Nachmittag</td><td>nachmittags</td><td>der Snack / das Zvieri (CH)</td><td>Zvieri essen</td></tr>
+      <tr><td>18-22 Uhr</td><td>am Abend</td><td>abends</td><td>das Abendessen</td><td>zu Abend essen</td></tr>
+      <tr><td>22-6 Uhr</td><td>in der Nacht</td><td>nachts</td><td></td><td></td></tr>
+    </table></div>
+    <h3>1. Noun: the breakfast, the lunch or the dinner</h3>
+    <ul>
+      <li>Ich mag das englische Frühstück mit Toast, Eiern und Bohnen.</li>
+      <li>Das Mittagessen in der Mensa schmeckt gar nicht gut.</li>
+      <li>Ich möchte dich zum Abendessen einladen.</li>
+    </ul>
+    <h3>2. Expression with verb: to have breakfast, lunch or dinner</h3>
+    <ul>
+      <li>Ich frühstücke selten; manchmal trinke ich nur einen Kaffee.</li>
+      <li>Ich esse meistens um 13 Uhr zu Mittag.</li>
+      <li>Wo isst du heute zu Mittag?</li>
+    </ul>
+    <h3>zum + Mahlzeit = what you eat</h3>
+    <ul>
+      <li>Um 8 Uhr frühstücke ich. · Ich esse ein Brot mit Käse zum Frühstück.</li>
+      <li>In der Mensa esse ich zu Mittag. · Nudeln esse ich zum Mittagessen.</li>
+      <li>Lieblings… = favourite: Mein Lieblingsessen ist Toast Hawaii.</li>
+    </ul>`,
+  words:[["am Morgen / morgens","in the morning / every morning"],["am Vormittag / vormittags","in the late morning / every late morning"],["am Mittag / mittags","at noon / every noon"],["am Nachmittag / nachmittags","in the afternoon / every afternoon"],["am Abend / abends","in the evening / every evening"],["in der Nacht / nachts","at night / every night"],["das Frühstück","breakfast"],["frühstücken · du frühstückst · er frühstückt","to have breakfast"],["das Znüni (CH)","morning snack"],["das Mittagessen","lunch"],["zu Mittag essen","to have lunch"],["das Zvieri (CH)","afternoon snack"],["die Zwischenmahlzeit, -en","snack between meals"],["das Abendessen","dinner"],["zu Abend essen","to have dinner"],["die Mahlzeit, -en","meal"],["zum Frühstück","for breakfast"],["zum Mittagessen","for lunch"],["zum Abendessen","for dinner"],["Lieblings…","favourite"],["das Lieblingsessen","favourite food"],["selten","rarely"],["meistens","mostly"],["spät","late"],["einladen · du lädst ein · er lädt ein","to invite"],["schmecken · es schmeckt · sie schmecken","to taste"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"the lunch · to have lunch",back:"das Mittagessen · zu Mittag essen",ex:"Das Mittagessen in der Mensa schmeckt gar nicht gut."},
+    {t:"flash",lv:1,d:1,k:"gv",front:"frühstücken",back:"to have breakfast · du frühstückst, er frühstückt",ex:"Ich frühstücke selten; manchmal trinke ich nur einen Kaffee."},
+    {t:"flash",lv:1,d:1,k:"v",front:"das Zvieri (CH)",back:"afternoon snack, between 14 and 18 Uhr",ex:"am Nachmittag: Zvieri essen"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"every evening",back:"abends",ex:"am Abend = in the evening"},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"zum + Mahlzeit",back:"says what you eat: zum Frühstück, zum Mittagessen, zum Abendessen",ex:"zum = zu dem"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the times with the times of day.",pairs:[["6-9 Uhr","am Morgen"],["9-12 Uhr","am Vormittag"],["12-14 Uhr","am Mittag"],["14-18 Uhr","am Nachmittag"],["18-22 Uhr","am Abend"],["22-6 Uhr","in der Nacht"]]},
+    {t:"match",lv:1,d:2,k:"gv",q:"Match each meal with its expression with a verb.",pairs:[["das Frühstück","frühstücken"],["das Mittagessen","zu Mittag essen"],["das Abendessen","zu Abend essen"],["das Znüni","einen Snack essen"],["das Zvieri","Zvieri essen"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Does the sentence use the noun or the expression with a verb?",groups:["noun: das Frühstück …","verb: frühstücken, zu Mittag essen …"],items:[["Das Mittagessen in der Mensa schmeckt gar nicht gut.",0],["Mein Lieblingsessen ist Toast Hawaii.",0],["Die Abendessen bei Jürg und Anne-Sophie sind immer fantastisch.",0],["Ich frühstücke selten.",1],["Ich esse in der Mensa zu Abend.",1],["In der Mensa esse ich zu Mittag.",1]],why:"The noun is the meal itself (the lunch). The verb expression is the action (to have lunch)."},
+    {t:"mc",lv:2,d:1,k:"gv",ctx:"From the script: „Ich frühstücke selten; manchmal trinke ich nur einen Kaffee.“",q:"What does the sentence mean?",opts:["I rarely have breakfast; sometimes I just have a coffee.","I often have breakfast; I always have a coffee too.","I never have breakfast; I only drink a tea."],a:0,why:"selten = rarely. manchmal = sometimes. nur = just, only."},
+    {t:"mc",lv:2,d:2,k:"g",q:"„Ich esse abends in der Mensa.“ What does abends add?",opts:["every evening, as a habit","only this evening","late in the evening"],a:0,why:"am Abend = in the evening. abends = every evening."},
+    {t:"mc",lv:2,d:1,k:"v",q:"When do people eat das Znüni?",opts:["in the late morning","in the afternoon","in the evening"],a:0,why:"Znüni = the snack at nine, between 9 and 12. The Zvieri is in the afternoon."},
+    {t:"gap",lv:3,d:1,k:"gv",q:"Ich ___ meistens um 13 Uhr zu ___.",hints:["essen","noon"],a:[["esse"],["Mittag"]],why:"zu Mittag essen = to have lunch."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Um 8 Uhr esse ich zu ___.",hints:["evening"],a:[["Abend"]],why:"zu Abend essen = to have dinner."},
+    {t:"gap",lv:3,d:2,k:"g",q:"___ Frühstück trinke ich immer Tee. Ich esse ein Sandwich ___ Mittagessen.",a:[["Zum"],["zum"]],why:"What you eat: zum + meal. zum = zu dem."},
+    {t:"write",lv:3,d:2,k:"g",q:"Say the same with the verb frühstücken.",prompt:"Mein Frühstück ist um 7 Uhr.",a:["Ich frühstücke um 7 Uhr.","Um 7 Uhr frühstücke ich.","Ich frühstücke um sieben Uhr.","Um sieben Uhr frühstücke ich."],why:"Course pattern: Um 8 Uhr frühstücke ich."},
+    {t:"write",lv:3,d:2,k:"g",q:"Say the same with mittags (every day at noon).",prompt:"Am Mittag esse ich in der Mensa.",a:["Mittags esse ich in der Mensa.","Ich esse mittags in der Mensa."],why:"am Mittag → mittags, with no am."},
+    {t:"write",lv:3,d:1,k:"g",q:"Rewrite the sentence with er instead of ich.",prompt:"Ich frühstücke zu Hause.",a:["Er frühstückt zu Hause."],why:"frühstücken is regular: er frühstückt."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich esse um 12 Uhr zum Mittag.",wrong:[5],fixed:"Ich esse um 12 Uhr zu Mittag.",why:"The verb expression is zu Mittag essen. zum goes with the noun: zum Mittagessen."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich esse ein Brot mit Käse zu Frühstück.",wrong:[6],fixed:"Ich esse ein Brot mit Käse zum Frühstück.",why:"What you eat: zum Frühstück."},
+    {t:"fix",lv:4,d:1,k:"g",q:"Tap the wrong word.",text:"Du frühstückt um 8 Uhr.",wrong:[1],fixed:"Du frühstückst um 8 Uhr.",why:"du frühstückst, er frühstückt."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the question: Where do you have lunch today?",tiles:["wo","isst","du","heute","zu Mittag"],end:"?",a:["Wo isst du heute zu Mittag?"],verb:"isst",why:"Question word, then the verb, then du. zu Mittag goes to the end."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: I would like to invite you for dinner.",tiles:["ich","möchte","dich","zum Abendessen","einladen"],end:".",a:["Ich möchte dich zum Abendessen einladen."],verb:"möchte",why:"möchte on position 2, the infinitive einladen at the end."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Ich esse um 13 Uhr zu Mittag.","Ich esse um 13 Uhr das Mittag.","Ich mittagesse um 13 Uhr."],a:0,why:"There is no verb mittagessen. Use zu Mittag essen."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I like the English breakfast.",a:["Ich mag das englische Frühstück."],why:"Course sentence. mögen + noun."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"We often have a late dinner.",a:["Wir essen oft spät zu Abend."],why:"Course sentence. zu Abend essen, with spät before zu Abend."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Use du.",prompt:"What do you eat for breakfast?",a:["Was isst du zum Frühstück?"],why:"Course question. essen: du isst."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Describe your meals in four sentences: when you have breakfast, what you eat for breakfast, where you have lunch, and when you have dinner.",model:"Ich frühstücke um 7 Uhr.\nZum Frühstück esse ich ein Birchermüesli.\nIch esse in der Mensa zu Mittag.\nAbends esse ich um 19 Uhr zu Abend.",checks:[{"need":"\\bfruehstuecke\\b","label":"frühstücken: ich frühstücke …"},{"need":"\\bzum (fruehstueck|mittagessen|abendessen)\\b","label":"What you eat: zum Frühstück …"},{"need":"\\bzu (mittag|abend)\\b","label":"zu Mittag / zu Abend essen"},{"avoid":"\\bzum (mittag|abend)\\b","label":"zu Mittag essen, not zum Mittag"},{"avoid":"\\bzu (fruehstueck|mittagessen|abendessen)\\b","label":"zum Frühstück, not zu Frühstück"}]}
+  ]
+},
+{
+  id:"w6-tagesablauf", stop:"Tagesablauf", title:"Der Tagesablauf: Wann stehst du auf?",
+  grammar:"trennbare Verben: Ich stehe um 7 Uhr auf; die Verbklammer", vocab:"Tagesablauf",
+  cheat:`
+    <h3>Interview mit deiner Kollegin / deinem Kollegen</h3>
+    <ul>
+      <li>Wann stehst du auf? Ich stehe um … auf. / Um … stehe ich auf.</li>
+      <li>Wann frühstückst du? Ich frühstücke um …</li>
+      <li>Um wie viel Uhr beginnst du mit der Arbeit? Ich beginne um … mit der Arbeit.</li>
+      <li>Wann gehst du ins Büro? Ich gehe um … ins Büro. / Ich arbeite von zu Hause.</li>
+      <li>Wann isst du zu Mittag? Ich esse um … zu Mittag.</li>
+      <li>Wann machst du eine Kaffeepause? Um … mache ich eine Kaffeepause.</li>
+      <li>Was machst du nach der Arbeit? Nach der Arbeit gehe ich zum Sport / gehe ich einkaufen / treffe ich Freunde.</li>
+      <li>Wann gehst du ins Bett? Ich gehe um … ins Bett.</li>
+    </ul>
+    <p>Beispiel: Claudio steht jeden Tag um 8 Uhr auf. Dann frühstückt er. Um 9 Uhr geht er ins Büro. …</p>
+    <h3>Trennbare Verben (Moodle)</h3>
+    <p>The verb stem is on position 2 as always, but the prefix goes to the very end of the sentence. This is the German verb bracket.</p>
+    <ul>
+      <li>aufstehen (to get up): Ich stehe um 7 Uhr auf.</li>
+      <li>einkaufen (shop groceries): Danach kauft er in der Migros ein.</li>
+      <li>ankommen (to arrive): Sie kommt um 9 Uhr im Büro an.</li>
+      <li>einschlafen (to fall asleep): Dann schläft er um Mitternacht ein.</li>
+    </ul>`,
+  words:[["aufstehen · du stehst auf · er steht auf","to get up"],["einkaufen · du kaufst ein · er kauft ein","to shop groceries"],["ankommen · du kommst an · er kommt an","to arrive"],["einschlafen · du schläfst ein · er schläft ein","to fall asleep"],["der Tagesablauf","daily routine"],["Wann stehst du auf?","When do you get up?"],["Um wie viel Uhr …?","At what time …?"],["mit der Arbeit beginnen","to start work"],["ins Büro gehen","to go to the office"],["Ich arbeite von zu Hause.","I work from home."],["eine Kaffeepause machen","to take a coffee break"],["nach der Arbeit","after work"],["zum Sport gehen","to go and do sports"],["Freunde treffen","to meet friends"],["ins Bett gehen","to go to bed"],["dann","then"],["danach","after that"],["später","later"],["jeden Tag","every day"],["die Mitternacht","midnight"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"gv",front:"aufstehen",back:"to get up · ich stehe auf, er steht auf",ex:"The prefix auf goes to the end of the sentence."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"to arrive",back:"ankommen",ex:"Wann kommst du an?"},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Separable verb: where does the prefix go?",back:"to the very end. The verb stem stays on position 2 (the verb bracket).",ex:"Sie kommt um 9 Uhr im Büro an."},
+    {t:"flash",lv:1,d:1,k:"v",front:"danach",back:"after that",ex:"Dann … Danach … Später …"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the verbs.",pairs:[["aufstehen","to get up"],["einkaufen","to shop groceries"],["ankommen","to arrive"],["einschlafen","to fall asleep"],["frühstücken","to have breakfast"],["ins Bett gehen","to go to bed"]]},
+    {t:"match",lv:1,d:2,k:"gv",q:"Match each interview question with its answer pattern.",pairs:[["Wann stehst du auf?","Ich stehe um … auf."],["Wann frühstückst du?","Ich frühstücke um …"],["Wann isst du zu Mittag?","Ich esse um … zu Mittag."],["Wann gehst du ins Bett?","Ich gehe um … ins Bett."],["Was machst du nach der Arbeit?","Nach der Arbeit gehe ich zum Sport."]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Separable or not?",groups:["trennbar","nicht trennbar"],items:[["aufstehen",0],["einkaufen",0],["ankommen",0],["einschlafen",0],["frühstücken",1],["beginnen",1],["besuchen",1],["bezahlen",1]],why:"auf-, ein- and an- split off. be- never splits: besuchen, bezahlen, beginnen."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From the script: „Claudio steht jeden Tag um 8 Uhr auf. Dann frühstückt er. Um 9 Uhr geht er ins Büro.“",q:"What does „steht … auf“ mean here?",opts:["gets up","stands still","stays up"],a:0,why:"aufstehen = to get up. auf comes at the end."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From Moodle: „Dann schläft er um Mitternacht ein.“",q:"What happens at midnight?",opts:["He falls asleep.","He wakes up.","He goes out."],a:0,why:"einschlafen = to fall asleep."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Which sentence keeps the verb on position 2?",opts:["Um 7 Uhr stehe ich auf.","Um 7 Uhr ich stehe auf.","Um 7 Uhr ich aufstehe."],a:0,why:"Um 7 Uhr is position 1, so the verb comes next and ich follows."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Ich ___ um 7 Uhr ___.",hints:["aufstehen","prefix"],a:[["stehe"],["auf"]],why:"ich stehe … auf."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Danach ___ er in der Migros ___.",hints:["einkaufen","prefix"],a:[["kauft"],["ein"]],why:"er kauft … ein. The prefix goes to the end."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Er ___ um Mitternacht ___.",hints:["einschlafen","prefix"],a:[["schläft"],["ein"]],why:"schlafen: er schläft (a → ä). ein at the end."},
+    {t:"write",lv:3,d:2,k:"gv",ctx:"You get up at 6.30.",q:"Answer in a full sentence.",prompt:"Wann stehst du auf?",a:["Ich stehe um 6.30 Uhr auf.","Ich stehe um halb sieben auf.","Um halb sieben stehe ich auf.","Um 6.30 Uhr stehe ich auf.","Ich stehe um 6.30 auf.","Um 6.30 stehe ich auf."],why:"Course answer: Ich stehe um … auf. / Um … stehe ich auf."},
+    {t:"write",lv:3,d:2,k:"g",q:"Rewrite the sentence with er instead of ich.",prompt:"Ich kaufe nach der Arbeit ein.",a:["Er kauft nach der Arbeit ein."],why:"er kauft … ein."},
+    {t:"write",lv:3,d:3,k:"g",q:"Rewrite the sentence. Start with Um 9 Uhr.",prompt:"Sie kommt um 9 Uhr im Büro an.",a:["Um 9 Uhr kommt sie im Büro an.","Um neun Uhr kommt sie im Büro an."],why:"The verb stays on position 2, sie moves behind it, an stays at the end."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Er steht um 7 Uhr an.",wrong:[5],fixed:"Er steht um 7 Uhr auf.",why:"aufstehen = to get up. ankommen = to arrive."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Er schlaft um 23 Uhr ein.",wrong:[1],fixed:"Er schläft um 23 Uhr ein.",why:"schlafen: er schläft (a → ä)."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Um 18 Uhr ich gehe einkaufen.",wrong:[3,4],fixed:"Um 18 Uhr gehe ich einkaufen.",why:"Um 18 Uhr is position 1, so the verb comes next."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: I go to bed at 11 pm.",tiles:["ich","gehe","um 23 Uhr","ins Bett"],end:".",a:["Ich gehe um 23 Uhr ins Bett.","Um 23 Uhr gehe ich ins Bett."],verb:"gehe",why:"Course pattern: Ich gehe um … ins Bett."},
+    {t:"build",lv:4,d:3,k:"gv",q:"Build the sentence: After that, she arrives at the office at 9.",tiles:["danach","kommt","sie","um 9 Uhr","im Büro","an"],end:".",a:["Danach kommt sie um 9 Uhr im Büro an.","Sie kommt danach um 9 Uhr im Büro an."],verb:"kommt",why:"kommt on position 2, an at the very end. Time before place: um 9 Uhr im Büro."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Ich beginne um 8 Uhr mit der Arbeit.","Ich beginne mit um 8 Uhr der Arbeit.","Ich um 8 Uhr beginne mit der Arbeit."],a:0,why:"Course pattern: Ich beginne um … mit der Arbeit."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer. Use du.",prompt:"Ich mache um 15 Uhr eine Kaffeepause.",a:["Wann machst du eine Kaffeepause?","Um wie viel Uhr machst du eine Kaffeepause?"],why:"Course question: Wann machst du eine Kaffeepause?"},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"After work I meet friends.",a:["Nach der Arbeit treffe ich Freunde.","Ich treffe nach der Arbeit Freunde."],why:"treffen: ich treffe. After Nach der Arbeit, the verb comes second."},
+    {t:"write",lv:5,d:1,k:"gv",q:"Write it in German.",prompt:"I work from home.",a:["Ich arbeite von zu Hause."],why:"Course gloss: Ich arbeite von zu Hause. (I work from home)"},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Like part B on page 38: write five sentences about the daily routine of a colleague or of yourself, with the times and at least two separable verbs.",model:"Lina steht um sieben Uhr auf.\nDann frühstückt sie um halb acht.\nUm neun Uhr kommt sie im Büro an.\nNach der Arbeit kauft sie in der Migros ein.\nSie geht um elf Uhr ins Bett.",checks:[{"need":"\\b(steht|stehe|stehst) [^.!?\\n]*\\bauf\\b|\\b(kauft|kaufe|kaufst) [^.!?\\n]*\\bein\\b|\\b(kommt|komme|kommst) [^.!?\\n]*\\ban\\b|\\b(schlaeft|schlafe|schlaefst) [^.!?\\n]*\\bein\\b","min":2,"label":"Two separable verbs with the prefix at the end"},{"need":"\\bum (\\d|halb|viertel|eins|zwei|drei|vier|fuenf|sechs|sieben|acht|neun|zehn|elf|zwoelf)","min":2,"label":"Two times with um"},{"need":"\\b(dann|danach|spaeter|nach der arbeit)\\b","label":"A linking word: dann, danach, später"},{"avoid":"\\b(ich|er|sie|du) (aufstehe|aufsteht|aufstehst|einkaufe|einkauft|ankomme|ankommt|einschlaeft|einschlafe)\\b","label":"Split the verb: er steht … auf"}]}
+  ]
+},
+{
+  id:"w6-lebensmittel", stop:"Lebensmittel", title:"Essen und Trinken: die Lebensmittel und ihre Artikel",
+  grammar:"der, die, das bei Lebensmitteln; Plural; Schweiz und Deutschland", vocab:"Lebensmittel, Geschirr",
+  cheat:`
+    <h3>Essen und Trinken (pages 46 and 47)</h3>
+    <p><b>der</b>: der Apfel, der Fisch, der Salat, der Käse, der Schinken, der Reis, der Kaffee, der Tee, der Zucker, der Wein, der Saft, der Kuchen, der Pfeffer, der Löffel, der Teller, der Topf</p>
+    <p><b>die</b>: die Kartoffel, die Erdbeere, die Orange, die Tomate, die Butter, die Wurst, die Karotte, die Banane, die Gurke, die Zitrone, die Zwiebel, die Suppe, die Sauce, die Milch, die Tasse, die Schüssel, die Pfanne, die Gabel, die Konfitüre / die Marmelade, die Mahlzeit</p>
+    <p><b>das</b>: das Gemüse, das Brot, das Fleisch, das Ei, das Poulet, das Wasser, das Bier, das Messer, das Glas, das Salz, das Gericht</p>
+    <p><b>Plural only</b>: die Trauben, die Früchte, die Kräuter, die Pommes Frites, die Teigwaren</p>
+    <h3>Schweiz und Deutschland</h3>
+    <ul>
+      <li>die Peperoni (CH) = die Paprika (D)</li>
+      <li>das Poulet (CH) = das Hähnchen (D)</li>
+      <li>die Teigwaren = die Pasta</li>
+    </ul>
+    <h3>Frag deine Kollegen (page 48)</h3>
+    <p>Was isst du gern / nicht gern? · Was hast du immer im Kühlschrank? · Wo kaufst du deinen Tee oder deinen Kaffee? · Was ist dein Lieblingsessen? · Was ist dein Lieblingsgetränk?</p>`,
+  words:[["der Schinken, -","ham"],["die Kartoffel, -n","potato"],["die Erdbeere, -n","strawberry"],["die Orange, -n","orange"],["die Tomate, -n","tomato"],["das Gemüse (Sg.)","vegetables"],["das Brot, -e","bread"],["das Fleisch","meat"],["die Butter","butter"],["das Ei, -er","egg"],["die Wurst, ¨-e","sausage"],["die Trauben (Pl.)","grapes"],["die Früchte (Pl.)","fruit"],["die Karotte, -n","carrot"],["der Fisch, -e","fish"],["die Banane, -n","banana"],["die Gurke, -n","cucumber"],["der Salat, -e","salad, lettuce"],["die Zitrone, -n","lemon"],["der Käse, -","cheese"],["die Peperoni (CH) / die Paprika (D)","bell pepper"],["die Kräuter (Pl.)","herbs"],["die Zwiebel, -n","onion"],["das Poulet, -s (CH) / das Hähnchen (D)","chicken"],["der Apfel, ¨","apple"],["die Tasse, -n","cup"],["der Reis","rice"],["die Schüssel, -n","bowl"],["der Kaffee","coffee"],["das Wasser","water"],["der Zucker","sugar"],["die Suppe, -n","soup"],["die Sauce","sauce"],["die Pommes Frites","French fries"],["der Löffel, -","spoon"],["der Wein","wine"],["das Messer, -","knife"],["die Milch","milk"],["das Bier","beer"],["der Saft, ¨-e","juice"],["der Tee","tea"],["der Kuchen, -","cake"],["der Teller, -","plate"],["die Pfanne, -n","pan"],["der Topf, ¨-e","pot"],["die Gabel, -n","fork"],["die Konfitüre, -n / die Marmelade, -n","jam"],["das Glas, ¨-er","glass"],["das Salz","salt"],["der Pfeffer","pepper"],["die Mahlzeit, -en","meal"],["das Gericht, -e","dish"],["die Teigwaren / die Pasta","pasta"],["der Kühlschrank, ¨-e","fridge"],["das Lieblingsgetränk, -e","favourite drink"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"die Teigwaren",back:"pasta · also: die Pasta · always plural",ex:"Ich esse gern Teigwaren mit Tomatensauce."},
+    {t:"flash",lv:1,d:1,k:"v",front:"das Poulet (CH)",back:"chicken · in Germany: das Hähnchen",ex:"die Peperoni (CH) = die Paprika (D)"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"jam",back:"die Konfitüre / die Marmelade",ex:"Brot mit Butter und Konfitüre"},
+    {t:"flash",lv:1,d:2,k:"gv",front:"die Wurst, ¨-e",back:"sausage · the plural takes an umlaut: die Würste",ex:"die Bratwurst, die Currywurst"},
+    {t:"flash",lv:1,d:2,k:"gv",front:"das Gemüse (Sg.)",back:"vegetables · always singular in German",ex:"Das Gemüse ist frisch."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the food.",pairs:[["der Apfel","apple"],["die Erdbeere","strawberry"],["die Gurke","cucumber"],["die Zwiebel","onion"],["die Kartoffel","potato"],["der Schinken","ham"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the tableware.",pairs:[["der Löffel","spoon"],["das Messer","knife"],["die Gabel","fork"],["der Teller","plate"],["die Tasse","cup"],["die Pfanne","pan"]]},
+    {t:"sort",lv:2,d:1,k:"v",q:"der, die oder das?",groups:["der","die","das"],items:[["Käse",0],["Fisch",0],["Saft",0],["Kuchen",0],["Butter",1],["Milch",1],["Suppe",1],["Zitrone",1],["Brot",2],["Ei",2],["Fleisch",2],["Wasser",2],["Bier",2],["Salz",2]],why:"Drinks are mixed: der Saft, der Kaffee, but die Milch and das Wasser, das Bier. Learn each noun with its article."},
+    {t:"sort",lv:2,d:2,k:"v",q:"der, die oder das? The kitchen and the table.",groups:["der","die","das"],items:[["Reis",0],["Zucker",0],["Pfeffer",0],["Topf",0],["Teller",0],["Sauce",1],["Tasse",1],["Schüssel",1],["Pfanne",1],["Glas",2],["Gericht",2],["Messer",2],["Poulet",2]],why:"der Löffel and der Teller, but die Gabel and das Messer."},
+    {t:"mc",lv:2,d:1,k:"v",q:"Which word is plural only?",opts:["die Trauben","die Butter","die Milch"],a:0,why:"die Trauben, die Früchte, die Kräuter and die Pommes Frites are marked (Pl.) on the page."},
+    {t:"mc",lv:2,d:1,k:"v",q:"In Germany you say das Hähnchen. What do you say in Switzerland?",opts:["das Poulet","das Gericht","das Gemüse"],a:0,why:"das Poulet (CH) = das Hähnchen (D)."},
+    {t:"mc",lv:2,d:2,k:"v",q:"What is der Topf?",opts:["the pot","the plate","the cup"],a:0,why:"der Topf = pot. der Teller = plate. die Tasse = cup."},
+    {t:"gap",lv:3,d:2,k:"v",q:"ein Ei, zwei ___ · ein Apfel, zwei ___",a:[["Eier"],["Äpfel"]],why:"das Ei, -er → die Eier. der Apfel → die Äpfel, with an umlaut."},
+    {t:"gap",lv:3,d:1,k:"v",q:"___ Kaffee ist heiss und ___ Milch ist kalt.",hints:["article","article"],a:[["Der"],["die"]],why:"der Kaffee, die Milch."},
+    {t:"gap",lv:3,d:2,k:"v",q:"___ Brot ist frisch, ___ Butter ist weich und ___ Käse ist aus der Schweiz.",hints:["article","article","article"],a:[["Das"],["die"],["der"]],why:"das Brot, die Butter, der Käse."},
+    {t:"write",lv:3,d:2,k:"v",q:"Write the plural with the article.",prompt:"die Karotte",a:["die Karotten"],why:"die Karotte, -n."},
+    {t:"write",lv:3,d:2,k:"v",q:"Write the plural with the article.",prompt:"das Glas",a:["die Gläser"],why:"das Glas, ¨-er: umlaut plus -er."},
+    {t:"write",lv:3,d:3,k:"v",q:"Write the plural with the article.",prompt:"der Saft",a:["die Säfte"],why:"der Saft, ¨-e: umlaut plus -e."},
+    {t:"fix",lv:4,d:1,k:"v",q:"Tap the wrong word.",text:"Das Milch ist frisch.",wrong:[0],fixed:"Die Milch ist frisch.",why:"die Milch."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Ich esse viele Gemüse.",wrong:[2],fixed:"Ich esse viel Gemüse.",why:"das Gemüse is singular, so viel, not viele."},
+    {t:"fix",lv:4,d:2,k:"v",q:"Tap the wrong word.",text:"Der Butter und das Brot sind auf dem Tisch.",wrong:[0],fixed:"Die Butter und das Brot sind auf dem Tisch.",why:"die Butter."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the answer: I always have milk and butter in the fridge.",tiles:["ich","habe","immer","Milch und Butter","im Kühlschrank"],end:".",a:["Ich habe immer Milch und Butter im Kühlschrank."],verb:"habe",why:"Answer to the page 48 question about the fridge."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Die Trauben sind süss.","Die Trauben ist süss.","Das Trauben sind süss."],a:0,why:"die Trauben is plural: sie sind."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Use du.",prompt:"What do you always have in the fridge?",a:["Was hast du immer im Kühlschrank?"],why:"Course question from page 48."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Use du.",prompt:"What is your favourite drink?",a:["Was ist dein Lieblingsgetränk?"],why:"Lieblings… = favourite: das Lieblingsgetränk."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German. Use du.",prompt:"Where do you buy your tea or your coffee?",a:["Wo kaufst du deinen Tee oder deinen Kaffee?"],why:"Course question. der Tee → deinen Tee."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write four sentences: what you like to eat, what you always have in the fridge, your favourite food, and one food with its article and an adjective (Der Käse ist …).",model:"Ich esse gern Käse und Brot.\nIch habe immer Milch, Eier und Butter im Kühlschrank.\nMein Lieblingsessen ist Toast Hawaii.\nDer Käse ist aus der Schweiz.",checks:[{"need":"\\b(esse|trinke) gern\\b","label":"What you like: ich esse gern …"},{"need":"\\bkuehlschrank\\b","label":"im Kühlschrank"},{"need":"\\blieblings\\w+","label":"Lieblingsessen or Lieblingsgetränk"},{"need":"\\b(der|die|das) [a-z]+ (ist|sind)\\b","label":"One food with its article: Der Käse ist …"},{"avoid":"\\bdas (milch|butter|suppe|wurst)\\b|\\bdie (brot|kaese|fisch|fleisch)\\b|\\bder (milch|butter|brot|fleisch|wasser)\\b","label":"Check the articles: die Milch, das Brot, der Käse"}]}
+  ]
+},
+{
+  id:"w6-bestellen", stop:"Bestellen", title:"Was bestellen die Leute? Ich möchte einen Cervelat.",
+  grammar:"einen, eine, ein nach möchten, nehmen, bezahlen", vocab:"Imbiss: Cervelat, Bratwurst, Frühlingsrolle",
+  cheat:`
+    <h3>Was bestellen die Leute? (page 49)</h3>
+    <p>Was nehmen Sie? · Ich möchte … · Wir nehmen …</p>
+    <div class="tbl"><table><tr><th>Dialog 1</th><th>Dialog 2</th><th>Dialog 3</th></tr>
+      <tr><td>einen Hamburger<br>einen Cervelat<br>eine Bratwurst<br>ein Poulet<br>einen Hot Dog<br>Pommes Frites</td>
+          <td>einen Salat<br>zwei Frühlingsrollen<br>ein Sandwich<br>eine Frühlingsrolle<br>Wontons<br>ein Chopsuey</td>
+          <td>einen Falafel<br>eine Suppe<br>einen Dönerkebab<br>ein Joghurt<br>zwei Dönerkebab<br>eine Currywurst</td></tr>
+    </table></div>
+    <p>der → <b>einen</b> · die → eine · das → ein. Only the masculine article changes.</p>
+    <h3>Wer bezahlt was?</h3>
+    <p>Was bezahlen Sie? Ich bezahle … · Und Sie? · Was macht das, bitte?</p>
+    <p>The answers are in the audio on Moodle (Woche 6 Petra). This stop practices the forms, not the listening.</p>`,
+  words:[["der Hamburger, -","hamburger"],["der Cervelat, -s","Swiss sausage"],["die Bratwurst, ¨-e","fried sausage"],["der Hot Dog, -s","hot dog"],["die Frühlingsrolle, -n","spring roll"],["das Sandwich, -s","sandwich"],["der Falafel, -","falafel"],["der Dönerkebab, -s","doner kebab"],["das Joghurt, -s","yogurt"],["die Currywurst, ¨-e","curry sausage"],["das Mineralwasser","mineral water"],["Was nehmen Sie?","What will you have?"],["Ich möchte …","I would like …"],["Wir nehmen …","We'll have …"],["Was bezahlen Sie?","What are you paying for?"],["Was macht das, bitte?","How much is that, please?"],["bestellen · du bestellst · er bestellt","to order"],["nehmen · du nimmst · er nimmt","to take"],["bezahlen · du bezahlst · er bezahlt","to pay"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"einen, eine or ein after nehmen and möchten?",back:"der → einen · die → eine · das → ein. Only masculine changes.",ex:"Ich möchte einen Hamburger, eine Suppe und ein Joghurt."},
+    {t:"flash",lv:1,d:1,k:"v",front:"der Cervelat",back:"Swiss sausage",ex:"Ich nehme einen Cervelat."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"How much is that, please?",back:"Was macht das, bitte?",ex:"Das macht zwölf fünfzig."},
+    {t:"flash",lv:1,d:1,k:"gv",front:"nehmen",back:"to take · du nimmst, er nimmt",ex:"Wir nehmen zwei Dönerkebab."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the words.",pairs:[["die Frühlingsrolle","spring roll"],["die Bratwurst","fried sausage"],["der Dönerkebab","doner kebab"],["das Mineralwasser","mineral water"],["die Suppe","soup"],["bestellen","to order"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Ich möchte … Sort by the article in the accusative.",groups:["einen","eine","ein"],items:[["Hamburger",0],["Cervelat",0],["Bratwurst",1],["Poulet",2],["Hot Dog",0],["Salat",0],["Sandwich",2],["Frühlingsrolle",1],["Chopsuey",2],["Falafel",0],["Suppe",1],["Dönerkebab",0],["Joghurt",2],["Currywurst",1]],why:"Masculine nouns take einen. Feminine take eine, neuter take ein. All from the order lists on page 49."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Ich möchte ___ Hot Dog.",opts:["einen","ein","eine"],a:0,why:"der Hot Dog → einen Hot Dog."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"At the snack bar: „Was macht das, bitte?“",q:"What does the guest want to know?",opts:["the price","the time","the menu"],a:0,why:"Was macht das? = How much is that?"},
+    {t:"gap",lv:3,d:1,k:"g",q:"Ich nehme ___ Bratwurst und ___ Sandwich.",hints:["die Bratwurst","das Sandwich"],a:[["eine"],["ein"]],why:"Feminine and neuter do not change: eine, ein."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Ich bezahle ___ Cervelat und ___ Bier.",hints:["der Cervelat","das Bier"],a:[["den","einen"],["das","ein"]],why:"der → den (einen). das stays das (ein)."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Er ___ einen Salat und sie ___ eine Suppe.",hints:["nehmen","nehmen"],a:[["nimmt"],["nimmt"]],why:"nehmen: er nimmt, sie nimmt."},
+    {t:"write",lv:3,d:1,k:"g",q:"Order with Ich möchte.",prompt:"der Dönerkebab",a:["Ich möchte einen Dönerkebab.","Ich möchte einen Dönerkebab, bitte."],why:"der → einen."},
+    {t:"write",lv:3,d:1,k:"g",q:"Order with Ich nehme.",prompt:"die Currywurst",a:["Ich nehme eine Currywurst.","Ich nehme eine Currywurst, bitte."],why:"die → eine."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Order for both of you with Wir nehmen.",prompt:"2 × die Frühlingsrolle",a:["Wir nehmen zwei Frühlingsrollen.","Wir nehmen zwei Frühlingsrollen, bitte."],why:"die Frühlingsrolle, -n: zwei Frühlingsrollen."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich möchte ein Hamburger und eine Suppe.",wrong:[2],fixed:"Ich möchte einen Hamburger und eine Suppe.",why:"der Hamburger → einen Hamburger."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich nehme einen Poulet.",wrong:[2],fixed:"Ich nehme ein Poulet.",why:"das Poulet is neuter: ein Poulet."},
+    {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Du nehmst einen Salat und er nehmt eine Suppe.",wrong:[1,6],fixed:"Du nimmst einen Salat und er nimmt eine Suppe.",why:"nehmen: du nimmst, er nimmt."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the order: We'll have a soup and a salad.",tiles:["wir","nehmen","eine Suppe","und einen Salat"],end:".",a:["Wir nehmen eine Suppe und einen Salat."],verb:"nehmen",why:"die Suppe → eine, der Salat → einen."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Ich bezahle die Bratwurst und das Mineralwasser.","Ich bezahle den Bratwurst und das Mineralwasser.","Ich bezahle die Bratwurst und den Mineralwasser."],a:0,why:"die Bratwurst and das Mineralwasser do not change in the accusative."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"I would like a hot dog and a mineral water, please.",a:["Ich möchte einen Hot Dog und ein Mineralwasser, bitte.","Ich möchte einen Hot Dog und ein Mineralwasser."],why:"der Hot Dog → einen. das Mineralwasser → ein."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question the seller asks you. Use Sie.",prompt:"Ich nehme einen Falafel.",a:["Was nehmen Sie?","Was möchten Sie?"],why:"Course question: Was nehmen Sie?"},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"I am paying for the coffee.",a:["Ich bezahle den Kaffee."],why:"der Kaffee → den Kaffee."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. You are at a snack bar with a friend. Write a short dialog: the seller greets you, you both order, and you ask the price.",model:"Grüezi, bitte schön?\nIch möchte einen Cervelat und ein Bier.\nUnd ich nehme eine Bratwurst.\nWas macht das, bitte?",checks:[{"need":"\\b(moechte|nehme|nehmen)\\b","min":2,"label":"Two orders: ich möchte …, ich nehme …"},{"need":"\\b(einen|eine|ein) ","min":2,"label":"With einen, eine or ein"},{"need":"\\bwas macht das\\b|\\bwas kostet\\b","label":"Ask the price: Was macht das, bitte?"},{"avoid":"\\bein (cervelat|hamburger|salat|hot dog|falafel|doenerkebab|kaffee|tee|wein|saft)\\b","label":"Masculine takes einen: einen Cervelat"}]}
+  ]
+},
+{
+  id:"w6-akkusativ", stop:"Akkusativ", title:"Der Akkusativ: Carla bestellt den Fisch",
+  grammar:"der → den, ein → einen, kein → keinen, mein → meinen; durch, für, gegen, ohne, um, entlang", vocab:"Akkusativ-Verben",
+  cheat:`
+    <h3>Subjekt und Akkusativ-Objekt</h3>
+    <p><b>Carla</b> (Subjekt: Wer / was?) bestellt <b>den Fisch</b> (Akkusativ-Objekt: Wen / was?).</p>
+    <p>The subject is always in nominative case. The object shows who or what is affected by the action. Many verbs require an accusative case.</p>
+    <div class="tbl"><table><tr><th></th><th>maskulin</th><th>feminin</th><th>neutrum</th><th>Plural</th></tr>
+      <tr><td>Nominativ</td><td>der · ein · kein · mein</td><td>die · eine · keine · meine</td><td>das · ein · kein · mein</td><td>die · – · keine · meine</td></tr>
+      <tr><td>Akkusativ</td><td><b>den · einen · keinen · meinen</b></td><td>die · eine · keine · meine</td><td>das · ein · kein · mein</td><td>die · – · keine · meine</td></tr>
+    </table></div>
+    <p>Only masculine changes.</p>
+    <h3>Akkusativ-Verben</h3>
+    <p>es gibt, haben, möchten, brauchen, kaufen, verkaufen, essen, trinken, nehmen, bestellen, (be)zahlen, kochen, probieren, sehen, sagen, lesen, schreiben, hören, singen, machen, lieben, hassen, fragen, suchen, finden, tragen …</p>
+    <h3>Präpositionen mit Akkusativ</h3>
+    <ul>
+      <li><b>durch</b> (through): Ich spaziere durch den Park.</li>
+      <li><b>für</b> (for): Der Kaffee ist für den Chef.</li>
+      <li><b>gegen</b> (against): Wir laufen gegen die Tür.</li>
+      <li><b>ohne</b> (without): Ich gehe ohne meinen Freund in die Ferien.</li>
+      <li><b>um</b> (around): Er fährt um den See.</li>
+      <li><b>entlang</b> (along, behind the object): Ich laufe die Limmat entlang.</li>
+    </ul>`,
+  words:[["es gibt …","there is / there are"],["brauchen · du brauchst · er braucht","to need"],["kaufen · du kaufst · er kauft","to buy"],["verkaufen · du verkaufst · er verkauft","to sell"],["kochen · du kochst · er kocht","to cook"],["probieren · du probierst · er probiert","to try"],["sehen · du siehst · er sieht","to see"],["lesen · du liest · er liest","to read"],["schreiben · du schreibst · er schreibt","to write"],["singen · du singst · er singt","to sing"],["lieben · du liebst · er liebt","to love"],["hassen · du hasst · er hasst","to hate"],["fragen · du fragst · er fragt","to ask"],["suchen · du suchst · er sucht","to search, to look for"],["finden · du findest · er findet","to find"],["tragen · du trägst · er trägt","to wear"],["öffnen · du öffnest · er öffnet","to open"],["durch","through"],["für","for"],["gegen","against"],["ohne","without"],["um","around"],["entlang","along (behind the object)"],["das Subjekt","subject"],["das Akkusativ-Objekt","accusative object"],["der Kellner, -","waiter"],["die Rechnung, -en","bill"],["der Chef, -s","boss"],["spazieren · du spazierst · er spaziert","to stroll, to walk"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"Which article changes in the accusative?",back:"only masculine: der → den, ein → einen, kein → keinen, mein → meinen",ex:"Carla bestellt den Fisch. Carla bestellt einen Fisch."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Carla bestellt den Fisch. Subjekt or Objekt?",back:"Carla = Subjekt (Wer?) · den Fisch = Akkusativ-Objekt (Wen / was?)",ex:"The subject is always in nominative case."},
+    {t:"flash",lv:1,d:1,k:"gv",front:"ohne",back:"without · + Akkusativ",ex:"ohne meinen Freund"},
+    {t:"flash",lv:1,d:2,k:"gv",front:"entlang",back:"along · it comes behind the object",ex:"den Fluss entlang"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"to try",back:"probieren",ex:"Probierst du die Suppe?"},
+    {t:"match",lv:1,d:1,k:"g",q:"Match the accusative prepositions.",pairs:[["durch","through"],["für","for"],["gegen","against"],["ohne","without"],["um","around"],["entlang","along"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the accusative verbs.",pairs:[["brauchen","to need"],["verkaufen","to sell"],["probieren","to try"],["hassen","to hate"],["tragen","to wear"],["suchen","to look for"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Does the article change in the accusative?",groups:["changes","stays the same"],items:[["der Salat",0],["ein Fisch",0],["kein Wein",0],["mein Pyjama",0],["die Suppe",1],["eine Pizza",1],["das Wasser",1],["ein Restaurant",1],["die Teigwaren",1]],why:"Only masculine changes. ein Fisch (m) becomes einen Fisch, but ein Restaurant (n) stays ein."},
+    {t:"mc",lv:2,d:1,k:"g",ctx:"„Carla bestellt im Restaurant den Fisch.“",q:"Which part is the Akkusativ-Objekt?",opts:["den Fisch","Carla","im Restaurant"],a:0,why:"Wen oder was bestellt Carla? Den Fisch."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Which preposition does NOT take the accusative?",opts:["mit","ohne","für"],a:0,why:"mit takes the dative: mit dem Velo. durch, für, gegen, ohne, um and entlang take the accusative."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Ich öffne ___ Tür. (f)",opts:["die","den","der"],a:0,why:"Feminine does not change: die Tür."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Ich möchte ___ Salat. (m) Ich trinke ___ Wein. (m)",a:[["einen","den"],["den","einen"]],why:"Masculine: einen or den."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Ich bezahle ___ Rechnung (f) und öffne ___ Tür (f).",a:[["die","eine"],["die"]],why:"Feminine does not change."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Ich ziehe ___ Pyjama (m) an und gehe ins Bett.",hints:["mein"],a:[["meinen"]],why:"mein works like ein: meinen for masculine."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Ich spaziere ___ den Park. Der Kaffee ist ___ den Chef.",hints:["through","for"],a:[["durch"],["für"]],why:"durch = through. für = for. Both take the accusative."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Er fährt ___ den See. Wir laufen ___ die Tür.",hints:["around","against"],a:[["um"],["gegen"]],why:"um = around. gegen = against."},
+    {t:"write",lv:3,d:2,k:"g",q:"Rewrite with einen / eine / ein instead of the definite article.",prompt:"Carla bestellt den Fisch und die Suppe.",a:["Carla bestellt einen Fisch und eine Suppe."],why:"den → einen. die → eine."},
+    {t:"write",lv:3,d:2,k:"g",q:"Say the opposite with kein.",prompt:"Ich trinke einen Kaffee.",a:["Ich trinke keinen Kaffee."],why:"einen → keinen."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Der Kellner bringt den Wasser.",wrong:[3],fixed:"Der Kellner bringt das Wasser.",why:"das Wasser is neuter. Neuter does not change."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich suche einen Restaurant.",wrong:[2],fixed:"Ich suche ein Restaurant.",why:"das Restaurant is neuter: ein Restaurant."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Ich gehe ohne mein Freund in die Ferien.",wrong:[3],fixed:"Ich gehe ohne meinen Freund in die Ferien.",why:"ohne + accusative. der Freund → meinen Freund."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence: I walk along the Limmat.",tiles:["ich","laufe","die Limmat","entlang"],end:".",a:["Ich laufe die Limmat entlang."],verb:"laufe",why:"entlang comes behind the object."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence: She would like to try the soup first.",tiles:["sie","möchte","zuerst","die Suppe","probieren"],end:".",a:["Sie möchte zuerst die Suppe probieren."],verb:"möchte",why:"möchte on position 2, probieren at the end."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Ich brauche einen Löffel und eine Gabel.","Ich brauche ein Löffel und eine Gabel.","Ich brauche einen Löffel und einen Gabel."],a:0,why:"der Löffel → einen. die Gabel → eine."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"I am buying a coffee for the boss.",a:["Ich kaufe einen Kaffee für den Chef.","Ich kaufe den Kaffee für den Chef."],why:"der Kaffee → einen. für + den Chef."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"We are walking through the park.",a:["Wir spazieren durch den Park.","Wir laufen durch den Park.","Wir gehen durch den Park."],why:"durch + accusative: der Park → den Park."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"I don't have a pen.",a:["Ich habe keinen Kugelschreiber.","Ich habe keinen Stift."],why:"der Kugelschreiber → keinen Kugelschreiber."},
+    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Write four sentences about a restaurant visit, like Carla's: what you order, drink, try and pay. Use at least two masculine nouns (den / einen).",model:"Ich bestelle einen Salat.\nIch trinke einen Apfelsaft.\nIch probiere die Suppe.\nIch bezahle das Essen mit Karte.",checks:[{"need":"\\b(den|einen|keinen|meinen) ","min":2,"label":"Two masculine objects: den / einen …"},{"need":"\\b(bestelle|nehme|esse|trinke|probiere|bezahle|moechte)\\b","min":3,"label":"Accusative verbs: bestellen, trinken, probieren, bezahlen …"},{"avoid":"\\b(bestelle|nehme|esse|trinke|probiere|bezahle|moechte) (der|ein) (salat|kaffee|tee|wein|saft|apfelsaft|fisch|kuchen|hamburger|burger)\\b","label":"Masculine object: den / einen, not der / ein"}]}
+  ]
+},
+{
+  id:"w6-mensa", stop:"In der Mensa", title:"In der Mensa: Akkusativ üben",
+  grammar:"Akkusativ-Artikel und Akkusativ-Präpositionen im Text", vocab:"Mensa, Kasse, Theke",
+  cheat:`
+    <h3>Die Übungen (pages 52 to 54)</h3>
+    <ul>
+      <li>Übung 1: Im Restaurant. Ich nehme eine Suppe und einen Salat …</li>
+      <li>Übung 2: In der Mensa, Anna und Lukas.</li>
+      <li>Übung 3 and the Carla text: durch, für, ohne, um, gegen, entlang.</li>
+      <li>Schreib die Sätze (homework, page 54): definite or indefinite article.</li>
+    </ul>
+    <p>The solutions are on pages 53 and 55.</p>
+    <h3>Reminder</h3>
+    <p>Only masculine changes: den, einen, keinen, meinen. Prepositions with accusative: durch, für, gegen, ohne, um, entlang (behind the object).</p>`,
+  words:[["die Mensa, die Mensen","university cafeteria"],["die Kasse, -n","checkout, till"],["die Theke, -n","counter"],["getrennt","separately"],["zusammen","together"],["bar bezahlen","to pay cash"],["mit Karte bezahlen","to pay by card"],["das Bargeld","cash"],["die Fünfzigernote, -n","fifty-franc note"],["die Flasche, -n","bottle"],["vergessen · du vergisst · er vergisst","to forget"],["holen · du holst · er holt","to get, to fetch"],["lecker","delicious"],["vegetarisch","vegetarian"],["der Vegetarier, -","vegetarian (person)"],["Hunger haben","to be hungry"],["Kommst du mit?","Are you coming along?"],["Schau mal!","Look!"],["die Eingangstür, -en","entrance door"],["das Hauptgebäude, -","main building"],["reservieren · du reservierst · er reserviert","to reserve"],["der Platz, ¨-e","seat, place"],["die Legi (CH)","student ID card"],["das Salatbuffet, -s","salad buffet"],["So eine Sauerei!","What a mess!"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"die Legi (CH)",back:"student ID card",ex:"An der Kasse zeige ich meine Legi."},
+    {t:"flash",lv:1,d:1,k:"v",front:"getrennt",back:"separately",ex:"Zusammen oder getrennt?"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"to pay cash",back:"bar bezahlen",ex:"Bezahlst du bar oder mit Karte?"},
+    {t:"flash",lv:1,d:2,k:"v",front:"die Theke",back:"counter",ex:"An der Theke bestellen wir das Menü."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the Mensa words.",pairs:[["die Kasse","checkout"],["die Theke","counter"],["die Rechnung","bill"],["das Bargeld","cash"],["die Flasche","bottle"],["lecker","delicious"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Übung 3: Which preposition fits the gap?",groups:["durch","für","ohne"],items:[["Ich laufe ___ die Eingangstür und gehe in die Mensa.",0],["Heute gibt es ein Menü ___ Vegetarier.",1],["Ich gehe nie ___ meine Legi in die Mensa!",2],["Lukas reserviert einen Platz ___ mich.",1],["Meine Freundin nimmt den Salat ___ Dressing.",2],["Wir gehen ___ das Hauptgebäude zur Mensa.",0],["An der Kasse zahle ich ___ Bargeld. Ich zahle mit Karte.",2]],why:"durch = through a door or a building. für = for someone. ohne = without."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"Anna: „Ich bezahle bar, aber ich habe nur eine Fünfzigernote.“",q:"How does Anna pay?",opts:["in cash","by card","with her Legi"],a:0,why:"bar = in cash. die Fünfzigernote = fifty-franc note."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"Lukas: „Ich nehme ein Wasser. Ich habe meine Flasche vergessen.“",q:"Why does Lukas take a water?",opts:["He forgot his bottle.","He has no money.","He does not like juice."],a:0,why:"vergessen = to forget. die Flasche = bottle."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"„Paul stösst mit der Hand gegen sein Glas und das Wasser fliesst auf den Tisch. So eine Sauerei!“",q:"What happens?",opts:["Paul knocks his glass and the water spills.","Paul orders a glass of water at the table.","Paul fills his glass and drinks the water."],a:0,why:"gegen sein Glas = against his glass. fliessen = to flow. So eine Sauerei = what a mess."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Ich nehme ___ Suppe (f) und ___ Salat (m). Meine Freundin bestellt ___ Pizza (f).",a:[["eine","die"],["einen","den"],["eine","die"]],why:"Solution: eine Suppe, einen Salat, eine Pizza."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Mein Bruder isst ___ Bratwurst (f) und trinkt ___ Cola (f). Der Kellner bringt uns ___ Rechnung (f).",a:[["eine","die"],["eine","die"],["die","eine"]],why:"Feminine does not change. Solution: eine Bratwurst, eine Cola, die Rechnung."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Anna: Ich nehme ___ Lasagne und ___ kleinen Salat.",a:[["die","eine"],["einen","den"]],why:"Solution: die Lasagne und einen kleinen Salat."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Lukas: Ich nehme ___ Schnitzel mit Pommes. Anna: Ich hole ___ Apfelsaft.",a:[["das","ein"],["einen","den"]],why:"das Schnitzel (n). der Apfelsaft (m) → einen Apfelsaft."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Carla geht ___ die Tür in die Mensa. Sie sucht einen Platz ___ sich und ihren Freund.",a:[["durch"],["für"]],why:"durch die Tür = through the door. für sich = for herself."},
+    {t:"gap",lv:3,d:3,k:"g",q:"Paul läuft ___ das Salatbuffet. Er nimmt ein Glas ___ das Wasser.",a:[["um"],["für"]],why:"um = around. für = for."},
+    {t:"write",lv:3,d:2,k:"g",q:"Write the sentence. Choose a definite or indefinite article.",prompt:"Du / nehmen / auch / Orangensaft (m)? (question)",a:["Nimmst du auch einen Orangensaft?","Nimmst du auch den Orangensaft?"],why:"Solution: Nimmst du auch einen Orangensaft?"},
+    {t:"write",lv:3,d:1,k:"g",q:"Write the sentence. Choose a definite or indefinite article.",prompt:"Wir / essen / Stück Kuchen (n)",a:["Wir essen ein Stück Kuchen."],why:"das Stück → ein Stück."},
+    {t:"write",lv:3,d:2,k:"g",q:"Write the sentence. Choose a definite or indefinite article.",prompt:"Marta / Tee (m) / möchten",a:["Marta möchte einen Tee.","Marta möchte den Tee."],why:"Solution: Marta möchte einen Tee. der Tee is masculine."},
+    {t:"write",lv:3,d:2,k:"g",q:"Write the sentence. Choose a definite or indefinite article.",prompt:"Bezahlen / du / Fisch (m)? (question)",a:["Bezahlst du den Fisch?","Bezahlst du einen Fisch?"],why:"Solution: Bezahlst du den Fisch?"},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Andreas isst abends oft ein Salat.",wrong:[4],fixed:"Andreas isst abends oft einen Salat.",why:"der Salat → einen Salat."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Er bestellt immer einen Pizza im Restaurant.",wrong:[3],fixed:"Er bestellt immer eine Pizza im Restaurant.",why:"die Pizza → eine Pizza."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Sie fragen der Kellner nach der Rechnung.",wrong:[2],fixed:"Sie fragen den Kellner nach der Rechnung.",why:"fragen + accusative: der Kellner → den Kellner."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence: Milena tries the fish soup today.",tiles:["Milena","probiert","heute","die Fischsuppe"],end:".",a:["Milena probiert heute die Fischsuppe.","Heute probiert Milena die Fischsuppe."],verb:"probiert",why:"Solution: Milena probiert heute die Fischsuppe."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence: Lea likes drinking a glass of milk.",tiles:["Lea","trinkt","gern","ein Glas Milch"],end:".",a:["Lea trinkt gern ein Glas Milch."],verb:"trinkt",why:"das Glas → ein Glas. gern after the verb."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Ich bezahle heute das Essen mit Karte.","Ich bezahle heute den Essen mit Karte.","Ich bezahle heute der Essen mit Karte."],a:0,why:"das Essen is neuter and does not change."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"Are you coming along? I'm going to the Mensa.",a:["Kommst du mit? Ich gehe in die Mensa.","Kommst du mit? Ich gehe gleich in die Mensa."],why:"mitkommen: kommst du mit?"},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"I am very hungry. I'll take the vegetarian lasagne.",a:["Ich habe viel Hunger. Ich nehme die vegetarische Lasagne."],why:"Course phrase: Ich habe viel Hunger. die Lasagne stays die."},
+    {t:"write",lv:5,d:1,k:"gv",q:"Write it in German.",prompt:"We are paying separately.",a:["Wir bezahlen getrennt.","Wir zahlen getrennt."],why:"getrennt = separately."},
+    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Write a short Mensa dialog like Anna and Lukas: what there is today (es gibt), what each person takes and drinks, and how they pay.",model:"Schau mal! Es gibt heute einen Burger.\nIch nehme den Burger und einen Salat.\nUnd ich nehme eine Suppe und ein Wasser.\nIch bezahle mit Karte, aber du bezahlst bar.",checks:[{"need":"\\bes gibt( heute)? (einen|eine|ein|den|die|das)\\b|\\bgibt es( heute)? (einen|eine|ein)\\b","label":"es gibt + Akkusativ: Es gibt einen …"},{"need":"\\b(nehme|nimmst|nimmt|trinke|hole)\\b","min":2,"label":"Two orders: ich nehme …, ich hole …"},{"need":"\\b(bar|mit karte)\\b","label":"How you pay: bar or mit Karte"},{"need":"\\b(einen|den)\\b","label":"At least one masculine object: einen / den"},{"avoid":"\\bes gibt( heute)? (ein|der) (burger|salat|kaffee|apfelsaft|saft|fisch)\\b","label":"es gibt takes the accusative: es gibt einen Burger"}]}
+  ]
+}
 ]}
 ];
 
@@ -1553,7 +1862,8 @@ const QUIZLET_SETS = {
   w2: ["«Personalien»", "«Deutsch im Alltag»", "«how are you feeling»", "«Bist du …?»", "«haben-sein im Präsens»"],
   w3: ["«Wohnsituation»", "«unregelmässige Verben»", "«regelmässige und unregelmässige Verben»"],
   w4: ["«unregelmässige Verben» (Anja und Petra)", "«regelmässige und unregelmässige Verben»"],
-  w5: ["«Uhrzeiten, im-am-um» (Petra)"]
+  w5: ["«Uhrzeiten, im-am-um» (Petra)"],
+  w6: ["«Tageszeiten - Tagesablauf» (Anja)", "«im Restaurant» (Anja)", "«Lebensmittel und Mahlzeiten» (Petra)", "«Lebensmittel Artikel» (Petra)"]
 };
 /* Set words that no stop lists yet, with the course glosses. */
 const QUIZLET_EXTRA = {
@@ -1562,7 +1872,8 @@ const QUIZLET_EXTRA = {
   w3: [["das Dach","roof"],["der Korridor","corridor"]],
   /* week 4 re-lists the irregular verb set for both teachers, so the whole list is the week's verb bank */
   w4: [["sein · du bist · er ist","to be"],["haben · du hast · er hat","to have"],["sprechen · du sprichst · er spricht","to speak"],["wissen · du weisst · er weiss","to know"],["vergessen · du vergisst · er vergisst","to forget"],["sehen · du siehst · er sieht","to see"],["fahren · du fährst · er fährt","to drive"],["lesen · du liest · er liest","to read"],["nehmen · du nimmst · er nimmt","to take"],["laufen · du läufst · er läuft","to walk, to run"],["gefallen · du gefällst mir · er gefällt mir","to like"],["fallen · du fällst · er fällt","to fall"],["halten · du hältst · er hält","to hold, to stop"],["fangen · du fängst · er fängt","to catch"],["helfen · du hilfst · er hilft","to help"],["geben · du gibst · er gibt","to give"],["essen · du isst · er isst","to eat"],["werfen · du wirfst · er wirft","to throw"],["sterben · du stirbst · er stirbt","to die"],["empfehlen · du empfiehlst · er empfiehlt","to recommend"],["stehlen · du stiehlst · er stiehlt","to steal"],["treffen · du triffst · er trifft","to meet"],["schlafen · du schläfst · er schläft","to sleep"],["messen · du misst · er misst","to measure"],["tragen · du trägst · er trägt","to wear, to carry"],["unterbrechen · du unterbrichst · er unterbricht","to interrupt"],["widersprechen · du widersprichst · er widerspricht","to contradict"],["treten · du trittst · er tritt","to step, to kick"],["mögen · du magst · er mag","to like"],["möchten · du möchtest · er möchte","would like"],["wollen · du willst · er will","to want"]],
-  w5: []
+  w5: [],
+  w6: []
 };
 /* Base form of an entry: the word before its du/er forms or plural suffix. */
 function baseDe(de){ return de.split("·")[0].split(",")[0].trim(); }
