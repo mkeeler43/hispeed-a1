@@ -1792,6 +1792,460 @@ const WEEKS = [
     {t:"open",lv:5,d:3,k:"g",q:"Your turn. Write a short Mensa dialog like Anna and Lukas: what there is today (es gibt), what each person takes and drinks, and how they pay.",model:"Schau mal! Es gibt heute einen Burger.\nIch nehme den Burger und einen Salat.\nUnd ich nehme eine Suppe und ein Wasser.\nIch bezahle mit Karte, aber du bezahlst bar.",checks:[{"need":"\\bes gibt( heute)? (einen|eine|ein|den|die|das)\\b|\\bgibt es( heute)? (einen|eine|ein)\\b","label":"es gibt + Akkusativ: Es gibt einen …"},{"need":"\\b(nehme|nimmst|nimmt|trinke|hole)\\b","min":2,"label":"Two orders: ich nehme …, ich hole …"},{"need":"\\b(bar|mit karte)\\b","label":"How you pay: bar or mit Karte"},{"need":"\\b(einen|den)\\b","label":"At least one masculine object: einen / den"},{"avoid":"\\bes gibt( heute)? (ein|der) (burger|salat|kaffee|apfelsaft|saft|fisch)\\b","label":"es gibt takes the accusative: es gibt einen Burger"}]}
   ]
 }
+]},
+{ id:"w7", n:7, label:"Woche 7", stops:[
+{
+  id:"w7-kein", stop:"kein & lieber", title:"Akkusativ: Essen und Trinken mit kein",
+  grammar:"keinen, keine, kein im Akkusativ; gern, lieber, am liebsten", vocab:"Lebensmittel; Magst du …? Isst du lieber …?",
+  cheat:`
+    <h3>kein im Akkusativ</h3>
+    <div class="tbl"><table><tr><th>maskulin</th><th>feminin</th><th>neutrum</th><th>Plural</th></tr>
+      <tr><td><b>keinen</b> Tee</td><td>keine Pizza</td><td>kein Obst</td><td>keine Kartoffeln</td></tr>
+    </table></div>
+    <p>Only masculine changes, exactly like einen. Übung 1: Ich esse keine Pizza. Du trinkst keinen Tee.</p>
+    <h3>Übung 2: Frage deinen Kollegen</h3>
+    <ul>
+      <li>Isst du gern … ? Ja, ich esse gern … . Nein, ich esse nicht gern … .</li>
+      <li>Magst du … ? Ja, ich mag … . … mag ich sehr. … esse ich am liebsten. … ist mein Lieblingsessen.</li>
+      <li>Nein, ich mag … nicht. … mag ich (gar) nicht. … kann ich nicht essen. Ich bin allergisch auf … . Ich bin Vegetarier(in).</li>
+      <li>Isst du lieber … oder … ? … mag ich lieber. Ich esse lieber … (als …). Gar nichts von beiden.</li>
+    </ul>`,
+  words:[["das Lebensmittel, -","grocery"],["das Obst","fruit"],["der Alkohol","alcohol"],["die Glace (CH) / das Eis","ice cream"],["die Schokolade, -n","chocolate"],["Magst du …? / Mögen Sie …?","Do you like …?"],["… mag ich sehr.","I like … a lot."],["… esse ich am liebsten.","I like eating … best."],["… ist mein Lieblingsessen.","… is my favourite food."],["… kann ich nicht essen.","I can't eat …"],["Ich bin allergisch auf …","I am allergic to …"],["Ich bin Vegetarier(in).","I am a vegetarian."],["Isst du lieber … oder …?","Do you prefer eating … or …?"],["… mag ich lieber.","I prefer …"],["Ich esse lieber … (als …).","I prefer eating … (to …)."],["Gar nichts von beiden.","Neither of them."],["lieber","rather, preferably"],["am liebsten","best of all"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"kein in the accusative",back:"keinen (m) · keine (f) · kein (n) · keine (Pl.)",ex:"Ich esse keine Pizza."},
+    {t:"flash",lv:1,d:1,k:"v",front:"die Glace (CH)",back:"ice cream · in Germany: das Eis",ex:"Isst du gern Glace?"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"I am allergic to …",back:"Ich bin allergisch auf …",ex:"… kann ich nicht essen."},
+    {t:"flash",lv:1,d:2,k:"gv",front:"lieber",back:"rather, preferably · gern → lieber → am liebsten",ex:"Ich esse lieber Reis als Teigwaren."},
+    {t:"flash",lv:1,d:1,k:"v",front:"Gar nichts von beiden.",back:"Neither of them.",ex:"Isst du lieber Fisch oder Fleisch?"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the food words.",pairs:[["das Obst","fruit"],["der Alkohol","alcohol"],["die Glace","ice cream"],["die Schokolade","chocolate"],["der Käse","cheese"],["das Fleisch","meat"]]},
+    {t:"match",lv:1,d:2,k:"gv",q:"Match the phrases.",pairs:[["… mag ich lieber.","I prefer …"],["… esse ich am liebsten.","I like eating … best."],["… kann ich nicht essen.","I can't eat …"],["… ist mein Lieblingsessen.","… is my favourite food."],["Magst du …?","Do you like …?"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Ich esse / trinke … Sort by the form of kein.",groups:["keinen","keine","kein"],items:[["Tee",0],["Kaffee",0],["Fisch",0],["Käse",0],["Alkohol",0],["Pizza",1],["Milch",1],["Glace",1],["Suppe",1],["Obst",2],["Fleisch",2],["Eis",2],["Wasser",2]],why:"Masculine takes keinen. die Glace (CH) but das Eis (D), so keine Glace, kein Eis."},
+    {t:"mc",lv:2,d:1,k:"g",q:"„Magst du Fisch?“ You don't. Which answer is correct?",opts:["Nein, ich mag keinen Fisch.","Nein, ich mag kein Fisch.","Nein, ich mag nicht Fisch."],a:0,why:"der Fisch → keinen Fisch."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"„Isst du lieber Fisch oder Fleisch?“ „Gar nichts von beiden. Ich bin Vegetarierin.“",q:"What does she eat?",opts:["neither fish nor meat","both fish and meat","only fish"],a:0,why:"Gar nichts von beiden = neither of them."},
+    {t:"mc",lv:2,d:2,k:"v",q:"What does „Fisch esse ich am liebsten“ mean?",opts:["I like eating fish best.","I rarely eat fish.","I like fish less."],a:0,why:"am liebsten = best of all."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Du ___ ___ Tee.",hints:["trinken","kein-"],a:[["trinkst"],["keinen"]],why:"du trinkst. der Tee → keinen Tee."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Du ___ ___ Obst.",hints:["essen","kein-"],a:[["isst"],["kein"]],why:"essen: du isst. das Obst → kein Obst."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Er ___ ___ Alkohol und Sophie ___ ___ Fisch.",hints:["trinken","kein-","essen","kein-"],a:[["trinkt"],["keinen"],["isst"],["keinen"]],why:"essen: sie isst (e → i). der Alkohol, der Fisch → keinen."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Ihr ___ ___ Käse.",hints:["essen","kein-"],a:[["esst"],["keinen"]],why:"ihr esst (no vowel change for ihr). der Käse → keinen."},
+    {t:"write",lv:3,d:2,k:"g",q:"Say the opposite with kein.",prompt:"Sie (Pl.) essen Fleisch.",a:["Sie essen kein Fleisch."],why:"das Fleisch → kein Fleisch."},
+    {t:"write",lv:3,d:2,k:"g",q:"Say the opposite with kein.",prompt:"Ihr trinkt Milch.",a:["Ihr trinkt keine Milch."],why:"die Milch → keine Milch."},
+    {t:"write",lv:3,d:1,k:"gv",q:"Answer with Ja and gern.",prompt:"Isst du gern Schokolade?",a:["Ja, ich esse gern Schokolade.","Ja, ich esse sehr gern Schokolade."],why:"Course pattern: Ja, ich esse gern … ."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wir trinken keine Kaffee.",wrong:[2],fixed:"Wir trinken keinen Kaffee.",why:"der Kaffee → keinen Kaffee."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Du isst kein Glace.",wrong:[2],fixed:"Du isst keine Glace.",why:"die Glace (CH) → keine Glace."},
+    {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Er esst keinen Fisch und trinkt keine Alkohol.",wrong:[1,6],fixed:"Er isst keinen Fisch und trinkt keinen Alkohol.",why:"essen: er isst. der Alkohol → keinen."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: I prefer drinking tea to coffee.",tiles:["ich","trinke","lieber","Tee","als Kaffee"],end:".",a:["Ich trinke lieber Tee als Kaffee."],verb:"trinke",why:"Course pattern: Ich esse lieber … (als …)."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the answer: I don't like meat at all. Start with Fleisch.",tiles:["Fleisch","mag","ich","gar nicht"],end:".",a:["Fleisch mag ich gar nicht."],verb:"mag",why:"Course pattern: … mag ich (gar) nicht."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Ich esse keine Pizza und keinen Käse.","Ich esse keinen Pizza und keine Käse.","Ich esse kein Pizza und kein Käse."],a:0,why:"die Pizza → keine. der Käse → keinen."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"I don't drink alcohol.",a:["Ich trinke keinen Alkohol."],why:"der Alkohol → keinen."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"I am a vegetarian. I can't eat fish.",a:["Ich bin Vegetarier. Fisch kann ich nicht essen.","Ich bin Vegetarierin. Fisch kann ich nicht essen.","Ich bin Vegetarier. Ich kann keinen Fisch essen.","Ich bin Vegetarierin. Ich kann keinen Fisch essen."],why:"Course phrases: Ich bin Vegetarier(in). … kann ich nicht essen."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer. Use du.",prompt:"Ja, ich mag Schokolade sehr.",a:["Magst du Schokolade?"],why:"Course question: Magst du … ?"},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Answer for yourself, like Übung 2: one food you like (gern), one you don't eat or drink (kein), and which of two things you prefer (lieber).",model:"Ich esse gern Pasta.\nIch esse keinen Fisch.\nIch esse lieber Reis als Kartoffeln.",checks:[{"need":"\\bgern\\b","label":"One food you like: gern"},{"need":"\\b(keinen|keine|kein)\\b","label":"One thing with kein"},{"need":"\\blieber\\b","label":"One preference with lieber"},{"avoid":"\\bkein (kaffee|tee|fisch|kaese|alkohol|wein|saft|salat|reis)\\b","label":"Masculine takes keinen: keinen Kaffee"}]}
+  ]
+},
+{
+  id:"w7-moechten", stop:"möchten & nehmen", title:"möchten und nehmen: Was nehmen wir?",
+  grammar:"möchten und nehmen konjugieren", vocab:"Im Café: Lena, Irma, Nora und Basil",
+  cheat:`
+    <div class="tbl"><table><tr><th></th><th>möchten</th><th>nehmen</th></tr>
+      <tr><td>ich</td><td>möchte</td><td>nehme</td></tr>
+      <tr><td>du</td><td>möchtest</td><td>nimmst</td></tr>
+      <tr><td>er / sie / es</td><td>möchte</td><td>nimmt</td></tr>
+      <tr><td>wir</td><td>möchten</td><td>nehmen</td></tr>
+      <tr><td>ihr</td><td>möchtet</td><td>nehmt</td></tr>
+      <tr><td>sie / Sie</td><td>möchten</td><td>nehmen</td></tr>
+    </table></div>
+    <p>möchte has no -t for er, like ich. nehmen changes e → i for du and er: du nimmst, er nimmt.</p>
+    <h3>Im Café (page 42)</h3>
+    <p>Lena (35), Irma (55), Nora (5) und Basil (3) sitzen im Café. Sie besprechen, was sie bestellen möchten. Dann rufen sie den Kellner.</p>`,
+  words:[["möchten · du möchtest · er möchte","would like"],["nehmen · du nimmst · er nimmt","to take, to have (food or drink)"],["bestellen · du bestellst · er bestellt","to order"],["besprechen · du besprichst · er bespricht","to discuss"],["rufen · du rufst · er ruft","to call"],["sitzen · du sitzt · er sitzt","to sit"],["der Kellner, -","waiter"],["die Kellnerin, -nen","waitress"],["das Café, -s","café"],["das Mineralwasser","mineral water"],["das stille Wasser","still water"],["Milch und Zucker","milk and sugar"],["noch","another, in addition"],["nichts","nothing"],["Was meinst du?","What do you think?"],["Das ist eine gute Idee.","That's a good idea."],["Warum nicht!","Why not!"],["Ich auch!","Me too!"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",front:"möchten: ich · du · er",back:"ich möchte · du möchtest · er möchte",ex:"ihr möchtet · sie möchten"},
+    {t:"flash",lv:1,d:1,k:"g",front:"nehmen: ich · du · er",back:"ich nehme · du nimmst · er nimmt",ex:"wir nehmen · ihr nehmt · sie nehmen"},
+    {t:"flash",lv:1,d:1,k:"v",front:"noch",back:"another, in addition",ex:"Und ich noch ein Mineralwasser."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"That's a good idea.",back:"Das ist eine gute Idee.",ex:"Was meinst du?"},
+    {t:"match",lv:1,d:1,k:"g",q:"Match the forms of nehmen.",pairs:[["ich","nehme"],["du","nimmst"],["er","nimmt"],["wir","nehmen"],["ihr","nehmt"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the words from the café.",pairs:[["der Kellner","waiter"],["bestellen","to order"],["besprechen","to discuss"],["rufen","to call"],["das stille Wasser","still water"],["nichts","nothing"]]},
+    {t:"sort",lv:2,d:1,k:"g",q:"möchte, möchtest or möchten?",groups:["möchte","möchtest","möchten"],items:[["ich ___",0],["er ___",0],["es ___",0],["du ___",1],["wir ___",2],["sie (Pl.) ___",2],["Sie ___",2]],why:"ich and er share möchte, with no -t. wir, sie and Sie take möchten."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"„Nora, was möchtest du trinken?“ „Ich möchte nichts trinken, ich möchte eine Glace.“",q:"What does Nora want?",opts:["an ice cream, nothing to drink","a drink and an ice cream","nothing at all"],a:0,why:"nichts trinken = drink nothing. eine Glace = an ice cream."},
+    {t:"mc",lv:2,d:2,k:"g",ctx:"„Ihr zwei nehmt Glacen. Irma, und wir? Was nehmen wir?“",q:"What does „Ihr zwei nehmt Glacen“ mean?",opts:["You two are having ice creams.","We two are having ice creams.","They two want ice cream."],a:0,why:"ihr = you (plural). ihr nehmt."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Er ___ ein Bier.",opts:["möchte","möchtet","möchtest"],a:0,why:"er möchte, with no -t."},
+    {t:"gap",lv:3,d:1,k:"g",q:"___ du Milch und Zucker? – Ja, gerne.",hints:["möchten"],a:[["Möchtest"]],why:"du möchtest."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Er ___ ein Bier und ich ___ einen Wein, bitte.",hints:["möchten","möchten"],a:[["möchte"],["möchte"]],why:"er and ich share the form: möchte."},
+    {t:"gap",lv:3,d:2,k:"g",q:"___ ihr auch ein Mineralwasser? – Nein, sie (Sg) ___ lieber ein stilles Wasser.",hints:["möchten","nehmen"],a:[["Möchtet"],["nimmt"]],why:"ihr möchtet. nehmen: sie nimmt."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Und du, Basil? ___ du auch eine Glace?",hints:["nehmen"],a:[["Nimmst"]],why:"nehmen: du nimmst (e → i, and the h drops)."},
+    {t:"write",lv:3,d:1,k:"g",q:"Rewrite the sentence with wir instead of ich.",prompt:"Ich nehme noch einen Kaffee.",a:["Wir nehmen noch einen Kaffee."],why:"wir nehmen."},
+    {t:"write",lv:3,d:2,k:"g",q:"Turn it into a question with du.",prompt:"Ich möchte etwas trinken.",a:["Möchtest du etwas trinken?"],why:"Yes/no question: the verb comes first. du möchtest."},
+    {t:"write",lv:3,d:2,k:"g",q:"Rewrite the sentence with er instead of ich.",prompt:"Ich nehme den Salat.",a:["Er nimmt den Salat."],why:"nehmen: er nimmt."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ihr möchten bestellen.",wrong:[1],fixed:"Ihr möchtet bestellen.",why:"ihr möchtet."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Sie (Sg) möchtet ein stilles Wasser.",wrong:[2],fixed:"Sie (Sg) möchte ein stilles Wasser.",why:"sie (she) möchte, like er."},
+    {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Er nehmt einen Kaffee und ich möchtest ein Wasser.",wrong:[1,6],fixed:"Er nimmt einen Kaffee und ich möchte ein Wasser.",why:"er nimmt. ich möchte."},
+    {t:"build",lv:4,d:1,k:"g",q:"Build the sentence: We would like to order.",tiles:["wir","möchten","bestellen"],end:".",a:["Wir möchten bestellen."],verb:"möchten",why:"möchten on position 2, the infinitive at the end."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: And I'll have another mineral water.",tiles:["und","ich","nehme","noch","ein Mineralwasser"],end:".",a:["Und ich nehme noch ein Mineralwasser."],verb:"nehme",why:"und does not count as a position, so ich nehme keeps the verb second."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Möchtest du einen Kaffee?","Möchtest du ein Kaffee?","Möchtet du einen Kaffee?"],a:0,why:"du möchtest. der Kaffee → einen Kaffee."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Use du.",prompt:"What would you like to eat?",a:["Was möchtest du essen?"],why:"möchten + infinitive at the end."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Use Sie.",prompt:"Would you like milk and sugar?",a:["Möchten Sie Milch und Zucker?"],why:"Sie möchten."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"He would like a beer and she would like a wine.",a:["Er möchte ein Bier und sie möchte einen Wein."],why:"er möchte, sie möchte. der Wein → einen Wein."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. You are in a café with friends. Write a short dialog like page 42: ask what the others want, say what you take, and call the waiter.",model:"Was möchtet ihr trinken?\nIch möchte einen Tee.\nUnd ich nehme eine Glace.\nKellner! Wir möchten bestellen.",checks:[{"need":"\\bmoechtet\\b|\\bmoechtest\\b","label":"A question with möchtest or möchtet"},{"need":"\\b(nehme|nimmst|nimmt|nehmt|nehmen)\\b","label":"One form of nehmen"},{"need":"\\bbestellen\\b","label":"Call the waiter: Wir möchten bestellen."},{"avoid":"\\b(du|er) (nehmst|nehmt)\\b|\\bihr moechten\\b|\\ber moechtet\\b","label":"du nimmst, er nimmt, ihr möchtet"}]}
+  ]
+},
+{
+  id:"w7-restaurant", stop:"Im Restaurant", title:"Im Restaurant: Haben Sie schon gewählt?",
+  grammar:"Akkusativ beim Bestellen: einen Tee, den Salat", vocab:"Kellner und Gast: typische Sätze",
+  cheat:`
+    <div class="tbl"><table><tr><th>Kellner / Kellnerin</th><th>Gast</th></tr>
+      <tr><td>Haben Sie schon gewählt? / Was möchten Sie?<br>Was kann ich Ihnen bringen?<br>Möchten Sie die Speisekarte? Kartoffeln oder Reis? ein Dessert? noch ein Wasser (mit oder ohne)?<br>Guten Appetit.<br>Hat es geschmeckt? War alles in Ordnung?<br>Zahlen Sie zusammen oder getrennt?<br>Das macht zusammen …</td>
+          <td>Ich habe einen Tisch auf den Namen … reserviert.<br>Ich brauche einen Tisch für … Personen.<br>Ich möchte … / Ich hätte gern …<br>Ich nehme / Wir nehmen …<br>Können Sie bitte … bringen?<br>Haben Sie …?<br>Es hat sehr gut geschmeckt.<br>Die Rechnung, bitte. / Zahlen, bitte.<br>Wir zahlen zusammen / getrennt.<br>Stimmt so. / Der Rest ist Trinkgeld. / Machen Sie … Franken.</td></tr>
+    </table></div>
+    <h3>Die Dialoge (pages 43 to 45)</h3>
+    <p>1: einen Tee, einen Schwarztee, einen Kaffee und ein Glas Hahnenwasser. 2: Zahlen, bitte! Getrennt. 3: das Tagesmenü, ein Mineralwasser mit und ohne Kohlensäure. 4: ein Käsesandwich und den Salat mit Ei, das Poulet mit Pommes Frites. 5: Hat es geschmeckt? ein Stück Kuchen und einen Espresso.</p>`,
+  words:[["Haben Sie schon gewählt?","Have you already chosen?"],["Was kann ich Ihnen bringen?","What can I bring you?"],["die Speisekarte, -n","menu"],["Darf ich Ihnen die Karte bringen?","May I bring you the menu?"],["Guten Appetit.","Enjoy your meal."],["Hat es geschmeckt?","Did you enjoy it?"],["War alles in Ordnung?","Was everything alright?"],["Zahlen Sie zusammen oder getrennt?","Are you paying together or separately?"],["Ich brauche einen Tisch für … Personen.","I need a table for … people."],["Ich hätte gern …","I would like …"],["Können Sie bitte … bringen?","Could you please bring …?"],["Es hat sehr gut geschmeckt.","It was very tasty."],["Die Rechnung, bitte.","The bill, please."],["Stimmt so.","Keep the change."],["das Trinkgeld","tip"],["das Hahnenwasser (CH)","tap water"],["mit / ohne Kohlensäure","sparkling / still"],["das Tagesmenü, -s","menu of the day"],["das Getränk, -e","drink"],["Leider nein.","Unfortunately not."],["Danke, gleichfalls.","Thanks, you too."],["Ich komme gleich.","I'm coming right away."],["das Dessert, -s","dessert"],["ein Stück Kuchen","a piece of cake"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"Stimmt so.",back:"Keep the change.",ex:"(gibt 4.50 Fr.) Das stimmt so."},
+    {t:"flash",lv:1,d:1,k:"v",front:"das Hahnenwasser (CH)",back:"tap water",ex:"ein Glas Hahnenwasser dazu"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"The bill, please.",back:"Die Rechnung, bitte. / Zahlen, bitte.",ex:"Zusammen oder getrennt?"},
+    {t:"flash",lv:1,d:1,k:"gv",front:"Ich hätte gern …",back:"I would like … (polite)",ex:"Ich hätte gern ein Glas Wasser."},
+    {t:"flash",lv:1,d:1,k:"v",front:"Danke, gleichfalls.",back:"Thanks, you too.",ex:"Ich wünsche Ihnen einen schönen Tag."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the waiter's question with the guest's answer.",pairs:[["Haben Sie schon gewählt?","Ja, ich nehme den Salat."],["Mit oder ohne Kohlensäure?","Ohne, bitte."],["Hat es geschmeckt?","Ja sehr, danke."],["Zusammen oder getrennt?","Getrennt."],["Möchten Sie noch etwas?","Nein, danke."]]},
+    {t:"sort",lv:2,d:1,k:"v",q:"Who says it?",groups:["Kellner/in","Gast"],items:[["Haben Sie schon gewählt?",0],["Was kann ich Ihnen bringen?",0],["Zahlen Sie zusammen oder getrennt?",0],["Guten Appetit.",0],["Ich brauche einen Tisch für zwei Personen.",1],["Die Rechnung, bitte.",1],["Stimmt so.",1],["Können Sie bitte Wasser bringen?",1]],why:"The waiter asks and serves. The guest orders, asks for things and pays."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"Dialog 2: „Der Kaffee kostet 3.80 Fr.“ (gibt 4.50 Fr.) „Das stimmt so.“",q:"How much tip does the guest give?",opts:["70 Rappen","4.50 Franken","3.80 Franken"],a:0,why:"Stimmt so = keep the change: 4.50 minus 3.80 is 70 Rappen."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"Dialog 3: „Heute gibt es auch ein Tagesmenü: Gemüsesuppe, Spaghetti mit Tomatensauce und eine Schokoladencrème für 15 Franken.“",q:"What is the Tagesmenü?",opts:["soup, pasta and dessert for 15 francs","soup and salad for 15 francs","pasta and coffee for 50 francs"],a:0,why:"das Tagesmenü = menu of the day: Gemüsesuppe, Spaghetti and Schokoladencrème."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"„Mit oder ohne Kohlensäure?“ „Mit.“",q:"What does the guest want?",opts:["sparkling water","still water","tap water"],a:0,why:"mit Kohlensäure = sparkling."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Ich ___ einen Tisch auf den Namen Keller reserviert.",hints:["haben"],a:[["habe"]],why:"Course phrase: Ich habe einen Tisch auf den Namen … reserviert."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Ich ___ gerne einen Tee. – Was für ___?",hints:["would like (polite)","der Tee"],a:[["hätte"],["einen"]],why:"Ich hätte gern(e) … . Was für einen? = Which kind? der Tee → einen."},
+    {t:"gap",lv:3,d:1,k:"v",q:"Wir zahlen ___. Der Rest ist ___.",hints:["together","tip"],a:[["zusammen"],["Trinkgeld"]],why:"zusammen = together. das Trinkgeld = tip."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Order politely with Ich hätte gern.",prompt:"das Mineralwasser, ohne Kohlensäure",a:["Ich hätte gern ein Mineralwasser ohne Kohlensäure.","Ich hätte gerne ein Mineralwasser ohne Kohlensäure.","Ich hätte gern ein Mineralwasser ohne Kohlensäure, bitte."],why:"das Mineralwasser → ein Mineralwasser."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Order with Für mich bitte.",prompt:"das Poulet mit Pommes Frites",a:["Für mich bitte das Poulet mit Pommes Frites."],why:"Dialog 4: Für mich bitte das Poulet mit Pommes Frites."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Ask for a table for three people. Start with Ich brauche.",prompt:"3 Personen",a:["Ich brauche einen Tisch für drei Personen.","Ich brauche einen Tisch für 3 Personen."],why:"der Tisch → einen Tisch."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich hätte gern ein Tee.",wrong:[3],fixed:"Ich hätte gern einen Tee.",why:"der Tee → einen Tee."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich bezahle der Kaffee.",wrong:[2],fixed:"Ich bezahle den Kaffee.",why:"der Kaffee → den Kaffee."},
+    {t:"fix",lv:4,d:2,k:"gv",q:"Tap the wrong word.",text:"Hat es gut schmeckt?",wrong:[3],fixed:"Hat es gut geschmeckt?",why:"Course phrase: Hat es geschmeckt?"},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the question: Could you please bring the menu?",tiles:["können","Sie","bitte","die Speisekarte","bringen"],end:"?",a:["Können Sie bitte die Speisekarte bringen?"],verb:"können",why:"Course phrase: Können Sie bitte … bringen?"},
+    {t:"build",lv:4,d:3,k:"gv",q:"Build the order: I'd like another piece of cake and an espresso.",tiles:["ich","hätte","gern","noch ein Stück Kuchen","und einen Espresso"],end:".",a:["Ich hätte gern noch ein Stück Kuchen und einen Espresso."],verb:"hätte",why:"Dialog 5. der Espresso → einen Espresso."},
+    {t:"mc",lv:4,d:2,k:"v",ctx:"The waiter asks: „Möchten Sie noch etwas? Ein Dessert? Kaffee?“ You are full.",q:"What do you answer?",opts:["Ich möchte nichts mehr, danke.","Ja, ich habe einen Tisch reserviert.","Guten Appetit, gleichfalls."],a:0,why:"nichts mehr = nothing more."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"The bill, please. We are paying separately.",a:["Die Rechnung, bitte. Wir zahlen getrennt.","Zahlen, bitte. Wir zahlen getrennt.","Die Rechnung, bitte. Wir bezahlen getrennt."],why:"Course phrases: Die Rechnung, bitte. Wir zahlen getrennt."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"It was very tasty, thank you.",a:["Es hat sehr gut geschmeckt, danke."],why:"Course phrase: Es hat sehr gut geschmeckt."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Use Sie.",prompt:"Do you also have tap water?",a:["Haben Sie auch Hahnenwasser?"],why:"Dialog 3. Hahnenwasser is the Swiss word."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write a restaurant dialog with a waiter and a guest, like the five dialogs: the order, a drink with or without Kohlensäure, and paying.",model:"Haben Sie schon gewählt?\nJa, ich nehme den Salat mit Ei.\nUnd zu trinken?\nEin Mineralwasser ohne Kohlensäure, bitte.\nDie Rechnung, bitte.\nDas macht 24 Franken.\nMachen Sie 26 Franken. Stimmt so.",checks:[{"need":"\\b(nehme|moechte|haette)\\b","label":"An order: ich nehme / möchte / hätte gern"},{"need":"\\b(mit|ohne) kohlensaeure\\b","label":"mit / ohne Kohlensäure"},{"need":"\\b(rechnung|zahlen)\\b","label":"Paying: Die Rechnung, bitte / Zahlen, bitte"},{"need":"\\b(einen|den)\\b","label":"One masculine object: den / einen"},{"avoid":"\\b(nehme|moechte|gern|gerne) (ein|der) (salat|kaffee|tee|fisch|wein|kuchen|espresso)\\b","label":"Masculine object: den / einen, not der / ein"}]}
+  ]
+},
+{
+  id:"w7-pronomen", stop:"mich, dich, ihn", title:"Personalpronomen im Akkusativ: Ich suche ihn",
+  grammar:"ich → mich, du → dich, er → ihn, wir → uns, ihr → euch", vocab:"Orte in Zürich",
+  cheat:`
+    <div class="tbl"><table><tr><th>Nominativ: Das bin …</th><th>Akkusativ: Ich sehe …</th></tr>
+      <tr><td>ich</td><td><b>mich</b></td></tr><tr><td>du</td><td><b>dich</b></td></tr>
+      <tr><td>er</td><td><b>ihn</b></td></tr><tr><td>sie</td><td>sie</td></tr><tr><td>es</td><td>es</td></tr>
+      <tr><td>wir</td><td><b>uns</b></td></tr><tr><td>ihr</td><td><b>euch</b></td></tr>
+      <tr><td>sie</td><td>sie</td></tr><tr><td>Sie</td><td>Sie</td></tr>
+    </table></div>
+    <p>Hier bin ich! Ich sehe mich im Spiegel und frage: Spieglein, Spieglein an der Wand, wer ist die Schönste im ganzen Land?</p>
+    <h3>Übung 2: Was suchst du?</h3>
+    <p>Ich suche die Mensa (f). Ich suche sie. der → ihn, die → sie, das → es.</p>`,
+  words:[["mich","me"],["dich","you (informal)"],["ihn","him; it (for der)"],["uns","us"],["euch","you (plural)"],["der Bahnhof, ¨-e","train station"],["die Post","post office"],["die Bibliothek, -en","library"],["das Sprachenzentrum","language center"],["das Hotel, -s","hotel"],["der Spiegel, -","mirror"],["die Wand, ¨-e","wall"],["suchen · du suchst · er sucht","to search, to look for"],["sehen · du siehst · er sieht","to see"],["finden · du findest · er findet","to find"],["lieben · du liebst · er liebt","to love"],["fragen · du fragst · er fragt","to ask"],["kennen · du kennst · er kennt","to know (a person)"],["anrufen · du rufst an · er ruft an","to call (on the phone)"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",front:"er → ? (Akkusativ)",back:"ihn",ex:"Wo ist der Kellner? Ich sehe ihn nicht."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Which pronouns change in the accusative?",back:"ich → mich, du → dich, er → ihn, wir → uns, ihr → euch. sie, es, sie and Sie stay the same.",ex:"Hier bin ich! Ich sehe mich im Spiegel."},
+    {t:"flash",lv:1,d:1,k:"g",front:"euch",back:"you (plural), the accusative of ihr",ex:"Ich besuche euch am Samstag."},
+    {t:"flash",lv:1,d:1,k:"g",rev:true,front:"us",back:"uns",ex:"Siehst du uns?"},
+    {t:"match",lv:1,d:1,k:"g",q:"Match nominative and accusative.",pairs:[["ich","mich"],["du","dich"],["er","ihn"],["wir","uns"],["ihr","euch"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the words.",pairs:[["der Bahnhof","train station"],["die Post","post office"],["die Bibliothek","library"],["das Sprachenzentrum","language center"],["der Spiegel","mirror"],["suchen","to look for"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Ich suche … Which pronoun replaces the place?",groups:["ihn","sie","es"],items:[["den Bahnhof (m)",0],["die Universität (f)",1],["den Paradeplatz (m)",0],["die Post (f)",1],["das Restaurant (n)",2],["die Bibliothek (f)",1],["das Sprachenzentrum (n)",2],["die Migros (f)",1],["den Coop (m)",0],["das Hotel (n)",2],["die Langstrasse (f)",1]],why:"den → ihn, die → sie, das → es."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Wo ist mein Schlüssel? Ich finde ___ nicht.",opts:["ihn","er","es"],a:0,why:"der Schlüssel → ihn in the accusative."},
+    {t:"mc",lv:2,d:1,k:"g",ctx:"„Hier bin ich! Ich sehe mich im Spiegel und frage: Spieglein, Spieglein an der Wand, wer ist die Schönste im ganzen Land?“",q:"Whom does the speaker see in the mirror?",opts:["herself","the king","her friend"],a:0,why:"Ich sehe mich = I see myself."},
+    {t:"mc",lv:2,d:1,k:"g",q:"„Ich liebe dich.“ Who is loved?",opts:["you","me","him"],a:0,why:"dich = you (accusative of du)."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Siehst du die Büroklammern? Ja, ich sehe ___.",a:[["sie"]],why:"die Büroklammern (Pl.) → sie."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Kennst du Peter? Ja, ich kenne ___ gut.",hints:["er"],a:[["ihn"]],why:"er → ihn."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Besuchst du ___ am Samstag? Ja, ich besuche ___ gern.",hints:["wir","ihr"],a:[["uns"],["euch"]],why:"wir → uns. ihr → euch."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Hörst du ___? – Nein, ich höre ___ nicht.",hints:["ich","du"],a:[["mich"],["dich"]],why:"ich → mich. du → dich."},
+    {t:"write",lv:3,d:1,k:"g",q:"Answer with a pronoun.",prompt:"Suchst du die Mensa?",a:["Ja, ich suche sie.","Nein, ich suche sie nicht."],why:"die Mensa → sie. The course example on page 56."},
+    {t:"write",lv:3,d:1,k:"g",q:"Answer with a pronoun.",prompt:"Siehst du das Hotel?",a:["Ja, ich sehe es.","Nein, ich sehe es nicht."],why:"das Hotel → es."},
+    {t:"write",lv:3,d:2,k:"g",q:"Answer with a pronoun.",prompt:"Fragst du den Professor?",a:["Ja, ich frage ihn.","Nein, ich frage ihn nicht."],why:"den Professor → ihn."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich suche den Bahnhof. Ich suche er.",wrong:[6],fixed:"Ich suche den Bahnhof. Ich suche ihn.",why:"After the verb, er becomes ihn."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wo ist die Post? Ich finde ihn nicht.",wrong:[6],fixed:"Wo ist die Post? Ich finde sie nicht.",why:"die Post → sie."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich besuche ihr am Wochenende.",wrong:[2],fixed:"Ich besuche euch am Wochenende.",why:"ihr → euch in the accusative."},
+    {t:"build",lv:4,d:1,k:"g",q:"Build the answer: Yes, I see him.",tiles:["ja,","ich","sehe","ihn"],end:".",a:["Ja, ich sehe ihn."],verb:"sehe",why:"ja does not count as a position. ihn after the verb."},
+    {t:"build",lv:4,d:1,k:"g",q:"Build the question: Do you love me?",tiles:["liebst","du","mich"],end:"?",a:["Liebst du mich?"],verb:"liebst",why:"Yes/no question: the verb first. ich → mich."},
+    {t:"mc",lv:4,d:2,k:"g",q:"„Brauchst du den Computer?“ Which answer is correct?",opts:["Ja, ich brauche ihn.","Ja, ich brauche er.","Ja, ich brauche es."],a:0,why:"den Computer → ihn."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German. Use du.",prompt:"I'll call you tomorrow.",a:["Ich rufe dich morgen an.","Morgen rufe ich dich an."],why:"anrufen is separable: ich rufe … an. du → dich."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"We are visiting you (plural) at the weekend.",a:["Wir besuchen euch am Wochenende.","Am Wochenende besuchen wir euch."],why:"ihr → euch."},
+    {t:"write",lv:5,d:3,k:"g",q:"Write it in German.",prompt:"Where is the coffee? I don't find it.",a:["Wo ist der Kaffee? Ich finde ihn nicht."],why:"der Kaffee → ihn. it is ihn for a der-word."},
+    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Write four short question-and-answer pairs. Each answer replaces the thing or person with a pronoun: use ihn, sie, es, and one of mich, dich, uns or euch.",model:"Suchst du den Bahnhof? Ja, ich suche ihn.\nSiehst du die Post? Nein, ich sehe sie nicht.\nKaufst du das Buch? Ja, ich kaufe es.\nBesuchst du mich? Ja, ich besuche dich.",checks:[{"need":"\\bihn\\b","label":"One answer with ihn"},{"need":"\\bes\\b","label":"One answer with es"},{"need":"\\b(mich|dich|uns|euch)\\b","label":"One with mich, dich, uns or euch"},{"avoid":"\\b(suche|sehe|kaufe|frage|finde|besuche|brauche|liebe|kenne) er\\b","label":"After the verb: ihn, not er"}]}
+  ]
+},
+{
+  id:"w7-wen", stop:"Wen oder was?", title:"Wen oder was? Akkusativ im Büro und die Kartoffel",
+  grammar:"Akkusativ-Objekt; wen = who in accusative case", vocab:"Im Büro; Text: Die Kartoffel",
+  cheat:`
+    <h3>Sätze mit Akkusativ (page 58)</h3>
+    <p>Write correct sentences with an accusative object, using either a definite or an indefinite article. Example: Mein Freund / suchen / Schere (f) → Mein Freund sucht eine Schere.</p>
+    <h3>wen</h3>
+    <p>wen = „who“ in accusative case. It's a question for a person. Wen fragst du? Ich frage den Vater.</p>
+    <h3>Die Kartoffel (page 57, aus Begegnungen A1+)</h3>
+    <p>Die Kartoffel ist schon sehr alt. Sie kam im 16. Jahrhundert mit spanischen Seefahrern aus Südamerika nach Europa. Schon ab dem 17. Jahrhundert war die Kartoffel in Europa das Hauptnahrungsmittel von armen Leuten. … Heute isst man Kartoffeln auf verschiedene Weise. In Deutschland sind Salzkartoffeln sehr beliebt. … Man schält die Kartoffel, danach kocht man sie mit etwas Salz. In Belgien oder Frankreich isst man die Kartoffeln anders: Man schneidet sie in Streifen und frittiert sie. … Pommes frites haben aber einen grossen Nachteil: sie enthalten sehr viel Fett.</p>
+    <p>kam = Präteritum von kommen.</p>`,
+  words:[["Wen?","whom? (who in accusative case)"],["der Tisch, -e","table"],["die Schere, -n","scissors"],["der Locher, -","hole punch"],["der Scanner, -","scanner"],["die Aufgabe, -n","task, exercise"],["der Doktorand, -en","doctoral student"],["beobachten · du beobachtest · er beobachtet","to observe"],["die Büroklammer, -n","paper clip"],["der Schlüssel, -","key"],["die Brille, -n","glasses"],["das Geld","money"],["der Braten, -","roast"],["die Torte, -n","gateau, cake"],["backen · du backst · er backt","to bake"],["das Nahrungsmittel, -","aliment, food"],["Haupt-…","main"],["die Leute (immer Plural)","people"],["weltbekannt","famous world-wide"],["auf verschiedene Weise","in different ways"],["zubereiten · du bereitest zu · er bereitet zu","to prepare"],["schälen · du schälst · er schält","to peel"],["anders","in a different way"],["in Streifen schneiden","to slice into strips"],["der Nachteil, -e","disadvantage"],["enthalten · du enthältst · er enthält","to contain"],["eine weitere Erfindung","another invention"],["beliebt","popular"],["kam","came (Präteritum von kommen)"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",front:"Wen?",back:"whom? · wer in the accusative, a question for a person",ex:"Wen besuchst du? Ich besuche die Familie."},
+    {t:"flash",lv:1,d:2,k:"gv",front:"beobachten",back:"to observe · du beobachtest, er beobachtet",ex:"Wir beobachten die Studenten."},
+    {t:"flash",lv:1,d:1,k:"v",front:"beliebt",back:"popular",ex:"Pommes frites sind beliebt."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"disadvantage",back:"der Nachteil, -e",ex:"der Vorteil >< der Nachteil"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the office words.",pairs:[["die Schere","scissors"],["der Locher","hole punch"],["die Büroklammer","paper clip"],["der Schlüssel","key"],["die Brille","glasses"],["die Aufgabe","task"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the words from the potato text.",pairs:[["zubereiten","to prepare"],["schälen","to peel"],["enthalten","to contain"],["weltbekannt","famous world-wide"],["anders","in a different way"],["das Nahrungsmittel","food"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Wer or wen? Which question word fits?",groups:["Wer?","Wen?"],items:[["___ fragst du? – Ich frage den Vater.",1],["___ trifft Peter? – Den Professor.",1],["___ braucht einen Computer? – Die Studentin.",0],["___ besuchst du in den Ferien? – Die Familie.",1],["___ sucht eine Schere? – Mein Freund.",0],["___ kommt heute? – Lisa.",0]],why:"Wer asks for the subject. Wen asks for the person in the accusative."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From the text: „Die Kartoffel ist schon sehr alt. Sie kam im 16. Jahrhundert mit spanischen Seefahrern aus Südamerika nach Europa.“",q:"Where does the potato come from?",opts:["South America","Spain","Ireland"],a:0,why:"aus Südamerika. kam = came."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"From the text: „Pommes frites haben aber einen grossen Nachteil: sie enthalten sehr viel Fett.“",q:"What is the disadvantage?",opts:["They contain a lot of fat.","They are very expensive.","They take long to cook."],a:0,why:"enthalten = to contain. das Fett = fat."},
+    {t:"mc",lv:2,d:2,k:"g",ctx:"From the text: „Man schält die Kartoffel, danach kocht man sie mit etwas Salz.“",q:"What does sie refer to?",opts:["the potato","the cook","the salt"],a:0,why:"die Kartoffel → sie (accusative, the same form)."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Mein Freund sucht ___ Schere.",a:[["eine","die"]],why:"die Schere stays: eine or die."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Meine Freundin kauft heute ___ Locher. Ich bestelle morgen ___ Scanner.",a:[["einen","den"],["einen","den"]],why:"der Locher, der Scanner → einen."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Er nimmt ___ Bus zum Hönggerberg.",a:[["den"]],why:"der Bus → den Bus."},
+    {t:"write",lv:3,d:2,k:"g",q:"Write the sentence with an accusative object.",prompt:"Im Büro / Tisch (m) / geben / es.",a:["Im Büro gibt es einen Tisch."],why:"es gibt + Akkusativ: einen Tisch."},
+    {t:"write",lv:3,d:2,k:"g",q:"Write the sentence with an accusative object.",prompt:"Ingrid / nicht / verstehen / Aufgabe (f).",a:["Ingrid versteht die Aufgabe nicht."],why:"nicht goes to the end here."},
+    {t:"write",lv:3,d:2,k:"g",q:"Write the sentence with an accusative object.",prompt:"Computer (m) / die Studentin / brauchen.",a:["Die Studentin braucht einen Computer.","Einen Computer braucht die Studentin."],why:"der Computer → einen Computer."},
+    {t:"write",lv:3,d:2,k:"g",q:"Answer and name all the things.",prompt:"Was brauchst du für die Wohnung? (der Stuhl, das Bett, die Lampe)",a:["Ich brauche einen Stuhl, ein Bett und eine Lampe.","Ich brauche einen Stuhl, ein Bett und eine Lampe für die Wohnung.","Für die Wohnung brauche ich einen Stuhl, ein Bett und eine Lampe."],why:"einen Stuhl (m), ein Bett (n), eine Lampe (f)."},
+    {t:"write",lv:3,d:2,k:"g",q:"Make the question with wen. Use du.",prompt:"treffen / morgen",a:["Wen triffst du morgen?"],why:"treffen: du triffst."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Peter trifft am Mittwoch der Professor.",wrong:[4],fixed:"Peter trifft am Mittwoch den Professor.",why:"der Professor → den Professor."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Isst du den Menü 1 in der Mensa?",wrong:[2],fixed:"Isst du das Menü 1 in der Mensa?",why:"das Menü is neuter and does not change."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Wer fragst du? Ich frage den Vater.",wrong:[0],fixed:"Wen fragst du? Ich frage den Vater.",why:"The answer is den Vater, an accusative person, so the question is wen."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence: Thomas and Karin don't hear the professor well.",tiles:["Thomas und Karin","hören","die Professorin","nicht gut"],end:".",a:["Thomas und Karin hören die Professorin nicht gut."],verb:"hören",why:"Subject, verb, object, then nicht gut."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: In Germany, boiled potatoes are very popular.",tiles:["in Deutschland","sind","Salzkartoffeln","sehr beliebt"],end:".",a:["In Deutschland sind Salzkartoffeln sehr beliebt."],verb:"sind",why:"In Deutschland on position 1, the verb second."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Siehst du die Büroklammern?","Siehst du den Büroklammern?","Sehst du die Büroklammern?"],a:0,why:"sehen: du siehst. The plural article die does not change."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German. Use du.",prompt:"Whom do you visit in the holidays?",a:["Wen besuchst du in den Ferien?"],why:"wen for a person in the accusative."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write the question from the potato page in German. Use du.",prompt:"Do you like eating potatoes, French fries or potato chips?",a:["Isst du gern Kartoffeln, Pommes frites oder Kartoffelchips?"],why:"essen: du isst. gern after the subject."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German. Use du.",prompt:"What do you have in the office?",a:["Was hast du im Büro?"],why:"The example question on page 59."},
+    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Like page 59, answer three questions and name all the things: what you have in the office, what you buy at the Migros, and whom you meet tomorrow.",model:"Ich habe einen Computer, einen Tisch und eine Lampe im Büro.\nIn der Migros kaufe ich einen Salat und ein Wasser.\nMorgen treffe ich den Professor.",checks:[{"need":"\\beinen\\b","min":2,"label":"Two masculine things with einen"},{"need":"\\b(eine|ein)\\b","label":"One feminine or neuter thing: eine / ein"},{"need":"\\b(den|die|das) (professor|professorin|kollegen|kollegin|team|familie|freund|freundin|chef|chefin|vater|mutter)\\b","label":"A person in the accusative: den Professor …"},{"avoid":"\\b(habe|kaufe|treffe|brauche) (der|ein) ","label":"Masculine object: den / einen"}]}
+  ]
+},
+{
+  id:"w7-praeteritum", stop:"war & hatte", title:"haben und sein im Präteritum: Wie war dein Wochenende?",
+  grammar:"ich war, du warst; ich hatte, du hattest", vocab:"Wochenende und Wetter",
+  cheat:`
+    <div class="tbl"><table><tr><th></th><th>sein (was)</th><th>haben (had)</th></tr>
+      <tr><td>ich</td><td>war</td><td>hatte</td></tr>
+      <tr><td>du</td><td>warst</td><td>hattest</td></tr>
+      <tr><td>er / sie / es / man</td><td>war</td><td>hatte</td></tr>
+      <tr><td>wir</td><td>waren</td><td>hatten</td></tr>
+      <tr><td>ihr</td><td>wart</td><td>hattet</td></tr>
+      <tr><td>sie / Sie</td><td>waren</td><td>hatten</td></tr>
+    </table></div>
+    <p>ich and er share the form, with no ending: ich war, er war, ich hatte, er hatte.</p>
+    <h3>Wie war dein Wochenende? (page 63)</h3>
+    <ul>
+      <li>Mein Wochenende war … sehr schön, erholsam, lustig, langweilig, anstrengend.</li>
+      <li>Ich hatte … viel Freizeit, viel Zeit, viel Spass, viel Arbeit, keine Zeit.</li>
+      <li>Ich war … zu Hause, draussen, in der Stadt, auf dem Land, bei Freunden, bei meinen Eltern.</li>
+      <li>Das Wetter war … sonnig, bewölkt, regnerisch, neblig, stürmisch, windstill, klar.</li>
+    </ul>`,
+  words:[["ich war, du warst, er war","I was, you were, he was"],["ich hatte, du hattest, er hatte","I had, you had, he had"],["gestern","yesterday"],["der Besuch, -e","visit"],["in den Bergen","in the mountains"],["der Kollege, -n","colleague"],["das Wetter","weather"],["lustig","funny"],["sonnig","sunny"],["heiss","hot"],["der Erfolg, -e","success"],["viel Spass","a lot of fun"],["immer noch","still"],["darum","that's why"],["alle","everyone"],["Wie war dein Wochenende?","How was your weekend?"],["erholsam","restful"],["anstrengend","exhausting"],["langweilig","boring"],["draussen","outside"],["auf dem Land","in the countryside"],["bei meinen Eltern","at my parents' place"],["bewölkt","cloudy"],["regnerisch","rainy"],["neblig","foggy"],["stürmisch","stormy"],["windstill","windless"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",front:"sein im Präteritum",back:"ich war · du warst · er war · wir waren · ihr wart · sie waren",ex:"Das Fernsehprogramm war gut."},
+    {t:"flash",lv:1,d:1,k:"g",front:"haben im Präteritum",back:"ich hatte · du hattest · er hatte · wir hatten · ihr hattet · sie hatten",ex:"Ich hatte Besuch."},
+    {t:"flash",lv:1,d:1,k:"v",front:"erholsam",back:"restful",ex:"Mein Wochenende war erholsam."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"that's why",back:"darum",ex:"Ich war müde, darum war ich zu Hause."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the opposites from page 63.",pairs:[["erholsam","anstrengend"],["lustig","langweilig"],["viel Zeit","keine Zeit"],["in der Stadt","auf dem Land"],["windstill","stürmisch"],["klar","neblig"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the weather words.",pairs:[["sonnig","sunny"],["bewölkt","cloudy"],["neblig","foggy"],["regnerisch","rainy"],["heiss","hot"],["das Wetter","weather"]]},
+    {t:"sort",lv:2,d:1,k:"g",q:"war or hatte?",groups:["war","hatte"],items:[["Ich ___ zu Hause.",0],["Ich ___ Besuch.",1],["Das Fernsehprogramm ___ gut.",0],["Ich ___ viele Telefongespräche.",1],["Am Sonntag ___ ich müde.",0],["Ich ___ viel Spass.",1],["Das Wetter ___ sonnig.",0],["Ich ___ keine Zeit.",1]],why:"A place or a description takes war. Something you have (Besuch, Spass, Zeit) takes hatte."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"„Ja, es war lustig. … Alle hatten Spass. Um drei Uhr morgens waren immer noch ein paar Freunde da.“",q:"What does the speaker say about the party?",opts:["It was fun and some friends stayed until 3 a.m.","It was boring and everyone left early.","It was a success, but nobody had fun."],a:0,why:"lustig = fun. immer noch = still. Alle hatten Spass = everyone had fun."},
+    {t:"mc",lv:2,d:1,k:"v",q:"„Wie war das Wetter?“ „Es war neblig.“ What was the weather like?",opts:["foggy","stormy","sunny"],a:0,why:"neblig = foggy."},
+    {t:"mc",lv:2,d:1,k:"g",q:"ihr ___ (haben, Präteritum)",opts:["hattet","hatten","hattest"],a:0,why:"ihr hattet. ihr wart."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Und, wie ___ es? Wie ___ das Wetter?",hints:["sein","sein"],a:[["war"],["war"]],why:"es war, das Wetter war."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Super, es ___ sonnig, aber nicht heiss. Wir ___ an einem kleinen See in den Bergen.",hints:["sein","sein"],a:[["war"],["waren"]],why:"es war, wir waren."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Und wo ___ du? ___ du ein gutes Wochenende?",hints:["sein","haben"],a:[["warst"],["Hattest"]],why:"du warst, du hattest."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Ich ___ zu Hause. Mein Freund ___ Geburtstag und wir ___ Besuch.",hints:["sein","haben","haben"],a:[["war"],["hatte"],["hatten"]],why:"Solution on your page 60: war, hatte, hatten."},
+    {t:"write",lv:3,d:1,k:"g",q:"Rewrite the sentence in the Präteritum.",prompt:"Ich bin in Luzern.",a:["Ich war in Luzern."],why:"ich bin → ich war."},
+    {t:"write",lv:3,d:1,k:"g",q:"Rewrite the sentence in the Präteritum.",prompt:"Wir haben viel Spass.",a:["Wir hatten viel Spass."],why:"wir haben → wir hatten."},
+    {t:"write",lv:3,d:2,k:"g",q:"Rewrite the sentence in the Präteritum.",prompt:"Du bist bei Freunden.",a:["Du warst bei Freunden."],why:"du bist → du warst."},
+    {t:"write",lv:3,d:2,k:"g",q:"Rewrite the sentence in the Präteritum.",prompt:"Ihr habt keine Zeit.",a:["Ihr hattet keine Zeit."],why:"ihr habt → ihr hattet."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wir hatten in einem Konzert.",wrong:[1],fixed:"Wir waren in einem Konzert.",why:"A place takes sein: wir waren."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich war viel Arbeit.",wrong:[1],fixed:"Ich hatte viel Arbeit.",why:"Arbeit is something you have: ich hatte."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Ihr hatten Besuch und wart müde.",wrong:[1],fixed:"Ihr hattet Besuch und wart müde.",why:"ihr hattet."},
+    {t:"build",lv:4,d:1,k:"g",q:"Build the sentence: On Sunday I was tired.",tiles:["am Sonntag","war","ich","müde"],end:".",a:["Am Sonntag war ich müde."],verb:"war",why:"Am Sonntag on position 1, war second."},
+    {t:"build",lv:4,d:1,k:"gv",q:"Build the sentence: My weekend was very nice.",tiles:["mein Wochenende","war","sehr schön"],end:".",a:["Mein Wochenende war sehr schön."],verb:"war",why:"Page 63: Mein Wochenende war …"},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Das Wetter war schön, aber wir hatten keine Zeit.","Das Wetter hatte schön, aber wir waren keine Zeit.","Das Wetter war schön, aber wir waren keine Zeit."],a:0,why:"A description takes war. Zeit is something you have: hatten."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer. Use du.",prompt:"Mein Wochenende war anstrengend.",a:["Wie war dein Wochenende?"],why:"The title question of page 63."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"Yesterday we were in the mountains.",a:["Gestern waren wir in den Bergen.","Wir waren gestern in den Bergen."],why:"wir waren. in den Bergen = in the mountains."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"I was at my parents' place. The weather was cold.",a:["Ich war bei meinen Eltern. Das Wetter war kalt."],why:"bei meinen Eltern = at my parents' place."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Like the homework on page 63, write four sentences about your weekend with war and hatte: how it was, where you were, what you had, and the weather.",model:"Mein Wochenende war erholsam.\nIch war am Samstag bei Freunden.\nWir hatten viel Spass.\nDas Wetter war sonnig, aber kalt.",checks:[{"need":"\\bwar\\b","min":2,"label":"At least two sentences with war"},{"need":"\\b(hatte|hatten|hattest)\\b","label":"One sentence with hatte"},{"need":"\\bwetter\\b","label":"The weather: Das Wetter war …"},{"avoid":"\\b(ich|er|es) waren\\b|\\bwir war\\b|\\bich hatten\\b|\\bwir hatte\\b","label":"ich war / wir waren, ich hatte / wir hatten"}]}
+  ]
+}
+]},
+{ id:"w8", n:8, label:"Woche 8", stops:[
+{
+  id:"w8-freizeit", stop:"Freizeit", title:"Wortschatz: Freizeit",
+  grammar:"Aktivitäten mit spielen, gehen, machen; Verb + Objekt", vocab:"Freizeit (page 46), Wortschatz üben (page 51)",
+  cheat:`
+    <h3>Wortschatz: Freizeit (page 46)</h3>
+    <ul>
+      <li>Sport machen, Fussball spielen, joggen, wandern, Ski fahren, Velo fahren, eine Velotour machen, im See schwimmen</li>
+      <li>spazieren gehen, ins Kino gehen, in eine Bar gehen, in einen Club gehen, ins Fitness-Studio gehen, an den See gehen, essen gehen</li>
+      <li>Freunde treffen, Freunde besuchen, Musik hören, ein Buch lesen, einen Ausflug machen, grillieren (CH) / grillen, zelten</li>
+      <li>nichts tun, faulenzen, zu Hause bleiben, die Wohnung putzen</li>
+    </ul>
+    <p>Starred verbs change their vowel: Ski fahren → er fährt, ein Buch lesen → er liest, Freunde treffen → er trifft.</p>
+    <h3>Was machst du gern? (page 47)</h3>
+    <p>Triffst du gern Freunde? Ja, ich treffe gern Freunde in meiner Freizeit. · Joggst du gern? Nein, ich jogge nicht gern. Und du? · Gehst du oft in eine Bar? Ja, ich gehe gern in eine Bar mit Freunden.</p>
+    <h3>Was gehört zusammen? (page 51)</h3>
+    <p>einen Film sehen · Deutsch sprechen · Auto fahren · ein Sandwich essen · ein Geschenk kaufen · Musik hören · einen Kaffee trinken · das Fenster öffnen · die Zeitung lesen · eine E-Mail schreiben</p>`,
+  words:[["die Freizeit","leisure time, spare time"],["das Hobby, -s","hobby"],["die Ferien (pl) / der Urlaub, - (sg)","vacation, holiday"],["der Feierabend, -e","finishing time / after work"],["essen gehen (in ein Restaurant)","to go out for dinner / lunch"],["nichts tun (= machen)","to do nothing"],["faulenzen · du faulenzt · er faulenzt","to laze around"],["Sport machen","to do sports"],["Ski fahren · du fährst Ski · er fährt Ski","to ski"],["joggen · du joggst · er joggt","to do running"],["Velo (CH) / Fahrrad fahren","to ride a bicycle"],["eine Velotour machen","to go on a bicycle tour"],["Fussball spielen","to play football"],["Musik hören","to listen to music"],["ein Buch lesen","to read a book"],["zelten · du zeltest · er zeltet","to do camping"],["wandern · du wanderst · er wandert","to hike"],["spazieren gehen","to go for a walk"],["Freunde treffen","to meet friends"],["Freunde besuchen","to visit friends"],["ins Kino gehen","to go to the cinema"],["zu Hause bleiben","to stay at home"],["in eine Bar gehen","to go to a bar"],["in einen Club gehen","to go clubbing"],["ins Fitness-Studio gehen","to go to the gym"],["an den See gehen","to go to the lake"],["im See schwimmen","to swim in the lake"],["einen Ausflug machen","to go on an excursion"],["grillieren (CH) / grillen","to have a BBQ"],["die Wohnung putzen","to clean the flat"],["das Faultier, -e","sloth"],["das Geschenk, -e","gift"],["das Fenster, -","window"],["die Zeitung, -en","newspaper"],["öffnen · du öffnest · er öffnet","to open"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"faulenzen",back:"to laze around · das Faultier = sloth",ex:"Am Sonntag faulenze ich."},
+    {t:"flash",lv:1,d:1,k:"v",front:"der Feierabend",back:"finishing time / after work",ex:"Schönen Feierabend!"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"to go clubbing",back:"in einen Club gehen",ex:"in eine Bar gehen = to go to a bar"},
+    {t:"flash",lv:1,d:1,k:"v",front:"grillieren (CH)",back:"to have a BBQ · in Germany: grillen",ex:"Im Sommer grillieren wir."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the activities.",pairs:[["wandern","to hike"],["zelten","to do camping"],["joggen","to do running"],["spazieren gehen","to go for a walk"],["einen Ausflug machen","to go on an excursion"],["die Wohnung putzen","to clean the flat"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Was gehört zusammen? Match the object with its verb.",pairs:[["einen Film","sehen"],["Deutsch","sprechen"],["Auto","fahren"],["ein Geschenk","kaufen"],["das Fenster","öffnen"],["die Zeitung","lesen"]]},
+    {t:"sort",lv:2,d:1,k:"v",q:"Which verb goes with it?",groups:["spielen","gehen","machen"],items:[["Fussball",0],["Tennis",0],["ins Kino",1],["spazieren",1],["in eine Bar",1],["Sport",2],["eine Velotour",2],["einen Ausflug",2]],why:"Games take spielen. Places and spazieren take gehen. Sport, tours and excursions take machen."},
+    {t:"mc",lv:2,d:1,k:"v",q:"What does „nichts tun“ mean?",opts:["to do nothing","to do sports","to do the dishes"],a:0,why:"nichts = nothing. tun = machen."},
+    {t:"mc",lv:2,d:1,k:"v",q:"What do „die Ferien“ and „der Urlaub“ mean?",opts:["vacation, holiday","weekend","spare time"],a:0,why:"die Ferien is plural, der Urlaub is singular. die Freizeit = spare time."},
+    {t:"mc",lv:2,d:2,k:"v",ctx:"From page 47: „Joggst du gern?“ „Nein, ich jogge nicht gern. Und du?“ „Ich jogge gern. Ich gehe einmal pro Woche joggen.“",q:"How often does the second person go jogging?",opts:["once a week","every day","never"],a:0,why:"einmal pro Woche = once a week."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Ich ___ gern im See und mein Freund ___ gern Velo.",hints:["schwimmen","fahren"],a:[["schwimme"],["fährt"]],why:"ich schwimme. fahren: er fährt (a → ä)."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Am Wochenende ___ er einen Ausflug und ___ am See.",hints:["machen","grillieren"],a:[["macht"],["grilliert"]],why:"er macht, er grilliert."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Bart ___ einen Film und Homer ___ einen Kaffee.",hints:["sehen","trinken"],a:[["sieht"],["trinkt"]],why:"sehen: er sieht (e → ie). trinken: er trinkt."},
+    {t:"write",lv:3,d:1,k:"gv",q:"Answer with Ja and gern.",prompt:"Triffst du gern Freunde?",a:["Ja, ich treffe gern Freunde.","Ja, ich treffe gern Freunde in meiner Freizeit."],why:"Course answer on page 47."},
+    {t:"write",lv:3,d:2,k:"g",q:"Rewrite the sentence with er instead of ich.",prompt:"Ich lese ein Buch.",a:["Er liest ein Buch."],why:"lesen: er liest (e → ie)."},
+    {t:"write",lv:3,d:2,k:"g",q:"Turn it into a question with du.",prompt:"Ich fahre Ski.",a:["Fährst du Ski?"],why:"fahren: du fährst."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich gehe ins Kino und er gehen in eine Bar.",wrong:[6],fixed:"Ich gehe ins Kino und er geht in eine Bar.",why:"er geht."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wir gehen in einen Bar.",wrong:[3],fixed:"Wir gehen in eine Bar.",why:"die Bar → in eine Bar. in einen Club is masculine."},
+    {t:"fix",lv:4,d:3,k:"g",q:"There are two mistakes. Tap both.",text:"Er lest gern und sie fahrt gern Velo.",wrong:[1,5],fixed:"Er liest gern und sie fährt gern Velo.",why:"lesen: er liest. fahren: sie fährt."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: On Saturday I clean the flat.",tiles:["am Samstag","putze","ich","die Wohnung"],end:".",a:["Am Samstag putze ich die Wohnung."],verb:"putze",why:"Am Samstag on position 1, the verb second."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: In summer we swim in the lake.",tiles:["im Sommer","schwimmen","wir","im See"],end:".",a:["Im Sommer schwimmen wir im See."],verb:"schwimmen",why:"Im Sommer on position 1, then the verb, then wir."},
+    {t:"mc",lv:4,d:2,k:"gv",q:"Which sentence is correct?",opts:["Ich gehe ins Fitness-Studio.","Ich gehe in Fitness-Studio.","Ich gehe ins Fitness-Studio gehen."],a:0,why:"ins = in das. gehen appears only once."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"In my free time I like hiking.",a:["In meiner Freizeit wandere ich gern.","Ich wandere gern in meiner Freizeit."],why:"wandern: ich wandere. gern after the subject."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"After work I go to the gym.",a:["Nach der Arbeit gehe ich ins Fitness-Studio.","Nach dem Feierabend gehe ich ins Fitness-Studio.","Ich gehe nach der Arbeit ins Fitness-Studio."],why:"ins Fitness-Studio gehen = to go to the gym."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer. Use du.",prompt:"Ich gehe gern spazieren und lese Bücher.",a:["Was machst du in deiner Freizeit?","Was machst du gern?","Was machst du gern in deiner Freizeit?"],why:"Was machst du (gern) in deiner Freizeit?"},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. What do you do in your free time? Write four sentences with four different activities from page 46.",model:"In meiner Freizeit jogge ich gern.\nAm Wochenende treffe ich Freunde.\nIm Sommer schwimme ich im See.\nAm Sonntag faulenze ich.",checks:[{"need":"\\b(jogge|wandere|schwimme|lese|spiele|treffe|besuche|gehe|mache|fahre|faulenze|grilliere|zelte|putze|hoere|bleibe)\\b","min":4,"label":"Four activities with ich: ich jogge, ich wandere …"},{"need":"\\b(am wochenende|im sommer|im winter|am sonntag|am samstag|in meiner freizeit|nach der arbeit)\\b","label":"When: am Wochenende, im Sommer …"},{"avoid":"\\bich (joggt|wandert|liest|spielt|trifft|faehrt|schwimmt|geht)\\b","label":"ich forms end in -e: ich jogge"}]}
+  ]
+},
+{
+  id:"w8-wieoft", stop:"Wie oft? Wie gern?", title:"Wie oft? Wie gern? Adverbien und Satzbau",
+  grammar:"Subjekt · Verb · Adverb · Objekt; gern, sehr gern, nicht gern, gar nicht gern", vocab:"Frequenzadverbien (Anja page 48, Petra page 64)",
+  cheat:`
+    <h3>Wie oft? How often?</h3>
+    <p>nie (never) · selten (seldom, rarely) · manchmal (sometimes) · oft (often) · immer (always) · jeden Tag / jede Woche / jeden Monat · einmal, zweimal, dreimal pro Tag, Woche, Monat · nicht oft genug (not often enough)</p>
+    <p>Petra adds: regelmässig (regularly) · normalerweise (usually, normally) · ab und zu (from time to time) · fast immer (almost always) · gelegentlich (occasionally) · häufig (frequently) · nicht oft · ständig (constantly) · fast nie (hardly ever) · meistens (mostly)</p>
+    <h3>Satzbau</h3>
+    <div class="tbl"><table><tr><th>Subjekt</th><th>Verb</th><th>Adverb</th><th>(additional information)</th><th>Objekt</th></tr>
+      <tr><td>Ich</td><td>jogge</td><td>einmal pro Woche.</td><td></td><td></td></tr>
+      <tr><td>Er</td><td>spielt</td><td>nie</td><td></td><td>Tennis.</td></tr>
+      <tr><td>Ich</td><td>spiele</td><td>jede Woche</td><td>mit meiner Kollegin</td><td>Tennis.</td></tr>
+      <tr><td>Sie</td><td>hört</td><td>jeden Tag</td><td>im Zug</td><td>Musik.</td></tr>
+    </table></div>
+    <h3>gern(e) (page 49)</h3>
+    <p>gern(e) = I like · sehr gern(e) = I like … very much · nicht gern(e) = I don't like · gar nicht gern = I don't like … at all</p>
+    <p>Ich gehe gern ins Kino. · Ich gehe sehr gern spazieren. · Ich spiele nicht gern Fussball. · Trinkst du gern Bier? Ja, sehr gern.</p>`,
+  words:[["Wie oft?","How often?"],["nie","never"],["selten","seldom, rarely"],["manchmal","sometimes"],["oft","often"],["immer","always"],["jeden Tag","every day"],["jede Woche","every week"],["jeden Monat","every month"],["einmal, zweimal, dreimal","once, twice, three times"],["pro Tag, Woche, Monat","per day, week, month"],["nicht oft genug","not often enough"],["jeden Montag","every Monday"],["regelmässig","regularly"],["normalerweise","usually, normally"],["ab und zu","from time to time"],["fast immer","almost always"],["gelegentlich","occasionally"],["häufig","frequently"],["ständig","constantly"],["fast nie","hardly ever"],["meistens","mostly"],["sehr gern(e)","I like … very much"],["nicht gern(e)","I don't like …"],["gar nicht gern","I don't like … at all"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"ab und zu",back:"from time to time",ex:"Ab und zu gehe ich ins Kino."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"hardly ever",back:"fast nie",ex:"fast immer = almost always"},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Where does the adverb go?",back:"Subjekt · Verb · Adverb · (additional information) · Objekt",ex:"Wir hören jeden Tag Musik."},
+    {t:"flash",lv:1,d:1,k:"gv",front:"gar nicht gern",back:"I don't like … at all",ex:"gern → sehr gern; nicht gern → gar nicht gern"},
+    {t:"flash",lv:1,d:1,k:"v",front:"normalerweise",back:"usually, normally",ex:"Normalerweise trinke ich Tee."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the adverbs.",pairs:[["nie","never"],["selten","rarely"],["manchmal","sometimes"],["oft","often"],["immer","always"],["ständig","constantly"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the adverbs from Petra's list.",pairs:[["regelmässig","regularly"],["gelegentlich","occasionally"],["häufig","frequently"],["meistens","mostly"],["einmal pro Woche","once a week"],["nicht oft genug","not often enough"]]},
+    {t:"sort",lv:2,d:2,k:"v",q:"Often or rarely?",groups:["oft or more","selten or less"],items:[["immer",0],["ständig",0],["fast immer",0],["häufig",0],["meistens",0],["nie",1],["fast nie",1],["selten",1],["nicht oft",1]],why:"immer, ständig and fast immer are at the top. nie and fast nie are at the bottom."},
+    {t:"sort",lv:2,d:1,k:"gv",q:"Does the person like it?",groups:["likes it","doesn't like it"],items:[["Ich gehe gern ins Kino.",0],["Ich gehe sehr gern spazieren.",0],["Trinkst du gern Bier? Ja, sehr gern.",0],["Ich spiele nicht gern Fussball.",1],["Ich gehe gar nicht gern spazieren.",1],["Nein, ich jogge nicht gern.",1]],why:"gern and sehr gern: yes. nicht gern and gar nicht gern: no."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"„Ich spiele jede Woche mit meiner Kollegin Tennis.“",q:"How often does the person play tennis?",opts:["every week","every day","never"],a:0,why:"jede Woche = every week."},
+    {t:"mc",lv:2,d:1,k:"v",q:"Which one is the most often?",opts:["fast immer","oft","manchmal"],a:0,why:"fast immer = almost always."},
+    {t:"gap",lv:3,d:1,k:"v",q:"Wir joggen ___ pro Woche.",hints:["once"],a:[["einmal"]],why:"einmal pro Woche = once a week."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Er spielt ___ Tennis, aber ich spiele ___ mit meiner Kollegin Tennis.",hints:["never","every week"],a:[["nie"],["jede Woche"]],why:"The adverb comes right after the verb."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Ich spiele ___ Fussball.",hints:["I don't like it at all"],a:[["gar nicht gern"]],why:"gar nicht gern = not at all gladly."},
+    {t:"write",lv:3,d:1,k:"gv",q:"Say it more strongly with sehr gern.",prompt:"Ich gehe gern ins Kino.",a:["Ich gehe sehr gern ins Kino."],why:"sehr goes before gern."},
+    {t:"write",lv:3,d:1,k:"g",q:"Put the adverb in the right place.",prompt:"Sie joggt. (nie)",a:["Sie joggt nie."],why:"Subjekt, Verb, Adverb."},
+    {t:"write",lv:3,d:2,k:"g",q:"Put the adverb in the right place.",prompt:"Ich chatte mit Freunden. (jeden Tag)",a:["Ich chatte jeden Tag mit Freunden."],why:"The adverb comes before the additional information."},
+    {t:"write",lv:3,d:2,k:"gv",q:"Answer in a full sentence with the word in brackets.",prompt:"Wie oft trinkst du Bier? (selten)",a:["Ich trinke selten Bier.","Selten trinke ich Bier."],why:"Subjekt, Verb, Adverb, Objekt."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Ich gern jogge.",wrong:[1,2],fixed:"Ich jogge gern.",why:"The verb stays on position 2, gern comes after it."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Ich spiele Tennis nie.",wrong:[2,3],fixed:"Ich spiele nie Tennis.",why:"The adverb comes before the object."},
+    {t:"fix",lv:4,d:2,k:"v",q:"Tap the wrong word.",text:"Ich gehe zweimal pro Wochen schwimmen.",wrong:[4],fixed:"Ich gehe zweimal pro Woche schwimmen.",why:"pro Woche, singular."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence: She listens to music every day on the train.",tiles:["sie","hört","jeden Tag","im Zug","Musik"],end:".",a:["Sie hört jeden Tag im Zug Musik."],verb:"hört",why:"Subjekt, Verb, Adverb, additional information, Objekt."},
+    {t:"build",lv:4,d:1,k:"gv",q:"Build the question: Do you like reading?",tiles:["liest","du","gern"],end:"?",a:["Liest du gern?"],verb:"liest",why:"lesen: du liest. gern after du."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Ich spiele selten Fussball.","Ich selten spiele Fussball.","Selten ich spiele Fussball."],a:0,why:"The verb stays on position 2."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write it in German.",prompt:"I hardly ever go to the cinema.",a:["Ich gehe fast nie ins Kino."],why:"fast nie = hardly ever."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"Do you often go to a bar? Yes, I like going to a bar with friends.",a:["Gehst du oft in eine Bar? Ja, ich gehe gern in eine Bar mit Freunden.","Gehst du oft in eine Bar? Ja, ich gehe gern mit Freunden in eine Bar."],why:"Course dialog on page 47."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the question for this answer. Use du.",prompt:"Ich schwimme zweimal pro Woche.",a:["Wie oft schwimmst du?"],why:"Wie oft …? = How often …?"},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write four sentences about how often you do things. Use four different adverbs and keep the verb on position 2.",model:"Ich trinke jeden Tag Kaffee.\nIch gehe einmal pro Woche joggen.\nManchmal spiele ich Tennis.\nIch koche selten.",checks:[{"need":"\\b(immer|oft|manchmal|selten|nie|jeden tag|jede woche|jeden monat|einmal|zweimal|dreimal|meistens|normalerweise|regelmaessig|ab und zu|haeufig|gelegentlich)\\b","min":4,"label":"Four frequency words"},{"avoid":"\\bich (immer|oft|manchmal|selten|nie|gern) [a-z]+e\\b","label":"Verb on position 2: ich jogge oft, not ich oft jogge"}]}
+  ]
+},
+{
+  id:"w8-kuenzli", stop:"Frau Künzli", title:"Frau Künzli: Was macht sie in ihrer Freizeit?",
+  grammar:"Frequenz im Text; fernsehen ist trennbar", vocab:"Wortschatz zum Interview",
+  cheat:`
+    <h3>Wortschatz</h3>
+    <p>einmal, zweimal = once, twice a week · der Besuch = guest(s), visitors · auswärts essen = to eat in a restaurant · hüten = to take care of the children, babysit · Kuchen backen = to bake cakes · bleiben = to stay · fernsehen = to watch television · nur = only</p>
+    <h3>Transkription (page 53)</h3>
+    <p>Frau Künzli, morgen ist Samstag und Sie haben frei. Was machen Sie? · Morgen Abend kommt Lisa, eine Freundin von mir, zu Besuch. · Haben Sie oft Besuch? · Ein- bis zweimal pro Woche. Ich lebe allein und so habe ich natürlich gern Besuch. · Was machen Sie und Ihre Kollegin morgen Abend? · Wir essen zusammen und dann gehen wir ins Kino. · Essen Sie auswärts? · Nein, das mache ich eigentlich nie. Ich koche immer selber. Auch morgen Abend essen wir bei mir zu Hause. · Und was machen Sie am Sonntag? · Da habe ich auch den ganzen Tag frei. Am Nachmittag hüte ich die Kinder meiner Schwester und am Morgen backe ich einen Kuchen für sie. Die Kinder haben meine Kuchen gern. · … Ich arbeite immer am Montag, Dienstag, Donnerstag und Freitag. An diesen Tagen bin ich am Abend müde und ich bleibe meistens zu Hause. Ich sehe dann fern oder höre Musik.</p>`,
+  words:[["einmal, zweimal","once, twice a week"],["der Besuch","guest(s), visitors"],["Besuch haben","to have visitors"],["auswärts essen","to eat in a restaurant"],["hüten · du hütest · er hütet","to take care of the children, babysit"],["Kuchen backen","to bake cakes"],["bleiben · du bleibst · er bleibt","to stay"],["fernsehen · du siehst fern · er sieht fern","to watch television"],["nur","only"],["die Kioskverkäuferin, -nen","kiosk saleswoman"],["allein","alone"],["selber","myself, oneself"],["eigentlich","actually"],["frei haben","to have the day off"],["den ganzen Tag","the whole day"],["müde","tired"],["die Schwester, -n","sister"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"auswärts essen",back:"to eat in a restaurant",ex:"Ich esse selten auswärts."},
+    {t:"flash",lv:1,d:1,k:"v",front:"hüten",back:"to take care of the children, babysit",ex:"Sie hütet Kinder."},
+    {t:"flash",lv:1,d:2,k:"gv",front:"fernsehen",back:"to watch television · separable: ich sehe fern",ex:"Siehst du oft fern?"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"to have visitors",back:"Besuch haben",ex:"der Besuch = guest(s), visitors"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the words.",pairs:[["einmal pro Woche","once a week"],["auswärts essen","to eat in a restaurant"],["Kuchen backen","to bake cakes"],["fernsehen","to watch television"],["allein","alone"],["müde","tired"]]},
+    {t:"sort",lv:2,d:2,k:"v",ctx:"From the interview: „Ein- bis zweimal pro Woche. Ich lebe allein und so habe ich natürlich gern Besuch.“ … „Wir essen zusammen und dann gehen wir ins Kino.“ … „Essen Sie auswärts?“ „Nein, das mache ich eigentlich nie. Ich koche immer selber.“ … „Am Nachmittag hüte ich die Kinder meiner Schwester und am Morgen backe ich einen Kuchen für sie.“ … „Ich arbeite immer am Montag, Dienstag, Donnerstag und Freitag. An diesen Tagen bin ich am Abend müde und ich bleibe meistens zu Hause. Ich sehe dann fern oder höre Musik.“",q:"Das macht Frau Künzli in ihrer Freizeit. Ja oder Nein?",groups:["Ja","Nein"],items:[["Sie hat ein- bis zweimal pro Woche Besuch.",0],["Sie geht manchmal ins Kino.",0],["Sie geht oft auswärts essen.",1],["Sie hütet die Kinder von ihrer Schwester.",0],["Sie backt Kuchen.",0],["Sie bleibt am Dienstagabend nie zu Hause.",1],["Sie sieht jeden Abend fern.",1],["Sie hört nur am Wochenende Musik.",1]],why:"She never eats out (eigentlich nie). On work days, Tuesday included, she mostly stays at home. She watches TV on those evenings, not every evening, and listens to music then too."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"„Nein, das mache ich eigentlich nie. Ich koche immer selber.“",q:"What does Frau Künzli say about eating out?",opts:["She never eats out; she always cooks.","She eats out once or twice a week.","She eats out only with her sister."],a:0,why:"eigentlich nie = actually never. selber = herself."},
+    {t:"mc",lv:2,d:1,k:"v",ctx:"„Ich lebe allein und so habe ich natürlich gern Besuch.“",q:"Why does she like having visitors?",opts:["She lives alone.","She has a big flat.","She works at home."],a:0,why:"allein = alone."},
+    {t:"mc",lv:2,d:2,k:"g",ctx:"„Ich sehe dann fern oder höre Musik.“",q:"Which verb is separable here?",opts:["fernsehen","hören","leben"],a:0,why:"fernsehen: ich sehe … fern. The prefix fern goes to the end."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Am Morgen ___ ich einen Kuchen und am Nachmittag ___ ich die Kinder.",hints:["backen","hüten"],a:[["backe"],["hüte"]],why:"ich backe, ich hüte."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Sie ___ am Abend müde und ___ meistens zu Hause.",hints:["sein","bleiben"],a:[["ist"],["bleibt"]],why:"sie ist, sie bleibt."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Sie ___ dann ___ oder ___ Musik.",hints:["fernsehen","prefix","hören"],a:[["sieht"],["fern"],["hört"]],why:"fernsehen: sie sieht … fern. hören: sie hört."},
+    {t:"write",lv:3,d:1,k:"g",q:"Rewrite the sentence with sie (she) instead of ich.",prompt:"Ich lebe allein.",a:["Sie lebt allein."],why:"sie lebt."},
+    {t:"write",lv:3,d:1,k:"g",q:"Rewrite the sentence with sie (she) instead of ich.",prompt:"Ich koche immer selber.",a:["Sie kocht immer selber."],why:"sie kocht."},
+    {t:"write",lv:3,d:2,k:"gv",ctx:"From the interview: „Morgen Abend kommt Lisa, eine Freundin von mir, zu Besuch.“",q:"Answer in a full sentence.",prompt:"Wer kommt morgen Abend zu Besuch?",a:["Lisa kommt morgen Abend zu Besuch.","Morgen Abend kommt Lisa zu Besuch.","Lisa kommt zu Besuch.","Lisa, eine Freundin von ihr, kommt zu Besuch."],why:"Lisa, a friend of hers."},
+    {t:"write",lv:3,d:2,k:"g",ctx:"From the interview: „Ich arbeite immer am Montag, Dienstag, Donnerstag und Freitag.“",q:"Answer in a full sentence with sie.",prompt:"Wann arbeitet Frau Künzli?",a:["Sie arbeitet am Montag, Dienstag, Donnerstag und Freitag.","Sie arbeitet immer am Montag, Dienstag, Donnerstag und Freitag.","Frau Künzli arbeitet am Montag, Dienstag, Donnerstag und Freitag.","Frau Künzli arbeitet immer am Montag, Dienstag, Donnerstag und Freitag."],why:"ich arbeite → sie arbeitet."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Frau Künzli hütet die Kinder von ihr Schwester.",wrong:[6],fixed:"Frau Künzli hütet die Kinder von ihrer Schwester.",why:"As on the worksheet: von ihrer Schwester."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Sie backen einen Kuchen für die Kinder.",wrong:[1],fixed:"Sie backt einen Kuchen für die Kinder.",why:"One person: sie backt."},
+    {t:"fix",lv:4,d:2,k:"v",ctx:"From the interview: „Am Nachmittag hüte ich die Kinder meiner Schwester und am Morgen backe ich einen Kuchen für sie.“",q:"One word contradicts the interview. Tap it.",text:"Sonntags hat sie frei und hütet die Kinder am Morgen.",wrong:[9],fixed:"Sonntags hat sie frei und hütet die Kinder am Nachmittag.",why:"She babysits in the afternoon and bakes in the morning."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the sentence: On Sunday she has the whole day off.",tiles:["am Sonntag","hat","sie","den ganzen Tag","frei"],end:".",a:["Am Sonntag hat sie den ganzen Tag frei."],verb:"hat",why:"frei haben: frei goes to the end."},
+    {t:"build",lv:4,d:2,k:"gv",q:"Build the question: What do you do in your free time? (Sie)",tiles:["was","machen","Sie","in Ihrer Freizeit"],end:"?",a:["Was machen Sie in Ihrer Freizeit?"],verb:"machen",why:"Question word, then the verb, then Sie."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is correct?",opts:["Sie sieht am Abend fern.","Sie fernsieht am Abend.","Sie sieht fern am Abend."],a:0,why:"fernsehen is separable: fern goes to the very end."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"I live alone, so I like having visitors.",a:["Ich lebe allein und so habe ich gern Besuch.","Ich lebe allein, darum habe ich gern Besuch.","Ich wohne allein und so habe ich gern Besuch."],why:"gern Besuch haben = to like having visitors."},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"In the evening I'm tired and I mostly stay at home.",a:["Am Abend bin ich müde und ich bleibe meistens zu Hause.","Am Abend bin ich müde und bleibe meistens zu Hause."],why:"Am Abend on position 1, then bin ich."},
+    {t:"write",lv:5,d:2,k:"gv",q:"Write the interviewer's question. Use Sie.",prompt:"Ja, ich habe ein- bis zweimal pro Woche Besuch.",a:["Haben Sie oft Besuch?"],why:"Yes/no question: the verb first. Besuch haben = to have visitors."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Answer the interviewer about yourself in four sentences: how often you have visitors, whether you eat out, what you do on Sunday, and what else you do in your free time.",model:"Ich habe einmal pro Monat Besuch.\nIch esse manchmal auswärts.\nAm Sonntag schlafe ich lange.\nIn meiner Freizeit sehe ich fern oder höre Musik.",checks:[{"need":"\\bbesuch\\b","label":"Visitors: Ich habe … Besuch."},{"need":"\\bauswaerts\\b","label":"Eating out: auswärts essen"},{"need":"\\bam sonntag\\b|\\bsonntags\\b","label":"Sunday: Am Sonntag …"},{"need":"\\b(nie|selten|manchmal|oft|immer|einmal|zweimal|meistens)\\b","label":"A frequency word"},{"avoid":"\\bich fernsehe\\b","label":"fernsehen is separable: ich sehe … fern"}]}
+  ]
+},
+{
+  id:"w8-satzbau", stop:"Sätze drehen", title:"Satzbau: Dreh die Sätze um das Verb",
+  grammar:"Position I wechseln, das Verb bleibt auf Position II", vocab:"Sätze drehen (Petra pages 64 and 65)",
+  cheat:`
+    <h3>Satzbau (page 64)</h3>
+    <ul>
+      <li>Ich <b>spiele</b> jeden Montag mit meinem Freund Poker in meiner Wohnung.</li>
+      <li>Jeden Montag <b>spiele</b> ich um 23 Uhr mit meinem Freund Poker in meiner Wohnung.</li>
+      <li>Mit meinem Freund <b>spiele</b> ich jeden Montag um 23 Uhr Poker in meiner Wohnung.</li>
+      <li>Poker <b>spiele</b> ich jeden Montag mit meinem Freund in meiner Wohnung.</li>
+      <li>In meiner Wohnung <b>spiele</b> ich jeden Montag Poker mit meinem Freund.</li>
+    </ul>
+    <p>Any one part can stand on position I. The verb stays on position II. If the subject is not on position I, it comes right after the verb.</p>
+    <h3>Zungenbrecher (tongue twister)</h3>
+    <p>Fischers Fritz fischt frische Fische, frische Fische fischt Fischers Fritz. · Blaukraut bleibt Blaukraut und Brautkleid bleibt Brautkleid.</p>`,
+  words:[["die Position, -en","position"],["Gschnätzlets mit Rösti","Zürich-style sliced veal with hash browns"],["fliegen · du fliegst · er fliegt","to fly"],["das Flugzeug, -e","airplane"],["der Flughafen, ¨","airport"],["schicken · du schickst · er schickt","to send"],["die Postkarte, -n","postcard"],["der Hund, -e","dog"],["vielleicht","maybe"],["wie immer","as always"],["zu spät","too late"],["das Labor, -s","lab"],["nach dem Kurs","after the course"],["der Zungenbrecher, -","tongue twister"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"Sätze drehen: what stays fixed?",back:"The verb stays on position II. Another part can move to position I, and the subject comes right after the verb.",ex:"Heute koche ich."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"What can stand on position I?",back:"one part: the subject, a time, a place, a person or an object",ex:"Mit meinem Freund spiele ich Poker."},
+    {t:"flash",lv:1,d:1,k:"v",front:"vielleicht",back:"maybe",ex:"Vielleicht komme ich morgen."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"tongue twister",back:"der Zungenbrecher",ex:"Fischers Fritz fischt frische Fische."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the words.",pairs:[["fliegen","to fly"],["das Flugzeug","airplane"],["der Flughafen","airport"],["schicken","to send"],["die Postkarte","postcard"],["der Hund","dog"]]},
+    {t:"sort",lv:2,d:1,k:"g",q:"Is the verb on position II?",groups:["richtig","falsch"],items:[["Heute gehe ich ins Kino.",0],["Heute ich gehe ins Kino.",1],["In den Ferien fliegen wir nach Mexiko.",0],["In den Ferien wir fliegen nach Mexiko.",1],["Normalerweise arbeite ich im Labor.",0],["Gestern ich war auf dem Üetliberg.",1],["Poker spiele ich jeden Montag.",0]],why:"After a time, a place or an object on position I, the verb comes next and the subject follows."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Which order is right?",opts:["Jeden Montag spiele ich Poker.","Jeden Montag ich spiele Poker.","Jeden Montag Poker spiele ich."],a:0,why:"Jeden Montag is position I, so spiele comes next."},
+    {t:"mc",lv:2,d:2,k:"g",q:"In „Poker spiele ich jeden Montag.“ what is on position I?",opts:["Poker","spiele","ich"],a:0,why:"The object can fill position I. The subject ich then follows the verb."},
+    {t:"gap",lv:3,d:1,k:"g",q:"In den Ferien ___ ___ manchmal nach Mexiko.",hints:["to fly","we"],a:[["fliegen"],["wir"]],why:"Verb on position II, then the subject."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Gestern ___ ___ mit meinem Hund auf dem Üetliberg.",hints:["was (sein)","I"],a:[["war"],["ich"]],why:"Gestern on position I, then war, then ich."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Normalerweise ___ ___ am Montag von 9 bis 12 Uhr im Labor.",hints:["arbeiten","I"],a:[["arbeite"],["ich"]],why:"Normalerweise on position I, then arbeite, then ich."},
+    {t:"write",lv:3,d:2,k:"g",q:"Turn the sentence. Start with Heute Abend.",prompt:"Ich / koche / heute Abend / Gschnätzlets mit Rösti.",a:["Heute Abend koche ich Gschnätzlets mit Rösti."],why:"Heute Abend on position I, koche on II, then ich."},
+    {t:"write",lv:3,d:2,k:"g",q:"Turn the sentence. Start with Meistens.",prompt:"Er / trifft / seine Freundin / meistens / um 8 Uhr / vor der ETH.",a:["Meistens trifft er seine Freundin um 8 Uhr vor der ETH."],why:"Meistens on position I, trifft on II, then er."},
+    {t:"write",lv:3,d:3,k:"g",q:"Turn the sentence. Start with Um 12.35 Uhr.",prompt:"Das Flugzeug fliegt vom Flughafen Zürich um 12.35 Uhr.",a:["Um 12.35 Uhr fliegt das Flugzeug vom Flughafen Zürich."],why:"The time moves to position I, das Flugzeug follows the verb."},
+    {t:"write",lv:3,d:2,k:"g",q:"Turn the sentence. Start with Jeden Montag.",prompt:"Er / kommt / jeden Montag / wie immer / zu spät / ins Büro.",a:["Jeden Montag kommt er wie immer zu spät ins Büro."],why:"Jeden Montag on position I, kommt on II, then er."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Am Samstag ich war oft zum Abendessen bei meinen Freunden.",wrong:[2,3],fixed:"Am Samstag war ich oft zum Abendessen bei meinen Freunden.",why:"Am Samstag is position I, so war comes next."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Vielleicht ich lerne morgen Abend die Possessivartikel.",wrong:[1,2],fixed:"Vielleicht lerne ich morgen Abend die Possessivartikel.",why:"Vielleicht is position I, so lerne comes next."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Ab und zu schickt ich meinen Eltern eine Postkarte.",wrong:[3],fixed:"Ab und zu schicke ich meinen Eltern eine Postkarte.",why:"The subject is ich, so the verb is schicke."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence. Start with Poker.",tiles:["Poker","spiele","ich","jeden Montag","mit meinem Freund"],end:".",a:["Poker spiele ich jeden Montag mit meinem Freund."],verb:"spiele",why:"The object on position I, the verb on II."},
+    {t:"build",lv:4,d:3,k:"g",q:"Build the sentence: Today after the course I'm going to the cinema with my friend.",tiles:["heute","gehe","ich","nach dem Kurs","mit meinem Freund","ins Kino"],end:".",a:["Heute gehe ich nach dem Kurs mit meinem Freund ins Kino."],verb:"gehe",why:"Sentence 3 on page 65."},
+    {t:"mc",lv:4,d:2,k:"g",q:"Which sentence is NOT correct?",opts:["Ins Büro kommt er jeden Montag zu spät.","Jeden Montag kommt er zu spät ins Büro.","Jeden Montag er kommt zu spät ins Büro."],a:2,why:"After Jeden Montag the verb must come next: kommt er."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German. Start with In meiner Wohnung.",prompt:"In my flat I play poker every Monday.",a:["In meiner Wohnung spiele ich jeden Montag Poker.","In meiner Wohnung spiele ich jeden Montag Poker mit meinem Freund."],why:"The place on position I, then spiele ich."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German. Start with Gestern.",prompt:"Yesterday I was at the lake with my dog.",a:["Gestern war ich mit meinem Hund am See."],why:"Gestern on position I, then war ich."},
+    {t:"write",lv:5,d:3,k:"g",q:"Write it in German. Start with Vielleicht.",prompt:"Maybe I'll fly to Mexico in the holidays.",a:["Vielleicht fliege ich in den Ferien nach Mexiko."],why:"Vielleicht on position I, then fliege ich."},
+    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Write one sentence about your week. Then turn it twice, each time with a different part on position I. The verb must stay on position II.",model:"Ich gehe jeden Freitag mit meiner Kollegin in die Mensa.\nJeden Freitag gehe ich mit meiner Kollegin in die Mensa.\nMit meiner Kollegin gehe ich jeden Freitag in die Mensa.",checks:[{"need":"\\bich\\b","min":3,"label":"Three versions of the same sentence"},{"need":"\\b(gehe|spiele|arbeite|esse|trinke|lerne|treffe|fahre|koche|mache|habe|bin) ich\\b","min":2,"label":"Two versions with the verb before ich"},{"avoid":"(^|\\n)(heute|morgen|gestern|normalerweise|manchmal|oft|vielleicht|jeden \\w+|am \\w+|im \\w+|mit \\w+ \\w+) (ich|er|sie|wir)\\b","label":"After a time or place on position I comes the verb, not the subject"}]}
+  ]
+}
 ]}
 ];
 
@@ -1863,7 +2317,9 @@ const QUIZLET_SETS = {
   w3: ["«Wohnsituation»", "«unregelmässige Verben»", "«regelmässige und unregelmässige Verben»"],
   w4: ["«unregelmässige Verben» (Anja und Petra)", "«regelmässige und unregelmässige Verben»"],
   w5: ["«Uhrzeiten, im-am-um» (Petra)"],
-  w6: ["«Tageszeiten - Tagesablauf» (Anja)", "«im Restaurant» (Anja)", "«Lebensmittel und Mahlzeiten» (Petra)", "«Lebensmittel Artikel» (Petra)"]
+  w6: ["«Tageszeiten - Tagesablauf» (Anja)", "«im Restaurant» (Anja)", "«Lebensmittel und Mahlzeiten» (Petra)", "«Lebensmittel Artikel» (Petra)"],
+  w7: ["«im Restaurant» (Anja, listed in Woche 6)", "«Freizeit» (Anja)"],
+  w8: ["«Wie oft …? Adverbien» (Petra)"]
 };
 /* Set words that no stop lists yet, with the course glosses. */
 const QUIZLET_EXTRA = {
@@ -1873,7 +2329,9 @@ const QUIZLET_EXTRA = {
   /* week 4 re-lists the irregular verb set for both teachers, so the whole list is the week's verb bank */
   w4: [["sein · du bist · er ist","to be"],["haben · du hast · er hat","to have"],["sprechen · du sprichst · er spricht","to speak"],["wissen · du weisst · er weiss","to know"],["vergessen · du vergisst · er vergisst","to forget"],["sehen · du siehst · er sieht","to see"],["fahren · du fährst · er fährt","to drive"],["lesen · du liest · er liest","to read"],["nehmen · du nimmst · er nimmt","to take"],["laufen · du läufst · er läuft","to walk, to run"],["gefallen · du gefällst mir · er gefällt mir","to like"],["fallen · du fällst · er fällt","to fall"],["halten · du hältst · er hält","to hold, to stop"],["fangen · du fängst · er fängt","to catch"],["helfen · du hilfst · er hilft","to help"],["geben · du gibst · er gibt","to give"],["essen · du isst · er isst","to eat"],["werfen · du wirfst · er wirft","to throw"],["sterben · du stirbst · er stirbt","to die"],["empfehlen · du empfiehlst · er empfiehlt","to recommend"],["stehlen · du stiehlst · er stiehlt","to steal"],["treffen · du triffst · er trifft","to meet"],["schlafen · du schläfst · er schläft","to sleep"],["messen · du misst · er misst","to measure"],["tragen · du trägst · er trägt","to wear, to carry"],["unterbrechen · du unterbrichst · er unterbricht","to interrupt"],["widersprechen · du widersprichst · er widerspricht","to contradict"],["treten · du trittst · er tritt","to step, to kick"],["mögen · du magst · er mag","to like"],["möchten · du möchtest · er möchte","would like"],["wollen · du willst · er will","to want"]],
   w5: [],
-  w6: []
+  w6: [],
+  w7: [],
+  w8: []
 };
 /* Base form of an entry: the word before its du/er forms or plural suffix. */
 function baseDe(de){ return de.split("·")[0].split(",")[0].trim(); }
