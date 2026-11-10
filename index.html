@@ -2245,6 +2245,124 @@ const WEEKS = [
     {t:"write",lv:5,d:3,k:"g",q:"Write it in German. Start with Vielleicht.",prompt:"Maybe I'll fly to Mexico in the holidays.",a:["Vielleicht fliege ich in den Ferien nach Mexiko."],why:"Vielleicht on position I, then fliege ich."},
     {t:"open",lv:5,d:3,k:"g",q:"Your turn. Write one sentence about your week. Then turn it twice, each time with a different part on position I. The verb must stay on position II.",model:"Ich gehe jeden Freitag mit meiner Kollegin in die Mensa.\nJeden Freitag gehe ich mit meiner Kollegin in die Mensa.\nMit meiner Kollegin gehe ich jeden Freitag in die Mensa.",checks:[{"need":"\\bich\\b","min":3,"label":"Three versions of the same sentence"},{"need":"\\b(gehe|spiele|arbeite|esse|trinke|lerne|treffe|fahre|koche|mache|habe|bin) ich\\b","min":2,"label":"Two versions with the verb before ich"},{"avoid":"(^|\\n)(heute|morgen|gestern|normalerweise|manchmal|oft|vielleicht|jeden \\w+|am \\w+|im \\w+|mit \\w+ \\w+) (ich|er|sie|wir)\\b","label":"After a time or place on position I comes the verb, not the subject"}]}
   ]
+},
+{
+  id:"w8-modalverben", stop:"Modalverben", title:"Die Modalverben im Präsens: Formen und Bedeutung",
+  grammar:"wollen, können, müssen, dürfen, sollen, möchten", vocab:"Kreisbüro, Aufenthaltsbewilligung, Ausflug (Petra pages 66, 67, 70 to 72)",
+  cheat:`
+    <h3>Die Modalverben im Präsens (page 66)</h3>
+    <div class="tbl"><table><tr><th></th><th>wollen</th><th>können</th><th>müssen</th><th>dürfen</th><th>sollen</th><th>möchten</th></tr>
+      <tr><td>ich</td><td>will</td><td>kann</td><td>muss</td><td>darf</td><td>soll</td><td>möchte</td></tr>
+      <tr><td>du</td><td>willst</td><td>kannst</td><td>musst</td><td>darfst</td><td>sollst</td><td>möchtest</td></tr>
+      <tr><td>er/sie/es</td><td>will</td><td>kann</td><td>muss</td><td>darf</td><td>soll</td><td>möchte</td></tr>
+      <tr><td>wir</td><td>wollen</td><td>können</td><td>müssen</td><td>dürfen</td><td>sollen</td><td>möchten</td></tr>
+      <tr><td>ihr</td><td>wollt</td><td>könnt</td><td>müsst</td><td>dürft</td><td>sollt</td><td>möchtet</td></tr>
+      <tr><td>sie/Sie</td><td>wollen</td><td>können</td><td>müssen</td><td>dürfen</td><td>sollen</td><td>möchten</td></tr>
+    </table></div>
+    <p>ich and er/sie/es share one form with no ending. In the singular the vowel often changes: können → kann, müssen → muss, dürfen → darf, wollen → will.</p>
+    <h3>Die Bedeutung der Modalverben (page 67)</h3>
+    <ul>
+      <li><b>wollen</b>, Wunsch (wish): Ich will bald Ferien haben.</li>
+      <li><b>können</b>, Fähigkeit (ability): Maria kann gut Fussball spielen. Möglichkeit (possibility): Ich kann die Jacke kaufen.</li>
+      <li><b>müssen</b>, Notwendigkeit, Pflicht, Gesetz / Regel (necessity, duty, law / rule): Ich muss aufs Klo.</li>
+      <li><b>müssen nicht</b>, keine Pflicht (no duty): Ich muss die Hausaufgaben nicht machen.</li>
+      <li><b>dürfen</b>, Erlaubnis (permission): Wir dürfen hier parkieren. <b>nicht dürfen</b>, Verbot (prohibition).</li>
+      <li><b>sollen</b>, Frage, Gebot (question, commandment): Du sollst nicht töten. Auftrag von einer anderen Person (order from another person).</li>
+      <li><b>möchten</b>, höfliche Bitte / Frage (polite request / question): Was möchten Sie bestellen?</li>
+    </ul>`,
+  words:[["wollen · du willst · er will","to want"],["können · du kannst · er kann","to be able to, can"],["müssen · du musst · er muss","to have to, must"],["dürfen · du darfst · er darf","to be allowed to"],["sollen · du sollst · er soll","to be supposed to, shall"],["möchten · du möchtest · er möchte","would like"],["der Wunsch, ¨e","wish"],["die Fähigkeit, -en","ability"],["die Erlaubnis","permission"],["das Verbot, -e","prohibition"],["die Pflicht, -en","duty"],["das Kreisbüro, -s","district office"],["die Untersuchung, -en","examination"],["die Aufenthaltsbewilligung, -en","residence permit"],["erneuern · du erneuerst · er erneuert","to renew"],["das Geschirr","dishes"],["der Betreibungsregisterauszug, ¨e","extract from the Debt Enforcement Office"],["tun · du tust · er tut","to do, to make"],["mitkommen · du kommst mit · er kommt mit","to come along"],["der Anwohner, -","resident"],["der Ausflug, ¨e","trip, excursion"],["in eine neue Wohnung ziehen","to move to a new flat"],["übersetzen · du übersetzt · er übersetzt","to translate"],["geniessen · du geniesst · er geniesst","to enjoy"],["die Krankenversicherung, -en","health insurance"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",front:"wollen: ich · du · er",back:"ich will · du willst · er will",ex:"wir wollen · ihr wollt · sie wollen"},
+    {t:"flash",lv:1,d:1,k:"g",front:"können: ich · du · er",back:"ich kann · du kannst · er kann",ex:"wir können · ihr könnt · sie können"},
+    {t:"flash",lv:1,d:1,k:"g",front:"müssen: ich · du · er",back:"ich muss · du musst · er muss",ex:"wir müssen · ihr müsst · sie müssen"},
+    {t:"flash",lv:1,d:1,k:"g",front:"dürfen: ich · du · er",back:"ich darf · du darfst · er darf",ex:"wir dürfen · ihr dürft · sie dürfen"},
+    {t:"flash",lv:1,d:1,k:"g",front:"sollen: ich · du · er",back:"ich soll · du sollst · er soll",ex:"wir sollen · ihr sollt · sie sollen"},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Modalverben: what is special about ich and er?",back:"ich and er share one form with no ending. In the singular the vowel often changes.",ex:"können → ich kann, er kann"},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Modalverb + second verb: where does the second verb go?",back:"The modal verb is on position II. The second verb goes to the end, in the infinitive.",ex:"Maria kann gut Fussball spielen."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match each modal verb with its meaning.",pairs:[["wollen","to want"],["können","to be able to, can"],["müssen","to have to, must"],["dürfen","to be allowed to"],["sollen","to be supposed to, shall"],["möchten","would like"]]},
+    {t:"match",lv:1,d:2,k:"v",q:"Match the words from the exercises.",pairs:[["das Kreisbüro","district office"],["die Untersuchung","examination"],["die Aufenthaltsbewilligung","residence permit"],["das Geschirr","dishes"],["der Ausflug","trip, excursion"],["der Anwohner","resident"]]},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"to translate",back:"übersetzen",ex:"Ich übersetze den Text."},
+    {t:"sort",lv:2,d:1,k:"g",q:"Which subject fits the form?",groups:["ich or er","du","ihr"],items:[["kann",0],["darf",0],["will",0],["muss",0],["kannst",1],["willst",1],["musst",1],["könnt",2],["dürft",2],["wollt",2]],why:"ich and er have no ending. du ends in -st, ihr in -t, and ihr keeps the umlaut of the infinitive."},
+    {t:"sort",lv:2,d:2,k:"g",q:"What does the modal verb express? Wunsch is a wish, Fähigkeit an ability, Erlaubnis a permission, Verbot a prohibition, Notwendigkeit a necessity.",groups:["Wunsch","Fähigkeit","Erlaubnis","Verbot","Notwendigkeit"],items:[["Ich will bald Ferien haben.",0],["Wir wollen lieber ins Dozentenfoyer gehen.",0],["Maria kann gut Fussball spielen.",1],["Ich kann gut schwimmen.",1],["Wir dürfen hier parkieren.",2],["Man darf hier nicht essen.",3],["Kinder dürfen keinen Alkohol kaufen.",3],["Ich muss aufs Klo.",4]],why:"wollen = Wunsch, können = Fähigkeit, dürfen = Erlaubnis, nicht dürfen = Verbot, müssen = Notwendigkeit."},
+    {t:"mc",lv:2,d:2,k:"g",q:"„Ich muss die Hausaufgaben nicht machen.“ What does it mean?",opts:["I don't have to do my homework.","I'm not allowed to do my homework.","I can't do my homework today."],a:0,why:"müssen + nicht = keine Pflicht, no duty. A prohibition is nicht dürfen."},
+    {t:"mc",lv:2,d:2,k:"g",q:"„Die Lehrerin sagt, wir sollen die Übung machen.“ Whose idea is the exercise?",opts:["the teacher's","ours","nobody's"],a:0,why:"sollen: an order from another person."},
+    {t:"mc",lv:2,d:1,k:"g",q:"„Was möchten Sie bestellen?“ What does möchten express here?",opts:["a polite question","a law or rule","an ability"],a:0,why:"möchten: höfliche Bitte oder Frage."},
+    {t:"mc",lv:2,d:1,k:"g",q:"ihr ___ (können)",opts:["könnt","können","kannt"],a:0,why:"ihr könnt. The umlaut stays in the plural."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Sonja ___ noch zum Kreisbüro gehen.",hints:["müssen"],a:[["muss"]],why:"Solution page 72: Sonja muss."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Ihr ___ eure Aufenthaltsbewilligung erneuern.",hints:["müssen"],a:[["müsst"]],why:"ihr müsst, with the umlaut."},
+    {t:"gap",lv:3,d:1,k:"g",q:"___ du mitkommen? – Ja, gern!",hints:["wollen"],a:[["Willst"]],why:"du willst. The question starts with the verb."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Eva und Adam ___ nicht gut Tennis spielen. ___ ihr uns am Sonntag helfen?",hints:["können, Plural","können"],a:[["können"],["Könnt"]],why:"sie können, ihr könnt."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Was hat der Arzt gesagt? Was ___ du machen?",hints:["sollen"],a:[["sollst"]],why:"du sollst. The doctor gave the order."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Ich ___ vor der Untersuchung zwei Stunden nichts essen. ___ ihr schon nach Hause gehen?",hints:["dürfen","dürfen"],a:[["darf"],["Dürft"]],why:"ich darf, ihr dürft."},
+    {t:"write",lv:3,d:2,k:"g",q:"Answer with sollen. Use the words in brackets.",prompt:"Was soll Max machen? (den Tisch abräumen)",a:["Er soll den Tisch abräumen.","Max soll den Tisch abräumen."],why:"Solution page 72: Er soll den Tisch abräumen."},
+    {t:"write",lv:3,d:2,k:"g",q:"Answer with wollen. Use the words in brackets.",prompt:"Was willst du morgen machen? (nach Basel fahren)",a:["Ich will morgen nach Basel fahren.","Morgen will ich nach Basel fahren."],why:"ich will, and fahren goes to the end."},
+    {t:"write",lv:3,d:3,k:"g",q:"Answer with dürfen. Use the words in brackets.",prompt:"Wer darf hier parkieren? (nur Anwohner)",a:["Hier dürfen nur Anwohner parkieren.","Nur Anwohner dürfen hier parkieren."],why:"Anwohner is plural, so dürfen."},
+    {t:"write",lv:3,d:2,k:"g",q:"Answer with wollen. Use the words in brackets.",prompt:"Was wollt ihr? (in eine grössere Wohnung ziehen)",a:["Wir wollen in eine grössere Wohnung ziehen."],why:"Asked with ihr, answered with wir: wir wollen."},
+    {t:"write",lv:3,d:2,k:"g",q:"Answer with sollen. Use the words in brackets.",prompt:"Was soll ich tun? (das Leben geniessen)",a:["Du sollst das Leben geniessen."],why:"Asked with ich, answered with du: du sollst."},
+    {t:"fix",lv:4,d:1,k:"g",q:"Tap the wrong word.",text:"Ihr müssen eure Adresse angeben.",wrong:[1],fixed:"Ihr müsst eure Adresse angeben.",why:"ihr müsst."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Er kann sehr gut schwimmt.",wrong:[4],fixed:"Er kann sehr gut schwimmen.",why:"The second verb stays in the infinitive."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Ich muss gehen jetzt.",wrong:[2,3],fixed:"Ich muss jetzt gehen.",why:"The infinitive goes to the very end."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wir dürft hier nicht parkieren.",wrong:[1],fixed:"Wir dürfen hier nicht parkieren.",why:"wir dürfen."},
+    {t:"mc",lv:4,d:3,k:"g",q:"Which sentence means: you must not smoke here?",opts:["Hier darf man nicht rauchen.","Hier muss man nicht rauchen.","Hier kann man nicht rauchen."],a:0,why:"A prohibition is nicht dürfen. nicht müssen only means it is not necessary."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the sentence: Marco doesn't want to eat anything now.",tiles:["Marco","will","jetzt","nichts","essen"],end:".",a:["Marco will jetzt nichts essen."],verb:"will",why:"Modal verb on position II, essen at the end."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the question: Can you translate this word?",tiles:["kannst","du","dieses Wort","übersetzen"],end:"?",a:["Kannst du dieses Wort übersetzen?"],verb:"kannst",why:"Yes/no question: the modal verb first, the infinitive at the end."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"I can buy the jacket.",a:["Ich kann die Jacke kaufen."],why:"können for a possibility, kaufen at the end."},
+    {t:"write",lv:5,d:3,k:"g",q:"Write it in German. Use man.",prompt:"In Switzerland you have to have health insurance.",a:["In der Schweiz muss man eine Krankenversicherung haben.","Man muss in der Schweiz eine Krankenversicherung haben."],why:"müssen for a law, haben at the end."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"The doctor says I should do more sport.",a:["Der Arzt sagt, ich soll mehr Sport machen.","Die Ärztin sagt, ich soll mehr Sport machen."],why:"sollen: an order from another person."},
+    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Write what you can do well and what you can't do well. Then ask a colleague if you shall bring her a coffee.",model:"Ich kann gut kochen.\nIch kann nicht gut singen.\nSoll ich dir einen Kaffee bringen?",checks:[{"need":"\\bkann\\b","min":2,"label":"Two sentences with kann"},{"need":"\\bnicht gut\\b","label":"Something you can't do well: nicht gut"},{"need":"\\bsoll ich\\b","label":"The offer starts with Soll ich …?"},{"need":"\\bbringen\\?","label":"bringen at the end of the question"},{"avoid":"\\bkann (gut |nicht gut )?\\w+(e|st|t)\\.","label":"The second verb goes to the end in the infinitive"}]}
+  ]
+},
+{
+  id:"w8-verkehr", stop:"Verkehrsschilder", title:"dürfen, müssen, können: Verkehrsschilder und Satzbau",
+  grammar:"Modalverb auf Position II, Infinitiv am Ende; nicht dürfen >< nicht müssen", vocab:"Verkehrsschilder (Petra pages 66, 68, 69, 73)",
+  cheat:`
+    <h3>Position der Verben (page 66)</h3>
+    <div class="tbl"><table><tr><th>Position I</th><th>Position II</th><th></th><th>Infinitiv</th></tr>
+      <tr><td>Ich</td><td>will</td><td>morgen mit dir ins Kino</td><td>gehen.</td></tr>
+      <tr><td>Er</td><td>muss</td><td>viel für sein Studium</td><td>arbeiten.</td></tr>
+      <tr><td>Wir</td><td>können</td><td>leider nicht in den Kurs</td><td>kommen.</td></tr>
+      <tr><td>Man (one)</td><td>darf</td><td>im Zug nicht</td><td>rauchen.</td></tr>
+      <tr><td></td><td>Soll</td><td>ich dir bei der Arbeit</td><td>helfen?</td></tr>
+    </table></div>
+    <h3>dürfen or müssen?</h3>
+    <ul>
+      <li><b>nicht dürfen</b>: it is forbidden. Hier darf man nicht hupen.</li>
+      <li><b>müssen</b>: it is a duty or a rule. Hier muss man leise sein.</li>
+      <li><b>nicht müssen</b>: it is not necessary. Am Sonntag muss ich nicht arbeiten.</li>
+      <li><b>können</b>: it is possible. Hier kann man tanken.</li>
+    </ul>`,
+  words:[["das Verkehrsschild, -er","traffic sign"],["die Kuh, ¨e","cow"],["die Strasse, -n","street"],["halten · du hältst · er hält","to stop"],["links >< rechts","left >< right"],["abbiegen · du biegst ab · er biegt ab","to turn"],["das Velo, -s","bicycle"],["tanken · du tankst · er tankt","to refuel, to tank up"],["hineinfahren · du fährst hinein · er fährt hinein","to drive in"],["hupen · du hupst · er hupt","to honk"],["leise","quiet"],["der Spielplatz, ¨e","playground"],["vorsichtig","careful, carefully"],["der Parkplatz, ¨e","parking space"],["parkieren · du parkierst · er parkiert","to park"],["überholen · du überholst · er überholt","to overtake"],["die Autobahn, -en","highway"],["der Fussgänger, -","pedestrian"],["überqueren · du überquerst · er überquert","to cross"],["die Richtung, -en","direction"],["man","one, people in general"],["der Führerschein, -e","driver's license"],["die Ampel, -n","traffic light"],["anhalten · du hältst an · er hält an","to stop"],["die Zähne putzen","to brush one's teeth"],["anrufen · du rufst an · er ruft an","to call (on the phone)"]],
+  items:[
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"nicht dürfen or nicht müssen?",back:"nicht dürfen: it is forbidden. nicht müssen: it is not necessary.",ex:"Am Sonntag muss ich nicht arbeiten."},
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"What does man mean?",back:"one, people in general. It takes the er form of the verb.",ex:"Hier kann man tanken."},
+    {t:"flash",lv:1,d:1,k:"v",front:"überholen",back:"to overtake",ex:"Auf der Autobahn überholt er oft."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"traffic light",back:"die Ampel",ex:"Die Ampel ist rot."},
+    {t:"flash",lv:1,d:1,k:"v",front:"abbiegen",back:"to turn",ex:"Biegen Sie links ab!"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the words from the traffic signs.",pairs:[["die Kuh","cow"],["das Velo","bicycle"],["der Spielplatz","playground"],["der Fussgänger","pedestrian"],["die Richtung","direction"],["hupen","to honk"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Traffic signs: which modal verb fills the gap?",groups:["darf / dürfen","muss","kann"],items:[["Hier ___ man nicht links abbiegen.",0],["Hier ___ man nicht überholen.",0],["Hier ___ man nicht hineinfahren.",0],["Hier ___ nur Taxis parkieren.",0],["Stoppschild: Hier ___ man halten.",1],["Spielplatz: Man ___ vorsichtig sein.",1],["Hier ___ man tanken.",2],["Rechts ___ man Parkplätze finden.",2]],why:"Verbot: nicht dürfen. Erlaubnis only for some people: nur Taxis dürfen. Rule: müssen. Possibility: können."},
+    {t:"mc",lv:2,d:1,k:"g",q:"The traffic light is red. Which sentence fits?",opts:["Ich muss anhalten.","Ich darf anhalten.","Ich will anhalten."],a:0,why:"A red light is a rule: müssen."},
+    {t:"mc",lv:2,d:2,k:"g",q:"„Er muss viel für sein Studium arbeiten.“ Which word is on position II?",opts:["muss","Er","arbeiten"],a:0,why:"The modal verb is on position II. arbeiten is the infinitive at the end."},
+    {t:"gap",lv:3,d:2,k:"g",ctx:"Traffic sign: a horn with a red line through it.",q:"Hier ___ man nicht hupen. Hier ___ man leise sein.",hints:["dürfen","müssen"],a:[["darf"],["muss"]],why:"Verbot: darf nicht. Rule: muss."},
+    {t:"gap",lv:3,d:2,k:"g",ctx:"Traffic sign: a bicycle and a pedestrian.",q:"Hier ___ nur Velos fahren und Fussgänger gehen.",hints:["dürfen, Plural"],a:[["dürfen"]],why:"Velos and Fussgänger are plural: dürfen."},
+    {t:"gap",lv:3,d:2,k:"g",ctx:"Traffic sign: a cow.",q:"Achtung: Hier ___ Kühe über die Strasse gehen.",hints:["können, Plural"],a:[["können"]],why:"It is possible: können. Kühe is plural."},
+    {t:"gap",lv:3,d:2,k:"g",ctx:"Traffic sign: a one-way street.",q:"Hier ___ man nur in eine Richtung fahren.",hints:["dürfen"],a:[["darf"]],why:"man takes the er form: darf."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Ich habe den Führerschein. Ich ___ Auto fahren, aber ich ___ nicht, wenn ich nicht will.",hints:["dürfen","müssen"],a:[["darf"],["muss"]],why:"Permission: darf. No duty: muss nicht."},
+    {t:"gap",lv:3,d:3,k:"g",q:"Die Kinder ___ Schokolade essen, aber sie ___ auch die Zähne putzen.",hints:["dürfen, Plural","müssen, Plural"],a:[["dürfen"],["müssen"]],why:"Permission: dürfen. Duty: müssen."},
+    {t:"build",lv:3,d:2,k:"g",ctx:"Ich habe keine Zeit.",q:"Build the sentence with müssen.",tiles:["ich","muss","um 9 Uhr","an der ETH","sein"],end:".",a:["Ich muss um 9 Uhr an der ETH sein."],verb:"muss",why:"muss on position II, sein at the end."},
+    {t:"build",lv:3,d:2,k:"g",ctx:"Du hast Durst?",q:"Build the offer with sollen.",tiles:["soll","ich","einen Kaffee","bringen"],end:"?",a:["Soll ich einen Kaffee bringen?"],verb:"soll",why:"An offer: Soll ich …? with the infinitive at the end."},
+    {t:"build",lv:3,d:2,k:"g",ctx:"Fremdsprachen?",q:"Build the sentence with können.",tiles:["er","kann","gut","Spanisch und Französisch","sprechen"],end:".",a:["Er kann gut Spanisch und Französisch sprechen."],verb:"kann",why:"kann on position II, sprechen at the end."},
+    {t:"write",lv:3,d:2,k:"g",ctx:"Du hast deine Kreditkarte verloren.",q:"What do you have to do now? Use müssen and the words in brackets.",prompt:"sofort die Bank anrufen",a:["Du musst sofort die Bank anrufen.","Ich muss sofort die Bank anrufen."],why:"musst on position II, anrufen at the end, not split."},
+    {t:"write",lv:3,d:3,k:"g",ctx:"Die Polizei hat Josef mit 40 km/h zu viel erwischt.",q:"What happens now? Use dürfen and the words in brackets.",prompt:"3 Monate nicht mehr Auto fahren",a:["Er darf 3 Monate nicht mehr Auto fahren.","Josef darf 3 Monate nicht mehr Auto fahren.","Er darf drei Monate nicht mehr Auto fahren.","Josef darf drei Monate nicht mehr Auto fahren."],why:"A prohibition: darf nicht."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Hier man darf nicht überholen.",wrong:[1,2],fixed:"Hier darf man nicht überholen.",why:"Hier is position I, so darf comes next."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Kannst du helfen mir?",wrong:[2,3],fixed:"Kannst du mir helfen?",why:"The infinitive goes to the very end."},
+    {t:"mc",lv:4,d:3,k:"g",q:"„Ich darf Auto fahren, aber ich muss nicht.“ What does it mean?",opts:["I'm allowed to drive, but I don't have to.","I have to drive, but I'm not allowed to.","I can drive, but I don't want to drive."],a:0,why:"darf = permission. muss nicht = no duty."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"I want to go to the cinema with you.",a:["Ich will mit dir ins Kino gehen."],why:"will on position II, gehen at the end."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"He has to work a lot.",a:["Er muss viel arbeiten."],why:"muss on position II, arbeiten at the end."},
+    {t:"write",lv:5,d:3,k:"g",q:"Write it in German.",prompt:"We can't come to the course next week.",a:["Wir können nächste Woche nicht in den Kurs kommen.","Nächste Woche können wir nicht in den Kurs kommen.","Wir können nächste Woche nicht zum Kurs kommen."],why:"können on position II, kommen at the end."},
+    {t:"write",lv:5,d:3,k:"g",q:"Write it in German. Use man.",prompt:"You are not allowed to smoke in the train.",a:["Man darf im Zug nicht rauchen.","Man darf nicht im Zug rauchen.","Im Zug darf man nicht rauchen."],why:"Verbot: darf nicht, rauchen at the end."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"Shall I help you?",a:["Soll ich dir helfen?","Soll ich Ihnen helfen?"],why:"Soll ich first, helfen at the end."},
+    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Answer in full sentences: Was musst du morgen machen? Was darf man im Tram machen? Was darf man nicht machen? Was willst du am Wochenende machen?",model:"Morgen muss ich an der ETH arbeiten.\nIm Tram darf man Musik hören.\nIm Tram darf man nicht rauchen.\nAm Wochenende will ich wandern gehen.",checks:[{"need":"\\bmuss ich\\b|\\bich muss\\b","label":"Tomorrow: muss"},{"need":"\\bdarf man\\b|\\bman darf\\b","min":2,"label":"Two sentences with darf man"},{"need":"\\bnicht\\b","label":"Something you are not allowed to do: nicht"},{"need":"\\bwill ich\\b|\\bich will\\b","label":"The weekend: will"},{"need":"\\w+en[.!]?(\\n|$)","min":3,"label":"The sentences end with an infinitive"}]}
+  ]
 }
 ]}
 ];
@@ -2319,7 +2437,7 @@ const QUIZLET_SETS = {
   w5: ["«Uhrzeiten, im-am-um» (Petra)"],
   w6: ["«Tageszeiten - Tagesablauf» (Anja)", "«im Restaurant» (Anja)", "«Lebensmittel und Mahlzeiten» (Petra)", "«Lebensmittel Artikel» (Petra)"],
   w7: ["«im Restaurant» (Anja, listed in Woche 6)", "«Freizeit» (Anja)"],
-  w8: ["«Wie oft …? Adverbien» (Petra)"]
+  w8: ["«Wie oft …? Adverbien» (Petra)", "«Modalverben Sätze» (Petra, listed in Woche 9)"]
 };
 /* Set words that no stop lists yet, with the course glosses. */
 const QUIZLET_EXTRA = {
