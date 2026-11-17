@@ -223,6 +223,40 @@ mark.fix{background:var(--ok-soft);color:var(--ok);padding:0 4px;border-radius:4
 .pos2 td:nth-child(2){background:var(--verb);color:var(--verb-ink);font-weight:700}
 details summary{cursor:pointer;font-weight:600}
 .foot{margin-top:28px;font-size:13px;color:var(--muted);display:grid;gap:4px}
+.wk.exam{border-color:var(--l5);color:var(--l5)}
+.wk.exam[aria-pressed="true"]{background:var(--l5);border-color:var(--l5);color:var(--surface)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:13px;font-weight:600;padding:6px 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none}
+.chip.exam::before{content:"● ";color:var(--l5)}
+.chip.strong{border-color:var(--l5);color:var(--l5)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip.strong[aria-pressed="true"]{background:var(--l5);border-color:var(--l5);color:var(--surface)}
+.chat{display:grid;gap:10px;align-content:start;min-height:220px;max-height:62vh;overflow:auto;padding:2px}
+.bub{max-width:88%;padding:10px 14px;border-radius:14px;font-size:15px;display:grid;gap:6px}
+.bub .txt{white-space:pre-wrap}
+.bub.bot{background:var(--accent-soft);justify-self:start;border-bottom-left-radius:4px}
+.bub.me{background:var(--ink);color:var(--paper);justify-self:end;border-bottom-right-radius:4px}
+.bub.fb{background:var(--paper);border:1px solid var(--line);justify-self:start}
+.bub.err{background:var(--bad-soft)}
+.bub .meta{font-size:12px;color:var(--muted);display:flex;gap:6px;align-items:center}
+.bub .en{font:inherit;font-size:11px;font-weight:700;padding:1px 7px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+.bub .gloss{font-style:italic}
+.bub .model{margin:0;font-size:14px;color:var(--muted);white-space:pre-wrap}
+.phr{list-style:none;padding:0!important}
+.phr li{display:grid;gap:0}
+.phr button{font:inherit;font-size:14px;font-weight:600;text-align:left;background:none;border:0;padding:0;color:var(--accent);cursor:pointer}
+.keyin{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);width:100%}
+.gram{display:grid;gap:10px;margin-top:16px}
+.gram details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px 18px;scroll-margin-top:16px}
+.gram summary{cursor:pointer;display:flex;gap:10px;align-items:baseline;padding:12px 0;font-family:var(--display);font-weight:700;font-size:18px}
+.gram summary small{font-family:var(--body);font-weight:500;font-size:13px;color:var(--muted);margin-left:auto}
+.gram .gl{color:var(--l5)}
+.gram .gbody{display:grid;gap:12px;padding-bottom:16px}
+.gram .gbody ul{margin:0;padding-left:20px;display:grid;gap:4px}
+.gram h4{margin:6px 0 0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.gram table{border-collapse:collapse;font-size:14px}
+.gram td,.gram th{padding:5px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.gram th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -2364,6 +2398,226 @@ const WEEKS = [
     {t:"open",lv:5,d:3,k:"g",q:"Your turn. Answer in full sentences: Was musst du morgen machen? Was darf man im Tram machen? Was darf man nicht machen? Was willst du am Wochenende machen?",model:"Morgen muss ich an der ETH arbeiten.\nIm Tram darf man Musik hören.\nIm Tram darf man nicht rauchen.\nAm Wochenende will ich wandern gehen.",checks:[{"need":"\\bmuss ich\\b|\\bich muss\\b","label":"Tomorrow: muss"},{"need":"\\bdarf man\\b|\\bman darf\\b","min":2,"label":"Two sentences with darf man"},{"need":"\\bnicht\\b","label":"Something you are not allowed to do: nicht"},{"need":"\\bwill ich\\b|\\bich will\\b","label":"The weekend: will"},{"need":"\\w+en[.!]?(\\n|$)","min":3,"label":"The sentences end with an infinitive"}]}
   ]
 }
+]},
+{ id:"w9", n:9, label:"Woche 9", stops:[
+{
+  id:"w9-verabredung", stop:"Verabredung", title:"Freunde treffen: eine Verabredung vereinbaren",
+  grammar:"Hast du Lust, … zu gehen?; Wollen wir …?; wir treffen uns", vocab:"Redemittel Verabredung (Anja pages 54 to 56)",
+  cheat:`
+    <h3>Vorschlagen (suggest), page 54</h3>
+    <ul>
+      <li>Hast du Lust, mit mir ins Kino zu gehen? (Do you feel like …?)</li>
+      <li>Vielleicht können wir am Samstag zusammen wandern. (Maybe on Saturday we could …)</li>
+      <li>Gehen wir am Samstag zusammen schwimmen? · Wollen wir mal zusammen Kaffee trinken?</li>
+    </ul>
+    <h3>Ja sagen</h3>
+    <p>Ja, gerne. · Ja, klar, das tönt gut. · Samstag ist gut. · Gute Idee. Das machen wir. · Super, wo treffen wir uns? · Da bin ich dabei. (I'm in)</p>
+    <h3>Nein sagen</h3>
+    <p>Nein, da habe ich keine Lust drauf. · Danke, aber ich glaube lieber nicht. · Schade, am Samstag kann ich nicht. · Ich habe keine Zeit. · Ich glaube, eher nicht. (rather not) · Das geht nicht, aber wir können …</p>
+    <h3>Einen Termin finden</h3>
+    <p>Wie wäre es am Mittwoch? (How about …?) · Hast du am Mittwoch Zeit? · Kannst du am Mittwoch? · Wann genau hast du Zeit? · Um wie viel Uhr passt es dir? · Ich kann um … / zwischen … und … / ab …</p>
+    <p>Bis dann! (see you then) · Bis später!</p>`,
+  words:[["die Verabredung, -en","appointment, date"],["einen Termin vereinbaren","to arrange an appointment"],["Hast du Lust, … zu …?","Do you feel like …?"],["Wollen wir mal zusammen …?","Shall we … together sometime?"],["Das tönt gut.","That sounds good."],["Da bin ich dabei.","I'm in."],["Da habe ich keine Lust drauf.","I don't feel like it."],["Ich glaube, eher nicht.","I don't think so, rather not."],["Wie wäre es am Mittwoch?","How about Wednesday?"],["Um wie viel Uhr passt es dir?","What time suits you?"],["Ich kann ab 18 Uhr.","I can from 6 pm."],["sich treffen · du triffst dich · er trifft sich","to meet (each other)"],["Bis dann!","See you then!"],["schade","what a pity"],["zusammen","together"],["faulenzen · du faulenzt · er faulenzt","to laze around"],["die Therme, -n","thermal bath"],["eine Velotour machen","to go on a bike tour"],["spazieren gehen","to go for a walk"],["der Plan, ¨e","plan"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"Da bin ich dabei.",back:"I'm in.",ex:"Wandern am Samstag? Da bin ich dabei!"},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"How about Wednesday?",back:"Wie wäre es am Mittwoch?"},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Hast du Lust, … zu …?",back:"zu + infinitive goes to the end.",ex:"Hast du Lust, mit mir zu tanzen?"},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"wir treffen uns: why uns?",back:"sich treffen is reflexive: ich treffe mich, du triffst dich, wir treffen uns.",ex:"Wo treffen wir uns?"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the sentences (Übung 1).",pairs:[["Gibst du mir deine Telefonnummer?","Can I have your phone number?"],["Hast du noch Zeit für einen Kaffee?","Do you have time for a coffee?"],["Möchtest du mit mir ins Kino gehen?","Do you want to go to the cinema with me?"],["Was machst du am Montag um 2 Uhr?","What are you doing on Monday at 2 pm?"],["Weisst du, wo es eine gute Bar gibt?","Do you know where to find a good bar?"]]},
+    {t:"sort",lv:2,d:1,k:"v",q:"Yes, no, or a new time?",groups:["Zusage (yes)","Absage (no)","Neuer Termin"],items:[["Ja, klar, das tönt gut.",0],["Gute Idee. Das machen wir.",0],["Da bin ich dabei.",0],["Ich habe keine Zeit.",1],["Ich glaube, eher nicht.",1],["Kannst du am Mittwoch?",2],["Das geht nicht, aber wir können am Freitag.",2]],why:"Page 54 groups the answers the same way."},
+    {t:"mc",lv:2,d:1,k:"v",q:"Your friend asks: „Wollen wir mal zusammen Kaffee trinken?“ You can't on Saturday. What fits?",opts:["Schade, am Samstag kann ich nicht.","Ja, gerne. Samstag ist gut.","Da bin ich dabei, am Samstag."],a:0,why:"schade = what a pity. Then say what doesn't work."},
+    {t:"mc",lv:2,d:2,k:"v",q:"„Um wie viel Uhr passt es dir?“ What is the person asking?",opts:["what time suits you","which day suits you","where you want to meet"],a:0,why:"Um wie viel Uhr = at what time. passen = to suit."},
+    {t:"gap",lv:3,d:1,k:"gv",q:"Hast du ___ mit mir ins Museum zu gehen? – Nein, da ___ ich keine Lust drauf.",hints:["feel like","haben"],a:[["Lust","Zeit"],["habe"]],why:"Solution page 56: Hast du Lust/Zeit … · da habe ich keine Lust drauf."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Aber wollen wir mal ___ spazieren gehen? – Super, das machen wir. Wann ___ wir uns?",hints:["together","sich treffen"],a:[["zusammen"],["treffen"]],why:"zusammen = together. wir treffen uns."},
+    {t:"gap",lv:3,d:2,k:"gv",q:"Wollen wir uns ___ 14 Uhr treffen? Wir können ___ dort treffen.",hints:["clock time","reflexive, wir"],a:[["um"],["uns"]],why:"um + Uhrzeit. wir … uns."},
+    {t:"gap",lv:3,d:1,k:"gv",q:"Dann sehen wir uns ___ Samstag. – Das ist gut, bis ___.",hints:["day","see you"],a:[["am"],["dann","später"]],why:"am + Tag. Bis dann!"},
+    {t:"write",lv:3,d:2,k:"v",q:"Translate (Übung 2).",prompt:"Are you free on Monday?",a:["Hast du am Montag Zeit?","Hast du Montag Zeit?"],why:"Solution page 56."},
+    {t:"write",lv:3,d:2,k:"v",q:"Translate (Übung 2).",prompt:"How do you like the course?",a:["Wie findest du den Kurs?","Wie gefällt dir der Kurs?"],why:"Solution page 56: Wie findest du den Kurs?"},
+    {t:"write",lv:3,d:2,k:"v",q:"Translate (Übung 2).",prompt:"What a pity, I can't make it on Monday.",a:["Schade, am Montag kann ich nicht.","Schade, ich kann am Montag nicht."],why:"Solution page 56."},
+    {t:"write",lv:3,d:3,k:"v",q:"Translate (Übung 2).",prompt:"Do you have any plans for the weekend?",a:["Hast du schon Pläne für das Wochenende?","Hast du Pläne für das Wochenende?","Hast du schon Pläne fürs Wochenende?","Hast du Pläne fürs Wochenende?"],why:"Solution page 56. der Plan, die Pläne."},
+    {t:"build",lv:3,d:2,k:"g",q:"Build the question: Do you feel like going dancing with me?",tiles:["hast","du","Lust,","mit mir","tanzen","zu","gehen"],end:"?",a:["Hast du Lust, mit mir tanzen zu gehen?"],verb:"hast",why:"zu + infinitive at the very end."},
+    {t:"build",lv:4,d:2,k:"g",q:"Build the suggestion: Maybe we can go to the lake together on Sunday.",tiles:["vielleicht","können","wir","am Sonntag","zusammen","an den See","gehen"],end:".",a:["Vielleicht können wir am Sonntag zusammen an den See gehen."],verb:"können",why:"können on position II, gehen at the end."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Morgen treffen wir sich am See.",wrong:[3],fixed:"Morgen treffen wir uns am See.",why:"wir … uns."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Hast du Lust, mit mir zu wandern gehen?",wrong:[5,6],fixed:"Hast du Lust, mit mir wandern zu gehen?",why:"zu stands right before the last infinitive."},
+    {t:"mc",lv:4,d:2,k:"v",q:"Which answer is a polite no?",opts:["Danke, aber ich glaube lieber nicht.","Ja, klar, das tönt gut.","Super, wo treffen wir uns?"],a:0,why:"lieber nicht = rather not."},
+    {t:"write",lv:5,d:2,k:"v",q:"Write it in German.",prompt:"Good idea. Where shall we meet?",a:["Gute Idee. Wo treffen wir uns?","Super Idee. Wo treffen wir uns?"],why:"Wo treffen wir uns?"},
+    {t:"write",lv:5,d:3,k:"gv",q:"Write it in German.",prompt:"I can't on Wednesday, but we can go to the cinema on Friday.",a:["Am Mittwoch kann ich nicht, aber wir können am Freitag ins Kino gehen.","Ich kann am Mittwoch nicht, aber wir können am Freitag ins Kino gehen."],why:"Das geht nicht, aber wir können …"},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Write a short chat: invite a colleague to do something, they say no to the first day, you find a new day and a time.",model:"Hast du Lust, am Samstag mit mir wandern zu gehen?\nSchade, am Samstag kann ich nicht.\nWie wäre es am Sonntag?\nJa, gerne. Um wie viel Uhr passt es dir?\nIch kann ab 10 Uhr. Wo treffen wir uns?",checks:[{"need":"\\blust\\b|\\bwollen wir\\b|\\bgehen wir\\b|\\bkoennen wir\\b","label":"An invitation: Hast du Lust …? / Wollen wir …?"},{"need":"\\bschade\\b|\\bkeine zeit\\b|\\bkann ich nicht\\b|\\beher nicht\\b|\\blieber nicht\\b","label":"A no: Schade, … kann ich nicht."},{"need":"\\bwie waere es\\b|\\bhast du am\\b|\\bkannst du am\\b","label":"A new day: Wie wäre es am …?"},{"need":"\\bum \\d+|\\bab \\d+|\\bzwischen\\b","label":"A time: um / ab / zwischen …"},{"need":"\\btreffen wir uns\\b","label":"Wo treffen wir uns?"}]}
+  ]
+},
+{
+  id:"w9-perfekt", stop:"Perfekt", title:"Das Perfekt: Was hast du gemacht?",
+  grammar:"haben/sein auf Position II, Partizip II am Ende; ge…t, ge…et, ge…en, …iert, trennbar", vocab:"Perfektformen (Petra pages 75 and 76, Anja page 63)",
+  cheat:`
+    <h3>Satzbau (Petra page 75, Anja page 63)</h3>
+    <div class="tbl"><table><tr><th>Position I</th><th>Position II</th><th></th><th>Partizip</th></tr>
+      <tr><td>Wo</td><td>hast</td><td>du früher</td><td>gewohnt?</td></tr>
+      <tr><td>Ich</td><td>habe</td><td>früher in Australien</td><td>gewohnt.</td></tr>
+      <tr><td>Früher</td><td>habe</td><td>ich in Australien</td><td>gewohnt.</td></tr>
+      <tr><td>Wann</td><td>bist</td><td>du in die Schweiz</td><td>gekommen?</td></tr>
+      <tr><td>2021</td><td>bin</td><td>ich in die Schweiz</td><td>gekommen.</td></tr>
+    </table></div>
+    <h3>Hilfsverb</h3>
+    <p>ich habe / bin · du hast / bist · er hat / ist · wir haben / sind · ihr habt / seid · sie haben / sind</p>
+    <h3>Partizip II (Petra page 76)</h3>
+    <ul>
+      <li><b>ge…t</b> (regular): machen → gemacht, kaufen → gekauft, hören → gehört, lernen → gelernt</li>
+      <li><b>ge…et</b> (stem on -t/-d): arbeiten → gearbeitet, antworten → geantwortet, kosten → gekostet</li>
+      <li><b>ge…en</b> (irregular, learn them): essen → gegessen, lesen → gelesen, sehen → gesehen, schreiben → geschrieben, treffen → getroffen, trinken → getrunken, finden → gefunden, helfen → geholfen, sprechen → gesprochen, nehmen → genommen</li>
+      <li><b>no ge-</b>: verbs on -ieren (telefoniert, studiert, grilliert) and prefixes be-, ver-, er-, emp-, ge- (besucht, erzählt, versucht, verstanden, bekommen, begonnen, empfohlen, gefallen, vergessen)</li>
+      <li><b>separable</b>: ge in the middle: einkaufen → eingekauft, aufhören → aufgehört, zuhören → zugehört, fernsehen → ferngesehen, anrufen → angerufen, anfangen → angefangen</li>
+      <li><b>gemischt</b>: irregular stem, regular -t: bringen → gebracht, denken → gedacht, kennen → gekannt</li>
+    </ul>`,
+  words:[["machen (hat gemacht)","to do, to make"],["kaufen (hat gekauft)","to buy"],["putzen (hat geputzt)","to clean"],["arbeiten (hat gearbeitet)","to work"],["kosten (hat gekostet)","to cost"],["essen (hat gegessen)","to eat"],["lesen (hat gelesen)","to read"],["schreiben (hat geschrieben)","to write"],["treffen (hat getroffen)","to meet"],["trinken (hat getrunken)","to drink"],["finden (hat gefunden)","to find"],["helfen (hat geholfen)","to help"],["sprechen (hat gesprochen)","to speak"],["nehmen (hat genommen)","to take"],["telefonieren (hat telefoniert)","to be on the phone"],["studieren (hat studiert)","to study"],["besuchen (hat besucht)","to visit"],["erzählen (hat erzählt)","to tell"],["verstehen (hat verstanden)","to understand"],["bekommen (hat bekommen)","to receive"],["beginnen (hat begonnen)","to begin"],["einkaufen (hat eingekauft)","to shop"],["fernsehen (hat ferngesehen)","to watch TV"],["anrufen (hat angerufen)","to call"],["bringen (hat gebracht)","to bring"],["denken (hat gedacht)","to think"],["früher","in the past"],["das Partizip Perfekt","past participle"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"How is the Perfekt built?",back:"haben or sein on position II, the Partizip II at the end.",ex:"Ich habe früher in Australien gewohnt."},
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"Regular Partizip II",back:"ge + stem + t. Stem on -t or -d: ge + stem + et.",ex:"machen → gemacht · arbeiten → gearbeitet"},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Which verbs have no ge-?",back:"Verbs on -ieren and verbs with be-, ver-, er-, emp-, ge-.",ex:"telefonieren → telefoniert · besuchen → besucht"},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Separable verbs in the Perfekt",back:"ge goes between the prefix and the stem.",ex:"einkaufen → eingekauft · anrufen → angerufen"},
+    {t:"flash",lv:1,d:2,k:"g",front:"bringen · denken · kennen",back:"gebracht · gedacht · gekannt",ex:"Gemischte Verben: irregular in the middle, -t at the end."},
+    {t:"match",lv:1,d:1,k:"g",q:"Match the infinitive with its Partizip II.",pairs:[["schreiben","geschrieben"],["treffen","getroffen"],["finden","gefunden"],["helfen","geholfen"],["nehmen","genommen"],["sprechen","gesprochen"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"Which pattern does the Partizip II follow?",groups:["ge…t / ge…et","ge…en","no ge-","…ge… (separable)"],items:[["putzen",0],["kosten",0],["hören",0],["lesen",1],["trinken",1],["studieren",2],["erzählen",2],["vergessen",2],["einkaufen",3],["zuhören",3]],why:"vergessen keeps -en but has no ge- because of ver-."},
+    {t:"mc",lv:2,d:1,k:"g",q:"telefonieren: Ich habe gestern lange ___.",opts:["telefoniert","getelefoniert","telefonieren"],a:0,why:"-ieren verbs take no ge-."},
+    {t:"mc",lv:2,d:2,k:"g",q:"„In Australien habe ich früher gewohnt.“ Why is habe before ich?",opts:["In Australien fills position I, so habe stays on II.","In a statement the subject must follow the verb.","habe always comes right before the subject ich."],a:0,why:"Same rule as in the Präsens: the conjugated verb is on position II."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Ich habe heute die Küche ___ und ___.",hints:["putzen","duschen"],a:[["geputzt"],["geduscht"]],why:"ge…t."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Wie viele Stunden hast du heute ___? Was hat das Ticket ___?",hints:["arbeiten","kosten"],a:[["gearbeitet"],["gekostet"]],why:"Stem on -t: ge…et."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Was hast du gestern ___? – Ich habe Spaghetti ___.",hints:["kochen","essen"],a:[["gekocht"],["gegessen"]],why:"kochen is regular, essen is irregular."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Wir haben am Samstag ___ und am Abend ___.",hints:["einkaufen","fernsehen"],a:[["eingekauft"],["ferngesehen"]],why:"Separable: ge in the middle."},
+    {t:"gap",lv:3,d:3,k:"g",q:"Hast du den Text ___? Der Kurs hat um 8 Uhr ___.",hints:["verstehen","beginnen"],a:[["verstanden"],["begonnen"]],why:"ver- and be-: no ge-."},
+    {t:"write",lv:3,d:2,k:"g",q:"Answer the question from page 75 about yourself. Use the words in brackets.",prompt:"Wo hast du studiert? (an der ETH)",a:["Ich habe an der ETH studiert.","An der ETH habe ich studiert."],why:"habe on II, studiert at the end."},
+    {t:"write",lv:3,d:2,k:"g",q:"Answer with the words in brackets.",prompt:"Was hast du heute zu Mittag gegessen? (eine Pizza)",a:["Ich habe eine Pizza gegessen.","Ich habe heute eine Pizza gegessen.","Heute habe ich eine Pizza gegessen.","Ich habe heute zu Mittag eine Pizza gegessen."],why:"eine Pizza goes between habe and gegessen."},
+    {t:"build",lv:3,d:2,k:"g",q:"Build the sentence. Start with Früher.",tiles:["früher","habe","ich","in Australien","gewohnt"],end:".",a:["Früher habe ich in Australien gewohnt."],verb:"habe",why:"Page 75."},
+    {t:"fix",lv:4,d:1,k:"g",q:"Tap the wrong word.",text:"Ich habe gestern getelefoniert.",wrong:[3],fixed:"Ich habe gestern telefoniert.",why:"-ieren: no ge-."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich habe gestern geeinkauft.",wrong:[3],fixed:"Ich habe gestern eingekauft.",why:"Separable: ein-ge-kauft."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Ich habe gelesen viel.",wrong:[2,3],fixed:"Ich habe viel gelesen.",why:"The Partizip goes to the end."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Er hat mir das Buch gebringt.",wrong:[5],fixed:"Er hat mir das Buch gebracht.",why:"bringen is mixed: gebracht."},
+    {t:"mc",lv:4,d:3,k:"g",q:"Which Partizip is NOT correct?",opts:["gevergessen","besucht","angerufen"],a:0,why:"vergessen → vergessen. ver- takes no ge-."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"Yesterday I met my friends.",a:["Gestern habe ich meine Freunde getroffen.","Ich habe gestern meine Freunde getroffen."],why:"treffen → getroffen."},
+    {t:"write",lv:5,d:3,k:"g",q:"Write it in German.",prompt:"What did you do on the weekend? I read a lot and tidied up the flat.",a:["Was hast du am Wochenende gemacht? Ich habe viel gelesen und die Wohnung aufgeräumt.","Was hast du am Wochenende gemacht? Ich habe viel gelesen und ich habe die Wohnung aufgeräumt."],why:"Anja page 63."},
+    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Answer three questions from page 75 in full sentences: Was hast du studiert? Wie lange hast du heute geschlafen? Was hast du gestern gekocht?",model:"Ich habe Maschinenbau studiert.\nIch habe heute sieben Stunden geschlafen.\nGestern habe ich Pasta gekocht.",checks:[{"need":"\\b(habe|hast|hat|haben|habt)\\b","min":3,"label":"Three sentences with haben"},{"need":"\\bstudiert\\b","label":"studiert (no ge-)"},{"need":"\\bgeschlafen\\b","label":"geschlafen"},{"need":"\\bgekocht\\b","label":"gekocht"},{"avoid":"\\bgestudiert\\b|\\bgeschlaft\\b","label":"studiert, geschlafen"}]}
+  ]
+},
+{
+  id:"w9-habensein", stop:"haben oder sein", title:"Perfekt mit haben oder sein?",
+  grammar:"sein bei Bewegung, Veränderung und 5 Ausnahmen", vocab:"Verben für die Perfekt-Übungen (Petra pages 77 to 81)",
+  cheat:`
+    <h3>sein im Perfekt: 3 Gruppen (page 77)</h3>
+    <ul>
+      <li><b>Bewegung</b> (movement from A to B): gehen → bin gegangen, fahren → bin gefahren, fliegen → geflogen, laufen → gelaufen, reisen → gereist, schwimmen → geschwommen, rennen → gerannt, spazieren → spaziert</li>
+      <li><b>Veränderung</b> (change of state): wachsen → bin gewachsen, einschlafen → eingeschlafen, aufwachen → aufgewacht, aufstehen → aufgestanden, einsteigen, umsteigen, aussteigen, sterben → ist gestorben</li>
+      <li><b>5 Ausnahmen</b>: sein → bin gewesen, bleiben → bin geblieben, werden → bin geworden, passieren → ist passiert, geschehen → ist geschehen</li>
+    </ul>
+    <p>All other verbs take haben, also haben itself: hat gehabt. Geboren: Ich bin am 30.9.2002 geboren.</p>
+    <p>In Switzerland sitzen, stehen and liegen often take sein: Hier bin ich immer gesessen. In Germany: habe gesessen.</p>`,
+  words:[["gehen (ist gegangen)","to go"],["fahren (ist gefahren)","to drive, to go"],["fliegen (ist geflogen)","to fly"],["laufen (ist gelaufen)","to walk, to run"],["reisen (ist gereist)","to travel"],["schwimmen (ist geschwommen)","to swim"],["rennen (ist gerannt)","to run"],["spazieren (ist spaziert)","to stroll"],["kommen (ist gekommen)","to come"],["wachsen (ist gewachsen)","to grow"],["aufwachen (ist aufgewacht)","to wake up"],["aufstehen (ist aufgestanden)","to get up"],["einschlafen (ist eingeschlafen)","to fall asleep"],["einsteigen (ist eingestiegen)","to get in"],["umsteigen (ist umgestiegen)","to change trains"],["aussteigen (ist ausgestiegen)","to get out"],["sterben (ist gestorben)","to die"],["sein (ist gewesen)","to be"],["bleiben (ist geblieben)","to stay"],["werden (ist geworden)","to become"],["passieren (ist passiert)","to happen"],["haben (hat gehabt)","to have"],["geboren sein","to be born"],["das Schiff, -e","ship, boat"],["das Schloss, ¨er","castle"],["die Aussicht","view"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",dirLabel:"Rule",front:"Which verbs take sein in the Perfekt?",back:"Movement, change of state, and five exceptions: sein, bleiben, werden, passieren, geschehen.",ex:"Ich bin nach Zürich gefahren."},
+    {t:"flash",lv:1,d:1,k:"g",front:"sein: ich · du · er · wir · ihr",back:"bin · bist · ist · sind · seid",ex:"Seid ihr ins Kino gegangen?"},
+    {t:"flash",lv:1,d:2,k:"g",front:"bleiben, Perfekt",back:"ist geblieben",ex:"Wir sind lange im Büro geblieben."},
+    {t:"flash",lv:1,d:2,k:"g",front:"werden, Perfekt",back:"ist geworden",ex:"Mannomann, ist das kalt geworden!"},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the verbs.",pairs:[["einsteigen","to get in"],["umsteigen","to change trains"],["aussteigen","to get out"],["wachsen","to grow"],["einschlafen","to fall asleep"],["passieren","to happen"]]},
+    {t:"sort",lv:2,d:2,k:"g",q:"haben or sein? (page 77)",groups:["haben","sein"],items:[["studieren",0],["hören",0],["besuchen",0],["telefonieren",0],["warten",0],["anfangen",0],["schlafen",0],["fallen",1],["gehen",1],["kommen",1],["werden",1],["mitkommen",1],["einschlafen",1]],why:"schlafen is a state, not a change: hat geschlafen. einschlafen is a change: ist eingeschlafen."},
+    {t:"mc",lv:2,d:2,k:"g",q:"Why is it „ich bin aufgewacht“ and not „ich habe aufgewacht“?",opts:["aufwachen is a change of state.","aufwachen is a movement verb.","aufwachen is one of the five exceptions."],a:0,why:"Asleep → awake is a change, so sein."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Ich ___ am 30.9.2002 geboren.",opts:["bin","habe","hat"],a:0,why:"geboren always goes with sein."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Wie ___ Sie heute zur Uni gekommen? – Ich ___ das Tram genommen.",hints:["sein or haben","sein or haben"],a:[["sind"],["habe"]],why:"kommen = movement: sind. nehmen: habe."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Was ___ du am Samstag gemacht? – Ich ___ ins Kino gegangen.",hints:["sein or haben","sein or haben"],a:[["hast"],["bin"]],why:"machen: hast. gehen: bin."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Wo ___ ihr euch zum letzten Mal gesehen? – Wir ___ mit einer Gruppe nach Italien gefahren.",hints:["sein or haben","sein or haben"],a:[["habt"],["sind"]],why:"sehen: habt. fahren: sind."},
+    {t:"gap",lv:3,d:2,k:"g",q:"___ ihr gestern noch lange im Büro geblieben? – Nein, wir ___ um 6 nach Hause gegangen.",hints:["sein or haben","sein or haben"],a:[["Seid"],["sind"]],why:"bleiben is an exception: seid. gehen: sind."},
+    {t:"gap",lv:3,d:2,k:"g",q:"___ ihr aufs Matterhorn gestiegen? – Ja, und die Aussicht ___ toll gewesen.",hints:["sein or haben","sein or haben"],a:[["Seid"],["ist"]],why:"steigen = movement. sein → ist gewesen."},
+    {t:"gap",lv:3,d:3,k:"g",q:"Gestern ___ ich mit dem Schiff nach Rapperswil ___ und ___ dort die Stadt ___.",hints:["sein or haben","fahren","sein or haben","besuchen"],a:[["bin"],["gefahren"],["habe"],["besucht"]],why:"fahren: bin gefahren. besuchen: habe besucht."},
+    {t:"gap",lv:3,d:3,k:"g",q:"Mein Freund und ich ___ zuerst zum Schloss ___. Am Engelsplatz ___ wir ein kleines Café ___.",hints:["sein or haben","gehen","sein or haben","finden"],a:[["sind"],["gegangen"],["haben"],["gefunden"]],why:"Mein Freund und ich = wir: sind gegangen. finden: haben gefunden."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Ich habe um 7 Uhr aufgestanden.",wrong:[1],fixed:"Ich bin um 7 Uhr aufgestanden.",why:"aufstehen is a change: sein."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wir sind gestern viel geschlafen.",wrong:[1],fixed:"Wir haben gestern viel geschlafen.",why:"schlafen: haben."},
+    {t:"fix",lv:4,d:3,k:"g",q:"Tap the wrong word.",text:"Wir haben dort einen Kaffee gefinden.",wrong:[5],fixed:"Wir haben dort einen Kaffee gefunden.",why:"finden → gefunden."},
+    {t:"mc",lv:4,d:3,k:"g",q:"Which sentence is NOT correct?",opts:["Er hat in Basel umgestiegen.","Er ist in Basel umgestiegen.","Er ist in Basel geblieben."],a:0,why:"umsteigen is a movement: ist umgestiegen."},
+    {t:"write",lv:5,d:2,k:"g",q:"Write it in German.",prompt:"We went to the lake and swam.",a:["Wir sind an den See gegangen und sind geschwommen.","Wir sind an den See gegangen und geschwommen.","Wir sind zum See gegangen und sind geschwommen."],why:"Both are movement verbs: sind."},
+    {t:"write",lv:5,d:3,k:"g",q:"Write it in German.",prompt:"In the evening I got tired early and fell asleep at 11.",a:["Am Abend bin ich früh müde geworden und bin um 11 Uhr eingeschlafen.","Am Abend bin ich früh müde geworden und um 11 Uhr eingeschlafen."],why:"werden and einschlafen both take sein. Petra page 83."},
+    {t:"open",lv:5,d:3,k:"g",q:"Homework from page 81: write 5 to 7 sentences in the Perfekt about your weekend. Use haben and sein.",model:"Am Samstag bin ich um 9 Uhr aufgestanden.\nIch habe gefrühstückt und die Zeitung gelesen.\nDann bin ich mit dem Tram in die Stadt gefahren.\nIch habe Freunde getroffen und wir haben Kaffee getrunken.\nAm Sonntag bin ich zu Hause geblieben.\nIch habe gekocht und ferngesehen.",checks:[{"need":"\\b(bin|bist|ist|sind|seid)\\b","min":2,"label":"At least two sentences with sein"},{"need":"\\b(habe|hast|hat|haben|habt)\\b","min":2,"label":"At least two sentences with haben"},{"need":"\\b(ge\\w+(t|en)|\\w+iert|\\w+ge\\w+(t|en))[.!]?(\\n|$)","min":4,"label":"The Partizip at the end of the sentence"},{"avoid":"\\bhabe (gegangen|gefahren|aufgestanden|geblieben|gekommen)\\b","label":"gehen, fahren, aufstehen, bleiben, kommen take sein"}]}
+  ]
+}
+]},
+{ id:"w10", n:10, label:"Woche 10", stops:[
+{
+  id:"w10-modal", stop:"Modalverben üben", title:"Modalverben: Interessen und Fähigkeiten",
+  grammar:"Modalverb auf Position II, Infinitiv am Ende; sollte; Infinitiv weglassen", vocab:"Modalverben (Anja pages 57 to 60)",
+  cheat:`
+    <h3>Formen (Anja page 57)</h3>
+    <p>können: can / be able to · müssen: have to / must · dürfen: be allowed to / may · wollen: want · sollen: shall / should · möchten: would like to</p>
+    <p>Anja's notes: ich soll / <b>sollte</b>. sollte is the polite "should": Du solltest zum Arzt gehen.</p>
+    <h3>Satzbau (page 58)</h3>
+    <div class="tbl"><table><tr><th></th><th>Position II</th><th></th><th>Satzende</th></tr>
+      <tr><td>Ich</td><td>kann</td><td>sehr gut</td><td>singen.</td></tr>
+      <tr><td>Wir</td><td>wollen</td><td>Deutsch</td><td>lernen.</td></tr>
+      <tr><td>Sie</td><td>möchte</td><td>einen Kaffee</td><td>(trinken).</td></tr>
+      <tr><td>Ich</td><td>muss</td><td>für die Prüfung</td><td>lernen.</td></tr>
+      <tr><td>Die Kinder</td><td>dürfen</td><td>im Park</td><td>spielen.</td></tr>
+      <tr><td>Hier</td><td>darf</td><td>man nicht</td><td>rauchen.</td></tr>
+      <tr><td></td><td>Soll</td><td>ich die Konzertkarten</td><td>kaufen?</td></tr>
+    </table></div>
+    <p>Sometimes the infinitive is left out: Sie möchte einen Kaffee. Am Samstag kann ich nicht.</p>`,
+  words:[["sollte · du solltest · er sollte","to be supposed to, should (polite)"],["die Fähigkeit, -en","ability"],["das Interesse, -n","interest"],["besonders","particularly"],["gar nicht gut","not good at all"],["das Doktorat","doctorate, PhD"],["die Regel, -n","rule"],["abwaschen · du wäschst ab · er wäscht ab","to do the dishes"],["sich beeilen · du beeilst dich · er beeilt sich","to hurry up"],["einladen · du lädst ein · er lädt ein","to invite"],["die Konzertkarte, -n","concert ticket"],["die Prüfung, -en","exam"]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"g",front:"sollte",back:"should (polite advice)",ex:"Du solltest mehr schlafen."},
+    {t:"flash",lv:1,d:2,k:"g",dirLabel:"Rule",front:"Can the infinitive be left out?",back:"Yes, when it is clear: Sie möchte einen Kaffee (trinken).",ex:"Am Mittwoch kann ich nicht."},
+    {t:"flash",lv:1,d:2,k:"g",front:"sich beeilen: wir …",back:"wir beeilen uns",ex:"Ihr müsst euch beeilen!"},
+    {t:"match",lv:1,d:1,k:"g",q:"Match each modal verb with what it expresses (page 58).",pairs:[["können","ability, possibility"],["wollen / möchten","intention, wish"],["müssen","necessity, duty"],["dürfen","permission"],["nicht dürfen","prohibition"],["sollen","offer"]]},
+    {t:"mc",lv:2,d:1,k:"g",q:"„Soll ich die Konzertkarten kaufen?“ What is it?",opts:["an offer","a prohibition","an ability"],a:0,why:"Soll ich …? offers help."},
+    {t:"mc",lv:2,d:2,k:"g",q:"„Er kann heute nicht ins Kino gehen.“ Where is gehen?",opts:["at the end","on position II","right after kann"],a:0,why:"The infinitive closes the sentence."},
+    {t:"sort",lv:2,d:2,k:"g",q:"Picture sentences from page 59: what does the modal verb say?",groups:["Fähigkeit","Wunsch","Verbot","Pflicht"],items:[["Er kann gut Tennis spielen.",0],["Er kann nicht gut Ski fahren.",0],["Sie möchte Saxofon spielen.",1],["Sie möchte nicht arbeiten.",1],["Man darf nicht trinken und Auto fahren.",2],["Du musst die Küche putzen.",3]],why:"können = ability, möchten = wish, nicht dürfen = prohibition, müssen = duty."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Ich ___ für die Prüfung lernen. Die Kinder ___ im Park spielen.",hints:["müssen","dürfen, Plural"],a:[["muss"],["dürfen"]],why:"Page 58."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Wo ___ du in 5 Jahren leben? Welche Sprachen ___ du gern lernen?",hints:["möchten","möchten"],a:[["möchtest"],["möchtest"]],why:"Page 59 B: du möchtest."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Was ___ du besonders gut? Was ___ du nach dem Doktorat machen?",hints:["können","wollen"],a:[["kannst"],["willst"]],why:"du kannst, du willst."},
+    {t:"write",lv:3,d:2,k:"g",q:"Translate (page 60).",prompt:"He can ski very well.",a:["Er kann sehr gut Ski fahren.","Er kann sehr gut skifahren."],why:"kann on II, Ski fahren at the end."},
+    {t:"write",lv:3,d:2,k:"g",q:"Translate (page 60).",prompt:"You have to do the dishes.",a:["Du musst abwaschen.","Du musst das Geschirr abwaschen.","Sie müssen abwaschen."],why:"abwaschen stays together at the end."},
+    {t:"write",lv:3,d:2,k:"g",q:"Translate (page 60). Start with Hier.",prompt:"You are not allowed to smoke in here.",a:["Hier darf man nicht rauchen."],why:"man darf nicht = one is not allowed."},
+    {t:"write",lv:3,d:2,k:"g",q:"Translate (page 60).",prompt:"She wants to learn German.",a:["Sie will Deutsch lernen."],why:"wollen: sie will."},
+    {t:"write",lv:3,d:2,k:"g",q:"Translate (page 60).",prompt:"They cannot dance well.",a:["Sie können nicht gut tanzen."],why:"sie (plural) können."},
+    {t:"write",lv:3,d:2,k:"g",q:"Translate (page 60).",prompt:"Shall I go shopping?",a:["Soll ich einkaufen?","Soll ich einkaufen gehen?"],why:"An offer: Soll ich …?"},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wir müssen sich beeilen.",wrong:[2],fixed:"Wir müssen uns beeilen.",why:"wir … uns. sich is only for er, sie, es and sie (plural)."},
+    {t:"fix",lv:4,d:1,k:"g",q:"Tap the wrong word.",text:"Er kannt sehr gut Tennis spielen.",wrong:[1],fixed:"Er kann sehr gut Tennis spielen.",why:"er kann, no -t."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Ich kann spielen Gitarre.",wrong:[2,3],fixed:"Ich kann Gitarre spielen.",why:"The infinitive goes to the end."},
+    {t:"write",lv:5,d:2,k:"g",q:"Translate (page 60).",prompt:"You should go to the doctor.",a:["Du solltest zum Arzt gehen.","Du sollst zum Arzt gehen.","Sie sollten zum Arzt gehen."],why:"Advice: Du solltest …"},
+    {t:"write",lv:5,d:2,k:"g",q:"Translate (page 60).",prompt:"May I invite you for dinner?",a:["Darf ich dich zum Abendessen einladen?","Darf ich Sie zum Abendessen einladen?"],why:"Darf ich …? asks for permission."},
+    {t:"write",lv:5,d:2,k:"g",q:"Translate (page 60).",prompt:"I don't have to work today.",a:["Ich muss heute nicht arbeiten.","Heute muss ich nicht arbeiten."],why:"nicht müssen = not necessary."},
+    {t:"open",lv:5,d:3,k:"g",q:"Your turn. Answer page 59 B: Was kannst du besonders gut? Was kannst du gar nicht gut? In deiner Wohnung: Was muss man machen? Was darf man nicht machen?",model:"Ich kann besonders gut kochen.\nIch kann gar nicht gut singen.\nIn meiner Wohnung muss man den Müll trennen.\nMan darf nach 22 Uhr keine laute Musik hören.",checks:[{"need":"\\bkann\\b","min":2,"label":"Two sentences with kann"},{"need":"\\bmuss man\\b|\\bman muss\\b","label":"A rule with man muss"},{"need":"\\bdarf\\b.*\\b(nicht|kein\\w*)\\b|\\b(nicht|kein\\w*)\\b.*\\bdarf\\b","label":"A prohibition: man darf nicht / keine …"},{"need":"\\w+en[.!]?(\\n|$)","min":3,"label":"The infinitive at the end"}]}
+  ]
+},
+{
+  id:"w10-wochenende", stop:"Wie war dein Wochenende?", title:"Wie war dein Wochenende? Fragen und Antworten",
+  grammar:"war und hatte; Wo warst du? Warst du schon einmal in …?", vocab:"Wochenende, Wetter, Aktivitäten (Anja pages 61 and 62)",
+  cheat:`
+    <h3>Fragen (page 61)</h3>
+    <p>Wie war dein Wochenende / gestern? · Wie waren deine Ferien? · Wo warst du? · Warst du schon einmal in …? (Have you ever been to …?) · Wie war …?</p>
+    <h3>Antworten</h3>
+    <p>Am Wochenende / gestern / in meinen Ferien war ich / waren wir … zu Hause · unterwegs · bei Freunden · bei meiner Familie · in der Stadt · in der Altstadt · auf dem Uetliberg · in den Bergen · am See / am Fluss · in Genf · an einer Party · im Kino</p>
+    <p>Es war super / toll · lustig · langweilig · spannend · interessant · teuer >< günstig</p>
+    <p>Das Wetter war kalt · regnerisch · warm · heiss · sonnig · bewölkt · neblig. Es hat geschneit.</p>
+    <h3>Ich hatte / wir hatten … (page 62)</h3>
+    <p>frei · ein stressiges Wochenende · viel Spass · Freunde zu Besuch · viel Arbeit · keine Zeit, Deutsch zu lernen · viel zu tun · ein schönes Wochenende. Also: Es hat viel Spass gemacht.</p>`,
+  words:[["Wie war dein Wochenende?","How was your weekend?"],["Wo warst du?","Where have you been?"],["Warst du schon einmal in …?","Have you ever been to …?"],["unterwegs","on the way, en route"],["die Altstadt","old town"],["der Fluss, ¨e","river"],["grillieren · du grillierst · er grilliert","to barbecue"],["lustig","funny, entertaining"],["langweilig","boring"],["spannend","exciting"],["teuer >< günstig","expensive >< cheap"],["regnerisch","rainy"],["bewölkt","cloudy"],["neblig","foggy"],["Es hat geschneit.","It was snowing."],["frei haben","to have a day off"],["stressig","stressful"],["Freunde zu Besuch haben","to have friends over"],["viel zu tun haben","to have lots to do"],["Es hat viel Spass gemacht.","It was a lot of fun."]],
+  items:[
+    {t:"flash",lv:1,d:1,k:"v",front:"unterwegs",back:"on the way, en route",ex:"Am Wochenende war ich viel unterwegs."},
+    {t:"flash",lv:1,d:1,k:"v",rev:true,front:"Have you ever been to …?",back:"Warst du schon einmal in …?"},
+    {t:"flash",lv:1,d:1,k:"v",front:"Es hat viel Spass gemacht.",back:"It was a lot of fun."},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the weather words.",pairs:[["regnerisch","rainy"],["bewölkt","cloudy"],["neblig","foggy"],["sonnig","sunny"],["heiss","hot"],["kalt","cold"]]},
+    {t:"match",lv:1,d:1,k:"v",q:"Match the adjectives.",pairs:[["lustig","funny"],["langweilig","boring"],["spannend","exciting"],["teuer","expensive"],["günstig","cheap"]]},
+    {t:"sort",lv:2,d:1,k:"g",q:"war or hatte?",groups:["Ich war …","Ich hatte …"],items:[["… zu Hause.",0],["… bei meiner Familie.",0],["… auf dem Uetliberg.",0],["… an einer Party.",0],["… frei.",1],["… viel Spass.",1],["… Freunde zu Besuch.",1],["… viel zu tun.",1]],why:"Places go with war. Things you had go with hatte."},
+    {t:"mc",lv:2,d:1,k:"g",q:"Wie ___ deine Ferien?",opts:["waren","war","warst"],a:0,why:"die Ferien is plural: waren."},
+    {t:"mc",lv:2,d:2,k:"v",q:"„Ich hatte ein stressiges Wochenende.“ How was the weekend?",opts:["full of stress","boring","relaxing"],a:0,why:"stressig = stressful."},
+    {t:"gap",lv:3,d:1,k:"g",q:"Wo ___ du am Samstag? – Ich ___ in der Altstadt.",hints:["sein, Präteritum","sein, Präteritum"],a:[["warst"],["war"]],why:"du warst, ich war."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Am Sonntag ___ wir am See. Das Wetter ___ sonnig.",hints:["sein, wir","sein, es"],a:[["waren"],["war"]],why:"wir waren, das Wetter war."},
+    {t:"gap",lv:3,d:2,k:"g",q:"Ich ___ viel Arbeit, aber wir ___ am Abend Freunde zu Besuch.",hints:["haben, Präteritum","haben, wir"],a:[["hatte"],["hatten"]],why:"ich hatte, wir hatten."},
+    {t:"write",lv:3,d:2,k:"v",q:"Write it in German.",prompt:"The weather was cloudy and cold.",a:["Das Wetter war bewölkt und kalt."],why:"Das Wetter war …"},
+    {t:"write",lv:3,d:2,k:"v",q:"Write it in German.",prompt:"I had a day off.",a:["Ich hatte frei.","Ich hatte einen Tag frei."],why:"frei haben → ich hatte frei."},
+    {t:"build",lv:3,d:2,k:"g",q:"Build the answer. Start with Am Wochenende.",tiles:["am Wochenende","war","ich","mit Freunden","in den Bergen"],end:".",a:["Am Wochenende war ich mit Freunden in den Bergen."],verb:"war",why:"Time on position I, then war ich."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Tap the wrong word.",text:"Wie war deine Ferien?",wrong:[1],fixed:"Wie waren deine Ferien?",why:"die Ferien is plural."},
+    {t:"fix",lv:4,d:2,k:"g",q:"Two words are in the wrong order. Tap both.",text:"Gestern ich war im Kino.",wrong:[1,2],fixed:"Gestern war ich im Kino.",why:"Gestern on position I, then war."},
+    {t:"mc",lv:4,d:2,k:"v",q:"„Warst du schon einmal in Genf?“ Which answer fits?",opts:["Ja, ich war schon zweimal in Genf.","Ja, ich bin gern in Genf.","Ja, ich war gestern zu Hause."],a:0,why:"schon einmal = ever. Answer with war and how often."},
+    {t:"write",lv:5,d:2,k:"v",q:"Write it in German.",prompt:"Yesterday I was at a party. It was a lot of fun.",a:["Gestern war ich an einer Party. Es hat viel Spass gemacht.","Ich war gestern an einer Party. Es hat viel Spass gemacht.","Gestern war ich an einer Party. Ich hatte viel Spass."],why:"an einer Party, Spass machen."},
+    {t:"write",lv:5,d:3,k:"v",q:"Write it in German.",prompt:"I had a stressful weekend and no time to learn German.",a:["Ich hatte ein stressiges Wochenende und keine Zeit, Deutsch zu lernen.","Ich hatte ein stressiges Wochenende und keine Zeit Deutsch zu lernen."],why:"Page 62."},
+    {t:"open",lv:5,d:3,k:"gv",q:"Your turn. Answer the question „Wie war dein Wochenende?“ in four sentences: where you were, what the weather was like, how it was, and what you had.",model:"Am Samstag war ich mit Freunden auf dem Uetliberg.\nDas Wetter war sonnig, aber kalt.\nEs war super.\nAm Sonntag hatte ich viel zu tun.",checks:[{"need":"\\bwar\\b|\\bwaren\\b","min":2,"label":"Two sentences with war"},{"need":"\\bwetter\\b","label":"The weather: Das Wetter war …"},{"need":"\\bhatte\\b|\\bhatten\\b","label":"Something you had: ich hatte …"},{"need":"\\b(am samstag|am sonntag|am wochenende|gestern)\\b","label":"A time: am Samstag, gestern …"}]}
+  ]
+}
 ]}
 ];
 
@@ -2437,7 +2691,9 @@ const QUIZLET_SETS = {
   w5: ["«Uhrzeiten, im-am-um» (Petra)"],
   w6: ["«Tageszeiten - Tagesablauf» (Anja)", "«im Restaurant» (Anja)", "«Lebensmittel und Mahlzeiten» (Petra)", "«Lebensmittel Artikel» (Petra)"],
   w7: ["«im Restaurant» (Anja, listed in Woche 6)", "«Freizeit» (Anja)"],
-  w8: ["«Wie oft …? Adverbien» (Petra)", "«Modalverben Sätze» (Petra, listed in Woche 9)"]
+  w8: ["«Wie oft …? Adverbien» (Petra)", "«Modalverben Sätze» (Petra, listed in Woche 9)"],
+  w9: ["«Redemittel Verabredung / Smalltalk» (Anja)", "«Perfektformen Tabelle» (Petra)"],
+  w10: ["«Perfektformen Tabelle» (Petra)"]
 };
 /* Set words that no stop lists yet, with the course glosses. */
 const QUIZLET_EXTRA = {
@@ -2449,7 +2705,9 @@ const QUIZLET_EXTRA = {
   w5: [],
   w6: [],
   w7: [],
-  w8: []
+  w8: [],
+  w9: [],
+  w10: []
 };
 /* Base form of an entry: the word before its du/er forms or plural suffix. */
 function baseDe(de){ return de.split("·")[0].split(",")[0].trim(); }
@@ -2564,6 +2822,10 @@ function start(kind, idx){
     WEEKS.forEach(w => w.stops.forEach(s => s.items.forEach(it => pool.push(Object.assign({src: w.label + " · " + s.stop}, it)))));
     items = arrange(sampleByLevel(pool, 4));
     idx = -1;
+  } else if (kind === "drill"){
+    const g = GRAMMAR[idx];
+    sec = {id: "drill-" + g.id, stop: g.title, drill: g, title: "Grammatik üben: " + g.title, grammar: g.title, vocab: g.weeks};
+    items = arrange(sampleByLevel(drillPool(g), 3));
   } else if (kind === "cards"){
     sec = Object.assign({}, stops[idx], {id: stops[idx].id + "-cards", cards: true, title: stops[idx].stop + ": Karteikarten"});
     const hd = stops[idx].wordsHead || ["Deutsch", "English"];
@@ -2594,17 +2856,22 @@ function start(kind, idx){
    CHROME: week tabs, tram line, reference panel
    ===================================================================== */
 function renderTop(){
-  document.getElementById("h1").innerHTML = S.kind === "all" ? `Woche <span class="num">${WEEKS.map(w => w.n).join("+")}</span>` : `Woche <span class="num">${WEEKS[weekIdx].n}</span>`;
+  const exam = ["talk", "gram", "drill"].includes(S.kind);
+  document.getElementById("h1").innerHTML = exam ? `Prüfung <span class="num">${S.kind === "talk" ? "Gespräch" : "Grammatik"}</span>` : S.kind === "all" ? `Woche <span class="num">${WEEKS.map(w => w.n).join("+")}</span>` : `Woche <span class="num">${WEEKS[weekIdx].n}</span>`;
   const box = document.getElementById("weeks");
   box.innerHTML = "";
-  WEEKS.forEach((w, i) => box.append(h("button", {class: "wk", type: "button", "aria-pressed": String(S.kind !== "all" && i === weekIdx), onclick: () => { weekIdx = i; start("stop", 0); }}, w.label)));
+  WEEKS.forEach((w, i) => box.append(h("button", {class: "wk", type: "button", "aria-pressed": String(["stop", "cards"].includes(S.kind) && i === weekIdx), onclick: () => { weekIdx = i; start("stop", 0); }}, w.label)));
   box.append(h("button", {class: "wk alt", type: "button", "aria-pressed": String(S.kind === "all"), onclick: () => start("all")}, "Alles mischen"));
+  box.append(h("button", {class: "wk exam", type: "button", "aria-pressed": String(S.kind === "talk"), onclick: () => openExam("talk")}, "Prüfung: Gespräch"));
+  box.append(h("button", {class: "wk exam", type: "button", "aria-pressed": String(S.kind === "gram" || S.kind === "drill"), onclick: () => openExam("gram")}, "Prüfung: Grammatik"));
 }
 
 function renderStops(){
   const best = loadStore().best || {};
   const ol = document.getElementById("stops");
   ol.innerHTML = "";
+  ol.parentElement.hidden = ["talk", "gram", "drill"].includes(S.kind);
+  if (ol.parentElement.hidden) return;
   stopsOf(weekIdx).forEach((sec, i) => {
     const b = best[sec.id];
     const active = S.kind !== "all" && i === S.idx;
@@ -2619,6 +2886,11 @@ function renderStops(){
 function renderRef(){
   const ref = document.getElementById("ref");
   ref.innerHTML = "";
+  if (S.sec.drill){
+    ref.append(h("details", {open: true}, h("summary", {}, S.sec.drill.title), h("div", {html: S.sec.drill.html, style: "display:grid;gap:10px;margin-top:10px"})),
+      h("button", {class: "btn ghost", type: "button", onclick: () => openExam("gram")}, "Zurück zum Überblick"));
+    return;
+  }
   if (S.sec.mix){
     ref.append(h("p", {}, "The mix takes a few questions from every level. Each card shows its stop. Open a cheat sheet only if you're stuck."));
     const weeks = S.kind === "all" ? WEEKS : [WEEKS[weekIdx]];
@@ -3103,6 +3375,7 @@ function renderEnd(){
     acts.append(h("button", {class: missed.length ? "btn ghost" : "btn", type: "button", onclick: () => start("stop", ni)}, "Next stop: " + stops[ni].stop));
   }
   acts.append(h("button", {class: "btn ghost", type: "button", onclick: () => start(S.kind === "cards" ? "cards" : S.kind, S.idx)}, "Again, reshuffled"));
+  if (S.kind === "drill") acts.append(h("button", {class: "btn ghost", type: "button", onclick: () => openExam("gram")}, "Back to the overview"));
   card.append(acts);
   return card;
 }
@@ -3133,12 +3406,714 @@ document.addEventListener("keydown", e => {
 /* =====================================================================
    BOOT: #w1 or #w2 in the link opens that week
    ===================================================================== */
+/* =====================================================================
+   EXAM PREP: GRAMMAR OVERVIEW
+   One section per grammar topic, weeks 1 to 10. "stops" lists the
+   stations whose grammar items feed the section's practice round.
+   ===================================================================== */
+const GRAMMAR = [
+{
+  id:"praesens", title:"Verben im Präsens", weeks:"Wochen 1 to 4",
+  stops:["w1-verben","w3-unregel","seinhaben","w4-gern"],
+  html:`
+    <div class="tbl"><table><tr><th></th><th>wohnen</th><th>arbeiten</th><th>heissen</th><th>fahren</th><th>sprechen</th><th>sein</th><th>haben</th></tr>
+      <tr><td>ich</td><td>wohne</td><td>arbeite</td><td>heisse</td><td>fahre</td><td>spreche</td><td>bin</td><td>habe</td></tr>
+      <tr><td>du</td><td>wohnst</td><td>arbeitest</td><td>heisst</td><td>fährst</td><td>sprichst</td><td>bist</td><td>hast</td></tr>
+      <tr><td>er/sie/es/man</td><td>wohnt</td><td>arbeitet</td><td>heisst</td><td>fährt</td><td>spricht</td><td>ist</td><td>hat</td></tr>
+      <tr><td>wir</td><td>wohnen</td><td>arbeiten</td><td>heissen</td><td>fahren</td><td>sprechen</td><td>sind</td><td>haben</td></tr>
+      <tr><td>ihr</td><td>wohnt</td><td>arbeitet</td><td>heisst</td><td>fahrt</td><td>sprecht</td><td>seid</td><td>habt</td></tr>
+      <tr><td>sie/Sie</td><td>wohnen</td><td>arbeiten</td><td>heissen</td><td>fahren</td><td>sprechen</td><td>sind</td><td>haben</td></tr>
+    </table></div>
+    <ul>
+      <li>Endings: -e, -st, -t, -en, -t, -en.</li>
+      <li>Stem on -t or -d gets an extra e: du arbeitest, er findet.</li>
+      <li>Stem on -s, -ss, -z: du only adds -t: du heisst, du tanzt.</li>
+      <li>Vowel change only for du and er/sie/es: a → ä (fahren, schlafen, tragen), e → i (sprechen, essen, helfen, treffen, nehmen: du nimmst), e → ie (lesen, sehen, empfehlen).</li>
+      <li>Special: wissen → ich weiss, du weisst, er weiss. mögen → ich mag, du magst, er mag.</li>
+    </ul>
+    <h4>Typische Fehler</h4>
+    <ul><li>✗ er fahrt → ✓ er fährt</li><li>✗ du arbeitst → ✓ du arbeitest</li><li>✗ ihr fährt → ✓ ihr fahrt (no vowel change in the plural)</li></ul>`
+},
+{
+  id:"satzbau", title:"Satzbau: das Verb auf Position II", weeks:"Wochen 1 to 3 and 8",
+  stops:["w1-fragen","position2","w3-brief","w8-satzbau","w8-wieoft"],
+  html:`
+    <div class="tbl"><table><tr><th>Position I</th><th>Position II</th><th>Rest</th></tr>
+      <tr><td>Ich</td><td>spiele</td><td>jeden Montag Poker.</td></tr>
+      <tr><td>Jeden Montag</td><td>spiele</td><td>ich Poker.</td></tr>
+      <tr><td>Wo</td><td>wohnst</td><td>du?</td></tr>
+      <tr><td></td><td>Wohnst</td><td>du in Zürich? (Ja/Nein-Frage: verb first)</td></tr>
+    </table></div>
+    <ul>
+      <li>In a statement the conjugated verb is always on position II. One part, short or long, fills position I.</li>
+      <li>If the subject is not on position I, it comes right after the verb.</li>
+      <li>W-Fragen: W-word, verb, subject. Ja/Nein-Fragen: verb first.</li>
+      <li>Doch answers a negative question with yes: Kommst du nicht? Doch, ich komme.</li>
+      <li>und, aber, oder, denn sit on position 0 and change nothing: Ich bin müde, denn ich arbeite viel.</li>
+      <li>Time before place: Ich fahre morgen nach Bern.</li>
+      <li>Frequency adverbs go after the verb: Ich gehe oft ins Kino. Or on position I: Oft gehe ich ins Kino.</li>
+    </ul>
+    <h4>Typische Fehler</h4>
+    <ul><li>✗ Heute ich gehe ins Kino. → ✓ Heute gehe ich ins Kino.</li><li>✗ Ich bin müde, denn arbeite ich viel. → ✓ denn ich arbeite viel.</li></ul>`
+},
+{
+  id:"anrede", title:"Sie oder du? Begrüssen", weeks:"Wochen 1 and 2",
+  stops:["w1-kontakte","wiegehts","personalien"],
+  html:`
+    <ul>
+      <li>du for friends, family, students, children. Sie for strangers, officials, older people. In the course and at the ETH most people say du.</li>
+      <li>Wie heisst du? · Wie heissen Sie? · Woher kommst du? · Woher kommen Sie?</li>
+      <li>Possessive: dein Name (du), Ihr Name (Sie). Wie ist Ihre Telefonnummer?</li>
+      <li>Wie geht es dir? (du) · Wie geht es Ihnen? (Sie) · Und dir? · Und Ihnen?</li>
+      <li>Swiss greetings: Grüezi (Sie), Hoi / Sali (du), Uf Wiederluege, Tschüss, Ciao.</li>
+    </ul>`
+},
+{
+  id:"artikel", title:"Nomen, Artikel und Plural", weeks:"Wochen 2, 3 and 6",
+  stops:["w3-haus","grossklein","w6-lebensmittel","w4-pronomen"],
+  html:`
+    <ul>
+      <li>Every noun has an article: der (masculine), die (feminine), das (neuter). Plural is always die.</li>
+      <li>Learn each noun with article and plural: der Tisch, -e · die Lampe, -n · das Zimmer, - · der Stuhl, ¨e (die Stühle).</li>
+      <li>The pronoun follows the article: der Tisch → er, die Lampe → sie, das Bett → es. Die Wohnung ist gross. Sie hat drei Zimmer.</li>
+      <li>All nouns are capitalized: der Kaffee, das Essen (but essen, the verb, is small).</li>
+      <li>Countries usually have no article: Ich komme aus Italien. Exceptions: die Schweiz, die USA, die Türkei, der Iran: aus der Schweiz, in der Schweiz.</li>
+      <li>Compounds take the article of the last word: die Tomatensuppe, der Kühlschrank.</li>
+    </ul>`
+},
+{
+  id:"akkusativ", title:"Nominativ und Akkusativ", weeks:"Wochen 6 and 7",
+  stops:["w6-akkusativ","w6-bestellen","w7-kein","w7-wen","w7-restaurant","w6-mensa"],
+  html:`
+    <div class="tbl"><table><tr><th></th><th>der</th><th>die</th><th>das</th><th>Plural</th></tr>
+      <tr><td>Nominativ</td><td>der / ein / kein / mein</td><td>die / eine / keine</td><td>das / ein / kein</td><td>die / – / keine</td></tr>
+      <tr><td>Akkusativ</td><td><b>den / einen / keinen / meinen</b></td><td>die / eine / keine</td><td>das / ein / kein</td><td>die / – / keine</td></tr>
+    </table></div>
+    <ul>
+      <li>Only the masculine changes: der → den, ein → einen.</li>
+      <li>Nominativ = the subject (wer? was?). Akkusativ = the direct object (wen? was?): Carla bestellt den Fisch.</li>
+      <li>Typical Akkusativ verbs: haben, es gibt, möchten, nehmen, bestellen, kaufen, brauchen, suchen, finden, sehen, essen, trinken, besuchen.</li>
+      <li>Akkusativ prepositions: durch, für, gegen, ohne, um, entlang. Das Geschenk ist für meinen Vater.</li>
+      <li>kein negates a noun with ein or no article: Ich habe keinen Hunger. Ich esse kein Fleisch.</li>
+      <li>nicht negates the rest: Ich esse nicht gern. Der Kaffee ist nicht heiss.</li>
+    </ul>
+    <h4>Typische Fehler</h4>
+    <ul><li>✗ Ich möchte ein Kaffee. → ✓ einen Kaffee (der Kaffee)</li><li>✗ Ich habe nicht Zeit. → ✓ Ich habe keine Zeit.</li></ul>`
+},
+{
+  id:"pronomen", title:"Personalpronomen", weeks:"Wochen 2, 4 and 7",
+  stops:["w4-pronomen","w7-pronomen","wiegehts"],
+  html:`
+    <div class="tbl"><table><tr><th>Nominativ</th><th>Akkusativ</th><th>Dativ (phrases)</th></tr>
+      <tr><td>ich</td><td>mich</td><td>mir</td></tr>
+      <tr><td>du</td><td>dich</td><td>dir</td></tr>
+      <tr><td>er</td><td>ihn</td><td>ihm</td></tr>
+      <tr><td>sie</td><td>sie</td><td>ihr</td></tr>
+      <tr><td>es</td><td>es</td><td>ihm</td></tr>
+      <tr><td>wir</td><td>uns</td><td>uns</td></tr>
+      <tr><td>ihr</td><td>euch</td><td>euch</td></tr>
+      <tr><td>sie / Sie</td><td>sie / Sie</td><td>ihnen / Ihnen</td></tr>
+    </table></div>
+    <ul>
+      <li>Akkusativ: Ich suche den Bahnhof. → Ich suche ihn. Kennst du mich?</li>
+      <li>Dativ phrases you already use: Wie geht es dir? Das gefällt mir. Kann ich dir helfen?</li>
+      <li>Reflexive: sich treffen → wir treffen uns, du triffst dich. sich beeilen → wir müssen uns beeilen.</li>
+    </ul>`
+},
+{
+  id:"praepositionen", title:"Präpositionen: Ort und Zeit", weeks:"Wochen 1, 4 and 5",
+  stops:["w1-wohin","w4-pronomen","w5-imamum","w5-sprachen","w4-leben"],
+  html:`
+    <h4>Woher? Wo? Wohin?</h4>
+    <ul>
+      <li>Woher? aus: Ich komme aus Spanien, aus der Schweiz.</li>
+      <li>Wo? in: Ich wohne in Zürich, in der Schweiz. bei: bei Freunden, bei meiner Familie.</li>
+      <li>Wohin? nach + city or country: nach Bern, nach Hause. zu: zum Bahnhof (der/das), zur Mensa (die). in + Akkusativ: ins Kino, in die Stadt.</li>
+    </ul>
+    <h4>Wo ist …? + Dativ</h4>
+    <p>auf, unter, hinter, vor, neben, in, bei: der/das → dem, die → der. Das Buch liegt auf dem Tisch. Die Tasche ist unter der Bank.</p>
+    <h4>Zeit: im, am, um, seit</h4>
+    <ul>
+      <li>im + Monat / Jahreszeit: im Mai, im Winter.</li>
+      <li>am + Tag / Tageszeit / Datum: am Montag, am Abend, am 3. Mai. Exception: in der Nacht.</li>
+      <li>um + Uhrzeit: um 8 Uhr.</li>
+      <li>seit + Dativ for something still going on: Ich wohne seit zwei Jahren in Zürich. Ich lerne seit einem Monat Deutsch.</li>
+      <li>vor + Dativ for the past: Ich bin vor einem Jahr gekommen.</li>
+    </ul>
+    <h4>Himmelsrichtungen</h4>
+    <p>im Norden, im Süden, im Osten, im Westen, im Südwesten. Basel liegt im Norden der Schweiz. Bern liegt westlich von Zürich.</p>`
+},
+{
+  id:"zahlen", title:"Zahlen, Uhrzeit, Datum", weeks:"Wochen 4 and 5",
+  stops:["w4-zahlen","w5-telefon","w5-datum","w5-uhrzeit"],
+  html:`
+    <ul>
+      <li>21 = einundzwanzig: ones first, then und, then tens. 365 = dreihundertfünfundsechzig.</li>
+      <li>Phone numbers in groups: 044 632 11 11 = null vier vier, sechs drei zwei, elf, elf.</li>
+      <li>Ordinal numbers: 1. der erste, 2. der zweite, 3. der dritte, 7. der siebte, up to 19 add -te, from 20 add -ste: der zwanzigste. Date: am ersten Mai, am 3. Mai.</li>
+      <li>Der Wievielte ist heute? Heute ist der 17. November. Wann ist dein Geburtstag? Am 30. September.</li>
+    </ul>
+    <div class="tbl"><table><tr><th>Uhr</th><th>informell</th><th>offiziell</th></tr>
+      <tr><td>8:15</td><td>Viertel nach acht</td><td>acht Uhr fünfzehn</td></tr>
+      <tr><td>8:30</td><td><b>halb neun</b></td><td>acht Uhr dreissig</td></tr>
+      <tr><td>8:25</td><td>fünf vor halb neun</td><td>acht Uhr fünfundzwanzig</td></tr>
+      <tr><td>8:45</td><td>Viertel vor neun</td><td>acht Uhr fünfundvierzig</td></tr>
+      <tr><td>19:35</td><td>fünf nach halb acht</td><td>neunzehn Uhr fünfunddreissig</td></tr>
+    </table></div>
+    <p>Wie spät ist es? / Wie viel Uhr ist es? · Um wie viel Uhr …? · Halb counts toward the next hour.</p>`
+},
+{
+  id:"gern", title:"gern, lieber, am liebsten; Vergleichen; Wie oft?", weeks:"Wochen 4, 5, 7 and 8",
+  stops:["w4-gern","w7-kein","w8-wieoft","w5-heimat"],
+  html:`
+    <ul>
+      <li>Verb + gern: Ich schwimme gern. Steigerung: gern → lieber → am liebsten. Ich trinke gern Tee, lieber Kaffee und am liebsten Wasser.</li>
+      <li>Scale: sehr gern · gern · nicht so gern · nicht gern · gar nicht gern.</li>
+      <li>mögen + noun: Ich mag Käse. gefallen: Zürich gefällt mir. Die Berge gefallen mir.</li>
+      <li>Vergleichen: hoch → höher → der höchste. Die Dufourspitze ist der höchste Berg der Schweiz.</li>
+      <li>Wie oft? immer · fast immer · meistens · oft · häufig · regelmässig · manchmal · ab und zu · gelegentlich · selten · fast nie · nie. Also: jeden Montag, einmal pro Woche, zweimal im Monat.</li>
+    </ul>`
+},
+{
+  id:"trennbar", title:"Trennbare Verben", weeks:"Wochen 6, 8 and 9",
+  stops:["w6-tagesablauf","w8-kuenzli","w6-tageszeiten"],
+  html:`
+    <div class="tbl"><table><tr><th>Position I</th><th>Position II</th><th>Mitte</th><th>Ende</th></tr>
+      <tr><td>Ich</td><td>stehe</td><td>um 7 Uhr</td><td>auf.</td></tr>
+      <tr><td>Am Abend</td><td>sehe</td><td>ich</td><td>fern.</td></tr>
+      <tr><td>Wann</td><td>kaufst</td><td>du</td><td>ein?</td></tr>
+    </table></div>
+    <ul>
+      <li>The prefix goes to the end: aufstehen, aufwachen, einkaufen, fernsehen, anrufen, mitkommen, einschlafen, abwaschen, vorbereiten.</li>
+      <li>With a modal verb the verb stays together at the end: Ich muss früh aufstehen.</li>
+      <li>In the Perfekt ge goes in the middle: aufgestanden, eingekauft, ferngesehen.</li>
+      <li>be-, ver-, er-, emp-, ge- never separate: Ich besuche meine Eltern. Ich verstehe dich.</li>
+    </ul>`
+},
+{
+  id:"modal", title:"Modalverben", weeks:"Wochen 7, 8 and 10",
+  stops:["w7-moechten","w8-modalverben","w8-verkehr","w10-modal"],
+  html:`
+    <div class="tbl"><table><tr><th></th><th>können</th><th>müssen</th><th>dürfen</th><th>wollen</th><th>sollen</th><th>möchten</th></tr>
+      <tr><td>ich</td><td>kann</td><td>muss</td><td>darf</td><td>will</td><td>soll</td><td>möchte</td></tr>
+      <tr><td>du</td><td>kannst</td><td>musst</td><td>darfst</td><td>willst</td><td>sollst</td><td>möchtest</td></tr>
+      <tr><td>er/sie/es</td><td>kann</td><td>muss</td><td>darf</td><td>will</td><td>soll</td><td>möchte</td></tr>
+      <tr><td>wir</td><td>können</td><td>müssen</td><td>dürfen</td><td>wollen</td><td>sollen</td><td>möchten</td></tr>
+      <tr><td>ihr</td><td>könnt</td><td>müsst</td><td>dürft</td><td>wollt</td><td>sollt</td><td>möchtet</td></tr>
+      <tr><td>sie/Sie</td><td>können</td><td>müssen</td><td>dürfen</td><td>wollen</td><td>sollen</td><td>möchten</td></tr>
+    </table></div>
+    <ul>
+      <li>Modal verb on position II, infinitive at the end: Ich kann sehr gut singen. Hier darf man nicht rauchen.</li>
+      <li>können = ability, possibility. wollen / möchten = wish. müssen = necessity, duty, rule. dürfen = permission. sollen = an order from someone else, or an offer: Soll ich dir helfen? sollte = polite advice: Du solltest zum Arzt gehen.</li>
+      <li><b>nicht müssen</b> = not necessary. <b>nicht dürfen</b> = forbidden. Ich muss heute nicht arbeiten. Man darf im Zug nicht rauchen.</li>
+      <li>The infinitive can be left out when it is clear: Sie möchte einen Kaffee. Am Samstag kann ich nicht.</li>
+    </ul>
+    <h4>Typische Fehler</h4>
+    <ul><li>✗ Er kannt → ✓ Er kann (no -t for ich and er)</li><li>✗ Ich kann spielen Gitarre. → ✓ Ich kann Gitarre spielen.</li><li>✗ Wir müssen sich beeilen. → ✓ Wir müssen uns beeilen.</li></ul>`
+},
+{
+  id:"praeteritum", title:"war und hatte", weeks:"Wochen 7 and 10",
+  stops:["w7-praeteritum","w10-wochenende"],
+  html:`
+    <div class="tbl"><table><tr><th></th><th>sein</th><th>haben</th></tr>
+      <tr><td>ich</td><td>war</td><td>hatte</td></tr>
+      <tr><td>du</td><td>warst</td><td>hattest</td></tr>
+      <tr><td>er/sie/es</td><td>war</td><td>hatte</td></tr>
+      <tr><td>wir</td><td>waren</td><td>hatten</td></tr>
+      <tr><td>ihr</td><td>wart</td><td>hattet</td></tr>
+      <tr><td>sie/Sie</td><td>waren</td><td>hatten</td></tr>
+    </table></div>
+    <ul>
+      <li>For sein and haben the past uses war and hatte, not the Perfekt: Wie war dein Wochenende? Ich hatte viel Spass.</li>
+      <li>Places with war: Ich war zu Hause, bei Freunden, in den Bergen, an einer Party.</li>
+      <li>Things with hatte: Ich hatte frei, viel Arbeit, keine Zeit, Freunde zu Besuch.</li>
+      <li>Weather: Das Wetter war sonnig. Es hat geschneit.</li>
+    </ul>`
+},
+{
+  id:"perfekt", title:"Das Perfekt", weeks:"Woche 9",
+  stops:["w9-perfekt","w9-habensein"],
+  html:`
+    <div class="tbl"><table><tr><th>Position I</th><th>Position II</th><th>Mitte</th><th>Ende</th></tr>
+      <tr><td>Ich</td><td>habe</td><td>gestern Pasta</td><td>gekocht.</td></tr>
+      <tr><td>Am Samstag</td><td>bin</td><td>ich nach Luzern</td><td>gefahren.</td></tr>
+      <tr><td>Was</td><td>hast</td><td>du am Wochenende</td><td>gemacht?</td></tr>
+    </table></div>
+    <h4>Partizip II</h4>
+    <ul>
+      <li>ge…t: machen → gemacht, kaufen → gekauft. Stem on -t/-d: arbeiten → gearbeitet.</li>
+      <li>ge…en (learn them): essen → gegessen, trinken → getrunken, schreiben → geschrieben, treffen → getroffen, finden → gefunden, sprechen → gesprochen, nehmen → genommen, sehen → gesehen, schlafen → geschlafen, gehen → gegangen, fahren → gefahren, kommen → gekommen.</li>
+      <li>No ge-: -ieren (studiert, telefoniert) and be-, ver-, er-, emp- (besucht, verstanden, erzählt, bekommen, begonnen, vergessen).</li>
+      <li>Separable: aufgestanden, eingekauft, ferngesehen, angerufen.</li>
+      <li>Mixed: gebracht, gedacht, gekannt.</li>
+    </ul>
+    <h4>haben oder sein?</h4>
+    <ul>
+      <li>sein: movement from A to B (gehen, fahren, fliegen, kommen, laufen, schwimmen, reisen), change of state (aufwachen, aufstehen, einschlafen, werden, sterben), and sein → gewesen, bleiben → geblieben, passieren → passiert. Ich bin am 30.9.2002 geboren.</li>
+      <li>haben: everything else, also schlafen, haben → gehabt, and most verbs with an object.</li>
+    </ul>
+    <h4>Typische Fehler</h4>
+    <ul><li>✗ Ich habe nach Luzern gefahren. → ✓ Ich bin … gefahren.</li><li>✗ Ich habe gekocht Pasta. → ✓ Ich habe Pasta gekocht.</li><li>✗ getelefoniert → ✓ telefoniert</li></ul>`
+},
+{
+  id:"extras", title:"Kleine Extras: es gibt, man, zu + Infinitiv", weeks:"Wochen 5, 8 and 9",
+  stops:["w5-heimat","w8-verkehr","w9-verabredung"],
+  html:`
+    <ul>
+      <li>es gibt + Akkusativ = there is / there are: In Zürich gibt es einen See. Gibt es hier eine gute Bar?</li>
+      <li>man = one, people in general, with the er form: Hier darf man nicht parkieren. Wie sagt man das auf Deutsch?</li>
+      <li>Hast du Lust, … zu + infinitive: Hast du Lust, mit mir ins Kino zu gehen? zu stands right before the last infinitive: … wandern zu gehen.</li>
+      <li>Wie wäre es am Mittwoch? = How about Wednesday? (a fixed phrase)</li>
+    </ul>`
+}
+];
+
+/* =====================================================================
+   EXAM PREP: CONVERSATION
+   Topics from every week plus the oral exam sheet (Anja pages 73 to 75).
+   Each question has an English gloss, a model answer and a few checks.
+   Checks run on lowercase text with ä → ae, ö → oe, ü → ue, ß → ss.
+   ===================================================================== */
+const TALK_EXAM_TOPICS = ["arbeiten","wohnen","freizeit","zuerich"];
+const TALK = [
+{
+  id:"arbeiten", title:"Arbeiten", exam:true, src:"Exam topic, Anja page 74",
+  qs:[
+    {q:"Wo arbeitest du? In welchem Institut oder Departement?",en:"Where do you work? In which institute or department?",model:"Ich arbeite an der ETH, im Departement Maschinenbau.",checks:[{"need":"\\barbeite\\b","label":"ich arbeite …"},{"need":"\\ban der\\b|\\bim\\b|\\bin der\\b|\\bbei\\b","label":"Where: an der ETH / im Institut / bei …"}]},
+    {q:"In welchem Fachgebiet machst du dein PhD?",en:"In which field are you doing your PhD?",model:"Ich mache mein PhD im Fachgebiet Maschinenbau. Ich forsche zu generativen Modellen.",checks:[{"need":"\\bmache\\b|\\bforsche\\b|\\bschreibe\\b","label":"ich mache … / ich forsche …"},{"need":"\\bim\\b|\\bin\\b","label":"im Fachgebiet … / in …"}]},
+    {q:"Welche Sprache sprichst du mit deinen Arbeitskollegen? Woher kommen sie?",en:"Which language do you speak with your colleagues? Where are they from?",model:"Mit meinen Kollegen spreche ich Englisch. Sie kommen aus Deutschland, Italien und China.",checks:[{"need":"\\bspreche\\b","label":"ich spreche …"},{"need":"\\bkommen aus\\b|\\bkommt aus\\b","label":"Sie kommen aus …"}]},
+    {q:"Gefällt dir deine Arbeit? Was gefällt dir, was gefällt dir nicht?",en:"Do you like your work? What do you like, what don't you like?",model:"Ja, meine Arbeit gefällt mir sehr. Die Kollegen gefallen mir. Die vielen Meetings gefallen mir nicht.",checks:[{"need":"\\bgefaellt mir\\b|\\bgefallen mir\\b","label":"… gefällt mir / gefallen mir"},{"need":"\\bnicht\\b","label":"Something you don't like: nicht"}]},
+    {q:"Wo hast du gearbeitet oder studiert, bevor du nach Zürich gekommen bist?",en:"Where did you work or study before you came to Zurich?",model:"Ich habe in Boston studiert. Dann habe ich zwei Jahre in Berlin gearbeitet.",checks:[{"need":"\\b(habe|bin)\\b","label":"Perfekt: ich habe …"},{"need":"\\b(studiert|gearbeitet|gewohnt)\\b","label":"studiert / gearbeitet at the end"}]},
+    {q:"Seit wann bist du in der Schweiz?",en:"Since when have you been in Switzerland?",model:"Ich bin seit zwei Jahren in der Schweiz.",checks:[{"need":"\\bseit\\b","label":"seit + time"},{"need":"\\b(jahren|monaten|wochen|einem jahr|einem monat|einer woche|20\\d\\d)\\b","label":"seit zwei Jahren / einem Monat (Dativ)"}]},
+    {q:"Wann bist du in die Schweiz gekommen?",en:"When did you come to Switzerland?",model:"Ich bin vor zwei Jahren in die Schweiz gekommen.",checks:[{"need":"\\bbin\\b","label":"kommen takes sein: ich bin …"},{"need":"\\bgekommen\\b","label":"gekommen at the end"}]},
+    {q:"Was ist dein berufliches Ziel?",en:"What is your professional goal?",model:"Ich möchte Professor werden. Oder ich will in einer Firma arbeiten.",checks:[{"need":"\\b(moechte|will|mag)\\b","label":"A wish: ich möchte / ich will …"},{"need":"\\w+en[.!]?\\s*($|\\n)|\\w+en\\.","label":"The infinitive at the end"}]},
+    {q:"Wie viele Stunden arbeitest du pro Tag?",en:"How many hours do you work per day?",model:"Ich arbeite normalerweise acht Stunden pro Tag.",checks:[{"need":"\\barbeite\\b","label":"ich arbeite …"},{"need":"\\bstunden\\b","label":"… Stunden"}]},
+    {q:"Was hast du heute schon gemacht?",en:"What have you already done today?",model:"Ich habe meine E-Mails beantwortet und ich habe ein Experiment durchgeführt.",checks:[{"need":"\\b(habe|bin)\\b","label":"Perfekt: ich habe / ich bin …"},{"need":"\\b(ge\\w+|\\w+ge\\w+|\\w+iert|beantwortet|besucht|vereinbart|durchgefuehrt)\\b","label":"A Partizip II"}]}
+  ]
+},
+{
+  id:"wohnen", title:"Wohnen", exam:true, src:"Exam topic, Anja page 74; Woche 3",
+  qs:[
+    {q:"Wo wohnst du? Wohnst du alleine oder in einer WG?",en:"Where do you live? Do you live alone or in a shared flat?",model:"Ich wohne in Zürich, im Kreis 6. Ich wohne in einer WG mit zwei Kollegen.",checks:[{"need":"\\bwohne\\b","label":"ich wohne …"},{"need":"\\bin\\b|\\bim\\b","label":"in Zürich / im Kreis …"}]},
+    {q:"Wie viele Zimmer hat deine Wohnung?",en:"How many rooms does your flat have?",model:"Meine Wohnung hat drei Zimmer, eine Küche und ein Bad.",checks:[{"need":"\\bhat\\b","label":"Die Wohnung hat … (sie hat)"},{"need":"\\bzimmer\\b","label":"… Zimmer"}]},
+    {q:"Gefällt dir deine Wohnung? Warum oder warum nicht?",en:"Do you like your flat? Why or why not?",model:"Ja, sie gefällt mir. Sie ist hell und ruhig, aber leider ein bisschen teuer.",checks:[{"need":"\\bgefaellt\\b","label":"Sie gefällt mir (die Wohnung = sie)"},{"need":"\\b(hell|dunkel|gross|klein|ruhig|laut|teuer|guenstig|modern|alt|schoen|praktisch)\\b","label":"An adjective: hell, ruhig, teuer …"}]},
+    {q:"Gefällt dir Zürich? Gefällt dir dein Kreis?",en:"Do you like Zurich? Do you like your district?",model:"Zürich gefällt mir sehr. Mein Kreis ist ruhig und grün.",checks:[{"need":"\\bgefaellt\\b|\\bmag\\b","label":"… gefällt mir / ich mag …"}]},
+    {q:"Welches ist deine Lieblingsstadt oder deine Heimatstadt?",en:"Which is your favorite city or your hometown?",model:"Meine Heimatstadt ist Denver. Meine Lieblingsstadt ist Lissabon.",checks:[{"need":"\\bist\\b","label":"Meine Heimatstadt ist …"},{"need":"\\bmeine\\b","label":"meine (die Stadt)"}]},
+    {q:"Was sind die Sehenswürdigkeiten in deiner Heimatstadt?",en:"What are the sights in your hometown?",model:"In meiner Heimatstadt gibt es ein altes Schloss, einen schönen Park und viele Museen.",checks:[{"need":"\\bgibt es\\b|\\bes gibt\\b","label":"es gibt …"},{"need":"\\b(einen|eine|ein|viele|den|die|das)\\b","label":"es gibt + Akkusativ: einen Park"}]},
+    {q:"Was ist deine ideale Wohnform?",en:"What is your ideal way of living?",model:"Ich möchte in einem kleinen Haus mit Garten wohnen, nicht weit von der Stadt.",checks:[{"need":"\\bmoechte\\b|\\bwill\\b","label":"ich möchte … wohnen"},{"need":"\\bwohnen\\b","label":"wohnen at the end"}]},
+    {q:"Wo möchtest du in 10 Jahren leben und arbeiten?",en:"Where would you like to live and work in 10 years?",model:"In 10 Jahren möchte ich in der Schweiz leben und an einer Uni arbeiten.",checks:[{"need":"\\bmoechte ich\\b|\\bich moechte\\b","label":"ich möchte"},{"need":"\\b(leben|arbeiten|wohnen)\\b","label":"leben / arbeiten at the end"},{"avoid":"\\bin 10 jahren ich\\b|\\bin zehn jahren ich\\b","label":"In 10 Jahren möchte ich … (verb on II)"}]},
+    {q:"Was gibt es in deiner Wohnung? Beschreib dein Zimmer.",en:"What is in your flat? Describe your room.",model:"In meinem Zimmer gibt es ein Bett, einen Schreibtisch und einen Schrank. Der Schrank ist neben dem Fenster.",checks:[{"need":"\\bgibt es\\b|\\bes gibt\\b|\\bhabe\\b|\\bsteht\\b|\\bist\\b","label":"es gibt / ich habe …"},{"need":"\\beinen\\b","label":"Akkusativ masculine: einen Tisch / einen Schrank"}]}
+  ]
+},
+{
+  id:"freizeit", title:"Freizeit und Reisen", exam:true, src:"Exam topic, Anja page 74; Woche 8",
+  qs:[
+    {q:"Was machst du gern in deiner Freizeit?",en:"What do you like to do in your free time?",model:"In meiner Freizeit wandere ich gern und ich lese gern Krimis.",checks:[{"need":"\\bgern\\b","label":"Verb + gern"},{"avoid":"\\bin meiner freizeit ich\\b","label":"In meiner Freizeit + verb (position II)"}]},
+    {q:"Machst du gern Sport? Welche Sportart machst du?",en:"Do you like doing sport? Which sport do you do?",model:"Ja, ich mache gern Sport. Ich gehe zweimal pro Woche schwimmen und im Winter fahre ich Ski.",checks:[{"need":"\\bgern\\b|\\bnicht gern\\b","label":"gern / nicht gern"},{"need":"\\b(spiele|gehe|fahre|mache|jogge|schwimme|klettere|wandere)\\b","label":"ich spiele / gehe / fahre …"}]},
+    {q:"Wie oft machst du Sport?",en:"How often do you do sport?",model:"Ich mache dreimal pro Woche Sport, meistens am Abend.",checks:[{"need":"\\b(immer|meistens|oft|manchmal|selten|nie|jeden|jede|einmal|zweimal|dreimal|pro woche|ab und zu|regelmaessig)\\b","label":"A frequency word: oft, manchmal, zweimal pro Woche …"}]},
+    {q:"Was kannst du besonders gut? Was kannst du nicht gut?",en:"What can you do particularly well? What can't you do well?",model:"Ich kann besonders gut kochen. Ich kann nicht gut singen.",checks:[{"need":"\\bkann\\b","min":2,"label":"Two sentences with kann"},{"need":"\\bnicht\\b","label":"nicht gut"},{"avoid":"\\bkannt\\b|\\bkann (gut |nicht gut |sehr gut )?\\w+(e|st|t)\\b\\.","label":"kann + infinitive at the end"}]},
+    {q:"Warst du schon einmal Ski fahren?",en:"Have you ever been skiing?",model:"Ja, ich war schon zweimal Ski fahren, in Davos und in Zermatt.",checks:[{"need":"\\bwar\\b","label":"ich war …"},{"need":"\\bschon\\b|\\bnoch nie\\b","label":"schon einmal / noch nie"}]},
+    {q:"Gehst du abends oft weg? Kennst du eine gute Bar oder ein gutes Restaurant?",en:"Do you often go out in the evening? Do you know a good bar or restaurant?",model:"Nein, ich gehe nicht so oft weg. Aber ich kenne eine gute Bar in der Altstadt.",checks:[{"need":"\\bgehe\\b.*\\bweg\\b|\\bnie weg\\b","label":"weggehen is separable: ich gehe … weg"},{"need":"\\bkenne\\b","label":"ich kenne …"}]},
+    {q:"Liest du gern? Was liest du?",en:"Do you like reading? What do you read?",model:"Ja, ich lese gern. Ich lese Romane und manchmal Fachbücher.",checks:[{"need":"\\blese\\b","label":"ich lese (lesen: du liest)"},{"avoid":"\\bich liest\\b","label":"ich lese, not ich liest"}]},
+    {q:"Hast du schon viele Orte in der Schweiz besucht?",en:"Have you already visited many places in Switzerland?",model:"Ja, ich habe schon Luzern, Bern und Genf besucht. Ich war auch auf dem Pilatus.",checks:[{"need":"\\bhabe\\b","label":"ich habe … besucht"},{"need":"\\bbesucht\\b|\\bgesehen\\b","label":"besucht (no ge-)"},{"avoid":"\\bgebesucht\\b","label":"besucht, not gebesucht"}]},
+    {q:"Was machst du in den Weihnachtsferien?",en:"What are you doing in the Christmas holidays?",model:"In den Weihnachtsferien fliege ich nach Hause zu meiner Familie.",checks:[{"need":"\\b(fliege|fahre|gehe|bleibe|besuche|mache|feiere|reise)\\b","label":"A verb in the present: ich fliege / fahre / bleibe …"},{"avoid":"\\bin den weihnachtsferien ich\\b","label":"In den Weihnachtsferien + verb"}]},
+    {q:"Wann hast du zuletzt Ferien gemacht? Wo warst du?",en:"When did you last take a holiday? Where were you?",model:"Im Sommer habe ich Ferien gemacht. Ich war zwei Wochen in Italien.",checks:[{"need":"\\bhabe\\b.*\\bgemacht\\b","label":"Ich habe Ferien gemacht"},{"need":"\\bwar\\b","label":"Ich war in …"}]},
+    {q:"Spielst du ein Instrument?",en:"Do you play an instrument?",model:"Ja, ich spiele Gitarre. Ich spiele seit zehn Jahren.",checks:[{"need":"\\bspiele\\b|\\bnein\\b","label":"Ich spiele … / Nein, …"}]}
+  ]
+},
+{
+  id:"zuerich", title:"Erfahrungen in Zürich", exam:true, src:"Exam topic, Anja page 75",
+  qs:[
+    {q:"Warum bist du in Zürich?",en:"Why are you in Zurich?",model:"Ich bin in Zürich, denn ich mache ein PhD an der ETH.",checks:[{"need":"\\bdenn\\b|\\bweil\\b|\\bfuer\\b","label":"A reason: denn … / für …"},{"avoid":"\\bdenn (mache|arbeite|studiere|bin|habe) ich\\b","label":"denn + subject + verb: denn ich mache …"}]},
+    {q:"Wenn man neu in Zürich ist: Was muss man hier machen?",en:"If you are new in Zurich: what do you have to do here?",model:"Man muss eine Wohnung suchen und man muss sich im Kreisbüro anmelden.",checks:[{"need":"\\bmuss man\\b|\\bman muss\\b","label":"man muss …"},{"need":"\\w+en[.!]?(\\s|$)","label":"The infinitive at the end"}]},
+    {q:"Was darf man in Zürich nicht machen?",en:"What are you not allowed to do in Zurich?",model:"Man darf im Tram nicht rauchen. Man darf am Sonntag keinen Lärm machen.",checks:[{"need":"\\bdarf man\\b|\\bman darf\\b","label":"man darf …"},{"need":"\\bnicht\\b|\\bkein\\w*\\b","label":"nicht / keinen …"}]},
+    {q:"Was kann man in Zürich machen? Was sollte man sehen?",en:"What can you do in Zurich? What should you see?",model:"Man kann im See schwimmen und auf den Uetliberg wandern. Man sollte die Altstadt sehen.",checks:[{"need":"\\bkann man\\b|\\bman kann\\b","label":"man kann …"},{"need":"\\bsollte\\b|\\bsoll\\b|\\bmuss\\b","label":"man sollte … (advice)"}]},
+    {q:"Was möchtest du in den nächsten Monaten machen?",en:"What would you like to do in the next months?",model:"In den nächsten Monaten möchte ich besser Deutsch lernen und nach Lugano fahren.",checks:[{"need":"\\bmoechte\\b|\\bwill\\b","label":"ich möchte / ich will"},{"need":"\\w+en[.!]?(\\s|$)","label":"The infinitive at the end"}]},
+    {q:"Was ist deine beste Erfahrung hier in Zürich?",en:"What is your best experience here in Zurich?",model:"Meine beste Erfahrung war das Schwimmen in der Limmat im Sommer. Es war super.",checks:[{"need":"\\bwar\\b|\\bist\\b","label":"… war / … ist"}]},
+    {q:"Und deine schlechteste Erfahrung?",en:"And your worst experience?",model:"Meine schlechteste Erfahrung war die Wohnungssuche. Sie war sehr stressig.",checks:[{"need":"\\bwar\\b|\\bist\\b","label":"… war …"}]},
+    {q:"Bist du in 2 Jahren auch noch hier?",en:"Will you still be here in 2 years?",model:"Ja, ich glaube schon. Mein PhD dauert noch drei Jahre.",checks:[{"need":"\\bja\\b|\\bnein\\b|\\bglaube\\b|\\bweiss\\b|\\bvielleicht\\b|\\bkommt darauf an\\b","label":"An answer: Ja / Nein / Ich glaube … / Es kommt darauf an"}]},
+    {q:"Welchen Tipp hast du für neue Leute in Zürich?",noSelf:true,en:"What tip do you have for new people in Zurich?",model:"Man sollte warme Kleidung für den Winter mitnehmen und schnell eine WG suchen.",checks:[{"need":"\\bsollte\\b|\\bmuss\\b|\\bkann\\b|\\bsoll\\b","label":"A modal verb: man sollte / muss / kann …"}]}
+  ]
+},
+{
+  id:"kennenlernen", title:"Kennenlernen", src:"Wochen 1 and 2",
+  qs:[
+    {q:"Hallo! Wie heisst du?",en:"Hello! What's your name?",model:"Hallo! Ich heisse Matthew. Und du?",checks:[{"need":"\\bich heisse\\b|\\bich bin\\b|\\bmein name ist\\b","label":"Ich heisse … / Mein Name ist …"}]},
+    {q:"Woher kommst du?",en:"Where are you from?",model:"Ich komme aus den USA, aus Colorado.",checks:[{"need":"\\bkomme aus\\b","label":"Ich komme aus …"}]},
+    {q:"Welche Sprachen sprichst du?",en:"Which languages do you speak?",model:"Ich spreche Englisch, ein bisschen Spanisch und jetzt auch ein bisschen Deutsch.",checks:[{"need":"\\bspreche\\b","label":"ich spreche"},{"avoid":"\\bich sprichst\\b|\\bich spricht\\b","label":"ich spreche (the vowel changes only for du and er)"}]},
+    {q:"Was machst du hier in Zürich?",en:"What do you do here in Zurich?",model:"Ich bin Doktorand an der ETH. Ich arbeite im Labor.",checks:[{"need":"\\bbin\\b|\\barbeite\\b|\\bstudiere\\b|\\bmache\\b","label":"Ich bin … / Ich arbeite … / Ich studiere …"}]},
+    {q:"Wie geht es dir heute?",en:"How are you today?",model:"Danke, es geht mir gut. Ich bin ein bisschen müde. Und dir?",checks:[{"need":"\\bgeht\\b|\\bgut\\b|\\bmuede\\b|\\bsuper\\b|\\bschlecht\\b","label":"Es geht mir gut / Ich bin müde …"},{"need":"\\bund dir\\b|\\bund ihnen\\b|\\bund du\\b","label":"Ask back: Und dir?"}]},
+    {q:"Wie ist deine Telefonnummer?",en:"What is your phone number?",model:"Meine Nummer ist null sieben neun, eins zwei drei, vier fünf, sechs sieben.",checks:[{"need":"\\bmeine\\b|\\bist\\b","label":"Meine Nummer ist …"}]},
+    {q:"Wie schreibt man deinen Nachnamen? Buchstabier bitte.",en:"How do you spell your last name? Please spell it.",model:"K - E - E - L - E - R.",checks:[{"need":"[a-z]","label":"Spell it letter by letter"}]},
+    {q:"Wie alt bist du?",en:"How old are you?",model:"Ich bin dreissig Jahre alt.",checks:[{"need":"\\bbin\\b","label":"Ich bin …"},{"need":"\\bjahre\\b|\\balt\\b","label":"… Jahre alt"}]},
+    {q:"Bist du verheiratet? Hast du Kinder?",en:"Are you married? Do you have children?",model:"Nein, ich bin ledig. Ich habe keine Kinder.",checks:[{"need":"\\bbin\\b","label":"Ich bin verheiratet / ledig"},{"need":"\\bhabe\\b","label":"Ich habe … / keine Kinder"}]}
+  ]
+},
+{
+  id:"heimat", title:"Heimatland, Zahlen, Uhrzeit", src:"Wochen 4 and 5",
+  qs:[
+    {q:"Wo liegt deine Heimatstadt?",en:"Where is your hometown?",model:"Meine Heimatstadt liegt im Westen der USA, in den Bergen.",checks:[{"need":"\\bliegt\\b","label":"… liegt …"},{"need":"\\bim (norden|sueden|osten|westen|nordwesten|suedwesten|nordosten|suedosten)\\b|\\bnoerdlich\\b|\\bsuedlich\\b|\\boestlich\\b|\\bwestlich\\b|\\bin der naehe\\b|\\bin den\\b|\\ban der\\b|\\bam\\b","label":"im Norden / westlich von / in der Nähe von …"}]},
+    {q:"Wie viele Einwohner hat dein Land?",en:"How many inhabitants does your country have?",model:"Die USA haben ungefähr dreihundertvierzig Millionen Einwohner.",checks:[{"need":"\\bhat\\b|\\bhaben\\b","label":"… hat / haben …"},{"need":"\\beinwohner\\b","label":"… Einwohner"}]},
+    {q:"Was ist der höchste Berg in deinem Land?",en:"What is the highest mountain in your country?",model:"Der höchste Berg ist der Denali. Er ist über sechstausend Meter hoch.",checks:[{"need":"\\bhoechste\\b","label":"der höchste Berg"},{"need":"\\bist\\b","label":"… ist …"}]},
+    {q:"Welche Nachbarländer hat dein Land?",en:"Which neighboring countries does your country have?",model:"Die USA haben zwei Nachbarländer: Kanada und Mexiko.",checks:[{"need":"\\bhat\\b|\\bhaben\\b|\\bsind\\b","label":"… hat / haben …"}]},
+    {q:"Wie spät ist es jetzt?",en:"What time is it now?",model:"Es ist Viertel nach drei.",checks:[{"need":"\\bes ist\\b","label":"Es ist …"},{"need":"\\buhr\\b|\\bhalb\\b|\\bviertel\\b|\\bnach\\b|\\bvor\\b","label":"… Uhr / halb / Viertel nach …"}]},
+    {q:"Wann ist dein Geburtstag?",en:"When is your birthday?",model:"Mein Geburtstag ist am dritten Mai.",checks:[{"need":"\\bam\\b","label":"am + date"},{"need":"\\w+(ten|sten)\\b|\\bam \\d+\\.","label":"Ordinal: am dritten / am 3."}]},
+    {q:"Der Wievielte ist heute?",en:"What's the date today?",model:"Heute ist der siebzehnte November.",checks:[{"need":"\\bder\\b|\\bist\\b","label":"Heute ist der …"},{"need":"\\w+(te|ste)\\b|\\d+\\.","label":"Ordinal: der siebzehnte / der 17."}]},
+    {q:"Wann beginnt der Deutschkurs?",en:"When does the German course start?",model:"Der Deutschkurs beginnt um zwölf Uhr.",checks:[{"need":"\\bbeginnt\\b|\\bfaengt\\b","label":"Der Kurs beginnt …"},{"need":"\\bum\\b","label":"um + Uhrzeit"}]},
+    {q:"Wann hast du Ferien?",en:"When do you have holidays?",model:"Ich habe im Dezember Ferien, vom zwanzigsten Dezember bis zum fünften Januar.",checks:[{"need":"\\bim\\b|\\bam\\b|\\bvom\\b","label":"im Dezember / am … / vom … bis zum …"}]}
+  ]
+},
+{
+  id:"alltag", title:"Tagesablauf", src:"Wochen 6 and 8",
+  qs:[
+    {q:"Wann stehst du normalerweise auf?",en:"When do you usually get up?",model:"Normalerweise stehe ich um sieben Uhr auf.",checks:[{"need":"\\bstehe\\b.*\\bauf\\b","label":"aufstehen is separable: ich stehe … auf"},{"need":"\\bum\\b","label":"um + Uhrzeit"},{"avoid":"\\bnormalerweise ich\\b","label":"Normalerweise stehe ich …"}]},
+    {q:"Was isst du zum Frühstück?",en:"What do you eat for breakfast?",model:"Zum Frühstück esse ich ein Müsli und ich trinke einen Kaffee.",checks:[{"need":"\\besse\\b|\\btrinke\\b|\\bfruehstuecke\\b","label":"ich esse / trinke …"},{"avoid":"\\bich isst\\b","label":"ich esse, not ich isst"}]},
+    {q:"Wie kommst du zur Arbeit oder an die ETH?",en:"How do you get to work or to the ETH?",model:"Ich fahre mit dem Tram zur ETH. Manchmal gehe ich zu Fuss.",checks:[{"need":"\\bfahre\\b|\\bgehe\\b|\\bnehme\\b","label":"ich fahre / gehe / nehme …"},{"need":"\\bmit dem\\b|\\bmit der\\b|\\bzu fuss\\b|\\bdas tram\\b|\\bden bus\\b|\\bdas velo\\b","label":"mit dem Tram / zu Fuss …"}]},
+    {q:"Wo isst du zu Mittag?",en:"Where do you have lunch?",model:"Ich esse meistens in der Mensa zu Mittag.",checks:[{"need":"\\besse\\b","label":"ich esse …"},{"need":"\\bin der\\b|\\bim\\b|\\bzu hause\\b","label":"in der Mensa / im Büro / zu Hause"}]},
+    {q:"Was machst du am Abend nach der Arbeit?",en:"What do you do in the evening after work?",model:"Am Abend koche ich und dann sehe ich ein bisschen fern.",checks:[{"need":"\\bam abend\\b|\\babends\\b|\\bnach der arbeit\\b","label":"am Abend / nach der Arbeit"},{"avoid":"\\bam abend ich\\b|\\bnach der arbeit ich\\b","label":"Am Abend + verb + ich"}]},
+    {q:"Wann gehst du ins Bett?",en:"When do you go to bed?",model:"Ich gehe meistens um elf Uhr ins Bett.",checks:[{"need":"\\bgehe\\b","label":"ich gehe …"},{"need":"\\bins bett\\b","label":"ins Bett"}]},
+    {q:"Was hast du gestern Abend gemacht?",en:"What did you do last night?",model:"Gestern Abend habe ich gekocht und dann habe ich einen Film gesehen.",checks:[{"need":"\\b(habe|bin)\\b","label":"Perfekt: habe / bin …"},{"need":"\\b(ge\\w+|\\w+ge\\w+|\\w+iert)\\b","label":"A Partizip II"},{"avoid":"\\bgestern abend ich\\b|\\bgestern ich\\b","label":"Gestern habe ich …"}]},
+    {q:"Wann bist du heute aufgestanden?",en:"When did you get up today?",model:"Ich bin heute um halb sieben aufgestanden.",checks:[{"need":"\\bbin\\b","label":"aufstehen takes sein: ich bin …"},{"need":"\\baufgestanden\\b","label":"aufgestanden at the end"}]}
+  ]
+},
+{
+  id:"essen", title:"Essen, Trinken, Restaurant", src:"Wochen 6 and 7",
+  qs:[
+    {q:"Was isst du gern? Was isst du nicht gern?",en:"What do you like to eat? What don't you like to eat?",model:"Ich esse gern Pasta und Fisch. Ich esse nicht gern Pilze.",checks:[{"need":"\\besse gern\\b|\\bmag\\b","label":"Ich esse gern … / Ich mag …"},{"need":"\\bnicht gern\\b|\\bkein\\w*\\b|\\bnicht\\b","label":"nicht gern / kein …"}]},
+    {q:"Trinkst du lieber Kaffee oder Tee?",en:"Do you prefer coffee or tea?",model:"Ich trinke lieber Kaffee. Am liebsten trinke ich einen Cappuccino.",checks:[{"need":"\\blieber\\b|\\bam liebsten\\b","label":"lieber / am liebsten"}]},
+    {q:"Isst du Fleisch?",en:"Do you eat meat?",model:"Nein, ich esse kein Fleisch. Ich bin Vegetarier.",checks:[{"need":"\\bja\\b|\\bnein\\b","label":"Ja / Nein"},{"need":"\\bfleisch\\b","label":"… Fleisch"},{"avoid":"\\bnicht fleisch\\b","label":"kein Fleisch, not nicht Fleisch"}]},
+    {q:"Was nimmst du heute in der Mensa?",en:"What are you having in the Mensa today?",model:"Ich nehme das Menü mit Gemüse und einen Salat.",checks:[{"need":"\\bnehme\\b|\\besse\\b|\\bmoechte\\b","label":"ich nehme / möchte …"},{"avoid":"\\bich nimmst\\b|\\bich nimmt\\b","label":"ich nehme (nehmen: du nimmst)"}]},
+    {q:"Guten Abend! Haben Sie schon gewählt?",en:"Good evening! Have you already chosen? (You are the guest.)",model:"Ja, ich möchte die Tomatensuppe und dann einen Hamburger, bitte.",checks:[{"need":"\\bmoechte\\b|\\bnehme\\b|\\bhaette gern\\b","label":"Ich möchte / Ich nehme …"},{"need":"\\bbitte\\b","label":"bitte"}]},
+    {q:"Und was möchten Sie trinken?",en:"And what would you like to drink?",model:"Ich nehme ein Mineralwasser und einen Kaffee, bitte.",checks:[{"need":"\\b(einen|ein|eine)\\b","label":"Akkusativ: einen Kaffee, ein Bier, eine Cola"}]},
+    {q:"Möchten Sie noch ein Dessert?",en:"Would you like a dessert?",model:"Nein danke, ich bin satt. Aber ich nehme noch einen Espresso.",checks:[{"need":"\\bja\\b|\\bnein\\b","label":"Ja / Nein"}]},
+    {q:"Zusammen oder getrennt?",en:"Together or separately? (paying)",model:"Getrennt, bitte. Ich bezahle die Suppe und den Kaffee.",checks:[{"need":"\\bzusammen\\b|\\bgetrennt\\b","label":"Zusammen / Getrennt"}]},
+    {q:"Was kochst du gern?",en:"What do you like to cook?",model:"Ich koche gern Curry mit Reis.",checks:[{"need":"\\bkoche\\b","label":"ich koche …"}]}
+  ]
+},
+{
+  id:"verabredung", title:"Verabredung", src:"Woche 9",
+  qs:[
+    {q:"Hast du Lust, am Samstag mit mir wandern zu gehen?",en:"Do you feel like going hiking with me on Saturday?",model:"Ja, gerne. Das tönt gut! Wo treffen wir uns?",checks:[{"need":"\\bja\\b|\\bnein\\b|\\bschade\\b|\\bgerne?\\b|\\bdabei\\b|\\bgute idee\\b","label":"Ja, gerne / Schade, …"}]},
+    {q:"Schade. Wie wäre es am Sonntag?",en:"Too bad. How about Sunday?",model:"Sonntag ist gut. Um wie viel Uhr passt es dir?",checks:[{"need":"\\bsonntag\\b|\\bgut\\b|\\bgeht\\b|\\bkann\\b","label":"Sonntag ist gut / Das geht …"}]},
+    {q:"Um wie viel Uhr passt es dir?",en:"What time suits you?",model:"Ich kann ab neun Uhr. Passt es dir um zehn?",checks:[{"need":"\\bum\\b|\\bab\\b|\\bzwischen\\b","label":"um / ab / zwischen …"}]},
+    {q:"Wo treffen wir uns?",en:"Where do we meet?",model:"Wir treffen uns am Hauptbahnhof, vor dem Kiosk.",checks:[{"need":"\\btreffen uns\\b","label":"Wir treffen uns …"},{"need":"\\bam\\b|\\bim\\b|\\bvor dem\\b|\\bvor der\\b|\\bbei\\b|\\bauf dem\\b","label":"A place: am Bahnhof / vor dem …"}]},
+    {q:"Hast du am Mittwoch Zeit für einen Kaffee?",en:"Do you have time for a coffee on Wednesday?",model:"Am Mittwoch kann ich leider nicht. Ich habe keine Zeit. Aber am Donnerstag geht es.",checks:[{"need":"\\bja\\b|\\bnein\\b|\\bkann\\b|\\bzeit\\b|\\bleider\\b","label":"An answer with Zeit / kann"}]},
+    {q:"Was machst du am Wochenende? Hast du schon Pläne?",en:"What are you doing on the weekend? Do you already have plans?",model:"Am Samstag gehe ich mit Freunden in die Therme. Am Sonntag faulenze ich.",checks:[{"need":"\\b(gehe|fahre|mache|besuche|treffe|bleibe|habe|will|moechte)\\b","label":"A verb in the present: ich gehe / fahre …"},{"avoid":"\\bam (samstag|sonntag|wochenende) ich\\b","label":"Am Samstag gehe ich … (verb on II)"}]},
+    {q:"Gib mir eine Einladung: Lade mich zu etwas ein.",en:"Give me an invitation: invite me to something.",model:"Hast du Lust, am Freitag mit mir ins Kino zu gehen?",checks:[{"need":"\\blust\\b|\\bwollen wir\\b|\\bgehen wir\\b|\\bmoechtest du\\b|\\bkommst du\\b","label":"Hast du Lust …? / Wollen wir …? / Möchtest du …?"},{"need":"\\?","label":"A question"}]}
+  ]
+},
+{
+  id:"wochenende", title:"Wochenende und Perfekt", src:"Wochen 7, 9 and 10",
+  qs:[
+    {q:"Wie war dein Wochenende?",en:"How was your weekend?",model:"Mein Wochenende war super, aber ein bisschen anstrengend.",checks:[{"need":"\\bwar\\b","label":"… war …"}]},
+    {q:"Wo warst du am Samstag?",en:"Where were you on Saturday?",model:"Am Samstag war ich mit Freunden in Luzern.",checks:[{"need":"\\bwar\\b","label":"ich war …"},{"avoid":"\\bam samstag ich\\b","label":"Am Samstag war ich …"}]},
+    {q:"Was hast du letztes Wochenende gemacht?",en:"What did you do last weekend?",model:"Am Samstag habe ich eingekauft und die Wohnung aufgeräumt. Am Sonntag bin ich wandern gegangen.",checks:[{"need":"\\b(habe|bin)\\b","min":2,"label":"Two Perfekt sentences"},{"need":"\\b(ge\\w+|\\w+ge\\w+|\\w+iert|besucht|erzaehlt|verbracht)\\b","label":"A Partizip II"},{"avoid":"\\bhabe (\\w+ )*(gegangen|gefahren|gekommen|geblieben|aufgestanden|geflogen)\\b","label":"gehen, fahren, kommen, bleiben, aufstehen take sein"}]},
+    {q:"Wie war das Wetter?",en:"How was the weather?",model:"Das Wetter war kalt und neblig. Am Sonntag hat es geschneit.",checks:[{"need":"\\bwar\\b|\\bhat es\\b|\\bes hat\\b","label":"Das Wetter war … / Es hat geschneit"}]},
+    {q:"Was hast du gestern gegessen?",en:"What did you eat yesterday?",model:"Gestern habe ich Pizza gegessen.",checks:[{"need":"\\bhabe\\b","label":"ich habe …"},{"need":"\\bgegessen\\b","label":"gegessen (essen is irregular)"}]},
+    {q:"Bist du schon einmal nach Neuseeland geflogen?",en:"Have you ever flown to New Zealand?",model:"Nein, ich bin noch nie nach Neuseeland geflogen. Aber ich bin schon oft nach Spanien geflogen.",checks:[{"need":"\\bbin\\b","label":"fliegen takes sein: ich bin …"},{"need":"\\bschon\\b|\\bnoch nie\\b","label":"schon oft / noch nie"}]},
+    {q:"Hast du schon einmal eine berühmte Person kennen gelernt?",en:"Have you ever met a famous person?",model:"Ja, ich habe schon einmal einen Fussballspieler kennen gelernt.",checks:[{"need":"\\bhabe\\b","label":"ich habe …"},{"need":"\\bkennen ?gelernt\\b|\\bnoch nie\\b|\\bgesehen\\b|\\bgetroffen\\b","label":"kennen gelernt / getroffen"}]},
+    {q:"Hattest du am Wochenende viel zu tun?",en:"Did you have a lot to do on the weekend?",model:"Ja, ich hatte viel Arbeit und keine Zeit, Deutsch zu lernen.",checks:[{"need":"\\bhatte\\b","label":"ich hatte …"}]},
+    {q:"Wann bist du gestern ins Bett gegangen?",en:"When did you go to bed yesterday?",model:"Ich bin gestern um elf Uhr ins Bett gegangen.",checks:[{"need":"\\bbin\\b","label":"gehen takes sein: ich bin …"},{"need":"\\bgegangen\\b","label":"gegangen at the end"}]}
+  ]
+},
+{
+  id:"modal", title:"Pläne, Regeln, Fähigkeiten", src:"Wochen 8 and 10",
+  qs:[
+    {q:"Was musst du morgen machen?",en:"What do you have to do tomorrow?",model:"Morgen muss ich im Büro arbeiten und Deutsch lernen.",checks:[{"need":"\\bmuss\\b","label":"ich muss …"},{"need":"\\w+en[.!]?(\\s|$)","label":"The infinitive at the end"},{"avoid":"\\bmorgen ich\\b","label":"Morgen muss ich …"}]},
+    {q:"Was darf man im Tram machen? Was darf man nicht machen?",en:"What are you allowed to do on the tram? What not?",model:"Man darf im Tram lesen und Musik hören. Man darf nicht rauchen.",checks:[{"need":"\\bdarf man\\b|\\bman darf\\b","min":2,"label":"Two sentences with man darf"},{"need":"\\bnicht\\b|\\bkein","label":"darf nicht …"}]},
+    {q:"Was willst du am Wochenende machen?",en:"What do you want to do on the weekend?",model:"Am Wochenende will ich Freunde treffen und in den Bergen wandern.",checks:[{"need":"\\bwill\\b|\\bmoechte\\b","label":"ich will / möchte …"},{"avoid":"\\bam wochenende ich\\b","label":"Am Wochenende will ich …"}]},
+    {q:"Welche Sprachen möchtest du gern lernen?",en:"Which languages would you like to learn?",model:"Ich möchte gern Italienisch lernen.",checks:[{"need":"\\bmoechte\\b","label":"ich möchte …"},{"need":"\\blernen\\b","label":"lernen at the end"}]},
+    {q:"Was willst du nach dem Doktorat machen?",en:"What do you want to do after the doctorate?",model:"Nach dem Doktorat will ich in der Industrie arbeiten.",checks:[{"need":"\\bwill\\b|\\bmoechte\\b","label":"ich will / möchte …"},{"avoid":"\\bnach dem doktorat ich\\b","label":"Nach dem Doktorat will ich …"}]},
+    {q:"Gibt es in deiner Wohnung Regeln? Was muss man machen?",en:"Are there rules in your flat? What do you have to do?",model:"Ja, man muss den Müll trennen und man darf nach 22 Uhr nicht laut sein.",checks:[{"need":"\\bmuss\\b|\\bdarf\\b","label":"man muss / man darf nicht …"}]},
+    {q:"Ich habe Durst. Was sagst du?",en:"I'm thirsty. What do you say? (Offer to bring something.)",model:"Soll ich dir ein Wasser bringen?",checks:[{"need":"\\bsoll ich\\b|\\bmoechtest du\\b|\\bkann ich\\b","label":"Soll ich …? / Möchtest du …?"},{"need":"\\?","label":"A question"}]}
+  ]
+}
+];
+
+/* Anja page 73: phrases for the oral exam */
+const REDEMITTEL = [
+  ["Nachfragen, nicht wissen", [["Ich verstehe nicht.","I don't understand."],["Wie sagt man … auf Deutsch?","How do you say … in German?"],["Kannst du das bitte wiederholen?","Can you please repeat?"],["Ich habe keine Ahnung.","I have no idea."],["Ich erinnere mich nicht.","I don't remember."],["Ich weiss noch nicht.","I don't know yet."],["Ich muss überlegen.","I have to think about it."]]],
+  ["Meinung sagen", [["Ich finde, dass …","I think that …"],["Meiner Meinung nach …","In my opinion …"],["Meiner Erfahrung nach …","In my experience …"],["Es kommt darauf an.","It depends."],["Das wusste ich nicht.","I didn't know that."],["Das ist interessant.","That's interesting."],["Bist du sicher?","Are you sure?"]]],
+  ["Zustimmen", [["Das finde ich auch.","I think so too."],["Ich bin einverstanden.","I agree."],["Das stimmt.","That's right."],["Findest du auch?","Do you agree?"]]],
+  ["Widersprechen", [["Das finde ich gar nicht.","I don't think so at all."],["Ich bin nicht einverstanden.","I don't agree."],["Das stimmt überhaupt nicht.","That's not true at all."]]]
+];
+
+/* =====================================================================
+   EXAM PREP TABS: Gespräch (conversation) and Grammatik (overview)
+   ===================================================================== */
+function findStop(id){
+  for (const w of WEEKS) for (const s of w.stops) if (s.id === id) return s;
+  return null;
+}
+function drillPool(g){
+  const pool = [];
+  g.stops.forEach(id => { const s = findStop(id); if (s) s.items.forEach(it => { if (it.k.includes("g")) pool.push(Object.assign({src: s.stop}, it)); }); });
+  return pool;
+}
+
+function openExam(kind){
+  S = {kind, idx: 0, sec: {id: kind}};
+  renderTop(); renderStops();
+  if (kind === "talk") renderTalk(); else renderGram();
+  history.replaceState(null, "", kind === "talk" ? "#gespraech" : "#grammatik");
+}
+
+/* ---------- Grammatik ---------- */
+function renderGram(){
+  const stage = document.getElementById("stage");
+  stage.innerHTML = "";
+  stage.append(h("div", {class: "sechead"},
+    h("h2", {}, "Grammatik-Überblick: alles aus Woche 1 bis " + WEEKS[WEEKS.length - 1].n),
+    h("p", {class: "ctx"}, "Every grammar topic from both scripts on one page. Open a section to read it. Each Üben button deals a round of grammar questions from the stops that taught it.")));
+  stage.append(h("div", {class: "chips"}, GRAMMAR.map((g, i) => h("a", {class: "chip", href: "#g-" + g.id, onclick: e => { e.preventDefault(); const d = document.getElementById("g-" + g.id); d.open = true; d.scrollIntoView({behavior: "smooth", block: "start"}); }}, String.fromCharCode(65 + i) + " · " + g.title))));
+  const box = h("div", {class: "gram"});
+  GRAMMAR.forEach((g, i) => {
+    const n = drillPool(g).length;
+    box.append(h("details", {id: "g-" + g.id},
+      h("summary", {}, h("span", {class: "gl"}, String.fromCharCode(65 + i)), h("span", {}, g.title), h("small", {}, g.weeks)),
+      h("div", {class: "gbody"},
+        h("div", {html: g.html}),
+        n ? h("div", {class: "actions"}, h("button", {class: "btn", type: "button", onclick: () => start("drill", i)}, `Üben: Fragen aus ${g.stops.length} Stationen`)) : null)));
+  });
+  stage.append(box);
+  const ref = document.getElementById("ref");
+  ref.innerHTML = "";
+  ref.append(h("h3", {}, "So lernst du damit"),
+    h("ul", {}, h("li", {}, "Read one section, then press Üben. The round mixes all five levels."),
+      h("li", {}, "Typische Fehler lists the mistakes the course corrected most often."),
+      h("li", {}, "For speaking, switch to Prüfung: Gespräch.")),
+    h("button", {class: "btn ghost", type: "button", onclick: () => openExam("talk")}, "Zum Gespräch"));
+}
+
+/* ---------- Gespräch ---------- */
+/* Checks every answer gets: a full sentence, the verb on position II, and an answer about yourself. */
+const TALK_GENERIC = [
+  {need: "\\S+\\s+\\S+\\s+\\S+", label: "A full sentence"},
+  {avoid: "(^|[.!?]\\s*)(heute|morgen|gestern|dann|danach|normalerweise|manchmal|oft|meistens|jetzt|abends|am \\w+|im \\w+|in \\w+ \\w+|um \\d+[.:]?\\d*( uhr)?) (ich|du|er|sie|wir|ihr|man)\\b", label: "Verb on position II: Heute gehe ich …, not Heute ich gehe …"}
+];
+const SELF_CHECK = {need: "\\b(ich|mein\\w*|mir|mich|wir|uns)\\b", label: "Answer about yourself: ich …"};
+const KEY_STORE = "hispeed-claude-key";
+function getKey(){ try { return localStorage.getItem(KEY_STORE) || ""; } catch(e){ return ""; } }
+function setKey(k){ try { if (k) localStorage.setItem(KEY_STORE, k); else localStorage.removeItem(KEY_STORE); } catch(e){} }
+
+let T = {topic: null, queue: [], i: 0, live: false, msgs: [], busy: false, score: [0, 0]};
+
+function talkChecks(q){
+  const checks = q.checks.concat(TALK_GENERIC);
+  if (/\bdu\b/i.test(q.q) && !q.noSelf) checks.push(SELF_CHECK);
+  return checks;
+}
+function runChecks(checks, raw){
+  const low = rubricText(raw);
+  return checks.map(c => {
+    const hits = (low.match(new RegExp(c.need || c.avoid, "gi")) || []).length;
+    return {label: c.label, pass: c.need ? hits >= (c.min || 1) : hits === 0};
+  });
+}
+
+function talkStart(topicId){
+  T = {topic: topicId, queue: [], i: 0, live: T.live, msgs: [], busy: false, score: [0, 0]};
+  if (topicId === "exam"){
+    const picks = shuffle(TALK_EXAM_TOPICS).slice(0, 2);
+    picks.forEach(id => { const t = TALK.find(x => x.id === id); shuffle(t.qs).slice(0, 5).forEach(q => T.queue.push(Object.assign({topic: t.title}, q))); });
+    T.title = "Prüfung: " + picks.map(id => TALK.find(x => x.id === id).title).join(" + ");
+  } else if (topicId === "mix"){
+    TALK.forEach(t => t.qs.forEach(q => T.queue.push(Object.assign({topic: t.title}, q))));
+    T.queue = shuffle(T.queue).slice(0, 12);
+    T.title = "Alles gemischt";
+  } else {
+    const t = TALK.find(x => x.id === topicId);
+    T.queue = t.qs.map(q => Object.assign({topic: t.title}, q));
+    T.title = t.title;
+  }
+  renderTalk();
+  const log = document.getElementById("chatlog");
+  if (T.live){ liveSend(null); return; }
+  if (topicId === "exam") bubble(log, "bot", "Simulation of the oral exam: two topics, five questions each. Answer in full sentences. In the real exam you also ask back, for example Und du?");
+  askNext();
+}
+
+function bubble(log, who, text, extra){
+  const b = h("div", {class: "bub " + who}, text != null ? h("span", {class: "txt"}, text) : null, extra || null);
+  log.append(b);
+  log.scrollTop = log.scrollHeight;
+  return b;
+}
+
+function askNext(){
+  const log = document.getElementById("chatlog");
+  if (T.i >= T.queue.length){
+    const [p, n] = T.score;
+    bubble(log, "fb", `Fertig! ${p} of ${n} answers passed every check.`, h("div", {class: "actions"},
+      h("button", {class: "btn", type: "button", onclick: () => talkStart(T.topic)}, "Noch einmal"),
+      h("button", {class: "btn ghost", type: "button", onclick: () => talkStart("exam")}, "Prüfung simulieren")));
+    return;
+  }
+  const q = T.queue[T.i];
+  const en = h("button", {class: "en", type: "button", onclick: e => { e.target.replaceWith(h("small", {class: "gloss"}, q.en)); }}, "EN");
+  bubble(log, "bot", q.q, h("span", {class: "meta"}, (T.topic === "mix" || T.topic === "exam" ? q.topic + " · " : "") + `${T.i + 1}/${T.queue.length} `, en));
+  const ta = document.getElementById("talkin");
+  if (ta){ ta.value = ""; ta.focus({preventScroll: true}); }
+}
+
+function talkAnswer(skip){
+  const ta = document.getElementById("talkin");
+  const raw = skip ? "" : ta.value.trim();
+  if (!skip && !raw) return;
+  const log = document.getElementById("chatlog");
+  if (T.live){ liveSend(raw); return; }
+  if (T.i >= T.queue.length) return;
+  const q = T.queue[T.i];
+  if (skip){
+    bubble(log, "fb", "So könntest du antworten:\n" + q.model);
+  } else {
+    bubble(log, "me", raw);
+    const res = runChecks(talkChecks(q), raw);
+    const ok = res.every(r => r.pass);
+    T.score[1]++; if (ok) T.score[0]++;
+    bubble(log, "fb", ok ? "Gut! Alles da." : "Fast. Check the list:", h("div", {},
+      h("ul", {class: "rubric", html: res.map(r => `<li class="${r.pass ? "pass" : "fail"}"><span class="m">${r.pass ? "✓" : "✗"}</span><span>${esc(r.label)}</span></li>`).join("")}),
+      h("p", {class: "model"}, "Beispiel: " + q.model)));
+  }
+  ta.value = "";
+  T.i++;
+  askNext();
+}
+
+function renderTalk(){
+  const stage = document.getElementById("stage");
+  stage.innerHTML = "";
+  const key = getKey();
+  if (!key) T.live = false;
+  stage.append(h("div", {class: "sechead"},
+    h("h2", {}, "Gespräch üben" + (T.title ? ": " + T.title : "")),
+    h("p", {class: "ctx"}, T.live
+      ? "Live-Partner: Claude asks questions on the topic, reacts to what you write and corrects your mistakes. Each message costs a fraction of a cent on your API key."
+      : "The practice bot asks the questions from the course and the exam sheet. After each answer it checks a few things and shows an example answer. It can't follow what you mean, only the patterns.")));
+  const modes = h("div", {class: "order"}, "Partner:",
+    h("button", {type: "button", "aria-pressed": String(!T.live), onclick: () => { T.live = false; T.topic ? talkStart(T.topic) : renderTalk(); }}, "Übungs-Bot"),
+    h("button", {type: "button", "aria-pressed": String(T.live), disabled: !key, title: key ? "" : "Add an API key in the panel first", onclick: () => { T.live = true; T.topic ? talkStart(T.topic) : renderTalk(); }}, "Live (Claude)"));
+  const chips = h("div", {class: "chips"},
+    h("button", {class: "chip strong", type: "button", "aria-pressed": String(T.topic === "exam"), onclick: () => talkStart("exam")}, "Prüfung simulieren"),
+    h("button", {class: "chip", type: "button", "aria-pressed": String(T.topic === "mix"), onclick: () => talkStart("mix")}, "Alles gemischt"),
+    TALK.map(t => h("button", {class: "chip" + (t.exam ? " exam" : ""), type: "button", "aria-pressed": String(T.topic === t.id), title: t.src, onclick: () => talkStart(t.id)}, t.title)));
+  stage.append(h("div", {style: "display:grid;gap:12px;margin-bottom:14px"}, modes, chips,
+    h("p", {class: "ctx"}, "Chips with a dot are the four topics on Anja's exam sheet.")));
+  const card = h("div", {class: "card"});
+  const log = h("div", {class: "chat", id: "chatlog", "aria-live": "polite"});
+  if (!T.topic) log.append(h("div", {class: "bub bot"}, h("span", {class: "txt"}, "Hallo! Choose a topic above. Prüfung simulieren picks two exam topics, like the real oral exam.")));
+  const ta = h("textarea", {class: "free", id: "talkin", rows: "3", spellcheck: "false", "aria-label": "Deine Antwort", disabled: !T.topic,
+    onkeydown: e => { if (e.key === "Enter" && !e.shiftKey){ e.preventDefault(); talkAnswer(false); } }});
+  ta.addEventListener("focus", () => lastInput = ta);
+  lastInput = ta;
+  const acts = h("div", {class: "actions"},
+    h("button", {class: "btn", type: "button", disabled: !T.topic, onclick: () => talkAnswer(false)}, "Senden"),
+    T.live ? null : h("button", {class: "btn ghost", type: "button", disabled: !T.topic, onclick: () => talkAnswer(true)}, "Ich weiss nicht"));
+  card.append(log, ta, umlautBar(), acts, h("p", {class: "ctx"}, "Enter sends, Shift+Enter starts a new line."));
+  stage.append(card);
+  renderTalkRef();
+}
+
+function renderTalkRef(){
+  const ref = document.getElementById("ref");
+  ref.innerHTML = "";
+  ref.append(h("details", {open: true}, h("summary", {}, "Die mündliche Prüfung"),
+    h("div", {style: "display:grid;gap:8px;margin-top:8px"},
+      h("p", {}, "From Anja's sheet: choose 2 topics and prepare two short dialogues with a colleague, about 5 minutes each. Use the questions here or your own."),
+      h("p", {}, "Topics: Arbeiten, Wohnen, Freizeit und Reisen, Erfahrungen in Zürich."),
+      h("p", {}, "Use some of the phrases below in every dialogue."))));
+  REDEMITTEL.forEach(([head, list]) => ref.append(h("details", {}, h("summary", {}, head),
+    h("ul", {class: "phr"}, list.map(([de, en]) => h("li", {}, h("button", {type: "button", title: "Insert", onclick: () => { const ta = document.getElementById("talkin"); if (ta && !ta.disabled){ ta.value += (ta.value && !/\s$/.test(ta.value) ? " " : "") + de.replace(/…$/, ""); ta.focus(); } }}, de), h("small", {}, en)))))));
+  const key = getKey();
+  const inp = h("input", {type: "password", class: "keyin", placeholder: "sk-ant-…", autocomplete: "off", "aria-label": "Anthropic API key"});
+  ref.append(h("details", {}, h("summary", {}, "Live-Partner (Claude)" + (key ? ": key saved" : "")),
+    h("div", {style: "display:grid;gap:8px;margin-top:8px"},
+      h("p", {}, "Optional. Paste your own Anthropic API key to talk with Claude instead of the practice bot. The key stays in this browser only and is sent only to the Anthropic API. Each message costs a fraction of a cent."),
+      key ? h("p", {}, "A key is saved in this browser.") : inp,
+      h("div", {class: "actions"},
+        key ? h("button", {class: "btn ghost", type: "button", onclick: () => { setKey(""); T.live = false; renderTalk(); }}, "Remove key")
+            : h("button", {class: "btn", type: "button", onclick: () => { const v = inp.value.trim(); if (v){ setKey(v); renderTalk(); } }}, "Save key")))));
+}
+
+/* ---------- Live partner: Claude through the Anthropic SDK in the browser ---------- */
+let Anthropic = null;
+async function loadSdk(){
+  if (!Anthropic) Anthropic = (await import("https://cdn.jsdelivr.net/npm/@anthropic-ai/sdk@1.4.0/+esm")).default;
+  return Anthropic;
+}
+
+function liveSystem(){
+  const topics = T.topic === "exam" || T.topic === "mix" ? T.queue.map(q => q.topic).filter((x, i, a) => a.indexOf(x) === i) : [T.title];
+  return `You are a friendly conversation partner for a learner of German at level A1. The learner is a PhD student at the ETH Zurich. They are preparing for the oral exam of the course Hispeed A1 at the Sprachenzentrum UZH/ETH. In the exam two colleagues talk about a topic for about five minutes.
+
+Topic of this conversation: ${topics.join(" and ")}.
+Course questions for this topic, to use as your guide. Ask them in a natural order and add short follow-ups:
+${T.queue.map(q => "- " + q.q).join("\n")}
+
+Grammar the learner knows: present tense, verb in position two, questions, accusative, personal pronouns, separable verbs, modal verbs, war and hatte, and the Perfekt with haben and sein. Do not use the subjunctive, the genitive, relative clauses, or the simple past of other verbs.
+
+How to write each turn:
+1. If the learner's last message has mistakes, start with one line: "Korrektur: <the corrected sentence>", followed by a short English explanation in parentheses, at most 12 words. Correct at most the two most important mistakes. Skip this line when there are no mistakes.
+2. React to the content in one short German sentence.
+3. Ask exactly one question in German.
+Keep each turn under 45 words. Use du. Use Swiss spelling: ss, never ß. Use simple A1 words.
+
+If the learner writes in English or asks what a word means, answer briefly in English, then continue in German. After about eight questions, write "Feedback:" with two things the learner did well and two things to practice, in English, and ask whether they want to continue.`;
+}
+
+async function liveSend(raw){
+  if (T.busy) return;
+  const log = document.getElementById("chatlog");
+  const ta = document.getElementById("talkin");
+  if (raw){ bubble(log, "me", raw); ta.value = ""; T.msgs.push({role: "user", content: raw}); }
+  else T.msgs.push({role: "user", content: "Hallo! Bitte fang an und stell mir die erste Frage."});
+  T.busy = true;
+  const out = bubble(log, "bot", "…");
+  const txt = out.querySelector(".txt");
+  try {
+    const A = await loadSdk();
+    const client = new A({apiKey: getKey(), dangerouslyAllowBrowser: true});
+    /* Short chat turns, so effort stays low. Server-side fallbacks retry a declined turn on another model. */
+    const stream = client.beta.messages.stream({
+      model: "claude-opus-5-5",
+      max_tokens: 2000,
+      betas: ["server-side-fallback-2026-07-01"],
+      fallbacks: "default",
+      output_config: {effort: "low"},
+      system: [{type: "text", text: liveSystem(), cache_control: {type: "ephemeral"}}],
+      messages: T.msgs
+    });
+    let shown = "";
+    stream.on("text", d => { shown += d; txt.textContent = shown; log.scrollTop = log.scrollHeight; });
+    const final = await stream.finalMessage();
+    if (final.stop_reason === "refusal"){
+      txt.textContent = "The model declined to answer this message. Try writing it differently.";
+      T.msgs.pop();
+    } else {
+      T.msgs.push({role: "assistant", content: final.content});
+      if (!shown) txt.textContent = final.content.filter(b => b.type === "text").map(b => b.text).join("");
+    }
+  } catch (err){
+    T.msgs.pop();
+    const A = Anthropic;
+    if (A && err instanceof A.AuthenticationError) txt.textContent = "The API key was rejected. Check it in the panel on the right.";
+    else if (A && err instanceof A.RateLimitError) txt.textContent = "Too many requests right now. Wait a minute and send again.";
+    else if (A && err instanceof A.APIError) txt.textContent = `The API returned an error (${err.status ?? "network"}). Try again.`;
+    else txt.textContent = "Could not reach the API. Check your connection.";
+    out.classList.add("err");
+  }
+  T.busy = false;
+  if (ta) ta.focus({preventScroll: true});
+}
+
 (function boot(){
   const hash = (location.hash || "").replace("#", "");
   const fromHash = WEEKS.findIndex(w => w.id === hash);
   const saved = loadStore().week;
   weekIdx = fromHash >= 0 ? fromHash : (typeof saved === "number" && WEEKS[saved] ? saved : WEEKS.length - 1);
-  start("stop", 0);
+  if (hash === "gespraech") openExam("talk");
+  else if (hash === "grammatik") openExam("gram");
+  else start("stop", 0);
 })();
 </script>
 
